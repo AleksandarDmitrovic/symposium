@@ -1,8 +1,19 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
 
 export default function TopNav(props) {
 
-  // Will need creator's username as props
+  const [creator, setCreator] = useState('');
+
+  useEffect(() => {
+    // axios.get(`/${props.crerator_id}`)
+    axios.get('/api/users/1')
+    .then(res => {
+      setCreator(res.data.user[0].username);
+    })
+    .catch(err => console.log('Error: ', err));
+  }, []);
 
   return (
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -14,7 +25,7 @@ export default function TopNav(props) {
         </ul>
       </div>
       <div class="mx-auto order-0">
-        <h5 class="navbar-brand mx-auto">Conversation Room</h5>
+        <h5 class="navbar-brand mx-auto">{creator}'s Room</h5>
       </div>
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
