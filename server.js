@@ -7,6 +7,12 @@ const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
+
 const users = {};
 
 const socketToRoom = {};
