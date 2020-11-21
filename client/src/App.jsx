@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateRoom from "./routes/CreateRoom";
 import Room from "./routes/Room";
 
-function App() {
+export default function App() {
   return (
      <BrowserRouter>
        <Switch>
@@ -13,5 +13,3 @@ function App() {
      </BrowserRouter>
   );
 }
-
-export default App;

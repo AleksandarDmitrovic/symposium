@@ -40,16 +40,19 @@ const videoConstraints = {
 * ROOM COMPONENT - the actual chat between the peers
 Every person who joins has a unique socket object created for them by socket.io. 
 We will hold an array of objects in our peersRef array where the object will be a socket id to an actual peer object. This will allow us to create handshakes with each individual peer as they come and go.
+
 When a person joins the room:
 1. Assuming there are already others in the room, this person is now the initiator. 
 2. They will notify everyone that they have joined. 
 3. The server in turn will send them back an array of every other participant other than themselves, and for each one they will create a new peer using the createPeer function. 
 4. The function creates a peer with initiator set to true, so we can immediatley emit the signal that we will be sending back to the others as soon as the construction of the peer happens. 
+
 For people already in the room:
 1. They will get notified by the server that someone else has joined.
 2. They will receive a payload/newcomer object and call the addPeer function.
 3. The function will create a peer with initiator set to false because we don't need the signal to be sent out right away. 
 4. We accept the incoming signal, then take our own signal, fire it to server, and then it is sent back to the person who initially sent the joining signal.
+
 For the person awaiting to join the room:
 1. They will be listening until they received a returned signal.
 2. They receive a payload/participant object

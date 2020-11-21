@@ -1,6 +1,6 @@
 import { v1 as uuid } from "uuid";
 
-const CreateRoom = (props) => {
+export default function CreateRoom(props) {
   function create() {
     const id = uuid();
     props.history.push(`/room/${id}`);
@@ -10,5 +10,3 @@ const CreateRoom = (props) => {
     <button onClick={create}>Create Room</button>
   );
 };
-
-export default CreateRoom;
