@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Modal } from '@material-ui/core';
 
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title || "");
