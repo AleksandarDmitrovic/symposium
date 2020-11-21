@@ -64,6 +64,15 @@ const Room = (props) => {
   }, []);
 
   function createPeer(userToSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream,
+    })
+
+    peer.on("signal", signal => {
+      socketRef.current.emit("sending signal", {userToSignal, callerID, signal})
+    })
 
   }
 
