@@ -69,3 +69,5 @@ const Room = (props) => {
     </Container>
   );
 };
+
+export default Room;
