@@ -1,9 +1,9 @@
-import Conversation from "components/conversation"
+import IndividualConversation from "components/conversation"
 
 const mapConversations = function (props) {
   const conversations = props.SOMETHING(conversation => {
     return (
-      <Conversation
+      <IndividualConversation
         //This is each individual conversation
       />
     );
