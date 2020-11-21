@@ -1,21 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import styled from "styled-components";
-
-const Container = styled.div`
-  padding: 20px;
-  display: flex;
-  height: 100vh;
-  width: 90%;
-  margin: auto;
-  flex-wrap: wrap;
-`;
-
-const StyledVideo = styled.video`
-  height: 40%;
-  width: 50%;
-`;
 
 const Video = (props) => {
   const ref = useRef();
@@ -27,7 +12,7 @@ const Video = (props) => {
   }, []);
 
   return (
-    <StyledVideo playsInline autoPlay ref={ref} />
+    <video class='call-video'  playsInline autoPlay ref={ref} />
   );
 }
 
@@ -157,13 +142,13 @@ export default function Call(props) {
   }
 
   return (
-    <Container>
-        <StyledVideo muted ref={userVideo} autoPlay playsInline />
+    <div class='call-container'>
+        <video class='call-video' muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer, index) => {
             return (
                 <Video key={index} peer={peer} />
             );
         })}
-    </Container>
+    </div>
   );
 } 
