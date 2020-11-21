@@ -54,5 +54,8 @@ io.on("connection", socket => {
 
 });
 
+const usersRoutes = require("./routes/users");
+
+app.use("/api/users", usersRoutes(db));
 
 server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
