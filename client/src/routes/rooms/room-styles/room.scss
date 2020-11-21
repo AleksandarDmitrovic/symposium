@@ -1,5 +1,4 @@
 .call-container {
-  padding: 20px;
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -8,7 +7,12 @@
   flex-wrap: wrap;
 }
 
+#call {
+  margin-top: 5em;
+}
+
 .call-video {
   height: 40%;
   width: 50%;
 }
+
