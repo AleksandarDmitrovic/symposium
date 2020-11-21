@@ -1,4 +1,4 @@
-import IndividualConversation from "components/conversation"
+import IndividualConversation from "./IndividualConversation"
 
 const mapConversations = function (props) {
   const conversations = props.SOMETHING(conversation => {
@@ -15,7 +15,8 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
   return (
     <ul>
-      {mapConversations(props)}
+      <IndividualConversation/>  
+      {/* mapConversations(props) */ }
     </ul>
   );
 };

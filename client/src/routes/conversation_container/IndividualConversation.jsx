@@ -1,7 +1,9 @@
 export default function IndividualConversation(props) {
 
+  
+
   return (
-    // Returning each conversation
+    <h1> I am a conversation </h1>
   );
 }
 

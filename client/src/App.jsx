@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CreateRoom from "./routes/CreateRoom";
-import Room from "./routes/Room";
+import Conversation from "./routes/conversation_container/index";
 
 export default function App() {
   return (
      <BrowserRouter>
        <Switch>
-         <Route path="/" exact component={CreateRoom} />
-         <Route path="/room/:roomID" component={Room} />
+         <Route path="/" exact component={Conversation} />
        </Switch>
      </BrowserRouter>
   );
