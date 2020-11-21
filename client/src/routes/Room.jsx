@@ -8,6 +8,15 @@ const StyledVideo = styled.video`
   width: 50%;
 `;
 
+const Container = styled.div`
+    padding: 20px;
+    display: flex;
+    height: 100vh;
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+`;
+
 const Video = (props) => {
   const ref = useRef();
 
@@ -20,4 +29,43 @@ const Video = (props) => {
   return (
     <StyledVideo playsInline autoPlay ref={ref} />
   );
-}
+};
+
+const videoConstraints = {
+  height: window.innerHeight / 2,
+  width: window.innerWidth / 2
+};
+
+const Room = (props) => {
+  const [peers, setPeers] = useState([]);
+  const socketRef = useRef();
+  const userVideo = useRef();
+  const peersRef = useRef([]);
+  const roomID = props.match.params.roomID;
+
+  useEffect(() => {
+    socketRef.current = io.connect("/");
+    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
+
+    })
+  }, []);
+
+  function createPeer(userToSignal, callerID, stream) {
+
+  }
+
+  function addPeer(incomingSignal, callerID, stream) {
+
+  }
+
+  return (
+    <Container>
+      <StyledVideo muted ref={userVideo} autoPlay playsInline />
+      {peers.map((peer, index) => {
+        return (
+          <Video key={index} peer={peer} />
+        );
+      })}
+    </Container>
+  );
+};
