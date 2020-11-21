@@ -60,13 +60,13 @@ For the person awaiting to join the room:
 4. They are now potentially receving x amount of signals based on who is in the room, so we need to know which one of the peers to use to accept the returning signal. 
 */
 
-export default function Room(props) {
+export default function Call(props) {
   const [peers, setPeers] = useState([]);
   // We keep track of the changes in the following refs without having to rerender the component
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]); 
-  const roomID = props.match.params.roomID;
+  const roomID = props.roomID;
 
   // useEffect runs when someone joins the room
   useEffect(() => {
