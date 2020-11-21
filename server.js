@@ -34,4 +34,8 @@ socket.on("sending signal", payload => {
   io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
 });
 
+socket.on("returning signal", payload => {
+  io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
+});
+
 server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
