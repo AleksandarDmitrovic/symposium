@@ -1,6 +1,6 @@
 .call-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
   width: 90%;
   margin: auto;
@@ -14,5 +14,7 @@
 .call-video {
   height: 40%;
   width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
