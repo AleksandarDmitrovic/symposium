@@ -46,7 +46,20 @@ const Room = (props) => {
   useEffect(() => {
     socketRef.current = io.connect("/");
     navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
-
+      userVideo.current.srcObject = stream;
+      socketRef.current.emit("join room");
+      socketRef.current.on("all users", users => {
+        const peers = [];
+        users.forEach(userID => {
+          const peer = createPeer(userID, socketRef.current.id, stream);
+          peersRef.current.push({
+            peerID: userID,
+            peer,
+          })
+          peers.push(peer);
+          setPeers(peers);
+        })
+      })
     })
   }, []);
 
