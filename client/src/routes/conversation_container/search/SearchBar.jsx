@@ -19,14 +19,13 @@ export default function SearchBar(props) {
 
   return (
     <section className="search">
-      <label for='search-bar'>Podcast: </label>
+      <label htmlFor='search-bar'>Podcast: </label>
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <input
-          class="selected-podcast"
+          className="selected-podcast"
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
-          autocomplete='off'
           type="text"
           value={value}
           onChange={event => props.changeValue(event.target.value)}

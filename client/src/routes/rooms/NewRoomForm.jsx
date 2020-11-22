@@ -34,7 +34,7 @@ export default function NewRoomForm (props) {
     setPodcastInfo(info);
   };
   
-  console.log('info :', podcastInfo);
+  // console.log('info :', podcastInfo);
 
   function create() {
     const id = uuid();
