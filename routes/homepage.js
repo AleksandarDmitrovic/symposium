@@ -57,10 +57,10 @@ module.exports = (db) => {
     const { title, description, url } = req.body;
     
     
-    const queryParams = [creatorID, categoryID, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage];
+    const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage];
     const queryString = `
-    INSERT INTO conversations (creator_id, category_id, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;`;
 
     db.query(queryString, queryParams)
