@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 
-import useDebounce from "hooks/useDebounce";
+import useDebounce from "../../hooks/useDebounce";
 
 export default function SearchBar(props) {
 
   const [value, setValue] = useState("");
   const term = useDebounce(value, 400);
 
-  const onSearch = useCallback(props.onSearch, [term]);
+  let onSearch = props.onSearch;
+
+  onSearch = useCallback((event) => {
+    console.log('EVENT', event);
+  }, [term]);
 
   useEffect(() => {
     onSearch(term);
