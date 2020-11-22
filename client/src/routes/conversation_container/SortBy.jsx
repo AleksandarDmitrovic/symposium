@@ -1,4 +1,4 @@
-import SearchBar from './SearchBar';
+import PodcastSearch from './PodcastSearch';
 
 // Passes information to ConversationList
 
@@ -10,7 +10,7 @@ export default function SortBy (props) {
   return (
     <div>
       <p>Sort By : All | Category | Search </p>
-      <SearchBar />
+      <PodcastSearch />
     </div>
   )
 }

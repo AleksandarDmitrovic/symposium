@@ -11,16 +11,22 @@ export default function PodcastSearch(props) {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://itunes.apple.com/search?${term}&entity=podcast`).then(response => {
-      console.log(response.data.results);
+    console.log('term length', term.length)
+    const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
+    axios.get(url).then(response => {
+      console.log('The results of the api search ', response.data.results);
       setResults([...response.data.results])
-    });
+    })
+    .catch(err => console.log('Error: ', err));
   }, [term])
 
   return (
     <Fragment>
       <div>
-        <SearchBar onSearch={term => setTerm(term)} />
+        <SearchBar onSearch={term => {
+          setTerm(term)
+          console.log('inside the onSearch in Podcast Search', term)
+        } } />
         <SearchResults results={results} />
       </div>
     </Fragment>

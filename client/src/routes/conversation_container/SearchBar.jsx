@@ -7,11 +7,7 @@ export default function SearchBar(props) {
   const [value, setValue] = useState("");
   const term = useDebounce(value, 400);
 
-  let onSearch = props.onSearch;
-
-  onSearch = useCallback((event) => {
-    console.log('EVENT', event);
-  }, [term]);
+  const onSearch = useCallback(props.onSearch, [term]);
 
   useEffect(() => {
     onSearch(term);
