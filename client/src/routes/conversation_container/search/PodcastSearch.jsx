@@ -7,13 +7,17 @@ import './searchBar.scss'
 
 const axios = require('axios');
 
+// PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props
 export default function PodcastSearch(props) {
 
+  // Name to insert into Itunes API 
   const [term, setTerm] = useState("");
+  // The results fetched from the API
   const [results, setResults] = useState([]);
-
+  // The value of the selected podcast
   const [value, setValue] = useState("");
 
+  // Stores the setValue function to pass down as props
   const changeValue = val => {
     setValue(val);
   }
