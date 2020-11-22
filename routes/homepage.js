@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/conversations", (req, res) => {
-    db.query(`SELECT * FROM conversations;`)
+    db.query(`SELECT * FROM conversations ORDER BY id DESC;`)
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -18,7 +18,8 @@ module.exports = (db) => {
   router.get("/conversations/category/:id", (req, res) => {
     db.query(`SELECT * FROM conversations 
               JOIN categories ON categories.id = category_id
-              WHERE conversations.category_id = $1;`, [req.params.id])
+              WHERE conversations.category_id = $1
+              ORDER BY id DESC;`, [req.params.id])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -31,7 +32,9 @@ module.exports = (db) => {
   });
 
   router.get("/conversations/podcast/:name", (req, res) => {
-    db.query(`SELECT * FROM conversations WHERE podcast_name = $1;`, [req.params.name])
+    db.query(`SELECT * FROM conversations 
+              WHERE podcast_name = $1
+              ORDER BY id DESC;`, [req.params.name])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
