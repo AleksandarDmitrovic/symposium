@@ -1,7 +1,11 @@
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import axios from 'axios';
+
+import io from "socket.io-client";
+import Peer from "simple-peer";
+
 
 import NewRoomButton from "../rooms/NewRoomButton";
 
@@ -23,6 +27,15 @@ export default function Conversation(props) {
       setConversations(res.data.conversation)
     })
   }, [searchParam]);
+
+
+  // SOCKET IO FOR HOMEPAGE
+  const socketRef = useRef();
+
+  useEffect(() => {
+    socketRef.current = io.connect("/")
+    socketRef.current.emit('at homepage');
+  }, [])
   
   return (
     <article>

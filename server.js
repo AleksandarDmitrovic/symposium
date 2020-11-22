@@ -27,6 +27,20 @@ const users = {};
 const socketToRoom = {};
 
 io.on("connection", socket => {
+
+  // For homepage
+  socket.on('at homepage', data => {
+    console.log('at homepage');
+
+    socket.on('created a new room', () => {
+      console.log('inside created a new room');
+      socket.emit('new conversation has been created')
+    })
+  })
+
+
+
+  // USER HAS JOINED THE ROOM
   socket.on("join room", roomID => {
     if (users[roomID]) {
       const length = users[roomID].length;
