@@ -44,7 +44,6 @@ export default function NewRoomForm (props) {
             placeholder="Enter Conversation Title"
             onChange={changeTitle}
             value={title}
-            required
           />
           <br/>
           <input
@@ -53,7 +52,6 @@ export default function NewRoomForm (props) {
             placeholder="Enter Conversation Description"
             onChange={changeDescription}
             value={description}
-            required
           />
            <br/>
           <label> Podcast </label>
