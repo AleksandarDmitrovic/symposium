@@ -43,10 +43,35 @@ module.exports = (db) => {
       });
   });
 
-
-
-
   // router.post for creating a new room
+  router.put('/conversations', (req, res) => {
+    console.log('req :', req);
+    res.status(204).json({});
+    
+
+
+    let creatorID = 1;
+    const { title, description, podcastName, url } = req.body;
+    
+    
+    const queryParams = [creatorID, title, description, podcastName, url];
+    // const queryString = `
+    // INSERT INTO users (name, email, password)
+    // VALUES ($1, $2, $3)
+    // RETURNING *;`;
+
+    // db.query(queryString, queryParams)
+    //   .then((data) => {
+    //     id = data.rows[0].id;
+    //     req.session.user_id = id;
+    //     res.redirect('/');
+    //   })
+    //   .catch((err) => {
+    //     res
+    //       .status(500)
+    //       .json({ error: err.message });
+    //   });
+  });
   // router.post for deleting a room
 
   return router;
