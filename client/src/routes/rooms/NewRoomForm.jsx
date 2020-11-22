@@ -26,10 +26,10 @@ export default function NewRoomForm (props) {
     axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
     .then((res) => {
       // console.log('res', res);
+      props.history.push(`/room/${id}`);
     })
     .catch(error => { console.error(error) });
     
-    props.history.push(`/room/${id}`);
 
   }
  

@@ -67,7 +67,7 @@ module.exports = (db) => {
       .then((data) => {
         const conversation = data.rows;
         // console.log('conversation :', conversation);
-        // res.json({ conversation });
+        res.status(201).json({});
       })
       .catch((err) => {
         res

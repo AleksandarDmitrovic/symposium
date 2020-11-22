@@ -10,7 +10,7 @@ const mapConversations = function (props) {
         podcast_name={conversation.podcast_name}
         description={conversation.description}
         image={conversation.podcast_image}
-        url={conversation.room_url}
+        url={conversation.conversation_url}
         history={props.history}
       />
     )

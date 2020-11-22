@@ -3,7 +3,8 @@
 export default function IndividualConversation(props) {
 
   const joinRoom = () => {
-    props.history.push('/room/4')
+    const roomURL = `/room/${props.url}`
+    props.history.push(roomURL)
   }
 
   return (
