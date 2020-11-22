@@ -1,7 +1,4 @@
 export default function Cover(props) {
-  // const albumInfoClass = classnames("album__info", {
-  //   "album__info--explicit": props.collectionExplicitness === "explicit"
-  // });
 
   return (
     <article className="podcast">
