@@ -1,12 +1,13 @@
-import { v1 as uuid } from "uuid";
+// import { v1 as uuid } from "uuid";
 
-export default function CreateRoom(props) {
-  function create() {
-    const id = uuid();
-    props.history.push(`/room/${id}`);
-  }
+// export default function CreateRoom(props) {
+//   console.log("props.history", props.history)
+//   function create() {
+//     const id = uuid();
+//     props.history.push(`/room/${id}`);
+//   }
 
-  return (
-    <button onClick={create}>Create Room</button>
-  );
-};
+//   return (
+//     <button onClick={create}>Create Room</button>
+//   );
+// };

@@ -7,7 +7,7 @@ export default function App() {
   return (
      <BrowserRouter>
        <Switch>
-         <Route path="/" exact component={Conversation}/>
+         <Route path="/" exact component={Conversation} />
          <Route path="/room/:roomID" component={Room} />
        </Switch>
      </BrowserRouter>
