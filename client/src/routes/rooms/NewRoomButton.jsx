@@ -37,7 +37,8 @@ export default function NewRoomButton(props) {
    const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);  
+  const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };  
@@ -60,7 +61,7 @@ export default function NewRoomButton(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
        >
-         <NewRoomForm/>
+         <NewRoomForm props = {props}/>
        </Modal>
        
      </>
