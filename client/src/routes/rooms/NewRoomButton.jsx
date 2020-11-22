@@ -61,7 +61,9 @@ export default function NewRoomButton(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
        >
-         <NewRoomForm props = {props}/>
+         <NewRoomForm 
+         props = {props}
+         />
        </Modal>
        
      </>

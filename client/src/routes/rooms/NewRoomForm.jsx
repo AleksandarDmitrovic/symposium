@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
+import axios from 'axios';
 
 export default function NewRoomForm (props) {
-  console.log("history", props.props.history)
+  // console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title || "");
   const [description, setDescription] = useState(props.description || "");
   const [podcastName, setPodcastName] = useState(props.podcastName || "");
@@ -15,12 +16,24 @@ export default function NewRoomForm (props) {
     setDescription(event.target.value);
   };
 
+  const changePodcastName = (event) => {
+    setPodcastName(event.target.value);
+  };
+
   function create() {
     const id = uuid();
+
+    axios.put(`/api/conversations`, { id })
+    .then((res) => {
+      console.log('res', res);
+    })
+    .catch(error => { console.error(error) });
+    
     props.props.history.push(`/room/${id}`);
+
   }
  
-
+  
   return (
     <main>
       <section className="new_room_form">
@@ -42,7 +55,7 @@ export default function NewRoomForm (props) {
           />
            <br/>
           <label> Podcast </label>
-          <select>
+          <select onChange={changePodcastName} value = {podcastName}>
             <option value="Sample Pod">Sample Pod</option>
             <option value="lime">Lime</option>
             <option value="coconut">Coconut</option>

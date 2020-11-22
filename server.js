@@ -1,17 +1,22 @@
 require('dotenv').config();
 const express = require("express");
+const bodyParser = require("body-parser");
 const http = require("http");
 const socket = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
 const io = socket(server);
+const cors = require('cors');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 const users = {};
 
@@ -60,7 +65,7 @@ const homepage = require("./routes/homepage");
 // For users
 const usersRoutes = require("./routes/users");
 
-app.use("/", homepage(db));
+app.use("/api", homepage(db));
 app.use("/api/users", usersRoutes(db));
 
 server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
