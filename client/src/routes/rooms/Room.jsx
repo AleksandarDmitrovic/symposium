@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';

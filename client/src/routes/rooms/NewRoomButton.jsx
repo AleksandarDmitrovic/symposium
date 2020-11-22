@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react';
+import { useState } from 'react';
 
 import NewRoomForm from './NewRoomForm';
 import { Button } from '@material-ui/core';
