@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
 import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';
 import Info from './Info';
 
-import './room-styles/room.scss';
+import './room.scss';
 
 export default function Room(props) {
 
