@@ -20,7 +20,7 @@ export default function PodcastSearch(props) {
     <Fragment>
       <div>
         <SearchBar onSearch={term => setTerm(term)} />
-        <Results results={results} />
+        {/* <Results results={results} /> */}
       </div>
     </Fragment>
   );
