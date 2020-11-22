@@ -1,4 +1,4 @@
-import PodcastSearch from './PodcastSearch';
+import PodcastSearch from './search/PodcastSearch';
 
 // Passes information to ConversationList
 

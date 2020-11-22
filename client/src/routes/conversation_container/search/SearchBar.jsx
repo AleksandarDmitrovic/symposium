@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-import useDebounce from "../../hooks/useDebounce";
+import useDebounce from "./hooks/useDebounce";
 
 export default function SearchBar(props) {
 
@@ -15,7 +15,7 @@ export default function SearchBar(props) {
 
   return (
     <section className="search">
-      <form className="search__form" onSubmit={event => event.preventDefault()}>
+      <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <input
           className="radius"
           spellCheck="false"
