@@ -1,4 +1,4 @@
-import React from "react";
+import Cover from './Cover';
 
 export default function SearchResults(props) {
 
@@ -6,7 +6,7 @@ export default function SearchResults(props) {
 
   console.log('RESULTS', results)
 
-  return results.map(album => {
-    // return <Album key={album.collectionId} {...album} />;
+  return results.map(podcast => {
+    return <Cover key={podcast.collectionId} {...podcast} />;
   });
 }

@@ -23,10 +23,7 @@ export default function PodcastSearch(props) {
   return (
     <Fragment>
       <div>
-        <SearchBar onSearch={term => {
-          setTerm(term)
-          console.log('inside the onSearch in Podcast Search', term)
-        } } />
+        <SearchBar onSearch={term => setTerm(term)} />
         <SearchResults results={results} />
       </div>
     </Fragment>
