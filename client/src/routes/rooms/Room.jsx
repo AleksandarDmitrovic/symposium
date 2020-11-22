@@ -4,6 +4,7 @@ import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';
 import Info from './Info';
+import EmbedVideo from './Embedded-player'
 
 import './room.scss';
 
@@ -20,7 +21,6 @@ useEffect(() => {
   })
 }, [roomID]);
 
-console.log('conversation :', conversation);
 
 
   return (
@@ -28,6 +28,7 @@ console.log('conversation :', conversation);
       <TopNav creatorID = {conversation[0].creator_id}/>
       <section id='call'>
         <Call roomID = {roomID} />
+        <EmbedVideo />
         <Info 
           title = {conversation[0].title}
           description = {conversation[0].description}
@@ -37,7 +38,7 @@ console.log('conversation :', conversation);
           podcast_image = {conversation[0].podcast_image}
         />
       </section>
-        <ChatBox />
+      <ChatBox />
     </main>
   );
 }
