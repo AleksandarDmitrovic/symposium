@@ -5,11 +5,11 @@ import axios from 'axios';
 
 export default function Conversation(props) {
 
-  const [conversation, setConversation] = useState([]);
+  const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
     axios.get('/api/conversations').then((res) => {
-      setConversation(res.data.conversation)
+      setConversations(res.data.conversation)
     })
   }, []);
   
@@ -17,7 +17,7 @@ export default function Conversation(props) {
     <article>
       <SortBy />
       <ConversationList 
-        conversations={conversation}
+        conversations={conversations}
       />
     </article>
     

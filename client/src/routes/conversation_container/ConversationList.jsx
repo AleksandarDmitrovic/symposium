@@ -1,24 +1,25 @@
 import IndividualConversation from "./IndividualConversation"
 
-const mapConversations = function (conversationsArray) {
-
-  const conversations = conversationsArray.map(conversation => {
-    console.log('conversation', conversation);
+const mapConversations = function (props) {
+  const conversations = props.conversations.map(conversation => {
     return (
-      <div style={ {border: "1px solid black", margin: '1em' } } >
-        <img src={conversation.podcast_image} alt="itunes" width="100" height="100"/>
-      </div>
+      <IndividualConversation
+        key={conversation.id}
+        title={conversation.title}
+        podcast_name={conversation.podcast_name}
+        description={conversation.description}
+        image={conversation.podcast_image}
+      />
     )
   });
   return conversations;
 };
 
-
 export default function ConversationList(props) {
 
   return (
     <ul>
-      { mapConversations(props.conversations) }
+      { mapConversations(props) }
     </ul>
   );
 };
