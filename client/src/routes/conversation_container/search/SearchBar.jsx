@@ -26,7 +26,7 @@ export default function SearchBar(props) {
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
-          autocomplete='off'
+          autoomplete='off'
           type="text"
           value={value}
           onChange={event => props.changeValue(event.target.value)}
