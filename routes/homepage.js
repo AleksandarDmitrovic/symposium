@@ -64,12 +64,15 @@ module.exports = (db) => {
 
     const creatorID = 1;
     const categoryID = 1;
-    const podcastName = "Podcast Sample";
+    
+    const { title, description, url, podcastInfo } = req.body;
+
+    const podcastName = podcastInfo.podcast_name;
+    console.log('podcastName :', podcastName);
     const podcastStartsAt = "TEXT";
     const podcastEndsAt = "TEXT";
-    const podcastImage = "https://images.unsplash.com/photo-1556761175-129418cb2dfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80";
-
-    const { title, description, url, podcastInfo } = req.body;
+    const podcastImage = podcastInfo.podcast_image;
+    console.log('podcastInfo :', podcastInfo);
     
     
     const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage];
