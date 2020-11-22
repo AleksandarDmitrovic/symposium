@@ -4,7 +4,6 @@ export default function CreateRoom(props) {
   function create() {
     const id = uuid();
     props.history.push(`/room/${id}`);
-    console.log(props.history)
   }
 
   return (
