@@ -17,9 +17,9 @@ export default function Cover(props) {
     });
     // Remove spaces from podcast name to provide valid route for searchParams
     const term = name.split(' ').join('+');
-    // Set the searchParams state
+    // Set the searchParams state using props passed all th way down from Index Component
     props.state(`/conversations/podcast/${term}`);
-     // Fill the input field with selected podcast name
+     // Fill the input field with selected podcast name using props passed down from PodcastSearch
      props.changeValue(name);
   };
 

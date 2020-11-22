@@ -2,6 +2,7 @@ import Cover from './Cover';
 
 export default function SearchResults(props) {
 
+  // props.results passed down from PodcastSearch, containing podcast info from the Itunes API
   const { results } = props;
 
   return results.map(podcast => {
