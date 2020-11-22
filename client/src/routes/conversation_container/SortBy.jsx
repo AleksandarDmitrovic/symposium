@@ -7,9 +7,9 @@ export default function SortBy (props) {
 
   return (
     <ul className="sort-by">
-      <li><button onClick={() => { props.state('conversations') } }>All</button></li>
-      <li><button onClick={() => { props.state('conversations/category/1') } }>Category</button></li>
-      <li><button onClick={() => { props.state('conversations/podcast/Sample%20Pod') } }>Search</button></li>
+      <li><button onClick={() => { props.changeState('conversations') } }>All</button></li>
+      <li><button onClick={() => { props.changeState('conversations/category/1') } }>Category</button></li>
+      <li><button onClick={() => { props.changeState('conversations/podcast/Sample%20Pod') } }>Search</button></li>
     </ul>
   )
 }

@@ -17,10 +17,17 @@ export default function Conversation(props) {
   // String of search params from sort bar
   const [searchParam, setSearchParam] = useState('conversations')
 
-  // Pass to sortby function so that it can update searchParam state
-  function changeState(newState) {
+  // State for when user creates new room
+  const [newRoom, setNewRoom] = useState()
+
+  // Pass to sortby so that it can update searchParam state
+  function changeSearchParamState(newState) {
     setSearchParam(newState)
   };
+  // Pass to NewRoomButton so that it can update newRoom state
+  function changeNewRoomState(newState) {
+    setNewRoom(newState);
+  }
 
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
@@ -31,7 +38,6 @@ export default function Conversation(props) {
 
   // SOCKET IO FOR HOMEPAGE
   const socketRef = useRef();
-
   useEffect(() => {
     socketRef.current = io.connect("/")
     socketRef.current.emit('at homepage');
@@ -42,10 +48,11 @@ export default function Conversation(props) {
 
       <NewRoomButton
         history={props.history}
+        changeState={changeSearchParamState}
       />
     
       <SortBy 
-        state={changeState}
+        changeState={changeNewRoomState}
       />
 
       <ConversationList 
