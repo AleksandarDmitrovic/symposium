@@ -13,16 +13,4 @@ export default function SearchResults(props) {
       />
     );
   });
-
-  // const podcastResults = results.map(podcast => {
-  //   return (
-  //     <li>
-  //       <button><Cover key={podcast.collectionId} {...podcast} /></button>
-  //     </li>
-  //   );
-  // });
-
-//   return (
-//     <ul>{podcastResults}</ul>
-//   );
 }

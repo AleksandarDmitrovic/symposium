@@ -5,7 +5,8 @@ export default function Cover(props) {
 
   console.log('props.state in Cover', props.state)
 
-  const term = 'lex'
+  const name = props.collectionName
+  const term = name.split(' ').join('+');
 
   return (
     <button onClick={() => props.state(`/conversations/podcast/${term}`)} className="podcast">
