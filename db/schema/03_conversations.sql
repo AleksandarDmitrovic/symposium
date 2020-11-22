@@ -7,7 +7,7 @@ CREATE TABLE conversations (
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   podcast_name VARCHAR(255) NOT NULL,
-  podcast_starts_at VARCHAR(255) NOT NULL,
-  podcast_ends_at VARCHAR(255) NOT NULL,
+  podcast_starts_at VARCHAR(255),
+  podcast_ends_at VARCHAR(255),
   podcast_image TEXT NOT NULL
 );
