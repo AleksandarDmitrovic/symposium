@@ -1,0 +1,32 @@
+.call-container {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 90%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+#call {
+  margin-top: 2em;
+}
+
+.call-video {
+  height: 45%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+}
+
+footer {
+  border-top: 1px solid black;
+}
+
+.info {
+  border: 1px solid black;
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-bottom: 1em;
+}
+
