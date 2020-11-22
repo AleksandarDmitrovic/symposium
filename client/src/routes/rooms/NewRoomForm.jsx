@@ -4,9 +4,9 @@ import axios from 'axios';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
-  const [title, setTitle] = useState(props.title || "");
-  const [description, setDescription] = useState(props.description || "");
-  const [podcastName, setPodcastName] = useState(props.podcastName || "");
+  const [title, setTitle] = useState(props.title || null);
+  const [description, setDescription] = useState(props.description || null);
+  const [podcastName, setPodcastName] = useState(props.podcastName || null);
 
   const changeTitle = (event) => {
     setTitle(event.target.value);

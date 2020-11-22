@@ -52,7 +52,7 @@ module.exports = (db) => {
     const podcastName = "Podcast Sample";
     const podcastStartsAt = "TEXT";
     const podcastEndsAt = "TEXT";
-    const podcastImage = "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
+    const podcastImage = "https://images.unsplash.com/photo-1556761175-129418cb2dfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80";
 
     const { title, description, url } = req.body;
     
@@ -66,8 +66,9 @@ module.exports = (db) => {
     db.query(queryString, queryParams)
       .then((data) => {
         const conversation = data.rows;
-        // console.log('conversation :', conversation);
-        res.status(201).json({});
+        console.log('conversation :', conversation);
+        res.json({ conversation });
+        // res.status(201).json({});
       })
       .catch((err) => {
         res
