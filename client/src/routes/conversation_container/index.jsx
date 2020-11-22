@@ -3,6 +3,8 @@ import ConversationList from "./ConversationList"
 import { useEffect, useState } from "react"
 import axios from 'axios';
 
+import NewRoomButton from "../rooms/NewRoomButton";
+
 export default function Conversation(props) {
 
   const [conversations, setConversations] = useState([]);
@@ -15,6 +17,9 @@ export default function Conversation(props) {
   
   return (
     <article>
+      <NewRoomButton
+      history={props.history}
+      />
       <SortBy />
       <ConversationList 
         conversations={conversations}

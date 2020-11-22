@@ -72,7 +72,7 @@ export default function NewRoomButton(props) {
         aria-describedby="simple-modal-description"
        >
          <NewRoomForm 
-         props = {props}
+         history = {props.history}
          />
        </Modal>
        
