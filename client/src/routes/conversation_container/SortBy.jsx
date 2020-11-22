@@ -1,13 +1,16 @@
-// Passes information to ConversationList
+import './conversation-styles/sortby.scss'
 
 export default function SortBy (props) {
 
-  // Set State
-  // Default to sort by all
+  console.log('props in sortBy', props);
+
+  props.state('Category')
 
   return (
-    <nav>
-      <p>Sort By : All | Category | Search </p>
-    </nav>
+    <ul class="sort-by">
+      <li><button>All</button></li>
+      <li><button>Category</button></li>
+      <li><button>Search</button></li>
+    </ul>
   )
 }
