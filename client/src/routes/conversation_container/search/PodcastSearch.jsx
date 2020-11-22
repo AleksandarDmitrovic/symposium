@@ -12,6 +12,12 @@ export default function PodcastSearch(props) {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
 
+  const [value, setValue] = useState("");
+
+  const changeValue = val => {
+    setValue(val);
+  }
+
   useEffect(() => {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
     axios.get(url).then(response => {
@@ -23,10 +29,15 @@ export default function PodcastSearch(props) {
   return (
     <Fragment>
       <div>
-        <SearchBar onSearch={term => setTerm(term)} />
+        <SearchBar 
+          onSearch={term => setTerm(term)}
+          changeValue = {changeValue}
+          value = {value}
+         />
         <SearchResults 
           results={results}
           state={props.state}
+          changeValue = {changeValue}
         />
       </div>
     </Fragment>

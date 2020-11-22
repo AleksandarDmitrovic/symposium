@@ -8,6 +8,8 @@ import './room-styles/room.scss';
 
 export default function Room(props) {
 
+  console.log(props.match.params.roomID)
+
   return (
     <main>
       <TopNav creator = {props.creator_id}/>

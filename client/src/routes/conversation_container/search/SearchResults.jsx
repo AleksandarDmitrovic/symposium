@@ -10,6 +10,7 @@ export default function SearchResults(props) {
         key={podcast.collectionId} 
         {...podcast}
         state = {props.state} 
+        changeValue = {props.changeValue}
       />
     );
   });
