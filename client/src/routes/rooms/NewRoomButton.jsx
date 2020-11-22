@@ -73,6 +73,7 @@ export default function NewRoomButton(props) {
        >
          <NewRoomForm 
          history = {props.history}
+         changeState={props.changeState}
          />
        </Modal>
        

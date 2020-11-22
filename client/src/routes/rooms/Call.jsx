@@ -67,6 +67,7 @@ export default function Call(props) {
         socketRef.current.emit('join room', roomID);
         // get array of users (everyone in chat except from themselves)
         socketRef.current.on('all users', users => {
+          console.log('users in room', users);
           // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
           const peers = []; 
           // iterate through each user in the room, creating a peer for each

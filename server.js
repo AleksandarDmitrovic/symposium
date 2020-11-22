@@ -23,22 +23,28 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const users = {};
+const allUsersConnectedToHomePage = [];
 
 const socketToRoom = {};
 
 io.on("connection", socket => {
 
-  // For homepage
-  socket.on('at homepage', data => {
-    console.log('at homepage');
+  // For newly created room
+  socket.on('connected to homepage', data => {
+    allUsersConnectedToHomePage.push(socket.id);
 
-    socket.on('created a new room', () => {
-      console.log('inside created a new room');
-      socket.emit('new conversation has been created')
-    })
-  })
+    const usersOtherThanCurrent = allUsersConnectedToHomePage.filter(id => id !== socket.id);
+    socket.emit("all users connected to homepage", usersOtherThanCurrent);
 
+    socket.on("sending signal", payload => {
+      console.log('EMIT USER CONNECTED TO HOMEPAGE');
+      io.to(payload.userToSignal).emit('user connected to homepage', { signal: payload.signal, callerID: payload.callerID });
+    });
 
+    socket.on("returning signal", payload => {
+      io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
+    });
+  });
 
   // USER HAS JOINED THE ROOM
   socket.on("join room", roomID => {

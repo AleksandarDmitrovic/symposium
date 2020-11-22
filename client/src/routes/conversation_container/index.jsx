@@ -38,21 +38,103 @@ export default function Conversation(props) {
 
   // SOCKET IO FOR HOMEPAGE
   const socketRef = useRef();
+  const peersRef = useRef([]); 
+  const [peers, setPeers] = useState([]);
+
   useEffect(() => {
-    socketRef.current = io.connect("/")
-    socketRef.current.emit('at homepage');
+    socketRef.current = io.connect("/");
+    socketRef.current.emit('connected to homepage');
+ 
+    socketRef.current.on('all users connected to homepage', users => {
+      console.log('users', users);
+      // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
+      const peers = []; 
+      // iterate through each user in the room, creating a peer for each
+      users.forEach(userID => {
+        const peer = createPeer(userID, socketRef.current.id);
+        peersRef.current.push({
+          peerID: userID, // the socketID for person we just created a peer for
+          peer // the peer object returned the from createPeer function
+        });
+        peers.push(peer);
+      });
+      // Update Peers State
+      setPeers(peers);
+    });
+
+    //* A PERSON ALREADY IN THE ROOM IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
+    socketRef.current.on('user connected to homepage', payload => {
+      console.log('user connect to homepage signal', payload.signal);
+      console.log('ON USER CONNECTED TO HOMEPAGE');
+      // Create a peer for the newcomer who just joined the room
+      // Pass as paramaters signal, who is calling us, and our stream
+      const peer = addPeer(payload.signal, payload.callerID);
+      
+      peersRef.current.push({
+        peerID: payload.callerID,
+        peer
+      });
+      // Update Peers State by adding the newly joined user to the existing array of participants
+      setPeers(users => [...users, peer]);
+    });
+
+    //* THE JOINING USER GETS THEIR RESPONSE
+    socketRef.current.on('receiving returned signal', payload => {
+      const item = peersRef.current.find(p => p.peerID === payload.id);
+      item.peer.signal(payload.signal);
+    })
   }, [])
+
+  function createPeer(userToSignal, callerID) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+    });
+
+    // The newly constructed peer emits a signal immediately because we set initiator to true. This starts the peer-to-peer handshake
+    peer.on('signal', signal => {
+      // Emit signal down to the server, sending an object with the userID of everyone already in room, the joining user's ID, and the actual signal data
+      console.log('EMIT SENDING SIGNAL');
+      socketRef.current.emit('sending signal', { userToSignal, callerID, signal })
+    });
+
+    return peer;
+  }
+
+  function addPeer(incomingSignal, callerID) {
+    console.log('TOP OF ADD PEER');
+    // initiator set to false so signal is not fired on creation of Peer
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+    });
+
+    // This will fire when it is notified that someone wants to make a connection with it
+    peer.on('signal', signal => {
+      console.log('ON SIGNAL (ADD PEER)');
+      console.log('EMIT RETURNING SIGNAL');
+      // Receives incoming signal, and sends a signal back out to the server, which sends a signal to the callerID that called 
+      socketRef.current.emit('returning signal', { signal, callerID });
+    });
+
+    // triggers the on 'signal' command above
+    peer.signal(incomingSignal);
+
+    return peer;
+  }
+
+  
   
   return (
     <article>
 
       <NewRoomButton
         history={props.history}
-        changeState={changeSearchParamState}
+        changeState={changeNewRoomState}
       />
     
       <SortBy 
-        changeState={changeNewRoomState}
+        changeState={changeSearchParamState}
       />
 
       <ConversationList 

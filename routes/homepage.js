@@ -45,7 +45,6 @@ module.exports = (db) => {
 
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
-    // console.log('req body:', req.body);
 
     const creatorID = 1;
     const categoryID = 1;
@@ -65,9 +64,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then((data) => {
-        const conversation = data.rows;
-        // console.log('conversation :', conversation);
-        // res.json({ conversation });
+        res.status(201).json({});
       })
       .catch((err) => {
         res
@@ -75,7 +72,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-  // router.post for deleting a room
 
   return router;
 };
