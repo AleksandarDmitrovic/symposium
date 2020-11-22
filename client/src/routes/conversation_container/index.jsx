@@ -46,8 +46,7 @@ export default function Conversation(props) {
     socketRef.current.emit('connected to homepage');
  
     socketRef.current.on('all users connected to homepage', users => {
-      console.log('users', users);
-      // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
+      // We have no peers yet because we have just joined.
       const peers = []; 
       // iterate through each user in the room, creating a peer for each
       users.forEach(userID => {
@@ -62,12 +61,9 @@ export default function Conversation(props) {
       setPeers(peers);
     });
 
-    //* A PERSON ALREADY IN THE ROOM IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
+    //* A PERSON ALREADY ON THE HOMEPAGE IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
     socketRef.current.on('user connected to homepage', payload => {
-      console.log('user connect to homepage signal', payload.signal);
-      console.log('ON USER CONNECTED TO HOMEPAGE');
-      // Create a peer for the newcomer who just joined the room
-      // Pass as paramaters signal, who is calling us, and our stream
+      // Create a peer for the newcomer who just went to the homepage
       const peer = addPeer(payload.signal, payload.callerID);
       
       peersRef.current.push({
@@ -93,8 +89,7 @@ export default function Conversation(props) {
 
     // The newly constructed peer emits a signal immediately because we set initiator to true. This starts the peer-to-peer handshake
     peer.on('signal', signal => {
-      // Emit signal down to the server, sending an object with the userID of everyone already in room, the joining user's ID, and the actual signal data
-      console.log('EMIT SENDING SIGNAL');
+      // Emit signal down to the server, sending an object with the userID of everyone already on the homepage, the joining user's ID, and the actual signal data
       socketRef.current.emit('sending signal', { userToSignal, callerID, signal })
     });
 
@@ -102,7 +97,6 @@ export default function Conversation(props) {
   }
 
   function addPeer(incomingSignal, callerID) {
-    console.log('TOP OF ADD PEER');
     // initiator set to false so signal is not fired on creation of Peer
     const peer = new Peer({
       initiator: false,
@@ -111,8 +105,6 @@ export default function Conversation(props) {
 
     // This will fire when it is notified that someone wants to make a connection with it
     peer.on('signal', signal => {
-      console.log('ON SIGNAL (ADD PEER)');
-      console.log('EMIT RETURNING SIGNAL');
       // Receives incoming signal, and sends a signal back out to the server, which sends a signal to the callerID that called 
       socketRef.current.emit('returning signal', { signal, callerID });
     });

@@ -37,7 +37,6 @@ io.on("connection", socket => {
     socket.emit("all users connected to homepage", usersOtherThanCurrent);
 
     socket.on("sending signal", payload => {
-      console.log('EMIT USER CONNECTED TO HOMEPAGE');
       io.to(payload.userToSignal).emit('user connected to homepage', { signal: payload.signal, callerID: payload.callerID });
     });
 
