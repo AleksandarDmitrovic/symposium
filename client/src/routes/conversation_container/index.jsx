@@ -18,6 +18,7 @@ export default function Conversation(props) {
       <SortBy />
       <ConversationList 
         conversations={conversations}
+        history={props.history}
       />
     </article>
     

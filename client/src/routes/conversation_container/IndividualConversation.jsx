@@ -1,4 +1,10 @@
+
+
 export default function IndividualConversation(props) {
+
+  const joinRoom = () => {
+    props.history.push('/room/4')
+  }
 
   return (
     <div style={ {border: "1px solid black", margin: '1em' } } >
@@ -7,7 +13,7 @@ export default function IndividualConversation(props) {
       <p>{props.podcast_name}</p>
       <p>{props.description}</p>
       <p>Time Elapsed</p>
-      <button>Join</button>
+      <button onClick={joinRoom}>Join Room</button>
     </div>
   );
 }
