@@ -7,6 +7,18 @@ export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title || null);
   const [description, setDescription] = useState(props.description || null);
   const [podcastName, setPodcastName] = useState(props.podcastName || null);
+  const [error, setError] = useState("");
+
+  const validate = () => {
+    if (title === null) {
+      setError("Conversation title cannot be blank");
+      return;
+    } else if (description === null) {
+      setError("Conversation description cannot be blank");
+      return;
+    } 
+    setError("");
+  };
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
@@ -22,6 +34,8 @@ export default function NewRoomForm (props) {
 
   function create() {
     const id = uuid();
+
+    validate()
 
     axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
     .then((res) => {
@@ -64,6 +78,7 @@ export default function NewRoomForm (props) {
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
         </form>
+        <section className="form__validation">{error}</section>
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
