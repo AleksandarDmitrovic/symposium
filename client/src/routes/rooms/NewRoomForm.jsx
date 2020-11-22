@@ -6,7 +6,7 @@ import PodcastSearch from '../conversation_container/search/PodcastSearch';
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title || undefined);
-  const [description, setDescription] = useState(props.description || undefined);
+  const [description, setDescription] = useState(props.description || '');
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || undefined);
   const [error, setError] = useState("");
 

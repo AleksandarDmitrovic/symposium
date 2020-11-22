@@ -35,11 +35,10 @@
 
 .container {
   overflow-y: scroll;
-  height: 300px;
-  width: auto;
 }
 .container::-webkit-scrollbar {
   display: none;
+  height: 300px;
 }
 
 /* width */

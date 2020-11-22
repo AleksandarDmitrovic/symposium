@@ -13,6 +13,7 @@ export default function SearchResults(props) {
         state = {props.state} 
         changeValue = {props.changeValue}
         changePodcastInfo = {props.changePodcastInfo}
+        changeInput = {props.changeInput}
       />
     )
   });
