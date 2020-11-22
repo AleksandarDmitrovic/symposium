@@ -45,7 +45,8 @@ module.exports = (db) => {
   });
 
   router.get("/conversations/podcast/:name", (req, res) => {
-    db.query(`SELECT * FROM conversations WHERE podcast_name = $1;`, [req.params.name])
+    const name = req.params.name.split('+').join(' ')
+    db.query(`SELECT * FROM conversations WHERE podcast_name = $1;`, [name])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
