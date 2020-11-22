@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Modal } from '@material-ui/core';
+import { v1 as uuid } from "uuid";
 
 export default function NewRoomForm (props) {
+  console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title || "");
   const [description, setDescription] = useState(props.description || "");
   const [podcastName, setPodcastName] = useState(props.podcastName || "");
@@ -13,6 +14,12 @@ export default function NewRoomForm (props) {
   const changeDescription = (event) => {
     setDescription(event.target.value);
   };
+
+  function create() {
+    const id = uuid();
+    props.props.history.push(`/room/${id}`);
+  }
+ 
 
   return (
     <main>
@@ -38,9 +45,11 @@ export default function NewRoomForm (props) {
           <select>
             <option value="Sample Pod">Sample Pod</option>
             <option value="lime">Lime</option>
-            <option selected value="coconut">Coconut</option>
+            <option value="coconut">Coconut</option>
             <option value="mango">Mango</option>
           </select>
+          <br/>
+          <input type="submit" value="Submit" onClick={create}/>
         </form>
       </section>
       <section className="appointment__card-right">

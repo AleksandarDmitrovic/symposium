@@ -5,14 +5,11 @@ import NewRoomButton from "./routes/rooms/NewRoomButton";
 
 export default function App() {
   return (
-    <>
-     <NewRoomButton/>
      <BrowserRouter>
        <Switch>
-         <Route path="/" exact component={CreateRoom} />
+         <Route path="/" exact component={NewRoomButton} />
          <Route path="/room/:roomID" component={Room} />
        </Switch>
      </BrowserRouter>
-    </>
   );
 }
