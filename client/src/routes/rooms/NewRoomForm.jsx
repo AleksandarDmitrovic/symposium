@@ -40,7 +40,12 @@ export default function NewRoomForm (props) {
     const id = uuid();
     if (validate()) {
 
-      axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastInfo: podcastInfo })
+      axios.put(`/api/conversations`, { 
+        url: id, 
+        title: title, 
+        description: description, 
+        podcastInfo: podcastInfo 
+      })
       .then((res) => {
         // console.log('res', res);
         props.history.push(`/room/${id}`);
