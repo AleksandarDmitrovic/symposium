@@ -4,20 +4,21 @@ import axios from 'axios';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
-  const [title, setTitle] = useState(props.title || null);
-  const [description, setDescription] = useState(props.description || null);
-  const [podcastName, setPodcastName] = useState(props.podcastName || null);
+  const [title, setTitle] = useState(props.title || undefined);
+  const [description, setDescription] = useState(props.description || undefined);
+  const [podcastName, setPodcastName] = useState(props.podcastName || undefined);
   const [error, setError] = useState("");
 
   const validate = () => {
-    if (title === null) {
+    if (title === undefined) {
       setError("Conversation title cannot be blank");
       return;
-    } else if (description === null) {
+    } else if (description === undefined) {
       setError("Conversation description cannot be blank");
       return;
     } 
     setError("");
+    return true;
   };
 
   const changeTitle = (event) => {
@@ -34,16 +35,15 @@ export default function NewRoomForm (props) {
 
   function create() {
     const id = uuid();
+    if (validate()) {
 
-    validate()
-
-    axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
-    .then((res) => {
-      // console.log('res', res);
-      props.history.push(`/room/${id}`);
-    })
-    .catch(error => { console.error(error) });
-    
+      axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
+      .then((res) => {
+        // console.log('res', res);
+        props.history.push(`/room/${id}`);
+      })
+      .catch(error => { console.error(error) }); 
+    }
 
   }
  

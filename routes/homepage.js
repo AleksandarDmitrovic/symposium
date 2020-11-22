@@ -15,6 +15,20 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/conversations/:url", (req, res) => {
+    db.query(`SELECT * FROM conversations 
+              WHERE conversations.conversation_url = $1;`, [req.params.url])
+      .then(data => {
+        const conversation = data.rows;
+        res.json({ conversation });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   router.get("/conversations/category/:id", (req, res) => {
     db.query(`SELECT * FROM conversations 
               JOIN categories ON categories.id = category_id

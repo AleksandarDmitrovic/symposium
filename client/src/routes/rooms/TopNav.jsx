@@ -4,15 +4,17 @@ import axios from 'axios';
 
 export default function TopNav(props) {
 
+
+
   const [creator, setCreator] = useState('');
 
   useEffect(() => {
-    axios.get(`/${props.crerator_id}`)
+    axios.get(`/api/users/${props.creatorID}`)
     .then(res => {
       setCreator(res.data.user[0].username);
     })
     .catch(err => console.log('Error: ', err));
-  }, []);
+  }, [props.creatorID]);
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
