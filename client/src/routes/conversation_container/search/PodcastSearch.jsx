@@ -42,6 +42,7 @@ export default function PodcastSearch(props) {
           results={results}
           state={props.state}
           changeValue = {changeValue}
+          changePodcastInfo = {props.changePodcastInfo}
         />
       </div>
     </Fragment>

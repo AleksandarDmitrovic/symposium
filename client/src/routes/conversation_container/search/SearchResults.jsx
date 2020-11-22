@@ -12,6 +12,7 @@ export default function SearchResults(props) {
         {...podcast}
         state = {props.state} 
         changeValue = {props.changeValue}
+        changePodcastInfo = {props.changePodcastInfo}
       />
     );
   });

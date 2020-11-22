@@ -20,8 +20,6 @@ useEffect(() => {
   })
 }, [roomID]);
 
-console.log('conversation :', conversation);
-
 
   return (
     <main>

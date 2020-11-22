@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
+import PodcastSearch from '../conversation_container/search/PodcastSearch';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title || undefined);
   const [description, setDescription] = useState(props.description || undefined);
-  const [podcastName, setPodcastName] = useState(props.podcastName || undefined);
+  const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || undefined);
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -29,15 +30,17 @@ export default function NewRoomForm (props) {
     setDescription(event.target.value);
   };
 
-  const changePodcastName = (event) => {
-    setPodcastName(event.target.value);
+  const changePodcastInfo = (info) => {
+    setPodcastInfo(info);
   };
+  
+  console.log('info :', podcastInfo);
 
   function create() {
     const id = uuid();
     if (validate()) {
 
-      axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
+      axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastInfo: podcastInfo })
       .then((res) => {
         // console.log('res', res);
         props.history.push(`/room/${id}`);
@@ -47,7 +50,6 @@ export default function NewRoomForm (props) {
 
   }
  
-  
   return (
     <main>
       <section className="new_room_form">
@@ -69,12 +71,7 @@ export default function NewRoomForm (props) {
           />
            <br/>
           <label> Podcast </label>
-          <select onChange={changePodcastName} value = {podcastName}>
-            <option value="Sample Pod">Sample Pod</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
+          <PodcastSearch changePodcastInfo = {changePodcastInfo} />
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
         </form>
