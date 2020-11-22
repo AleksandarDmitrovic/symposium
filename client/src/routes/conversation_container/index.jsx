@@ -13,9 +13,18 @@ export default function Conversation(props) {
   // String of search params from sort bar
   const [searchParam, setSearchParam] = useState('conversations')
 
+  // TO DO
+  const [addRoom, setAddRoom] = useState();
+
   // Pass to sortby function so that it can update searchParam state
-  function changeState(newState) {
-    setSearchParam(newState)
+  function changeSearchParamState(newState) {
+    setSearchParam(newState);
+  };
+
+  // Pass to NewRoomButton to re-render conversations when new room is created
+  // TO DO WILL NEED WEBSOCKETS TO ACHIEVE THIS
+  function changeAddRoomState(newState) {
+    setAddRoom(newState);
   };
 
   useEffect(() => {
@@ -32,7 +41,7 @@ export default function Conversation(props) {
       />
     
       <SortBy 
-        state={changeState}
+        changeState={changeSearchParamState}
       />
 
       <ConversationList 
