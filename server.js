@@ -43,6 +43,10 @@ io.on("connection", socket => {
     socket.on("returning signal", payload => {
       io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
     });
+
+    socket.on("created a new room", () => {
+      socket.emit('there is a new room')
+    })
   });
 
   // USER HAS JOINED THE ROOM

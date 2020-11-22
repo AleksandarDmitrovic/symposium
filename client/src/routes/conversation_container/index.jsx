@@ -27,6 +27,7 @@ export default function Conversation(props) {
   // Pass to NewRoomButton so that it can update newRoom state
   function changeNewRoomState(newState) {
     setNewRoom(newState);
+    socketRef.current.emit('created a new room');
   }
 
   useEffect(() => {
@@ -46,19 +47,22 @@ export default function Conversation(props) {
     socketRef.current.emit('connected to homepage');
  
     socketRef.current.on('all users connected to homepage', users => {
-      // We have no peers yet because we have just joined.
-      const peers = []; 
-      // iterate through each user in the room, creating a peer for each
-      users.forEach(userID => {
-        const peer = createPeer(userID, socketRef.current.id);
-        peersRef.current.push({
-          peerID: userID, // the socketID for person we just created a peer for
-          peer // the peer object returned the from createPeer function
+
+      if (users) {
+        // We have no peers yet because we have just joined.
+        const peers = []; 
+        // iterate through each user in the room, creating a peer for each
+        users.forEach(userID => {
+          const peer = createPeer(userID, socketRef.current.id);
+          peersRef.current.push({
+            peerID: userID, // the socketID for person we just created a peer for
+            peer // the peer object returned the from createPeer function
+          });
+          peers.push(peer);
         });
-        peers.push(peer);
-      });
-      // Update Peers State
-      setPeers(peers);
+        // Update Peers State
+        setPeers(peers);
+      }
     });
 
     //* A PERSON ALREADY ON THE HOMEPAGE IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
@@ -77,7 +81,12 @@ export default function Conversation(props) {
     //* THE JOINING USER GETS THEIR RESPONSE
     socketRef.current.on('receiving returned signal', payload => {
       const item = peersRef.current.find(p => p.peerID === payload.id);
+      console.log('handshake has been created');
       item.peer.signal(payload.signal);
+    })
+
+    socketRef.current.on('there is a new room', () => {
+      setNewRoom('new room');
     })
   }, [])
 
