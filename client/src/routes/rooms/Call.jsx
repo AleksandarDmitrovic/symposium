@@ -9,7 +9,7 @@ const Video = (props) => {
     props.peer.on("stream", stream => {
       ref.current.srcObject = stream;
     })
-  }, []);
+  }, [props.peer]);
 
   return (
     <video className='call-video'  playsInline autoPlay ref={ref} />
@@ -101,7 +101,7 @@ export default function Call(props) {
           item.peer.signal(payload.signal);
         })
       })
-  }, []);
+  }, [roomID]);
 
   //* Function for creating peers when a user has joined a room with existing participants
   function createPeer(userToSignal, callerID, stream) {

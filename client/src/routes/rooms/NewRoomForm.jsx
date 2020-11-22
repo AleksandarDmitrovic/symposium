@@ -4,9 +4,22 @@ import axios from 'axios';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
-  const [title, setTitle] = useState(props.title || "");
-  const [description, setDescription] = useState(props.description || "");
-  const [podcastName, setPodcastName] = useState(props.podcastName || "");
+  const [title, setTitle] = useState(props.title || undefined);
+  const [description, setDescription] = useState(props.description || undefined);
+  const [podcastName, setPodcastName] = useState(props.podcastName || undefined);
+  const [error, setError] = useState("");
+
+  const validate = () => {
+    if (title === undefined) {
+      setError("Conversation title cannot be blank");
+      return;
+    } else if (description === undefined) {
+      setError("Conversation description cannot be blank");
+      return;
+    } 
+    setError("");
+    return true;
+  };
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
@@ -22,14 +35,15 @@ export default function NewRoomForm (props) {
 
   function create() {
     const id = uuid();
+    if (validate()) {
 
-    axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
-    .then((res) => {
-      // console.log('res', res);
-    })
-    .catch(error => { console.error(error) });
-    
-    props.history.push(`/room/${id}`);
+      axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
+      .then((res) => {
+        // console.log('res', res);
+        props.history.push(`/room/${id}`);
+      })
+      .catch(error => { console.error(error) }); 
+    }
 
   }
  
@@ -64,6 +78,7 @@ export default function NewRoomForm (props) {
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
         </form>
+        <section className="form__validation">{error}</section>
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
