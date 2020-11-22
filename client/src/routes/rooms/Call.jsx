@@ -12,7 +12,7 @@ const Video = (props) => {
   }, []);
 
   return (
-    <video class='call-video'  playsInline autoPlay ref={ref} />
+    <video className='call-video'  playsInline autoPlay ref={ref} />
   );
 }
 
@@ -142,8 +142,8 @@ export default function Call(props) {
   }
 
   return (
-    <div class='call-container'>
-        <video class='call-video' muted ref={userVideo} autoPlay playsInline />
+    <div className='call-container'>
+        <video className='call-video' muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer, index) => {
             return (
                 <Video key={index} peer={peer} />
