@@ -2,7 +2,6 @@ import IndividualConversation from "./IndividualConversation"
 
 const mapConversations = function (props) {
   const conversations = props.conversations.map(conversation => {
-    console.log('con', conversation);
     return (
       <IndividualConversation
         key={conversation.id}

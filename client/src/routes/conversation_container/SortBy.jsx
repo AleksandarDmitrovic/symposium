@@ -6,8 +6,8 @@ export default function SortBy (props) {
   // Default to sort by all
 
   return (
-    <div>
+    <nav>
       <p>Sort By : All | Category | Search </p>
-    </div>
+    </nav>
   )
 }
