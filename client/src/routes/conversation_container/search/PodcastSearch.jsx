@@ -3,6 +3,8 @@ import { Fragment, useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 
+import './searchBar.scss'
+
 const axios = require('axios');
 
 export default function PodcastSearch(props) {
@@ -22,7 +24,10 @@ export default function PodcastSearch(props) {
     <Fragment>
       <div>
         <SearchBar onSearch={term => setTerm(term)} />
-        <SearchResults results={results} />
+        <SearchResults 
+          results={results}
+          state={props.state}
+        />
       </div>
     </Fragment>
   );

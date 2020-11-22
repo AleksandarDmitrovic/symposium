@@ -18,6 +18,8 @@ export default function Conversation(props) {
     setSearchParam(newState)
   };
 
+  console.log('Search Params = ', searchParam)
+
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation)
