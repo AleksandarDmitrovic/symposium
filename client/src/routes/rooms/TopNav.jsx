@@ -7,8 +7,7 @@ export default function TopNav(props) {
   const [creator, setCreator] = useState('');
 
   useEffect(() => {
-    // axios.get(`/${props.crerator_id}`)
-    axios.get('/api/users/1')
+    axios.get(`/${props.crerator_id}`)
     .then(res => {
       setCreator(res.data.user[0].username);
     })
