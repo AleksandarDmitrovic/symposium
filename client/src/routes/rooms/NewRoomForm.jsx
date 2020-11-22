@@ -23,7 +23,7 @@ export default function NewRoomForm (props) {
   function create() {
     const id = uuid();
 
-    axios.put(`/api/conversations`, { id })
+    axios.put(`/api/conversations`, { url: id, title: title, description: description, podcastName: podcastName })
     .then((res) => {
       console.log('res', res);
     })

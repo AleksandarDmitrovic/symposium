@@ -15,7 +15,11 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(cors());
 
 const users = {};

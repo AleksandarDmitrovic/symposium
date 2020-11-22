@@ -8,11 +8,7 @@ export default function App() {
   return (
      <BrowserRouter>
        <Switch>
-<<<<<<< HEAD
-         <Route path="/" exact component={Conversation}/>
-=======
          <Route path="/" exact component={NewRoomButton} />
->>>>>>> Add submit button on NewRoomForm
          <Route path="/room/:roomID" component={Room} />
        </Switch>
      </BrowserRouter>
