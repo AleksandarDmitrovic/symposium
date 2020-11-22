@@ -6,16 +6,26 @@ import axios from 'axios';
 export default function Conversation(props) {
 
   const [conversations, setConversations] = useState([]);
+  const [searchParam, setSearchParam] = useState('conversations')
+
+  // Pass to sortby function so that it can update searchParam state
+  function changeState(newState) {
+    console.log('changing state');
+    setSearchParam(newState)
+  };
 
   useEffect(() => {
-    axios.get('/api/conversations').then((res) => {
+    console.log('useEffect', searchParam);
+    axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation)
     })
-  }, []);
+  }, [searchParam]);
   
   return (
     <article>
-      <SortBy />
+      <SortBy 
+        state={changeState}
+      />
       <ConversationList 
         conversations={conversations}
         history={props.history}

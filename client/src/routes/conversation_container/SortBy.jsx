@@ -1,13 +1,15 @@
-// Passes information to ConversationList
+import './conversation-styles/sortby.scss'
 
 export default function SortBy (props) {
 
-  // Set State
-  // Default to sort by all
+  // CATEGORY BUTTON IS HARDCODED TO 1
+  // SEARCH BUTTON IS HARDCODED TO SAMPLE POD
 
   return (
-    <div>
-      <p>Sort By : All | Category | Search </p>
-    </div>
+    <ul className="sort-by">
+      <li><button onClick={() => { props.state('conversations') } }>All</button></li>
+      <li><button onClick={() => { props.state('conversations/category/1') } }>Category</button></li>
+      <li><button onClick={() => { props.state('conversations/podcast/Sample%20Pod') } }>Search</button></li>
+    </ul>
   )
 }
