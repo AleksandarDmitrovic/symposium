@@ -3,7 +3,7 @@ export default function Cover(props) {
   // Object that the will be given to the changePodcastInfo prop passed down from NewRoomForm Component
   const podcastInfo = {
     podcast_name: props.collectionName,
-    podcast_image: props.artworkUrl60,
+    podcast_image: props.artworkUrl100,
     category: props.primaryGenreName
   }
 
@@ -30,7 +30,7 @@ export default function Cover(props) {
 
   return (
     <article onClick={() => selectPodcast(name)} className="podcast">
-      <img className="podcast-thumbnail" src={props.artworkUrl60} alt="Cover" />
+      <img className="podcast-thumbnail" src={props.artworkUrl100} alt="Cover" />
       <div className='podcast-list'>
         <div className="podacast-result">{name}</div>
       </div>
