@@ -12,7 +12,7 @@ export default function Cover(props) {
 
   const selectPodcast = name => {
     // Hide the remaining search results
-    document.getElementById('result-container').style.display = 'none';
+    document.getElementsByClassName('result-container')[0].style.display = 'none';
  
     if (props.state) {
       // Remove spaces from podcast name to provide valid route for searchParams
