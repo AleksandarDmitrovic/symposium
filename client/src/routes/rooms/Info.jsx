@@ -10,6 +10,7 @@ export default function Info(props) {
         <li>Title: {props.title}</li>
         <li>Description: {props.description}</li>
         <li>Podcast: {props.podcast_name}</li>
+        <li>Category: {props.category}</li>
         <li>Timestamp: {props.podcast_starts_at} - {props.podcast_ends_at}</li>
       </ul>
     </div>
