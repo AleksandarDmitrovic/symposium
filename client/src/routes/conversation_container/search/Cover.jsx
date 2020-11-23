@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function Cover(props) {
 
@@ -17,7 +17,7 @@ export default function Cover(props) {
 
   const selectPodcast = name => {
     // Hide the remaining search results. Convert into an array to iterate through 
-    Array.from(document.getElementsByClassName('podcast')).forEach(result => {
+    Array.from(document.getElementsByClassName('container')).forEach(result => {
       result.style.display = 'none';
     });
     if (props.state) {
