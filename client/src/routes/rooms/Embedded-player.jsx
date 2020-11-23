@@ -1,10 +1,14 @@
 export default function EmbedVideo (props) {
 
-  const collectionID = '1408856271';
-  const url = `https://embed.podcasts.apple.com/us/podcast/the-joe-rogan-experience-experience/id${collectionID}`
-  console.log('url', url);
+  console.log(props.embed_url);
 
   return (
-    <iframe src={url}></iframe>
+    <div>
+      <h1>{props.embed_title}</h1>
+      <audio controls>
+        <source src="https://traffic.libsyn.com/secure/joeroganexp/p1568.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
   );
 }

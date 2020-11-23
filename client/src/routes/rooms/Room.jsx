@@ -21,14 +21,15 @@ useEffect(() => {
   })
 }, [roomID]);
 
-
-
   return (
     <main>
       <TopNav creatorID = {conversation[0].creator_id}/>
       <section id='call'>
         <Call roomID = {roomID} />
-        <EmbedVideo />
+        <EmbedVideo 
+          embed_title = {conversation[0].embed_title}
+          embed_url = {conversation[0].embed_url}
+        />
         <Info 
           title = {conversation[0].title}
           description = {conversation[0].description}
