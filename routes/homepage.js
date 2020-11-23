@@ -65,7 +65,9 @@ module.exports = (db) => {
     const creatorID = 1;
     const categoryID = 1;
     
-    const { title, description, url, podcastInfo } = req.body;
+    const { title, description, url, podcastInfo, episodeInfo } = req.body;
+
+    console.log('this is the info', episodeInfo)
 
     const podcastName = podcastInfo.podcast_name;
     console.log('podcastName :', podcastName);
@@ -73,12 +75,13 @@ module.exports = (db) => {
     const podcastEndsAt = "TEXT";
     const podcastImage = podcastInfo.podcast_image;
     console.log('podcastInfo :', podcastInfo);
+    const embed_title = episodeInfo.embed_title;
+    const embed_url = episodeInfo.embed_url;
     
-    
-    const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage];
+    const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embed_title, embed_url];
     const queryString = `
     INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING *;`;
 
     db.query(queryString, queryParams)

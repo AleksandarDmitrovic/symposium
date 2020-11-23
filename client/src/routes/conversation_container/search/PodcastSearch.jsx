@@ -29,10 +29,9 @@ export default function PodcastSearch(props) {
       // Make second api call for specific podcasts
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
-      console.log('feedUrl', url);
       axios.get(url).then(response => {
-        console.log('data items', response.data.items)
-        setEpisodes(response.data.items)
+        setEpisodes(response.data.items);
+        props.changeEpisodes(response.data.items);
       })
     })
     .catch(err => console.log('Error: ', err));
@@ -45,12 +44,11 @@ export default function PodcastSearch(props) {
           onSearch={term => setTerm(term)}
           changeValue = {changeValue}
           value = {value}
-         />
-        <select class='episode-list'>
-          <option>Episodes:</option>
+        />
+        <select id='episode-list'>
+          <option>Episode:</option>
           <Episodes 
             episodes = {episodes}
-            changeEpisodes = {props.changeEpisodes} 
           />
         </select>
         <SearchResults 

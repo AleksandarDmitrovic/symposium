@@ -5,10 +5,10 @@ import PodcastSearch from '../conversation_container/search/PodcastSearch';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
-  const [title, setTitle] = useState(props.title || undefined);
+  const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
-  const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || undefined);
-  const [episodeInfo, setEpisodeInfo] = useState([{}]);
+  const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
+  const [episodeInfo, setEpisodeInfo] = useState(props.episodes || [{}]);
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -35,11 +35,9 @@ export default function NewRoomForm (props) {
     setPodcastInfo(info);
   };
 
-  const changeEpisodes = episodes => {
+  const changeEpisodes = (episodes) => {
     setEpisodeInfo(episodes);
   }
-  
-  // console.log('info :', podcastInfo);
 
   function create() {
     const id = uuid();
@@ -49,7 +47,8 @@ export default function NewRoomForm (props) {
         url: id, 
         title: title, 
         description: description, 
-        podcastInfo: podcastInfo 
+        podcastInfo: podcastInfo,
+        episodeInfo: episodeInfo
       })
       .then((res) => {
         // console.log('res', res);
@@ -57,7 +56,6 @@ export default function NewRoomForm (props) {
       })
       .catch(error => { console.error(error) }); 
     }
-
   }
  
   return (

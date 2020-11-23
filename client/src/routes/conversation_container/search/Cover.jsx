@@ -1,4 +1,8 @@
+import { useState } from 'react';
+
 export default function Cover(props) {
+
+  const [visible, setVisible] = useState('hidden');
 
   // Object that the will be given to the changePodcastInfo prop passed down from NewRoomForm Component
   const podcastInfo = {
@@ -22,6 +26,8 @@ export default function Cover(props) {
       props.state(`/conversations/podcast/${term}`);
     } else {
       props.changePodcastInfo(podcastInfo);
+      document.getElementById('episode-list').style.visibility = 'visible';
+      setVisible('visible')
     }
     // Fill the input field with selected podcast name using props passed down from PodcastSearch
     props.changeValue(name);
