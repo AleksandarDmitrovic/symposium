@@ -19,7 +19,7 @@ export default function SearchResults(props) {
   });
 
   return (
-    <div className='container'>
+    <div id='result-container'>
       {scrollableResults}
     </div>
   );
