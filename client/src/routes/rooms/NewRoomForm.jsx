@@ -36,10 +36,6 @@ export default function NewRoomForm (props) {
     setPodcastInfo(info);
   };
 
-  // const changeEpisodeInfo = (episode) => {
-  //   setEpisodeInfo(episode);
-  // }
-
   function create(event) {
     event.preventDefault();
     const id = uuid();
