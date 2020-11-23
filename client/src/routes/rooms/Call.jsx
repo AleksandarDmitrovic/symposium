@@ -75,7 +75,10 @@ export default function Call(props) {
               peerID: userID, // the socketID for person we just created a peer for
               peer // the peer object returned the from createPeer function
             });
-            peers.push(peer);
+            peers.push({
+              peerID: userID,
+              peer,
+            });
           });
           // Update Peers State
           setPeers(peers);
@@ -91,8 +94,14 @@ export default function Call(props) {
             peerID: payload.callerID,
             peer
           });
+
+          //Object that includes peer and their id to make unique keys for the video components
+          const peerObj = {
+            peer,
+            peerID: payload.callerID
+          }
           // Update Peers State by adding the newly joined user to the existing array of participants
-          setPeers(users => [...users, peer]);
+          setPeers(users => [...users, peerObj]);
         });
 
         //* THE JOINING USER GETS THEIR RESPONSE
@@ -155,9 +164,9 @@ export default function Call(props) {
   return (
     <div className='call-container'>
         <video className='call-video' muted ref={userVideo} autoPlay playsInline />
-        {peers.map((peer, index) => {
+        {peers.map((peer) => {
             return (
-                <Video key={index} peer={peer} />
+                <Video key={peer.peerID} peer={peer.peer} />
             );
         })}
     </div>
