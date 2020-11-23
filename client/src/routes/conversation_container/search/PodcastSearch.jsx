@@ -29,12 +29,18 @@ export default function PodcastSearch(props) {
     axios.get(url).then(response => {
       setResults([...response.data.results])
 
+      console.log('image', response.data.results[0].artworkUrl100);
+      console.log('genre', response.data.results[0].primaryGenreName);
+      console.log('name', response.data.results[0].collectionName);
+
       // Make second api call for specific podcasts
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
 
       axios.get(url).then(response => {
-        console.log('res', response.data.items);
+        console.log('embed', response.data.items[0].title);
+        console.log('embed', response.data.items[0].link);
+        // console.log('embed', response.data.items);
         setPodcastName(response.data.items)
       })
 
