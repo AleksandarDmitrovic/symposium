@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  width: 20em;
   padding-left: 1rem;
   background: #201f2f;
   overflow: hidden;
@@ -31,4 +31,18 @@
 .props-result {
   font-weight: 700;
   font-size: 1.5rem;
+}
+
+.result-container {
+  position: absolute;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#episode-list {
+  visibility: hidden;
 }

@@ -2,6 +2,8 @@ import { useEffect, useCallback } from "react";
 
 import useDebounce from "./hooks/useDebounce";
 
+import { Input } from '@material-ui/core';
+
 export default function SearchBar(props) {
 
   // Value state passed down from PodcastSearch Component
@@ -17,19 +19,33 @@ export default function SearchBar(props) {
     onSearch(term);
   }, [term, onSearch]);
 
+  const showResults = () => {
+    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+      if (document.getElementById('episode-list')) {
+        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
+          result.style.visibility = 'visible';
+        }
+      } else {
+        result.style.visibility = 'visible';
+      }
+    });
+  }
+
   return (
     <section className="search">
-      <label for='search-bar'>Podcast: </label>
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
-        <input
-          class="selected-podcast"
+        <Input
+          className="selected-podcast"
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
-          autocomplete='off'
           type="text"
+          autoComplete='off'
           value={value}
-          onChange={event => props.changeValue(event.target.value)}
+          onChange={event => {
+            props.changeValue(event.target.value);
+            showResults();
+          }}
         />
       </form>
     </section>

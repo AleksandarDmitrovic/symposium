@@ -5,14 +5,22 @@ export default function SearchResults(props) {
   // props.results passed down from PodcastSearch, containing podcast info from the Itunes API
   const { results } = props;
 
-  return results.map(podcast => {
+  const scrollableResults = results.map(podcast => {
     return (
       <Cover 
         key={podcast.collectionId} 
         {...podcast}
         state = {props.state} 
         changeValue = {props.changeValue}
+        changePodcastInfo = {props.changePodcastInfo}
+        changeInput = {props.changeInput}
       />
-    );
+    )
   });
+
+  return (
+    <div className='result-container'>
+      {scrollableResults}
+    </div>
+  );
 }
