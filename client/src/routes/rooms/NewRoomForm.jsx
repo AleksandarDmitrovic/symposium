@@ -8,6 +8,7 @@ export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title || undefined);
   const [description, setDescription] = useState(props.description || '');
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || undefined);
+  const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -33,6 +34,10 @@ export default function NewRoomForm (props) {
   const changePodcastInfo = (info) => {
     setPodcastInfo(info);
   };
+
+  const changeEpisodes = episodes => {
+    setEpisodeInfo(episodes);
+  }
   
   // console.log('info :', podcastInfo);
 
@@ -76,7 +81,10 @@ export default function NewRoomForm (props) {
           />
            <br/>
           <label> Podcast </label>
-          <PodcastSearch changePodcastInfo = {changePodcastInfo} />
+          <PodcastSearch 
+            changePodcastInfo = {changePodcastInfo}
+            changeEpisodes = {changeEpisodes}
+          />
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
         </form>

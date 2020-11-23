@@ -16,8 +16,6 @@ export default function PodcastSearch(props) {
   const [value, setValue] = useState("");
   // Episodes of the selected podcast
   const [episodes, setEpisodes] = useState([{}]);
-  // // Titles of the episodes in the episodes state
-  // const [titles, setTitles] = useState([]);
 
   // Stores the setValue function to pass down as props
   const changeValue = val => {
@@ -40,12 +38,6 @@ export default function PodcastSearch(props) {
     .catch(err => console.log('Error: ', err));
   }, [term]);
 
-  // useEffect(() => {
-  //   const options = [];
-  //   episodes.forEach(episode => options.push(episode.title));
-  //   setTitles(options);
-  // }, [titles, episodes]);
-
   return (
     <Fragment>
       <div>
@@ -56,7 +48,10 @@ export default function PodcastSearch(props) {
          />
         <select class='episode-list'>
           <option>Episodes:</option>
-          <Episodes episodes = {episodes} />
+          <Episodes 
+            episodes = {episodes}
+            changeEpisodes = {props.changeEpisodes} 
+          />
         </select>
         <SearchResults 
           results={results}
