@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
@@ -31,7 +31,6 @@ export default function PodcastSearch(props) {
   }, [term])
 
   return (
-    <Fragment>
       <div>
         <SearchBar 
           onSearch={term => setTerm(term)}
@@ -45,6 +44,5 @@ export default function PodcastSearch(props) {
           changePodcastInfo = {props.changePodcastInfo}
         />
       </div>
-    </Fragment>
   );
 }

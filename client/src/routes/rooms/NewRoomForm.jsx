@@ -75,7 +75,6 @@ export default function NewRoomForm (props) {
             value={description}
           />
            <br/>
-          <label> Podcast </label>
           <PodcastSearch changePodcastInfo = {changePodcastInfo} />
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
