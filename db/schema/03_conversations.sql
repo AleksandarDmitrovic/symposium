@@ -10,5 +10,7 @@ CREATE TABLE conversations (
   podcast_name VARCHAR(255) NOT NULL,
   podcast_starts_at VARCHAR(255),
   podcast_ends_at VARCHAR(255),
-  podcast_image TEXT NOT NULL
+  podcast_image TEXT NOT NULL,
+  embed_title VARCHAR(255) NOT NULL,
+  embed_url TEXT NOT NULL
 );
