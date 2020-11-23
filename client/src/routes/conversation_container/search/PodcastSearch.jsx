@@ -16,6 +16,8 @@ export default function PodcastSearch(props) {
   const [results, setResults] = useState([]);
   // The value of the selected podcast
   const [value, setValue] = useState("");
+  // Specific podcast
+  const [podcastName, setPodcastName] = useState();
 
   // Stores the setValue function to pass down as props
   const changeValue = val => {
@@ -25,8 +27,17 @@ export default function PodcastSearch(props) {
   useEffect(() => {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
     axios.get(url).then(response => {
-      console.log('response', response);
       setResults([...response.data.results])
+
+      // Make second api call for specific podcasts
+      const feedUrl = response.data.results[0].feedUrl;
+      const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
+
+      console.log('feedUrl', url);
+      axios.get(url).then(response => {
+        setPodcastName(response)
+      })
+
     })
     .catch(err => console.log('Error: ', err));
   }, [term])
