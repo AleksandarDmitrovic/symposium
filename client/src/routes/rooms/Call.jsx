@@ -45,8 +45,10 @@ For the person awaiting to join the room:
 4. They are now potentially receving x amount of signals based on who is in the room, so we need to know which one of the peers to use to accept the returning signal. 
 */
 
+
 export default function Call(props) {
   const [peers, setPeers] = useState([]);
+  const [videoStream, setVideoStream] = useState([]);
   // We keep track of the changes in the following refs without having to rerender the component
   const socketRef = useRef();
   const userVideo = useRef();
@@ -54,12 +56,25 @@ export default function Call(props) {
   const roomID = props.roomID;
 
   const toggleVideo = () => {
-    console.log(navigator.mediaDevices.getUserMedia().then(stream => {
-    console.log('stream :', stream);
-    // userVideo.current.srcObject.active = false
-      // userVideo is a ref to the actual video (stream)
-      console.log(userVideo.current.srcObject);
-    }))
+    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
+      userVideo.current.srcObject = stream;
+
+      // stream.getVideoTracks()[0].enabled = !(stream.getVideoTracks()[0].enabled);
+
+
+      if(videoStream === true) {
+        setVideoStream(false);
+        stream.getVideoTracks()[0].enabled = false;
+      } else {
+        setVideoStream(true);
+        stream.getVideoTracks()[0].enabled = true;
+      }
+      console.log(' stream.getVideoTracks()[0]:',  stream.getVideoTracks()[0]);
+      console.log('stream.getVideoTracks()[0].enabled :', stream.getVideoTracks()[0].enabled);
+
+
+     
+    })
   };
 
   // useEffect runs when someone joins the room
@@ -69,7 +84,7 @@ export default function Call(props) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
         // userVideo is a ref to the actual video (stream)
         userVideo.current.srcObject = stream;
-
+        console.log('stream :', stream);
         //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
         // Emit an event saying the user has joined the room
         socketRef.current.emit('join room', roomID);
