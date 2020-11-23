@@ -4,7 +4,7 @@ import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';
 import Info from './Info';
-import EmbedVideo from './Embedded-player'
+import EmbedPodcast from './Embedded-player'
 
 import './room.scss';
 
@@ -29,25 +29,30 @@ useEffect(() => {
 }, [roomID]);
 
   return (
-    <main>
+    <article className="room">
+
       <TopNav creatorID = {conversation[0].creator_id}/>
-      <section id='call'>
+
+      <div className="main">
+        <div className="side-bar">
+          <Info 
+            title = {conversation[0].title}
+            description = {conversation[0].description}
+            podcast_name = {conversation[0].podcast_name}
+            category = {category}
+            podcast_starts_at = {conversation[0].podcast_starts_at}
+            podcast_ends_at = {conversation[0].podcast_ends_at}
+            podcast_image = {conversation[0].podcast_image}
+          />
+          <EmbedPodcast 
+            embed_title = {conversation[0].embed_title}
+            embed_url = {conversation[0].embed_url}
+          />
+        </div>
         <Call roomID = {roomID} />
-        <EmbedVideo 
-          embed_title = {conversation[0].embed_title}
-          embed_url = {conversation[0].embed_url}
-        />
-        <Info 
-          title = {conversation[0].title}
-          description = {conversation[0].description}
-          podcast_name = {conversation[0].podcast_name}
-          category = {category}
-          podcast_starts_at = {conversation[0].podcast_starts_at}
-          podcast_ends_at = {conversation[0].podcast_ends_at}
-          podcast_image = {conversation[0].podcast_image}
-        />
-      </section>
+      </div>
+
       <ChatBox />
-    </main>
+    </article>
   );
 }
