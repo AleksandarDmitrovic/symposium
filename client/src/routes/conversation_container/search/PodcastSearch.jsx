@@ -17,7 +17,7 @@ export default function PodcastSearch(props) {
   // The value of the selected podcast
   const [value, setValue] = useState("");
   // Specific podcast
-  const [podcastName, setPodcastName] = useState();
+  const [podcastName, setPodcastName] = useState([]);
 
   // Stores the setValue function to pass down as props
   const changeValue = val => {
@@ -33,9 +33,9 @@ export default function PodcastSearch(props) {
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
 
-      console.log('feedUrl', url);
       axios.get(url).then(response => {
-        setPodcastName(response)
+        console.log('res', response.data.items);
+        setPodcastName(response.data.items)
       })
 
     })
