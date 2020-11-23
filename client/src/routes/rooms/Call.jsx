@@ -101,6 +101,17 @@ export default function Call(props) {
           item.peer.signal(payload.signal);
         })
       })
+
+      // LEAVING USER
+      socketRef.current.on("user left", id => {
+        const peerObj = peersRef.current.find(p => p.peerID === id);
+        if(peerObj) {
+          peerObj.peer.destroy();
+        }
+        const peers = peersRef.current.filter(p => p.peerID !== id);
+        peersRef.current = peers;
+        setPeers(peers);
+      })
   }, [roomID]);
 
   //* Function for creating peers when a user has joined a room with existing participants
