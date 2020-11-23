@@ -36,9 +36,9 @@ export default function NewRoomForm (props) {
     setPodcastInfo(info);
   };
 
-  const changeEpisodeInfo = (episode) => {
-    setEpisodeInfo(episode);
-  }
+  // const changeEpisodeInfo = (episode) => {
+  //   setEpisodeInfo(episode);
+  // }
 
   function create(event) {
     event.preventDefault();
@@ -97,7 +97,7 @@ export default function NewRoomForm (props) {
           <label> Podcast </label>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
-            changeEpisodeInfo = {changeEpisodeInfo}
+            changeEpisodeInfo = {setEpisodeInfo}
           />
           <select id='episode-list' value={val} onChange={handleChange}>
             <option value='none'>Episode:</option>

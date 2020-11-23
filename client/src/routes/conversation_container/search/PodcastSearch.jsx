@@ -30,7 +30,9 @@ export default function PodcastSearch(props) {
         const episodeData = response.data.items.map(ep => {
           return {embed_title: ep.title, embed_url: ep.link};
         })
-        props.changeEpisodeInfo(episodeData);
+        if (props.changeEpisodeInfo) {
+          props.changeEpisodeInfo(episodeData);
+        }
       })
     })
     .catch(err => console.log('Error: ', err));

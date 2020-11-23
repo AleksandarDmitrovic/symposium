@@ -11,9 +11,10 @@ export default function Cover(props) {
   const name = props.collectionName
 
   const selectPodcast = name => {
-    // Hide the remaining search results
-    document.getElementsByClassName('result-container')[0].style.display = 'none';
- 
+    // Hide the remaining search results. Convert into an array to iterate through 
+    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+      result.style.display = 'none';
+    });
     if (props.state) {
       // Remove spaces from podcast name to provide valid route for searchParams
       const term = name.split(' ').join('+');
