@@ -30,7 +30,10 @@ useEffect(() => {
 
   return (
     <main>
-      <TopNav creatorID = {conversation[0].creator_id}/>
+      <TopNav 
+      creatorID = {conversation[0].creator_id}
+      history = {props.history}
+      />
       <section id='call'>
         <Call roomID = {roomID} />
         <Info 

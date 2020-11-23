@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
+import { Button } from '@material-ui/core';
+
 export default function TopNav(props) {
-
-
-
   const [creator, setCreator] = useState('');
 
   useEffect(() => {
@@ -16,12 +15,17 @@ export default function TopNav(props) {
     .catch(err => console.log('Error: ', err));
   }, [props.creatorID]);
 
+  const back = () => {
+    props.history.push(`/`);
+    window.location.reload(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-item nav-link active" href="/">Back</a>
+            <Button onClick={back}>Back</Button>
           </li>
         </ul>
       </div>
