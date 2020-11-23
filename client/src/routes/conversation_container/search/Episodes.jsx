@@ -1,12 +1,14 @@
-export default function Episodes(props) {
+// export default function Episodes(props) {
 
-  const listTitles = titles => {
-    return titles.map(title => {
-      return (
-        <option key={title.title} value={title.title}>{title.title}</option>
-      );
-    });
-  }
+//   document.getElementById = 
+
+//   const listTitles = titles => {
+//     return titles.map(title => {
+//       return (
+//         <option key={title.title} value={title.title}>{title.title}</option>
+//       );
+//     });
+//   }
   
-  return listTitles(props.episodes);
-}
+//   return listTitles(props.episodes);
+// }

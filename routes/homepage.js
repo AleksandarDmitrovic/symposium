@@ -92,24 +92,38 @@ module.exports = (db) => {
     const creatorID = 1;
     const categoryID = 1;
     
-    const { title, description, url, podcastInfo, episodeInfo } = req.body;
+    const { title, description, url, podcastInfo } = req.body;
 
-    console.log('this is the info', episodeInfo)
+    //! For Episode dropdown once up and running
+    // const { title, description, url, podcastInfo, episodeInfo } = req.body;
+
+    // console.log('this is the info', episodeInfo)
 
     const podcastName = podcastInfo.podcast_name;
-    console.log('podcastName :', podcastName);
+    // console.log('podcastName :', podcastName);
     const podcastStartsAt = "TEXT";
     const podcastEndsAt = "TEXT";
     const podcastImage = podcastInfo.podcast_image;
-    console.log('podcastInfo :', podcastInfo);
-    const embed_title = episodeInfo.embed_title;
-    const embed_url = episodeInfo.embed_url;
+
+    //! For Episode dropdown once up and running
+    // console.log('podcastInfo :', podcastInfo);
+    // const embed_title = episodeInfo.title;
+    // const embed_url = episodeInfo.linkl;
+    // console.log('EMBEDDED INFO RECEIVED, ', embed_title)
     
     const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embed_title, embed_url];
     const queryString = `
     INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;`;
+
+    //! New Query for Episode dropdown once up and running
+    // const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embed_title, embed_url];
+    // const queryString = `
+    // INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, embed_title, embed_url)
+    // VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    // RETURNING *;`;
+
 
   });
   // router.post for deleting a room

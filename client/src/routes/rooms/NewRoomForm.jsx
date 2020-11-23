@@ -2,16 +2,21 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import PodcastSearch from '../conversation_container/search/PodcastSearch';
+//! For Episode dropdown once up and running
+// import Episodes from '../conversation_container/search/Episodes';
 
 export default function NewRoomForm (props) {
   // console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
-  const [episodeInfo, setEpisodeInfo] = useState([{}]);
+  //! For Episode dropdown once up and running
+  // const [episodeInfo, setEpisodeInfo] = useState([{}]);
+  // const [selected, setSelected] = useState({});
   const [error, setError] = useState("");
 
   const validate = () => {
+    console.log('validating')
     if (title === undefined) {
       setError("Conversation title cannot be blank");
       return;
@@ -35,20 +40,26 @@ export default function NewRoomForm (props) {
     setPodcastInfo(info);
   };
 
-  const changeEpisodes = (episodes) => {
-    setEpisodeInfo(episodes);
-  }
+  //! For Episode dropdown once up and running
+  // const changeEpisodes = (episodes) => {
+  //   setEpisodeInfo(episodes);
+  // }
+
+  // const selectEpisode = episode => {
+  //   setSelected(episode);
+  // }
 
   function create() {
     const id = uuid();
     if (validate()) {
-
+      console.log('validation successful')
       axios.put(`/api/conversations`, { 
         url: id, 
         title: title, 
         description: description, 
         podcastInfo: podcastInfo,
-        episodeInfo: episodeInfo
+        //! For Episode dropdown once up and running
+        // episodeInfo: episodeInfo
       })
       .then((res) => {
         // console.log('res', res);
@@ -81,8 +92,17 @@ export default function NewRoomForm (props) {
           <label> Podcast </label>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
-            changeEpisodes = {changeEpisodes}
+            //! For Episode dropdown once up and running
+            // changeEpisodes = {changeEpisodes}
           />
+           {/* <select id='episode-list'>
+            <option>Episode:</option>
+            <Episodes 
+              episodes = {episodeInfo}
+              selected = {selected}
+              setSelected = {setSelected}
+            />
+          </select> */}
           <br/>
           <input type="submit" value="Submit" onClick={create}/>
         </form>

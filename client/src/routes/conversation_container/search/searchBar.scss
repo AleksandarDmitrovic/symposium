@@ -39,6 +39,10 @@
   height: 300px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 // for hiding and showing episode dropdown in form:
 // #episode-list {
 //   visibility: hidden;
