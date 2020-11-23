@@ -74,6 +74,17 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/categories/:id", (req, res) => {
+    const categoryID = parseInt(req.params.id);
+    console.log('req.params.id :', typeof parseInt(req.params.id));
+    db.query(`SELECT name FROM categories
+              WHERE id = $1;`, [categoryID])
+      .then(data => {
+        const categoryName = data.rows[0];
+        res.json({ categoryName });
+      });
+  });
+
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
     const { title, description, url, podcastInfo } = req.body;
