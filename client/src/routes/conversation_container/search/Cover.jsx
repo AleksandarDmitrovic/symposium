@@ -13,7 +13,7 @@ export default function Cover(props) {
   const selectPodcast = name => {
     // Hide the remaining search results. Convert into an array to iterate through 
     Array.from(document.getElementsByClassName('result-container')).forEach(result => {
-      result.style.display = 'none';
+      result.style.visibility = 'hidden';
     });
     if (props.state) {
       // Remove spaces from podcast name to provide valid route for searchParams

@@ -34,7 +34,16 @@ export default function NewRoomForm (props) {
 
   const changePodcastInfo = (info) => {
     setPodcastInfo(info);
+    showDropdown();
   };
+
+  const showDropdown = () => {
+    if (document.getElementsByClassName('result-container')[1]) {
+      if (document.getElementsByClassName('result-container')[1].style.visibility === 'hidden') {
+        document.getElementById('episode-list').style.visibility = 'visible';
+      } 
+    }
+  }
 
   function create(event) {
     event.preventDefault();
