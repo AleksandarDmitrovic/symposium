@@ -2,17 +2,13 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import PodcastSearch from '../conversation_container/search/PodcastSearch';
-//! For Episode dropdown once up and running
-// import Episodes from '../conversation_container/search/Episodes';
 
 export default function NewRoomForm (props) {
-  // console.log("history", props.props.history)
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
-  //! For Episode dropdown once up and running
-  // const [episodeInfo, setEpisodeInfo] = useState([{}]);
-  // const [selected, setSelected] = useState({});
+  const [episodeInfo, setEpisodeInfo] = useState([{}]);
+  const [val, setVal] = useState('');
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -38,41 +34,56 @@ export default function NewRoomForm (props) {
 
   const changePodcastInfo = (info) => {
     setPodcastInfo(info);
+    showDropdown();
   };
 
-  //! For Episode dropdown once up and running
-  // const changeEpisodes = (episodes) => {
-  //   setEpisodeInfo(episodes);
-  // }
+  const showDropdown = () => {
+    if (document.getElementsByClassName('result-container')[1]) {
+      if (document.getElementsByClassName('result-container')[1].style.visibility === 'hidden') {
+        document.getElementById('episode-list').style.visibility = 'visible';
+      } 
+    }
+  }
 
-  // const selectEpisode = episode => {
-  //   setSelected(episode);
-  // }
-
-  function create() {
+  function create(event) {
+    event.preventDefault();
     const id = uuid();
+    let selectedEpisode = episodeInfo.filter(obj => obj.embed_title === val);
+
     if (validate()) {
-      console.log('validation successful')
       axios.put(`/api/conversations`, { 
         url: id, 
         title: title, 
         description: description, 
         podcastInfo: podcastInfo,
-        //! For Episode dropdown once up and running
-        // episodeInfo: episodeInfo
+        embedTitle: selectedEpisode[0].embed_title,
+        embedUrl: selectedEpisode[0].embed_url
       })
       .then((res) => {
-        // console.log('res', res);
         props.history.push(`/room/${id}`);
+        document.getElementById('episode-list').style.visibility = 'hidden';
       })
       .catch(error => { console.error(error) }); 
     }
+  }
+
+  // Render the episodes for the dropdown based on selected podcast
+  const listTitles = titles => {
+    return titles.map(title => {
+      return (
+        <option key={title.embed_title} value={title.embed_title}>{title.embed_title}</option>
+      );
+    });
+  }
+
+  const handleChange = (event) => {
+    setVal(event.target.value);
   }
  
   return (
     <main>
       <section className="new_room_form">
-        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
+        <form autoComplete="off" onSubmit={create}>
           <input
             title="title"
             type="text"
@@ -92,26 +103,21 @@ export default function NewRoomForm (props) {
           <label> Podcast </label>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
-            //! For Episode dropdown once up and running
-            // changeEpisodes = {changeEpisodes}
+            changeEpisodeInfo = {setEpisodeInfo}
           />
-           {/* <select id='episode-list'>
-            <option>Episode:</option>
-            <Episodes 
-              episodes = {episodeInfo}
-              selected = {selected}
-              setSelected = {setSelected}
-            />
-          </select> */}
+          <select id='episode-list' value={val} onChange={handleChange}>
+            <option value='none'>Episode:</option>
+            {listTitles(episodeInfo)}
+          </select>
           <br/>
-          <input type="submit" value="Submit" onClick={create}/>
+          <input type="submit" value="Submit" />
         </form>
         <section className="form__validation">{error}</section>
-      </section>
-      <section className="appointment__card-right">
-        <section className="appointment__actions">
         </section>
-      </section>
+        <section className="appointment__card-right">
+          <section className="appointment__actions">
+          </section>
+        </section>
     </main>
   );
 };

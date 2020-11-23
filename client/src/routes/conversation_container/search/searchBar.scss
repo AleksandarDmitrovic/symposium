@@ -33,7 +33,7 @@
   font-size: 1.5rem;
 }
 
-.container {
+.result-container {
   position: absolute;
   overflow-y: scroll;
   height: 300px;
@@ -43,7 +43,6 @@
   display: none;
 }
 
-// for hiding and showing episode dropdown in form:
-// #episode-list {
-//   visibility: hidden;
-// }
+#episode-list {
+  visibility: hidden;
+}

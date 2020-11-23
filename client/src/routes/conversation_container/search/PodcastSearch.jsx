@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
-//! For Episode dropdown once up and running
-// import Episodes from "./Episodes";
 import './searchBar.scss'
 const axios = require('axios');
 
@@ -15,9 +13,7 @@ export default function PodcastSearch(props) {
   const [results, setResults] = useState([]);
   // The value of the selected podcast
   const [value, setValue] = useState("");
-  //! For Episode dropdown once up and runninga
-  // const [episodes, setEpisodes] = useState([{}]);
-
+ 
   // Stores the setValue function to pass down as props
   const changeValue = val => {
     setValue(val);
@@ -27,25 +23,20 @@ export default function PodcastSearch(props) {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
     axios.get(url).then(response => {
       setResults([...response.data.results])
+      // Make second api call for specific podcasts
+      const feedUrl = response.data.results[0].feedUrl;
+      const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
+      axios.get(url).then(response => {
+        const episodeData = response.data.items.map(ep => {
+          return {embed_title: ep.title, embed_url: ep.link};
+        })
+        if (props.changeEpisodeInfo) {
+          props.changeEpisodeInfo(episodeData);
+        }
+      })
     })
     .catch(err => console.log('Error: ', err));
-  }, [term])
-
-  //! For Episode dropdown once up and running
-  // useEffect(() => {
-  //   const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
-  //   axios.get(url).then(response => {
-  //     setResults([...response.data.results])
-  //     // Make second api call for specific podcasts
-  //     const feedUrl = response.data.results[0].feedUrl;
-  //     const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
-  //     axios.get(url).then(response => {
-  //       // setEpisodes(response.data.items);
-  //       props.changeEpisodes(response.data.items);
-  //     })
-  //   })
-  //   .catch(err => console.log('Error: ', err));
-  // }, [term]);
+  }, [term]);
 
   return (
       <div>
@@ -54,12 +45,6 @@ export default function PodcastSearch(props) {
           changeValue = {changeValue}
           value = {value}
         />
-        {/* <select id='episode-list'>
-          <option>Episode:</option>
-          <Episodes 
-            episodes = {episodes}
-          />
-        </select> */}
         <SearchResults 
           results={results}
           state={props.state}

@@ -19,6 +19,18 @@ export default function SearchBar(props) {
     onSearch(term);
   }, [term, onSearch]);
 
+  const showResults = () => {
+    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+      if (document.getElementById('episode-list')) {
+        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
+          result.style.visibility = 'visible';
+        }
+      } else {
+        result.style.visibility = 'visible';
+      }
+    });
+  }
+
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
@@ -30,7 +42,10 @@ export default function SearchBar(props) {
           type="text"
           autoComplete='off'
           value={value}
-          onChange={event => props.changeValue(event.target.value)}
+          onChange={event => {
+            props.changeValue(event.target.value);
+            showResults();
+          }}
         />
       </form>
     </section>
