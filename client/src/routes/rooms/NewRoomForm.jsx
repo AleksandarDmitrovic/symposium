@@ -61,6 +61,7 @@ export default function NewRoomForm (props) {
       })
       .then((res) => {
         props.history.push(`/room/${id}`);
+        document.getElementById('episode-list').style.visibility = 'hidden';
       })
       .catch(error => { console.error(error) }); 
     }
