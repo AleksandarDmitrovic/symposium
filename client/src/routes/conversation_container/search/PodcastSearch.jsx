@@ -23,7 +23,7 @@ export default function PodcastSearch(props) {
   }
 
   useEffect(() => {
-    const url = `https://itunes.apple.com/search?term=${term}&entity=podcast&limit=10`;
+    const url = `https://itunes.apple.com/search?term=${term}&entity=podcast&limit=50`;
     axios.get(url).then(response => {
       setResults([...response.data.results])
     })

@@ -34,11 +34,13 @@
 }
 
 .container {
+  position: absolute;
   overflow-y: scroll;
+  height: 300px;
+
 }
 .container::-webkit-scrollbar {
   display: none;
-  height: 300px;
 }
 
 /* width */
