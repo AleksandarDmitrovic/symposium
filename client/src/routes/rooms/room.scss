@@ -62,7 +62,7 @@ body {
             list-style-type: none;
           }
           img {
-            // Might need styling later
+            
           }
         }
 
@@ -79,5 +79,25 @@ body {
       
 
     }
+  }
+}
+
+
+
+.podcast-card {
+  background-color: rgba(85, 85, 85, 0.2) !important;
+  text-align: center;
+  margin: 1em;
+  padding: 5px;
+  
+
+  ul {
+    list-style-type: none;
+    text-align: left;
+    padding: 10px;
+  }
+
+  img {
+    mix-blend-mode: multiply;
   }
 }
