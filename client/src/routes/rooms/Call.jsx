@@ -53,6 +53,15 @@ export default function Call(props) {
   const peersRef = useRef([]); 
   const roomID = props.roomID;
 
+  const toggleVideo = () => {
+    console.log(navigator.mediaDevices.getUserMedia().then(stream => {
+    console.log('stream :', stream);
+    // userVideo.current.srcObject.active = false
+      // userVideo is a ref to the actual video (stream)
+      console.log(userVideo.current.srcObject);
+    }))
+  };
+
   // useEffect runs when someone joins the room
   useEffect(() => {
     socketRef.current = io.connect("/");
@@ -162,6 +171,7 @@ export default function Call(props) {
   }
 
   return (
+    <>
     <div className='call-container'>
         <video className='call-video' muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer) => {
@@ -170,5 +180,7 @@ export default function Call(props) {
             );
         })}
     </div>
+    <button onClick={toggleVideo}>TOGGLE VIDEO</button>
+    </>
   );
 } 
