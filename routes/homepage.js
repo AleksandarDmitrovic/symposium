@@ -76,7 +76,7 @@ module.exports = (db) => {
 
   router.get("/categories/:id", (req, res) => {
     const categoryID = parseInt(req.params.id);
-    console.log('req.params.id :', typeof parseInt(req.params.id));
+    
     db.query(`SELECT name FROM categories
               WHERE id = $1;`, [categoryID])
       .then(data => {
@@ -88,6 +88,9 @@ module.exports = (db) => {
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
     const { title, description, url, podcastInfo } = req.body;
+    
+    //Outputs the podcast api data sent back
+    // console.log('podcastInfo :', podcastInfo);
     
     podcastCategorySearch(podcastInfo.category).then(categoryFound => {
       const creatorID = 1;
