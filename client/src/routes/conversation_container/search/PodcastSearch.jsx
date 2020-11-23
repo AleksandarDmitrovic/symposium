@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 import Episodes from "./Episodes";
@@ -31,14 +31,13 @@ export default function PodcastSearch(props) {
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
       axios.get(url).then(response => {
         setEpisodes(response.data.items);
-        props.changeEpisodes(response.data.items);
+        // props.changeEpisodes(response.data.items);
       })
     })
     .catch(err => console.log('Error: ', err));
   }, [term]);
 
   return (
-    <Fragment>
       <div>
         <SearchBar 
           onSearch={term => setTerm(term)}
@@ -59,6 +58,5 @@ export default function PodcastSearch(props) {
           changeInput = {props.changeInput}
         />
       </div>
-    </Fragment>
   );
 }

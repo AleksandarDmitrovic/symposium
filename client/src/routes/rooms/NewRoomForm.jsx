@@ -8,7 +8,7 @@ export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
-  const [episodeInfo, setEpisodeInfo] = useState(props.episodes || [{}]);
+  const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [error, setError] = useState("");
 
   const validate = () => {

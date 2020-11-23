@@ -2,6 +2,8 @@ import { useEffect, useCallback } from "react";
 
 import useDebounce from "./hooks/useDebounce";
 
+import { Input } from '@material-ui/core';
+
 export default function SearchBar(props) {
 
   // Value state passed down from PodcastSearch Component
@@ -19,9 +21,8 @@ export default function SearchBar(props) {
 
   return (
     <section className="search">
-      <label htmlFor='search-bar'>Podcast: </label>
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
-        <input
+        <Input
           className="selected-podcast"
           spellCheck="false"
           placeholder="Search Podcast"
