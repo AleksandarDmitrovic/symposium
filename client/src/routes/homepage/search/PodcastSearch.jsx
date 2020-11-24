@@ -23,7 +23,6 @@ export default function PodcastSearch(props) {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
     axios.get(url).then(response => {
       setResults([...response.data.results])
-      
       // Make second api call for specific podcasts
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`

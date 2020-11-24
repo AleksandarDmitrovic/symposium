@@ -1,0 +1,66 @@
+.conversation-card {
+  margin: 2em;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 15em;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.body {
+  padding-left: 3em;
+  padding-right: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  width: 100%;
+
+  header {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+  }
+  .start {
+    justify-content: flex-start;
+  }
+  .end {
+    justify-content: flex-end;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    border-top: 1px solid black;
+    padding-top: 1.5em;
+ 
+  }
+
+  article {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+  };
+
+}
+
+.share {
+  display: flex;
+  align-items: baseline;
+}
+
+#social-media {
+  padding-left: 1em;
+}
+
+.cover-photo {
+  height: 100%;
+  position: relative;
+}
