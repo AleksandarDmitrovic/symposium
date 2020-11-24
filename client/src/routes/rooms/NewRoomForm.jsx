@@ -13,11 +13,14 @@ export default function NewRoomForm (props) {
 
   const validate = () => {
     console.log('validating')
-    if (title === undefined) {
+    if (title === "") {
       setError("Conversation title cannot be blank");
       return;
-    } else if (description === undefined) {
+    } else if (description === "") {
       setError("Conversation description cannot be blank");
+      return;
+    } else if (val === "") {
+      setError("Podcast & Podcast Episode must be selected");
       return;
     } 
     setError("");
