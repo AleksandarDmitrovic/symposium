@@ -46,6 +46,10 @@ io.on("connection", socket => {
     socket.emit("all users", usersInThisRoom);
   });
 
+  // socket.on('video disabled', payload => {
+  //   console.log('received message', payload.stream);
+  // });
+
   socket.on("sending signal", payload => {
     io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
   });
