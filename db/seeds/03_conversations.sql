@@ -12,4 +12,3 @@ VALUES (4, 4, '4','Whale exploding', 'Tiktok is slowly taking over the world', '
 
 INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, embed_title, embed_url)
 VALUES (5, 5, '5', 'Inca warriors', 'The war against the Europeans', 'HISTORY This Week', '5:36', '18:34', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/100x100bb.jpg', 'The Incas Last Stand', 'https://play.acast.com/s/historythisweek/theincaslaststand');
-
