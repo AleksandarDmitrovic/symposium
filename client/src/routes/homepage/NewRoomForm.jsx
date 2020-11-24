@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
-import PodcastSearch from './search/PodcastSearch';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import { Button, Menu, MenuItem, Input } from '@material-ui/core';
 
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
@@ -92,7 +92,7 @@ export default function NewRoomForm (props) {
     <main>
       <section className="new_room_form">
         <form autoComplete="off" onSubmit={create}>
-          <input
+          <Input
             title="title"
             type="text"
             placeholder="Enter Conversation Title"
@@ -100,7 +100,7 @@ export default function NewRoomForm (props) {
             value={title}
           />
           <br/>
-          <input
+          <Input
             description="description"
             type="text"
             placeholder="Enter Conversation Description"
@@ -128,7 +128,9 @@ export default function NewRoomForm (props) {
             </Menu>
           </div> 
           <br/>
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
         </form>
         <section className="form__validation">{error}</section>
         </section>
