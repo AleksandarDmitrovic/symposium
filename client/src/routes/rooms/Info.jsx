@@ -38,6 +38,7 @@ export default function Info(props) {
         <li><b>Title : </b>{props.title}</li>
         <li><b>Description : </b>{props.description}</li>
         <li><b>Podcast : </b>{props.podcast_name}</li>
+        <li><b>Episode : </b>{props.episode_title}</li>
         <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
         <li><b>Category : </b>{props.category}</li>
       </ul>

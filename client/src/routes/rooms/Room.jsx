@@ -48,6 +48,7 @@ useEffect(() => {
             title = {conversation[0].title}
             description = {conversation[0].description}
             podcast_name = {conversation[0].podcast_name}
+            episode_title = {conversation[0].podcast_episode_title}
             category = {category}
             podcast_starts_at = {conversation[0].podcast_starts_at}
             podcast_ends_at = {conversation[0].podcast_ends_at}
