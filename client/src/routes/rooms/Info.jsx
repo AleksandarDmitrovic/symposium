@@ -1,5 +1,5 @@
 import React from 'react';
-import ShareLink from 'react-twitter-share-link'
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton,  LinkedinIcon } from 'react-share';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -41,14 +41,24 @@ export default function Info(props) {
         <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
         <li><b>Category : </b>{props.category}</li>
       </ul>
-      <ShareLink 
-        link={'Heroku link goes here'}
-        text={'Join my conversation!'}
+      <TwitterShareButton 
+        title={props.description}
+        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
       >
-        {link => (
-            <a href={link} target='_blank'>Share this on Twitter</a>
-        )}
-      </ShareLink>
+        <TwitterIcon></TwitterIcon>
+      </TwitterShareButton>
+      <FacebookShareButton 
+        quote={props.description}
+        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
+      >
+        <FacebookIcon></FacebookIcon>
+      </FacebookShareButton>
+      <LinkedinShareButton 
+        title={props.description}
+        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
+      >
+        <LinkedinIcon></LinkedinIcon>
+      </LinkedinShareButton>
     {/* </div> */}
   </Card>
   )
