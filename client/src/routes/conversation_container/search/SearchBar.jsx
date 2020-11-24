@@ -15,10 +15,14 @@ export default function SearchBar(props) {
   // useCallback memoizes the function to run whenever debounced term changes
   const onSearch = useCallback(props.onSearch, [term]);
 
+  // 
+  const handleFocus = (event) => event.target.select();
+
   useEffect(() => {
     if (document.getElementsByClassName('result-container')[1]) {
       if (document.getElementsByClassName('result-container')[1].style.visibility === 'visible' && term.length === 0) {
         document.getElementById('episode-list').style.visibility = 'hidden';
+        document.getElementById('display-episode').style.visibility = 'hidden';
       }
     }
     
@@ -52,6 +56,7 @@ export default function SearchBar(props) {
             props.changeValue(event.target.value);
             showResults();
           }}
+          onClick={handleFocus}
         />
       </form>
     </section>

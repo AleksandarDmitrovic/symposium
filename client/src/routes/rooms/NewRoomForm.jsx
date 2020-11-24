@@ -114,8 +114,10 @@ export default function NewRoomForm (props) {
             changePodcastInfo = {changePodcastInfo}
             changeEpisodeInfo = {setEpisodeInfo}
           />
+          <br/>
           <div>
           <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+          <br/>
           <p id='display-episode'>{val}</p>
           <Menu
             id="simple-menu"
