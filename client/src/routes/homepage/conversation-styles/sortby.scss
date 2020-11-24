@@ -1,3 +1,7 @@
+button:focus {
+  outline: none;
+}
+
 .sort-by {
   display: flex;
   list-style-type: none;
@@ -7,5 +11,11 @@
     margin: 10px;
     padding: 10px;
   }
-  
+}
+
+.sort-by-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  flex-grow: 1;
 }
