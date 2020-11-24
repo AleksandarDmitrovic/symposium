@@ -41,14 +41,12 @@ body {
         width: 70%;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
+        flex-wrap: wrap;
 
         .call-video {
-          margin: 1em;
+          padding: 2%;
           width: 45%;
-          height: 43%;
-          
-         
+          height: 45%;
         }
       }
 
