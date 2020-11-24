@@ -16,6 +16,12 @@ export default function SearchBar(props) {
   const onSearch = useCallback(props.onSearch, [term]);
 
   useEffect(() => {
+    if (document.getElementsByClassName('result-container')[1]) {
+      if (document.getElementsByClassName('result-container')[1].style.visibility === 'visible' && term.length === 0) {
+        document.getElementById('episode-list').style.visibility = 'hidden';
+      }
+    }
+    
     onSearch(term);
   }, [term, onSearch]);
 

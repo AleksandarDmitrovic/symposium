@@ -41,7 +41,7 @@ export default function NewRoomForm (props) {
     if (document.getElementsByClassName('result-container')[1]) {
       if (document.getElementsByClassName('result-container')[1].style.visibility === 'hidden') {
         document.getElementById('episode-list').style.visibility = 'visible';
-      } 
+      }
     }
   }
 
