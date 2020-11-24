@@ -45,19 +45,19 @@ export default function Info(props) {
         title={props.description}
         url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
       >
-        <TwitterIcon></TwitterIcon>
+        <TwitterIcon size={32} round={true}></TwitterIcon>
       </TwitterShareButton>
       <FacebookShareButton 
         quote={props.description}
         url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
       >
-        <FacebookIcon></FacebookIcon>
+        <FacebookIcon size={32} round={true}></FacebookIcon>
       </FacebookShareButton>
       <LinkedinShareButton 
         title={props.description}
         url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
       >
-        <LinkedinIcon></LinkedinIcon>
+        <LinkedinIcon size={32} round={true}></LinkedinIcon>
       </LinkedinShareButton>
     {/* </div> */}
   </Card>
