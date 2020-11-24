@@ -125,12 +125,19 @@ export default function Call(props) {
         const peers = peersRef.current.filter(p => p.peerID !== id);
         peersRef.current = peers;
         setPeers(peers);
-      })
+      });
+
+      socketRef.current.on("update chat box", message => {
+        console.log('in call.jsx update chat box', message);
+        if (message) {
+          props.setNewMessage(message)
+        }
+      });
+
   }, [roomID]);
 
   // CHAT BOX 
   useEffect(() => {
-    console.log('in useEffect', props.message);
     socketRef.current.emit("new message", props.message)
   }, [props.message]);
 

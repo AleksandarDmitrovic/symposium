@@ -15,6 +15,8 @@ export default function ChatBox(props) {
     setMessage(event.target.value);
   }
 
+  console.log('in ChatBox', props.newMessage);
+
   return (
     <footer className="chat-box">
       <h4>Messages</h4>
