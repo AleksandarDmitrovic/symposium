@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react"
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
-import { useEffect, useState } from "react"
+import NewRoomButton from "./NewRoomButton";
+import './index.scss';
 import axios from 'axios';
-
-import NewRoomButton from "../rooms/NewRoomButton";
 
 export default function Conversation(props) {
 
@@ -25,7 +25,7 @@ export default function Conversation(props) {
   }, [searchParam]);
   
   return (
-    <article>
+    <article class='homepage'>
 
       <NewRoomButton
         history={props.history}

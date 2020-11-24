@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
-import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import PodcastSearch from './search/PodcastSearch';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 export default function NewRoomForm (props) {

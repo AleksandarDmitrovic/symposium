@@ -1,9 +1,9 @@
 import { useState } from 'react';
-
 import NewRoomForm from './NewRoomForm';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import './index.scss';
 
  function getModalStyle() {
    const top = 50;

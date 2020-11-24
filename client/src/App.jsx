@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Conversation from "./routes/conversation_container/index";
+import Conversation from "./routes/homepage/index";
 import Room from "./routes/rooms/Room";
 
 export default function App() {
