@@ -67,7 +67,6 @@ io.on("connection", socket => {
 
   // When user sends a message for the chat box
   socket.on('new message', message => {
-    console.log('in server.js', message);
     socket.broadcast.emit('update chat box', message)
   })
 

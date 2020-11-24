@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react';
 
 import IncomingMessage from './IncomingMessage'
-import OutgoingMessage from './OutgoingMessage'
+import OutGoingMessage from './OutGoingMessage'
 
 export default function ChatBox(props) {
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
-  const [allMessages, setAllMessages] = useState([]);
+  const [allIncomingMessages, setAllIncomingMessages] = useState([]);
+  const [allOutGoingMessages, setAllOutGoingMessages] = useState([]);
 
   function sendMessage(event) {
     event.preventDefault();
     props.setMessage(chatBoxMessage);
+    setAllOutGoingMessages([...allOutGoingMessages, chatBoxMessage]);
     // clear message form
     setChatBoxMessage("");
   };
 
   function changeHandler(event) {
     setChatBoxMessage(event.target.value);
-  }
+  };
 
   useEffect(() => {
     if (props.newMessage !== "") {
-      setAllMessages([...allMessages, props.newMessage])
+      setAllIncomingMessages([...allIncomingMessages, props.newMessage])
     }
-  }, [props.newMessage])
+  }, [props.newMessage]);
 
-  const mapAllMessages = function (allMessages) {  
+  const mapAllIncomingMessages = allIncomingMessages => {  
     // Ensure there are messages to render  
-    if (allMessages.length > 0) {
-      const message = allMessages.map(message => {
+    if (allIncomingMessages.length > 0) {
+      const message = allIncomingMessages.map(message => {
         return (
           <IncomingMessage
             message = {message}
@@ -46,16 +48,32 @@ export default function ChatBox(props) {
     }
   };
 
+  const mapAllOutGoingMessages = allOutGoingMessages => {
+    // Ensure there are messages to render  
+    if (allOutGoingMessages.length > 0) {
+      const message = allOutGoingMessages.map(message => {
+        return (
+          <OutGoingMessage
+            message = {message}
+          />
+        )
+      });
+
+      return message;
+    } 
+  };
 
 
   return (
     <footer className="chat-box">
       <h4>Messages</h4>
       <div>
-        { mapAllMessages(allMessages) }
+        { mapAllIncomingMessages(allIncomingMessages) }
       </div>
 
-      <OutgoingMessage />
+      <div>
+        { mapAllOutGoingMessages(allOutGoingMessages) }
+      </div>
 
       <form onSubmit={ sendMessage }>
         <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
@@ -63,4 +81,4 @@ export default function ChatBox(props) {
       </form>
     </footer>
   );
-}
+};

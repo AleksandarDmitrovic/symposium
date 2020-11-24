@@ -128,7 +128,6 @@ export default function Call(props) {
       });
 
       socketRef.current.on("update chat box", message => {
-        console.log('in call.jsx update chat box', message);
         if (message) {
           props.setNewMessage(message)
         }

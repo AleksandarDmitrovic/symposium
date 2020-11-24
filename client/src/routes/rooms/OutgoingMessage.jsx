@@ -1,8 +1,8 @@
-export default function OutgoingMessage(props) {
+export default function OutGoingMessage(props) {
 
   return (
     <div className="outgoing-messages" style={{textAlign: "right"}}>
-      <p>Username : This is an outgoing message, class="outgoing-messages"</p>
+      <p>Username : {props.message}</p>
     </div>
   )
 };
