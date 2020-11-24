@@ -1,8 +1,11 @@
+$roomCardColour: rgba(124, 152, 228, 0.2) !important;
+
 body {
   height: 100%;
   width: 100%;
 
   .room {
+   
     border: 10px solid black;
     min-height: 100vh;
     display: flex;
@@ -12,7 +15,7 @@ body {
 
     .top-nav {
       flex-shrink: 0;
-      background-color: rgb(85, 85, 85);
+      background-color: rgb(222, 233, 238);
 
       ul {
         list-style-type: none;
@@ -22,23 +25,19 @@ body {
       }
     }
 
-    .chat-box {
-      flex-shrink: 0;
-      background-color: rgb(85, 85, 85)
-    }
-
     .main {
       flex-grow: 1;
       display: flex;
 
       .call-container {
-        width: 60%;
+        width: 70%;
 
         .call-video {
           margin: 1em;
           width: 45%;
           height: 45%;
-          border: 1px solid black;
+          
+         
         }
       }
 
@@ -46,34 +45,41 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 40%;
+        width: 30%;
 
-        border-right: 2px solid black;
-  
-        .info {
-          display: flex;
-          padding: 1em;
+        .podcast-card {
+          background-color: $roomCardColour;
+          text-align: center;
           margin: 1em;
-          align-items: center;
-          justify-content: center;
-          border: 1px solid black;
-
+          padding: 5px;
+          
+        
           ul {
             list-style-type: none;
+            text-align: left;
+            padding: 10px;
           }
+        
           img {
-            
+            mix-blend-mode: multiply;
           }
         }
 
         .embed-video {
+          background-color: $roomCardColour;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
           margin: 1em;
           padding: 1em;
-          border: 1px solid black;
+        }
+
+        .chat-box {
+          flex-shrink: 0;
+          margin: 1em;
+          padding: 1em;
+          background-color: $roomCardColour;
         }
       }
       
@@ -83,21 +89,3 @@ body {
 }
 
 
-
-.podcast-card {
-  background-color: rgba(85, 85, 85, 0.2) !important;
-  text-align: center;
-  margin: 1em;
-  padding: 5px;
-  
-
-  ul {
-    list-style-type: none;
-    text-align: left;
-    padding: 10px;
-  }
-
-  img {
-    mix-blend-mode: multiply;
-  }
-}
