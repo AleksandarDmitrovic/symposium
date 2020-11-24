@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
 import Timer from 'react-compound-timer';
 
 export default function TopNav(props) {
@@ -19,12 +21,12 @@ export default function TopNav(props) {
   return (
     <nav className="top-nav">
       <ul>
-        <li><a href="/">Back</a></li>
-        <li><h5>{creator}'s Room</h5></li>
+        <li><a href="/"><ArrowBackIosIcon/></a></li>
+        <li><h5 className="creator-name"><b>{creator}'s Room</b></h5></li>
 
         {props.timer && 
         <Timer>
-          <div>
+          <div className="timer">
             <Timer.Hours /> :         
             <Timer.Minutes /> : 
             <Timer.Seconds />  
