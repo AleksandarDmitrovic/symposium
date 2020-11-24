@@ -1,5 +1,5 @@
 import SocialMedia from '../rooms/SocialMedia';
-import { Paper, Button } from '@material-ui/core';
+import { Paper, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
 import './conversation-styles/individualConversation.scss'
 
 export default function IndividualConversation(props) {
@@ -26,39 +26,101 @@ export default function IndividualConversation(props) {
     //   </SocialMedia>
     // </div>
 
-    <div className='conversation-card'>
-      <Paper className='card' elevation={3}>
-        <img className='cover-photo' src={props.image} alt="itunes" />
-        <section className='body'>
-          <header>
-            <h5 className='start'>{props.title}</h5>
-            <p className='end'>Time Remaining: ""min</p>
-          </header>
-          <article>
-            <div className='info'>
-              <p>{props.description}</p>
-              <p className='italic'>{props.podcast_name}</p>
-              <p className='italic'>{props.episode_title}</p>
-              <p>Timestamps: {props.starts_at} - {props.ends_at}</p>
-            </div>
-            <div className='embedded-player'>
-              <p>Player goes here</p>
-            </div>
-          </article>
-          <footer>
-            <Button color="primary" onClick={joinRoom}>Join Room</Button>
-            <div class='share'>
-              <p>Share this Room </p>
-              <SocialMedia 
-                description={props.description}
-                url={roomURL}
-              >
-              </SocialMedia>
-            </div>
-          </footer>
-        </section>
-      </Paper>
-    </div>
+    // <div className='conversation-card'>
+    //   <Paper className='card' elevation={3}>
+    //     <img className='cover-photo' src={props.image} alt="itunes" />
+    //     <section className='body'>
+    //       <header>
+    //         <h5 className='start'>{props.title}</h5>
+    //         <p className='end'>Time Remaining: ""min</p>
+    //       </header>
+    //       <article>
+    //         <div className='info'>
+    //           <p>{props.description}</p>
+    //           <p className='italic'>{props.podcast_name}</p>
+    //           <p className='italic'>{props.episode_title}</p>
+    //           <p>Timestamps: {props.starts_at} - {props.ends_at}</p>
+    //         </div>
+    //         <div className='embedded-player'>
+    //           <p>Player goes here</p>
+    //         </div>
+    //       </article>
+    //       <footer>
+    //         <Button color="primary" onClick={joinRoom}>Join Room</Button>
+    //         <div class='share'>
+    //           <p>Share this Room </p>
+    //           <SocialMedia 
+    //             description={props.description}
+    //             url={roomURL}
+    //           >
+    //           </SocialMedia>
+    //         </div>
+    //       </footer>
+    //     </section>
+    //   </Paper>
+    // </div>
+
+    <Card className='conversation-card'>
+      <div className='card'>
+      <CardMedia
+          className='cover-photo'
+          image={props.image}
+          title="Contemplative Reptile"
+        />
+      <article>
+        <CardActionArea className='info'>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <footer>
+          <CardActions>
+            <Button size="small" color="primary">
+              Share
+            </Button>
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
+        </footer>
+      </article>
+      </div>
+    </Card>
+
+// <Card className={classes.root}>
+// <div className={classes.details}>
+//   <CardContent className={classes.content}>
+//     <Typography component="h5" variant="h5">
+//       Live From Space
+//     </Typography>
+//     <Typography variant="subtitle1" color="textSecondary">
+//       Mac Miller
+//     </Typography>
+//   </CardContent>
+//   <div className={classes.controls}>
+//     <IconButton aria-label="previous">
+//       {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+//     </IconButton>
+//     <IconButton aria-label="play/pause">
+//       <PlayArrowIcon className={classes.playIcon} />
+//     </IconButton>
+//     <IconButton aria-label="next">
+//       {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+//     </IconButton>
+//   </div>
+// </div>
+// <CardMedia
+//   className={classes.cover}
+//   image="/static/images/cards/live-from-space.jpg"
+//   title="Live from space album cover"
+// />
+// </Card>
+
   );
 }
 
