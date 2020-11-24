@@ -56,7 +56,7 @@ export default function Call(props) {
   const roomID = props.roomID;
 
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       userVideo.current.srcObject = stream;
 
       // stream.getVideoTracks()[0].enabled = !(stream.getVideoTracks()[0].enabled);
