@@ -9,7 +9,6 @@ export default function EmbedPodcast (props) {
   useEffect(function() {    
     setUrl(props.embed_url);
     myAudio.current.load()
-    console.log('audio', myAudio.current);
   });
 
   

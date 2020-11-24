@@ -13,8 +13,13 @@ import axios from 'axios';
 export default function Room(props) {
 const [conversation, setConversation] = useState([{}]);
 const [category, setCategory] = useState("");
+const [timer, setTimer] = useState(false);
 const roomID =  props.match.params.roomID;
 
+
+const changeTimer = (newValue) => {
+  setTimer(newValue)
+};
 
 useEffect(() => {
   axios.get(`/api/conversations/${roomID}`).then((res) => {
@@ -34,6 +39,7 @@ useEffect(() => {
       <TopNav 
       creatorID = {conversation[0].creator_id}
       history = {props.history}
+      timer = {timer}
       />
 
       <div className="main">
@@ -53,7 +59,10 @@ useEffect(() => {
             embed_url = {conversation[0].embed_url}
           />
         </div>
-        <Call roomID = {roomID} />
+        <Call 
+          roomID = {roomID} 
+          timer = {changeTimer}
+          />
       </div>
 
       <ChatBox />

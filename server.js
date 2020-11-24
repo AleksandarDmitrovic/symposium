@@ -30,7 +30,11 @@ io.on("connection", socket => {
   socket.on("join room", roomID => {
     if (users[roomID]) {
       const length = users[roomID].length;
-      if (length === 4) {
+      console.log('length', length);
+      if (length === 1) {
+        // console.log('do something');
+        socket.emit("conversation started");
+      } else if (length === 4) {
         socket.emit("room full");
         return;
       }
@@ -41,6 +45,7 @@ io.on("connection", socket => {
     socketToRoom[socket.id] = roomID;
     const usersInThisRoom = users[roomID].filter(id => id !== socket.id);
 
+    // console.log('emiting to all users');
     socket.emit("all users", usersInThisRoom);
   });
 

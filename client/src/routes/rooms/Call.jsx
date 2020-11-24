@@ -109,7 +109,12 @@ export default function Call(props) {
           const item = peersRef.current.find(p => p.peerID === payload.id);
           item.peer.signal(payload.signal);
         })
+
+        socketRef.current.on('conversation started', () => {
+          props.timer(true);
+        });
       })
+
 
       // LEAVING USER
       socketRef.current.on("user left", id => {
