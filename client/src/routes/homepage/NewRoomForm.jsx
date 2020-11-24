@@ -2,7 +2,19 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import TimePicker from './TimePicker';
+
 import { Button, Menu, MenuItem, Input } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+  inputField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+}));
 
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
@@ -87,6 +99,8 @@ export default function NewRoomForm (props) {
       );
     });
   }
+
+  const classes = useStyles();
  
   return (
     <main>
@@ -98,6 +112,7 @@ export default function NewRoomForm (props) {
             placeholder="Enter Conversation Title"
             onChange={changeTitle}
             value={title}
+            className={classes.inputField}
           />
           <br/>
           <Input
@@ -106,6 +121,11 @@ export default function NewRoomForm (props) {
             placeholder="Enter Conversation Description"
             onChange={changeDescription}
             value={description}
+            className={classes.inputField}
+          />
+          <br/>
+          <br/>
+          <TimePicker
           />
           <br/>
           <PodcastSearch 
