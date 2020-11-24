@@ -1,13 +1,13 @@
 import React from 'react';
-
+import SocialMedia from './SocialMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+// import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
 
 import './room.scss';
 
@@ -41,6 +41,10 @@ export default function Info(props) {
         <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
         <li><b>Category : </b>{props.category}</li>
       </ul>
+      <SocialMedia 
+        description={props.description}
+        url={props.history}
+      />
     {/* </div> */}
   </Card>
   )

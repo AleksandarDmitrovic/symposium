@@ -46,6 +46,7 @@ useEffect(() => {
             podcast_starts_at = {conversation[0].podcast_starts_at}
             podcast_ends_at = {conversation[0].podcast_ends_at}
             podcast_image = {conversation[0].podcast_image}
+            url = {props.history.location.pathname}
           />
           <EmbedPodcast 
             embed_title = {conversation[0].embed_title}

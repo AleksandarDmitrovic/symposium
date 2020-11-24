@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
@@ -9,6 +10,7 @@ export default function NewRoomForm (props) {
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
   const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [val, setVal] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -72,17 +74,22 @@ export default function NewRoomForm (props) {
     }
   }
 
-  // Render the episodes for the dropdown based on selected podcast
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (id) => {
+    setAnchorEl(null);
+    setVal(id);
+    document.getElementById('display-episode').style.visibility = 'visible';
+  };
+
   const listTitles = titles => {
     return titles.map(title => {
       return (
-        <option key={title.embed_title} value={title.embed_title}>{title.embed_title}</option>
+        <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
       );
     });
-  }
-
-  const handleChange = (event) => {
-    setVal(event.target.value);
   }
  
   return (
@@ -105,15 +112,25 @@ export default function NewRoomForm (props) {
             value={description}
           />
            <br/>
-          <label> Podcast </label>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
             changeEpisodeInfo = {setEpisodeInfo}
           />
-          <select id='episode-list' value={val} onChange={handleChange}>
-            <option value='none'>Episode:</option>
+          <br/>
+          <div>
+          <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+          <br/>
+          <p id='display-episode'>{val}</p>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+          >
             {listTitles(episodeInfo)}
-          </select>
+          </Menu>
+        </div> 
           <br/>
           <input type="submit" value="Submit" />
         </form>
