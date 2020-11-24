@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ShareLink from 'react-twitter-share-link'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -41,6 +41,14 @@ export default function Info(props) {
         <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
         <li><b>Category : </b>{props.category}</li>
       </ul>
+      <ShareLink 
+        link={'Heroku link goes here'}
+        text={'Join my conversation!'}
+      >
+        {link => (
+            <a href={link} target='_blank'>Share this on Twitter</a>
+        )}
+      </ShareLink>
     {/* </div> */}
   </Card>
   )
