@@ -56,7 +56,7 @@ export default function Call(props) {
   const roomID = props.roomID;
 
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
       // console.log('stream :', stream);
       // console.log('This is the peersRef', peersRef.peer)
