@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS conversations CASCADE;
-
 CREATE TABLE conversations (
   id SERIAL PRIMARY KEY NOT NULL,
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,

@@ -16,8 +16,26 @@ export default function SearchBar(props) {
   const onSearch = useCallback(props.onSearch, [term]);
 
   useEffect(() => {
+    if (document.getElementsByClassName('result-container')[1]) {
+      if (document.getElementsByClassName('result-container')[1].style.visibility === 'visible' && term.length === 0) {
+        document.getElementById('episode-list').style.visibility = 'hidden';
+      }
+    }
+    
     onSearch(term);
   }, [term, onSearch]);
+
+  const showResults = () => {
+    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+      if (document.getElementById('episode-list')) {
+        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
+          result.style.visibility = 'visible';
+        }
+      } else {
+        result.style.visibility = 'visible';
+      }
+    });
+  }
 
   return (
     <section className="search">
@@ -30,7 +48,10 @@ export default function SearchBar(props) {
           type="text"
           autoComplete='off'
           value={value}
-          onChange={event => props.changeValue(event.target.value)}
+          onChange={event => {
+            props.changeValue(event.target.value);
+            showResults();
+          }}
         />
       </form>
     </section>

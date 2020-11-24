@@ -31,7 +31,10 @@ useEffect(() => {
   return (
     <article className="room">
 
-      <TopNav creatorID = {conversation[0].creator_id}/>
+      <TopNav 
+      creatorID = {conversation[0].creator_id}
+      history = {props.history}
+      />
 
       <div className="main">
         <div className="side-bar">
