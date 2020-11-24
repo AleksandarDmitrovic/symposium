@@ -40,7 +40,7 @@ export default function IndividualConversation(props) {
                 Timestamps: {props.starts_at} - {props.ends_at}
               </Typography>
             </div>
-            <EmbedPodcast />
+            <EmbedPodcast embed_url = {props.audio} />
             </CardContent>
           </CardActionArea>   
         <CardActions className='footer' >
