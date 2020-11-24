@@ -32,6 +32,8 @@ io.on("connection", socket => {
       const length = users[roomID].length;
       if (length === 1) {
         socket.emit("conversation started");
+      } else if (length > 1 && length < 4) {
+        socket.emit("conversation started");
       } else if (length === 4) {
         socket.emit("room full");
         return;
