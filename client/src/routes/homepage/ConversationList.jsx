@@ -9,6 +9,7 @@ const mapConversations = function (props) {
         // keyValue={conversation.id}
         title={conversation.title}
         podcast_name={conversation.podcast_name}
+        episode_title = {conversation.podcast_episode_title}
         description={conversation.description}
         image={conversation.podcast_image}
         url={conversation.conversation_url}
