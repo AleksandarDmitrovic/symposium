@@ -55,27 +55,27 @@ export default function Call(props) {
   const peersRef = useRef([]); 
   const roomID = props.roomID;
 
-  // const toggleVideo = () => {
-  //   navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-  //     userVideo.current.srcObject = stream;
-  //     // console.log('stream :', stream);
-  //     // console.log('This is the peersRef', peersRef.peer)
-  //     // console.log('These are the peers', peers)
-  //     console.log('this is our media device', navigator.mediaDevices)
-  //     // stream.getVideoTracks()[0].enabled = !(stream.getVideoTracks()[0].enabled);
-  //     if(videoStream === true) {
-  //       setVideoStream(false);
-  //       stream.getVideoTracks()[0].enabled = false;
-  //       socketRef.current.emit('video disabled', { stream });
-  //     } else {
-  //       setVideoStream(true);
-  //       stream.getVideoTracks()[0].enabled = true;
-  //     }
-  //     console.log('stream :', stream);
-  //     console.log(' stream.getVideoTracks()[0]:',  stream.getVideoTracks()[0]);
-  //     console.log('stream.getVideoTracks()[0].enabled :', stream.getVideoTracks()[0].enabled);
-  //   })
-  // };
+  const toggleVideo = () => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      userVideo.current.srcObject = stream;
+      // console.log('stream :', stream);
+      // console.log('This is the peersRef', peersRef.peer)
+      // console.log('These are the peers', peers)
+      console.log('this is our media device', navigator.mediaDevices)
+      // stream.getVideoTracks()[0].enabled = !(stream.getVideoTracks()[0].enabled);
+      if(videoStream === true) {
+        setVideoStream(false);
+        stream.getVideoTracks()[0].enabled = false;
+        socketRef.current.emit('video disabled', { stream });
+      } else {
+        setVideoStream(true);
+        stream.getVideoTracks()[0].enabled = true;
+      }
+      console.log('stream :', stream);
+      console.log(' stream.getVideoTracks()[0]:',  stream.getVideoTracks()[0]);
+      console.log('stream.getVideoTracks()[0].enabled :', stream.getVideoTracks()[0].enabled);
+    })
+  };
 
   // useEffect runs when someone joins the room
   useEffect(() => {
