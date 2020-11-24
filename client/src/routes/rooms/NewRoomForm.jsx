@@ -79,12 +79,13 @@ export default function NewRoomForm (props) {
   const handleClose = (id) => {
     setAnchorEl(null);
     setVal(id);
+    document.getElementById('display-episode').style.visibility = 'visible';
   };
 
   const listTitles = titles => {
     return titles.map(title => {
       return (
-        <MenuItem onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
+        <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
       );
     });
   }
@@ -109,13 +110,13 @@ export default function NewRoomForm (props) {
             value={description}
           />
            <br/>
-          <label> Podcast </label>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
             changeEpisodeInfo = {setEpisodeInfo}
           />
           <div>
           <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+          <p id='display-episode'>{val}</p>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
