@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
-import './index.scss';
+import SideNav from "./SideNav";
+import './conversation-styles/index.scss';
 import axios from 'axios';
 
 export default function Conversation(props) {
@@ -26,15 +27,13 @@ export default function Conversation(props) {
   
   return (
     <article class='homepage'>
-
+      <SideNav />
       <NewRoomButton
         history={props.history}
       />
-    
       <SortBy 
         state={changeState}
       />
-
       <ConversationList 
         conversations={conversations}
         history={props.history}

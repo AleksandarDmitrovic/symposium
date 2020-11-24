@@ -20,7 +20,6 @@ export default function IndividualConversation(props) {
           title="Contemplative Reptile"
         />
       <article>
-        
           <CardActionArea>
             <CardContent className='body'>
             <div className='info'>

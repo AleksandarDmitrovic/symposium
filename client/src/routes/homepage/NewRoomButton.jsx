@@ -3,7 +3,7 @@ import NewRoomForm from './NewRoomForm';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import './index.scss';
+import './conversation-styles/index.scss';
 
  function getModalStyle() {
    const top = 50;
@@ -28,8 +28,6 @@ import './index.scss';
    },
  }));
  
-
-
 export default function NewRoomButton(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
