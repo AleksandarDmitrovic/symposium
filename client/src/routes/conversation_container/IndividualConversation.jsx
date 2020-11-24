@@ -1,9 +1,10 @@
-
+import SocialMedia from '../rooms/SocialMedia';
 
 export default function IndividualConversation(props) {
 
+  const roomURL = `/room/${props.url}`
+
   const joinRoom = () => {
-    const roomURL = `/room/${props.url}`
     props.history.push(roomURL)
   }
 
@@ -15,6 +16,11 @@ export default function IndividualConversation(props) {
       <p>{props.description}</p>
       <p>Time Elapsed</p>
       <button onClick={joinRoom}>Join Room</button>
+      <SocialMedia 
+        description={props.description}
+        url={roomURL}
+      >
+      </SocialMedia>
     </div>
   );
 }

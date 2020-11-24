@@ -6,8 +6,6 @@ export default function SocialMedia(props) {
   // replace url for each button with heroku url with props.url appended to the end of it
   // ie "heroku.com/${props.url}""
 
-  console.log(props)
-
   return (
     <div id='social-media'>
       <TwitterShareButton 
