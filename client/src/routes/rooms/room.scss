@@ -1,5 +1,9 @@
 $navColour: rgb(13, 126, 255);
 
+audio:focus {
+  outline: none;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -79,6 +83,7 @@ body {
           align-items: center;
           margin: 1em;
           padding: 1em;
+          
         }
 
         .chat-box {
