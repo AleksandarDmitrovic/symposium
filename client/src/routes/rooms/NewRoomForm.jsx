@@ -14,7 +14,6 @@ export default function NewRoomForm (props) {
   const [error, setError] = useState("");
 
   const validate = () => {
-    console.log('validating')
     if (title === "") {
       setError("Conversation title cannot be blank");
       return;
@@ -54,8 +53,6 @@ export default function NewRoomForm (props) {
     event.preventDefault();
     const id = uuid();
     let selectedEpisode = episodeInfo.filter(obj => obj.embed_title === val);
-    console.log('selectedEpisode', selectedEpisode);
-    console.log('episodeInfo', episodeInfo);
 
     if (validate()) {
       axios.put(`/api/conversations`, { 

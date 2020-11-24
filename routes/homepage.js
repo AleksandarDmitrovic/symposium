@@ -109,7 +109,6 @@ module.exports = (db) => {
       db.query(queryString, queryParams)
         .then((data) => {
           const conversation = data.rows;
-          console.log('conversation :', conversation);
           res.json({ conversation });
         })
         .catch((err) => {
