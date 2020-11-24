@@ -9,12 +9,11 @@ export default function EmbedPodcast (props) {
   useEffect(function() {    
     setUrl(props.embed_url);
     myAudio.current.load()
-  });
+  }, [props.embed_url]);
 
   
   return (
     <div className="embed-video">
-      <h6>{props.embed_title}</h6>
       <audio controls ref={myAudio}>
         <source src={url} type="audio/mpeg" />
         Your browser does not support the audio element.

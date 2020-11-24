@@ -60,13 +60,12 @@ useEffect(() => {
             embed_url = {conversation[0].podcast_episode_embed_url}
           />
         </div>
-        <Call 
-          roomID = {roomID} 
-          timer = {changeTimer}
+          <Call 
+            roomID = {roomID} 
+            timer = {changeTimer}
           />
-      </div>
-
-      <ChatBox />
+        </div>
+         {/* <ChatBox /> */}
     </article>
   );
 }

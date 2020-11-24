@@ -1,8 +1,11 @@
+$navColour: rgb(13, 126, 255);
+
 body {
   height: 100%;
   width: 100%;
 
   .room {
+    background-color: black;
     border: 10px solid black;
     min-height: 100vh;
     display: flex;
@@ -12,19 +15,22 @@ body {
 
     .top-nav {
       flex-shrink: 0;
-      background-color: rgb(85, 85, 85);
+      // background-color: $roomColour;
 
       ul {
         list-style-type: none;
         display: flex;
         justify-content: space-between;
-        margin: 1em;
+        margin: 0.2em;
       }
-    }
-
-    .chat-box {
-      flex-shrink: 0;
-      background-color: rgb(85, 85, 85)
+      .creator-name {
+        color: $navColour;
+      }
+      .timer {
+        color: $navColour;
+        font-size: large;
+      }
+     
     }
 
     .main {
@@ -32,13 +38,15 @@ body {
       display: flex;
 
       .call-container {
-        width: 60%;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
 
         .call-video {
-          margin: 1em;
+          padding: 2%;
           width: 45%;
           height: 45%;
-          border: 1px solid black;
         }
       }
 
@@ -46,23 +54,21 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 40%;
+        width: 30%;
 
-        border-right: 2px solid black;
-  
-        .info {
-          display: flex;
-          padding: 1em;
+        .podcast-card {
+          text-align: center;
           margin: 1em;
-          align-items: center;
-          justify-content: center;
-          border: 1px solid black;
-
+          padding: 5px;
+        
           ul {
             list-style-type: none;
+            text-align: left;
+            padding: 10px;
           }
+        
           img {
-            
+            mix-blend-mode: multiply;
           }
         }
 
@@ -73,7 +79,12 @@ body {
           align-items: center;
           margin: 1em;
           padding: 1em;
-          border: 1px solid black;
+        }
+
+        .chat-box {
+          flex-shrink: 0;
+          margin: 1em;
+          padding: 1em;
         }
       }
       
@@ -83,21 +94,3 @@ body {
 }
 
 
-
-.podcast-card {
-  background-color: rgba(85, 85, 85, 0.2) !important;
-  text-align: center;
-  margin: 1em;
-  padding: 5px;
-  
-
-  ul {
-    list-style-type: none;
-    text-align: left;
-    padding: 10px;
-  }
-
-  img {
-    mix-blend-mode: multiply;
-  }
-}
