@@ -87,6 +87,7 @@ module.exports = (db) => {
 
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
+  
     const { title, description, url, podcastInfo, embedTitle, embedUrl } = req.body;
     
     podcastCategorySearch(podcastInfo.category).then(categoryFound => {
@@ -101,6 +102,8 @@ module.exports = (db) => {
       const podcastImage = podcastInfo.podcast_image;
   
       const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embedTitle, embedUrl];
+
+      console.log(queryParams)
       const queryString = `
       INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
