@@ -1,44 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import IncomingMessage from './IncomingMessage'
+import OutgoingMessage from './OutgoingMessage'
 
 export default function ChatBox(props) {
 
-  const [message, setMessage] = useState("");
+  const [chatBoxMessage, setChatBoxMessage] = useState("");
+  const [allMessages, setAllMessages] = useState([]);
 
   function sendMessage(event) {
     event.preventDefault();
+    props.setMessage(chatBoxMessage);
     // clear message form
-    setMessage("");
-    props.setMessage(message);
+    setChatBoxMessage("");
   };
 
   function changeHandler(event) {
-    setMessage(event.target.value);
+    setChatBoxMessage(event.target.value);
   }
 
-  console.log('in ChatBox', props.newMessage);
+  useEffect(() => {
+    if (props.newMessage !== "") {
+      setAllMessages([...allMessages, props.newMessage])
+    }
+  }, [props.newMessage])
+
+  const mapAllMessages = function (allMessages) {  
+    // Ensure there are messages to render  
+    if (allMessages.length > 0) {
+      const message = allMessages.map(message => {
+        return (
+          <IncomingMessage
+            message = {message}
+          />
+        )
+      });
+
+      return message;
+
+    } else {
+      // No messages in array
+      return (
+        <p>You have no messages to show</p>
+      )
+    }
+  };
+
+
 
   return (
     <footer className="chat-box">
       <h4>Messages</h4>
+      <div>
+        { mapAllMessages(allMessages) }
+      </div>
 
-      <div className="incoming-messages">
-        <p>Username : This is an incoming message, class="incoming-messages"</p>
-      </div>
-      <div className="outgoing-messages" style={{textAlign: "right"}}>
-        <p>Username : This is an outgoing message, class="outgoing-messages"</p>
-      </div>
-      <div className="outgoing-messages" style={{textAlign: "right"}}>
-        <p>Username : This is an outgoing message, class="outgoing-messages"</p>
-      </div>
-      <div className="outgoing-messages" style={{textAlign: "right"}}>
-        <p>Username : This is an outgoing message, class="outgoing-messages"</p>
-      </div>
-      <div className="incoming-messages">
-        <p>Username : This is an incoming message, class="incoming-messages"</p>
-      </div>
+      <OutgoingMessage />
 
       <form onSubmit={ sendMessage }>
-        <input type="text" id="message" name="message" onChange={changeHandler} value={message}/>
+        <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
         <input type="submit" value="Submit" />
       </form>
     </footer>
