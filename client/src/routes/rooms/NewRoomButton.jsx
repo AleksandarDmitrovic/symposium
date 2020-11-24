@@ -47,9 +47,7 @@ export default function NewRoomButton(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Create Your Podcast Conversation</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      
       <NewRoomForm 
          history = {props.history}
          />

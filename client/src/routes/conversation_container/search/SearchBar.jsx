@@ -3,6 +3,16 @@ import { useEffect, useCallback } from "react";
 import useDebounce from "./hooks/useDebounce";
 
 import { Input } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+  inputField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+}));
 
 export default function SearchBar(props) {
 
@@ -41,11 +51,13 @@ export default function SearchBar(props) {
     });
   }
 
+  const classes = useStyles();
+
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <Input
-          className="selected-podcast"
+          className={classes.inputField}
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
