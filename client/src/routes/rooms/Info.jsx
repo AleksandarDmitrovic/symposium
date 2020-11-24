@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton,  LinkedinIcon } from 'react-share';
+import SocialMedia from './SocialMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -41,24 +41,10 @@ export default function Info(props) {
         <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
         <li><b>Category : </b>{props.category}</li>
       </ul>
-      <TwitterShareButton 
-        title={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
-      >
-        <TwitterIcon size={32} round={true}></TwitterIcon>
-      </TwitterShareButton>
-      <FacebookShareButton 
-        quote={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
-      >
-        <FacebookIcon size={32} round={true}></FacebookIcon>
-      </FacebookShareButton>
-      <LinkedinShareButton 
-        title={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
-      >
-        <LinkedinIcon size={32} round={true}></LinkedinIcon>
-      </LinkedinShareButton>
+      <SocialMedia 
+        description={props.description}
+        url={props.history}
+      />
     {/* </div> */}
   </Card>
   )
