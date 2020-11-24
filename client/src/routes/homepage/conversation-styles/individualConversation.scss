@@ -10,25 +10,16 @@
   width: 100%;
 }
 
-section {
+.body {
   display: flex;
-  flex-direction: column;
-
+  align-items: center;
 }
 
-.body {
-  width: 50em;
+.info {
+  width: 30em;
   height: 10em;
 
-
-  .start {
-    justify-content: flex-start;
-  }
-  .end {
-    justify-content: flex-end;
-  }
-
-#footer{
+.footer{
     display: flex;
     padding: 8px;
     align-items: baseline;

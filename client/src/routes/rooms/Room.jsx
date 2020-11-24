@@ -4,7 +4,7 @@ import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';
 import Info from './Info';
-import EmbedPodcast from './Embedded-player'
+import EmbedPodcast from './EmbedPodcast'
 
 import './room.scss';
 
