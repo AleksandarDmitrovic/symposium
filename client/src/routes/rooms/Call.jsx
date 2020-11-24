@@ -48,7 +48,7 @@ For the person awaiting to join the room:
 
 export default function Call(props) {
   const [peers, setPeers] = useState([]);
-  const [videoStream, setVideoStream] = useState([]);
+  const [videoStream, setVideoStream] = useState(true);
   // We keep track of the changes in the following refs without having to rerender the component
   const socketRef = useRef();
   const userVideo = useRef();
@@ -145,6 +145,7 @@ export default function Call(props) {
         peersRef.current = peers;
         setPeers(peers);
       })
+      
   }, [roomID]);
 
   //* Function for creating peers when a user has joined a room with existing participants
