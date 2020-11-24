@@ -13,6 +13,9 @@ export default function PodcastSearch(props) {
   const [results, setResults] = useState([]);
   // The value of the selected podcast
   const [value, setValue] = useState("");
+  //! For Episode dropdown once up and runninga
+  // const [episodes, setEpisodes] = useState([{}]);
+  // Specific podcast
 
   const [podcastName, setPodcastName] = useState([]);
 

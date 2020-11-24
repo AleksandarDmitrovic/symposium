@@ -16,10 +16,10 @@ const Video = (props) => {
   );
 }
 
-const videoConstraints = {
-  height: window.innerHeight / 2,
-  width: window.innerWidth / 2
-};
+// const videoConstraints = {
+//   height: window.innerHeight / 4,
+//   width: window.innerWidth / 4
+// };
 
 /*
 * ROOM COMPONENT - the actual chat between the peers
@@ -57,7 +57,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: false }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
         // userVideo is a ref to the actual video (stream)
         userVideo.current.srcObject = stream;
 
@@ -166,7 +166,7 @@ export default function Call(props) {
         <video className='call-video' muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer) => {
             return (
-                <Video key={peer.peerID} peer={peer.peer} />
+                <Video key={peer.peerID} peer={peer.peer} className='call-video' />
             );
         })}
     </div>

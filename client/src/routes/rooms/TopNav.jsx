@@ -21,24 +21,12 @@ export default function TopNav(props) {
   };
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-      <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <Button onClick={back}>Back</Button>
-          </li>
+    <nav className="top-nav">
+        <ul>
+          <li><a href="/">Back</a></li>
+          <li><h5>{creator}'s Room</h5></li>
+          <li><h5>Timer</h5></li>
         </ul>
-      </div>
-      <div className="mx-auto order-0">
-        <h5 className="navbar-brand mx-auto">{creator}'s Room</h5>
-      </div>
-      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <h5 className='mr-sm-2'>Timer</h5>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    </nav> 
   );
 }
