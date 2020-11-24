@@ -87,35 +87,40 @@ module.exports = (db) => {
 
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
-
-    const creatorID = 1;
-    const categoryID = 1;
-
     const { title, description, url, podcastInfo, embedTitle, embedUrl } = req.body;
-
-    const podcastName = podcastInfo.podcast_name;
-    const podcastStartsAt = "TEXT";
-    const podcastEndsAt = "TEXT";
-    const podcastImage = podcastInfo.podcast_image;
-
-    const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embedTitle, embedUrl];
-    const queryString = `
-    INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, embed_title, embed_url)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-    RETURNING *;`;
-
-    db.query(queryString, queryParams)
-      .then((data) => {
-        const conversation = data.rows;
-        console.log('conversation :', conversation);
-        res.json({ conversation });
-      })
-      .catch((err) => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    
+    podcastCategorySearch(podcastInfo.category).then(categoryFound => {
+      const creatorID = 1;
+  
+      const categoryID = categoryFound;
+  
+  
+      const podcastName = podcastInfo.podcast_name;
+      const podcastStartsAt = "TEXT";
+      const podcastEndsAt = "TEXT";
+      const podcastImage = podcastInfo.podcast_image;
+  
+      const queryParams = [creatorID, categoryID, url, title, description, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embedTitle, embedUrl];
+      const queryString = `
+      INSERT INTO conversations (creator_id, category_id, conversation_url, title, description, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, embed_title, embed_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      RETURNING *;`;
+  
+      db.query(queryString, queryParams)
+        .then((data) => {
+          const conversation = data.rows;
+          console.log('conversation :', conversation);
+          res.json({ conversation });
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    });
+    
   });
+ 
 
   return router;
 };
