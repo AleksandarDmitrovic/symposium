@@ -35,13 +35,14 @@ export default function IndividualConversation(props) {
             <p className='end'>Time Remaining: ""min</p>
           </header>
           <article>
-            <div>
+            <div className='info'>
               <p>{props.description}</p>
-            </div>
-            <div>
-              <p>{props.podcast_name}</p>
-              <p>{props.episode_title}</p>
+              <p className='italic'>{props.podcast_name}</p>
+              <p className='italic'>{props.episode_title}</p>
               <p>Timestamps: {props.starts_at} - {props.ends_at}</p>
+            </div>
+            <div className='embedded-player'>
+              <p>Player goes here</p>
             </div>
           </article>
           <footer>

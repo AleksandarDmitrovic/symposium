@@ -39,16 +39,19 @@ section {
     justify-content: space-between;
     position: relative;
     border-top: 1px solid black;
-    padding-top: 1.5em;
- 
+    padding-top: 0.5em;
   }
 
   article {
     display: flex;
     justify-content: space-between;
-    padding-top: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
   };
+}
 
+info {
+  width: 60%;
 }
 
 .share {
@@ -61,6 +64,10 @@ section {
 }
 
 .cover-photo {
-  height: 100%;
+  height: 15em;
   position: relative;
+}
+
+.italic {
+  font-style: italic;
 }

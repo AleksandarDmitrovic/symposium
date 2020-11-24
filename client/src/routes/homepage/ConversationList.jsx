@@ -13,8 +13,8 @@ const mapConversations = function (props) {
         description={conversation.description}
         image={conversation.podcast_image}
         url={conversation.conversation_url}
-        starts_at={props.podcast_starts_at}
-        ends_at={props.podcast_ends_at}
+        starts_at={conversation.podcast_starts_at}
+        ends_at={conversation.podcast_ends_at}
         history={props.history}
       />
     )
