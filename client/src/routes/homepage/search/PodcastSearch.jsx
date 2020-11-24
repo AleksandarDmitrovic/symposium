@@ -6,6 +6,7 @@ const axios = require('axios');
 
 // PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props
 export default function PodcastSearch(props) {
+  const { changeEpisodeInfo } = props
 
   // Name to insert into Itunes API 
   const [term, setTerm] = useState("");
@@ -30,13 +31,13 @@ export default function PodcastSearch(props) {
         const episodeData = response.data.items.map(ep => {
           return {embed_title: ep.title, embed_url: ep.enclosure.link};
         })
-        if (props.changeEpisodeInfo) {
-          props.changeEpisodeInfo(episodeData);
+        if (changeEpisodeInfo) {
+          changeEpisodeInfo(episodeData);
         }
       })
     })
     .catch(err => console.log('Error: ', err));
-  }, [term]);
+  }, [term, changeEpisodeInfo]);
 
   return (
       <div>
