@@ -1,11 +1,11 @@
-$roomCardColour: rgba(124, 152, 228, 0.2) !important;
+$navColour: rgb(13, 126, 255);
 
 body {
   height: 100%;
   width: 100%;
 
   .room {
-   
+    background-color: black;
     border: 10px solid black;
     min-height: 100vh;
     display: flex;
@@ -15,14 +15,22 @@ body {
 
     .top-nav {
       flex-shrink: 0;
-      background-color: rgb(222, 233, 238);
+      // background-color: $roomColour;
 
       ul {
         list-style-type: none;
         display: flex;
         justify-content: space-between;
-        margin: 1em;
+        margin: 0.2em;
       }
+      .creator-name {
+        color: $navColour;
+      }
+      .timer {
+        color: $navColour;
+        font-size: large;
+      }
+     
     }
 
     .main {
@@ -31,11 +39,14 @@ body {
 
       .call-container {
         width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
 
         .call-video {
           margin: 1em;
           width: 45%;
-          height: 45%;
+          height: 43%;
           
          
         }
@@ -48,11 +59,9 @@ body {
         width: 30%;
 
         .podcast-card {
-          background-color: $roomCardColour;
           text-align: center;
           margin: 1em;
           padding: 5px;
-          
         
           ul {
             list-style-type: none;
@@ -66,7 +75,6 @@ body {
         }
 
         .embed-video {
-          background-color: $roomCardColour;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
@@ -79,7 +87,6 @@ body {
           flex-shrink: 0;
           margin: 1em;
           padding: 1em;
-          background-color: $roomCardColour;
         }
       }
       
