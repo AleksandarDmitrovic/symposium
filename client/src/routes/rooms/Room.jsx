@@ -11,27 +11,38 @@ import './room.scss';
 import axios from 'axios';
 
 export default function Room(props) {
-const [conversation, setConversation] = useState([{}]);
-const [category, setCategory] = useState("");
-const [timer, setTimer] = useState(false);
-const roomID =  props.match.params.roomID;
+
+  // STATE
+  const [conversation, setConversation] = useState([{}]);
+  const [category, setCategory] = useState("");
+  const [timer, setTimer] = useState(false);
+  const [message, setMessage] = useState();
+
+  // ROOM ID
+  const roomID =  props.match.params.roomID;
+
+  // State Helper Functions
+  const changeTimer = (newValue) => {
+    setTimer(newValue)
+  };
+
+  const changeMessage = newValue => {
+    setMessage(newValue);
+  };
 
 
-const changeTimer = (newValue) => {
-  setTimer(newValue)
-};
-
-useEffect(() => {
-  axios.get(`/api/conversations/${roomID}`).then((res) => {
-    setConversation(res.data.conversation)
-    const categoryID = res.data.conversation[0].category_id;
-    
-    axios.get(`/api/categories/${categoryID}`).then((res) => {
-      setCategory(res.data.categoryName.name)
+  // Use Effects
+  useEffect(() => {
+    axios.get(`/api/conversations/${roomID}`).then((res) => {
+      setConversation(res.data.conversation)
+      const categoryID = res.data.conversation[0].category_id;
+      
+      axios.get(`/api/categories/${categoryID}`).then((res) => {
+        setCategory(res.data.categoryName.name)
+      })
+      
     })
-    
-  })
-}, [roomID]);
+  }, [roomID]);
 
   return (
     <article className="room">
@@ -66,7 +77,9 @@ useEffect(() => {
           />
       </div>
 
-      <ChatBox />
+      <ChatBox 
+        message = {changeMessage}
+      />
     </article>
   );
 }

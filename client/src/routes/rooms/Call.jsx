@@ -116,6 +116,9 @@ export default function Call(props) {
         });
       })
 
+      // CHAT BOX 
+      
+
 
       // LEAVING USER
       socketRef.current.on("user left", id => {
