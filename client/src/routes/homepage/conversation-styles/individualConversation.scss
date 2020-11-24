@@ -17,18 +17,10 @@ section {
 }
 
 .body {
-  padding-left: 3em;
-  padding-right: 1em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  width: 100%;
+  width: 50em;
+  height: 10em;
 
-  header {
-    display: flex;
-    position: relative;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-  }
+
   .start {
     justify-content: flex-start;
   }
@@ -36,24 +28,12 @@ section {
     justify-content: flex-end;
   }
 
-  footer {
+#footer{
     display: flex;
+    padding: 8px;
+    align-items: baseline;
     justify-content: space-between;
-    position: relative;
-    border-top: 1px solid black;
-    padding-top: 0.5em;
   }
-
-  article {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 0.5em;
-    padding-bottom: 1em;
-  };
-}
-
-info {
-  width: 60%;
 }
 
 .share {
@@ -73,4 +53,13 @@ info {
 
 .italic {
   font-style: italic;
+}
+
+.description {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.join-room {
+  width: 60%
 }

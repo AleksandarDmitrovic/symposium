@@ -69,60 +69,38 @@ export default function IndividualConversation(props) {
         />
       <article>
         <CardActionArea className='info'>
-          <CardContent>
+          <CardContent className='body'>
             <Typography gutterBottom variant="h5" component="h2">
               {props.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body1"  className='description' component="p" >
               {props.description}
             </Typography>
+            <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              {props.podcast_name}
+            </Typography>
+            <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              {props.episode_title}
+            </Typography>
+            <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              Timestamps: {props.starts_at} - {props.ends_at}
+            </Typography>
+            
           </CardContent>
         </CardActionArea>
-        <footer>
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
+          <CardActions style={{display:'flex', alignItems:'baseline', justifyContent: 'space-between', padding: '1em'}}>
+            <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+            <div className='share'>
+              <p>Share this Room </p>
+              <SocialMedia 
+                description={props.description}
+                url={roomURL}
+              >
+              </SocialMedia>
+            </div>
           </CardActions>
-        </footer>
       </article>
       </div>
     </Card>
-
-// <Card className={classes.root}>
-// <div className={classes.details}>
-//   <CardContent className={classes.content}>
-//     <Typography component="h5" variant="h5">
-//       Live From Space
-//     </Typography>
-//     <Typography variant="subtitle1" color="textSecondary">
-//       Mac Miller
-//     </Typography>
-//   </CardContent>
-//   <div className={classes.controls}>
-//     <IconButton aria-label="previous">
-//       {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-//     </IconButton>
-//     <IconButton aria-label="play/pause">
-//       <PlayArrowIcon className={classes.playIcon} />
-//     </IconButton>
-//     <IconButton aria-label="next">
-//       {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-//     </IconButton>
-//   </div>
-// </div>
-// <CardMedia
-//   className={classes.cover}
-//   image="/static/images/cards/live-from-space.jpg"
-//   title="Live from space album cover"
-// />
-// </Card>
-
   );
 }
-
-
-
