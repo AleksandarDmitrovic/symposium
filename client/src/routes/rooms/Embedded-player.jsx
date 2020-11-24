@@ -1,12 +1,23 @@
+import { useEffect, useState, useRef } from 'react'
+
 export default function EmbedPodcast (props) {
 
-  console.log(props.embed_url);
+  // USE STATE
+  const [url, setUrl] = useState();
+  const myAudio = useRef();
 
+  useEffect(function() {    
+    setUrl(props.embed_url);
+    myAudio.current.load()
+    console.log('audio', myAudio.current);
+  });
+
+  
   return (
     <div className="embed-video">
-      <h1>{props.embed_title}</h1>
-      <audio controls>
-        <source src="https://traffic.libsyn.com/secure/joeroganexp/p1568.mp3" type="audio/mp3" />
+      <h6>{props.embed_title}</h6>
+      <audio controls ref={myAudio}>
+        <source src={url} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
     </div>

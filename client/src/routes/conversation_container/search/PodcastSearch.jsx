@@ -33,6 +33,7 @@ export default function PodcastSearch(props) {
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
       axios.get(url).then(response => {
+        console.log('res', response);
         const episodeData = response.data.items.map(ep => {
           return {embed_title: ep.title, embed_url: ep.link};
         })
