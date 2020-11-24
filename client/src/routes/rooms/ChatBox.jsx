@@ -7,8 +7,8 @@ export default function ChatBox(props) {
   function sendMessage(event) {
     event.preventDefault();
     // clear message form
-    setMessage("")
-    console.log('message', message);
+    setMessage("");
+    props.setMessage(message);
   };
 
   function changeHandler(event) {
@@ -22,13 +22,13 @@ export default function ChatBox(props) {
       <div className="incoming-messages">
         <p>Username : This is an incoming message, class="incoming-messages"</p>
       </div>
-      <div className="outgoing-messages" style={{'text-align': "right"}}>
+      <div className="outgoing-messages" style={{textAlign: "right"}}>
         <p>Username : This is an outgoing message, class="outgoing-messages"</p>
       </div>
-      <div className="outgoing-messages" style={{'text-align': "right"}}>
+      <div className="outgoing-messages" style={{textAlign: "right"}}>
         <p>Username : This is an outgoing message, class="outgoing-messages"</p>
       </div>
-      <div className="outgoing-messages" style={{'text-align': "right"}}>
+      <div className="outgoing-messages" style={{textAlign: "right"}}>
         <p>Username : This is an outgoing message, class="outgoing-messages"</p>
       </div>
       <div className="incoming-messages">

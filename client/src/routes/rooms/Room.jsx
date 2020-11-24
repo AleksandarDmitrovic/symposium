@@ -16,7 +16,7 @@ export default function Room(props) {
   const [conversation, setConversation] = useState([{}]);
   const [category, setCategory] = useState("");
   const [timer, setTimer] = useState(false);
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("");
 
   // ROOM ID
   const roomID =  props.match.params.roomID;
@@ -74,11 +74,12 @@ export default function Room(props) {
         <Call 
           roomID = {roomID} 
           timer = {changeTimer}
+          message = {message}
           />
       </div>
 
       <ChatBox 
-        message = {changeMessage}
+        setMessage = {changeMessage}
       />
     </article>
   );
