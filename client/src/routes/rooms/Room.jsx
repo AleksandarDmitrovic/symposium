@@ -55,8 +55,8 @@ useEffect(() => {
             url = {props.history.location.pathname}
           />
           <EmbedPodcast 
-            embed_title = {conversation[0].embed_title}
-            embed_url = {conversation[0].embed_url}
+            embed_title = {conversation[0].podcast_episode_title}
+            embed_url = {conversation[0].podcast_episode_embed_url}
           />
         </div>
         <Call 
