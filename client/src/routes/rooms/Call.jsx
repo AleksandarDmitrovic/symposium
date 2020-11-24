@@ -102,6 +102,7 @@ export default function Call(props) {
           }
           // Update Peers State by adding the newly joined user to the existing array of participants
           setPeers(users => [...users, peerObj]);
+          props.timer(true);
         });
 
         //* THE JOINING USER GETS THEIR RESPONSE
