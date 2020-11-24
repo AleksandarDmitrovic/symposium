@@ -55,25 +55,24 @@ export default function Call(props) {
   const peersRef = useRef([]); 
   const roomID = props.roomID;
 
+  // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
-      // console.log('stream :', stream);
-      // console.log('This is the peersRef', peersRef.peer)
-      // console.log('These are the peers', peers)
-      console.log('this is our media device', navigator.mediaDevices)
-      // stream.getVideoTracks()[0].enabled = !(stream.getVideoTracks()[0].enabled);
+
+      console.log('stream :', stream);
+      console.log('This is the peersRef', peersRef.peer)
+      console.log('These are the peers', peers)
+
+      
       if(videoStream === true) {
         setVideoStream(false);
         stream.getVideoTracks()[0].enabled = false;
-        socketRef.current.emit('video disabled', { stream });
+        socketRef.current.emit('video disabled', { stream } );
       } else {
         setVideoStream(true);
         stream.getVideoTracks()[0].enabled = true;
       }
-      console.log('stream :', stream);
-      console.log(' stream.getVideoTracks()[0]:',  stream.getVideoTracks()[0]);
-      console.log('stream.getVideoTracks()[0].enabled :', stream.getVideoTracks()[0].enabled);
     })
   };
 
@@ -125,7 +124,7 @@ export default function Call(props) {
           }
           // Update Peers State by adding the newly joined user to the existing array of participants
           setPeers(users => [...users, peerObj]);
-          props.timer(true);
+          props.timer(true); 
         });
 
         //* THE JOINING USER GETS THEIR RESPONSE
@@ -137,6 +136,12 @@ export default function Call(props) {
         socketRef.current.on('conversation started', () => {
           props.timer(true);
         });
+
+        socketRef.current.on("video disabled", data => {
+          console.log('below conversation started (141)', data);
+          console.log('user has disabled video');
+        });
+
       })
 
 
@@ -150,6 +155,10 @@ export default function Call(props) {
         peersRef.current = peers;
         setPeers(peers);
       })
+
+      socketRef.current.on('video disabled', payload => {
+        console.log('here (160)', payload);
+      });
       
   }, [roomID]);
 
