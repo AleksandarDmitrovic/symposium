@@ -144,7 +144,6 @@ export default function Call(props) {
 
       })
 
-
       // LEAVING USER
       socketRef.current.on("user left", id => {
         const peerObj = peersRef.current.find(p => p.peerID === id);
@@ -159,8 +158,21 @@ export default function Call(props) {
       socketRef.current.on('video disabled', payload => {
         console.log('here (160)', payload);
       });
-      
+
+      // Updates newMessage state triggering useEffect in ChatBox.jsx
+      socketRef.current.on("update chat box", messageInfo => {
+        if (messageInfo.message) {
+          props.setNewMessage({ messageInfo })
+        }
+      });
+
   }, [roomID]);
+
+  // CHAT BOX 
+  useEffect(() => {
+    // Message goes to server.js which broadcasts "update chat box" to all other users in the room
+    socketRef.current.emit("new message", { message: props.message, userId: socketRef.current.id })
+  }, [props.message]);
 
   //* Function for creating peers when a user has joined a room with existing participants
   function createPeer(userToSignal, callerID, stream) {

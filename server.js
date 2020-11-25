@@ -54,6 +54,7 @@ io.on("connection", socket => {
     io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
   });
 
+  // When user leaves
   socket.on('disconnect', () => {
     const roomID = socketToRoom[socket.id];
     let room = users[roomID];
@@ -68,6 +69,11 @@ io.on("connection", socket => {
   //   console.log('received message', payload);
   //   socket.broadcast.emit("user has disabled video");
   // });
+  
+  // When user sends a message for the chat box
+  socket.on('new message', messageInfo => {
+    socket.broadcast.emit('update chat box', messageInfo)
+  })
 
 });
 
