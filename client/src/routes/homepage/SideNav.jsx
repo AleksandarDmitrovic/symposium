@@ -9,6 +9,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import './conversation-styles/index.scss';
+
 const drawerWidth = '20vw';
 
 const useStyles = makeStyles((theme) => ({
@@ -84,7 +86,7 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     if (open) {
       document.getElementById('convo-list').style.paddingLeft = '22vw';
-      document.getElementById('convo-list').style.paddingRight = '2vw';
+      document.getElementById('convo-list').style.paddingRight = '4vw';
       document.getElementById('sort-by-container').style.paddingLeft = '22vw';
       document.getElementsByClassName('new-room-button')[0].style.marginLeft = '35vw';
       document.getElementsByClassName('new-room-button')[0].style.marginRight = '35vw';
@@ -124,6 +126,7 @@ export default function PersistentDrawerLeft() {
         }}
       > 
         <h3>Symposium</h3>
+        <img className='icon' src='icon_a.png' alt='icon'/>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}

@@ -2,8 +2,7 @@ import { useEffect, useCallback } from "react";
 
 import useDebounce from "./hooks/useDebounce";
 
-import { TextField } from '@material-ui/core';
-import { Input } from '@material-ui/core';
+import { TextField, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -26,7 +25,6 @@ export default function SearchBar(props) {
   // useCallback memoizes the function to run whenever debounced term changes
   const onSearch = useCallback(props.onSearch, [term]);
 
-  // 
   const handleFocus = (event) => event.target.select();
 
   useEffect(() => {
@@ -60,7 +58,7 @@ export default function SearchBar(props) {
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
-        <TextField
+        <Input
           label="PODCAST"
           className="selected-podcast"
           spellCheck="false"

@@ -29,12 +29,14 @@ export default function Conversation(props) {
     <main>
       <SideNav />
       <article class='homepage'>
-        <NewRoomButton
-          history={props.history}
-        />
-        <SortBy 
-          state={changeState}
-        />
+        <div className='fixed'>
+          <NewRoomButton
+            history={props.history}
+          />
+          <SortBy 
+            state={changeState}
+          />
+        </div>
         <ConversationList 
           conversations={conversations}
           history={props.history}

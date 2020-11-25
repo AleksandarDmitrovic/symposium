@@ -17,3 +17,16 @@ body {
     font-family: 'Raleway', sans-serif;
   }
 }
+
+.fixed {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  height: 20vh;
+  background-color: white;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+}
