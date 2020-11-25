@@ -14,6 +14,8 @@ const mapConversations = function (props) {
         image={conversation.podcast_image}
         url={conversation.conversation_url}
         history={props.history}
+        is_active = {conversation.is_active}
+        time_available_seconds = {conversation.time_available_seconds}
       />
     )
   });
