@@ -65,11 +65,10 @@ io.on("connection", socket => {
     socket.broadcast.emit('user left', socket.id);
   });
 
-  // socket.on('video disabled', payload => {
-  //   console.log('received message', payload);
-  //   socket.broadcast.emit("user has disabled video");
-  // });
-  
+  socket.on('user video settings changed', userId => {
+    socket.broadcast.emit("user has disabled video", userId);
+  });
+
   // When user sends a message for the chat box
   socket.on('new message', messageInfo => {
     socket.broadcast.emit('update chat box', messageInfo)

@@ -45,10 +45,11 @@ For the person awaiting to join the room:
 4. They are now potentially receving x amount of signals based on who is in the room, so we need to know which one of the peers to use to accept the returning signal. 
 */
 
-
 export default function Call(props) {
   const [peers, setPeers] = useState([]);
   const [videoStream, setVideoStream] = useState(true);
+
+  // const [userStream, setUserStream] = useState();
   // We keep track of the changes in the following refs without having to rerender the component
   const socketRef = useRef();
   const userVideo = useRef();
@@ -60,18 +61,16 @@ export default function Call(props) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
 
-      console.log('stream :', stream);
-      console.log('This is the peersRef', peersRef.peer)
-      console.log('These are the peers', peers)
-
-      
       if(videoStream === true) {
+
         setVideoStream(false);
-        stream.getVideoTracks()[0].enabled = false;
-        socketRef.current.emit('video disabled', { stream } );
+        // stream.getVideoTracks()[0].enabled = false;
+        // stream.getVideoTracks()[0].stop();
+        // emit message
+        socketRef.current.emit("user video settings changed", socketRef.current.id);
       } else {
         setVideoStream(true);
-        stream.getVideoTracks()[0].enabled = true;
+        socketRef.current.emit("user video settings changed", socketRef.current.id);
       }
     })
   };
@@ -83,6 +82,7 @@ export default function Call(props) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
         // userVideo is a ref to the actual video (stream)
         userVideo.current.srcObject = stream;
+        
         //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
         // Emit an event saying the user has joined the room
         socketRef.current.emit('join room', roomID);
@@ -137,12 +137,7 @@ export default function Call(props) {
           props.timer(true);
         });
 
-        socketRef.current.on("video disabled", data => {
-          console.log('below conversation started (141)', data);
-          console.log('user has disabled video');
-        });
-
-      })
+      });
 
       // LEAVING USER
       socketRef.current.on("user left", id => {
@@ -155,8 +150,21 @@ export default function Call(props) {
         setPeers(peers);
       })
 
-      socketRef.current.on('video disabled', payload => {
-        console.log('here (160)', payload);
+      socketRef.current.on('user has disabled video', userId => {
+        console.log('user that turned off video', userId);
+        console.log('current user', socketRef.current.id);
+        console.log('peers', peersRef);
+
+        const peerObj = peersRef.current.find(p => p.peerID === userId);
+        if(peerObj) {
+
+          if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
+            peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
+          } else {
+            peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
+          }
+  
+        }
       });
 
       // Updates newMessage state triggering useEffect in ChatBox.jsx
