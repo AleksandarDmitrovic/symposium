@@ -26,8 +26,7 @@ export default function TimePicker(props) {
 
   useEffect(()=> {
     changeTimeAvailable(time)
-    // console.log(time)
-  }) 
+  }, [changeTimeAvailable, time]) 
   
   const classes = useStyles();
 
