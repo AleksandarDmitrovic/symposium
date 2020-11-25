@@ -17,8 +17,6 @@ export default function SortBy (props) {
     props.state(`conversations/category/${id}`)
   };
 
-  // CATEGORY BUTTON IS HARDCODED TO 1
-
   return (
     <ul className="sort-by">
       <li>

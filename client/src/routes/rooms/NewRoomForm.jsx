@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
+import moment from 'moment'
 import PodcastSearch from '../conversation_container/search/PodcastSearch';
 import TimePicker from './TimePicker';
 
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
+  const [timePicked, setTimePicked] = useState(props.timePicked || '');
+  const [timeAvailable, setTimeAvailable] = useState(props.timeAvailable || 0);
+
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
   const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [val, setVal] = useState('');
@@ -31,6 +35,9 @@ export default function NewRoomForm (props) {
       return;
     } else if (description === "") {
       setError("Conversation description cannot be blank");
+      return;
+    } else if (timeAvailable <= 0) {
+      setError("Please set a time in the future");
       return;
     } else if (val === "") {
       setError("Podcast & Podcast Episode must be selected");
@@ -47,6 +54,20 @@ export default function NewRoomForm (props) {
   const changeDescription = (event) => {
     setDescription(event.target.value);
   };
+
+  const changeTimeAvailable = (value) => {
+    setTimePicked(value);
+    const hoursMins = timePicked.split(":");
+   
+    const futureTime = moment().set('hour', parseInt(hoursMins[0])).set('minute', parseInt(hoursMins[1]));
+   
+    const seconds = futureTime.unix() - moment().unix()
+
+    setTimeAvailable(seconds);
+    console.log('time :', timeAvailable);
+   
+
+  }
 
   const changePodcastInfo = (info) => {
     setPodcastInfo(info);
@@ -127,6 +148,7 @@ export default function NewRoomForm (props) {
           <br/>
           <br/>
           <TimePicker
+            changeTimeAvailable={changeTimeAvailable}
           />
           <br/>
           <PodcastSearch 
@@ -135,30 +157,26 @@ export default function NewRoomForm (props) {
           />
           <br/>
           <div>
-          <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
-          <br/>
-          <p id='display-episode'>{val}</p>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-          >
-            {listTitles(episodeInfo)}
-          </Menu>
-        </div> 
+            <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+            <br/>
+            <p id='display-episode'>{val}</p>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={() => setAnchorEl(null)}
+            >
+              {listTitles(episodeInfo)}
+            </Menu>
+          </div> 
           <br/>
           <Button type="submit" value="Submit">
             Submit
           </Button>
         </form>
         <section className="form__validation">{error}</section>
-        </section>
-        <section className="appointment__card-right">
-          <section className="appointment__actions">
-          </section>
-        </section>
+      </section>
     </main>
   );
 };

@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,7 +15,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TimePicker() {
+export default function TimePicker(props) {
+  const [time, setTime] = useState("00:00");
+
+  const { changeTimeAvailable } = props;
+
+  const changeTime = (event) => {
+    setTime(event.target.value)
+  }
+
+  useEffect(()=> {
+    changeTimeAvailable(time)
+    // console.log(time)
+  }) 
+  
   const classes = useStyles();
 
   return (
@@ -31,6 +45,8 @@ export default function TimePicker() {
         inputProps={{
           step: 300, // 5 min
         }}
+        value={time}
+        onChange={changeTime}
       />
     </form>
   );
