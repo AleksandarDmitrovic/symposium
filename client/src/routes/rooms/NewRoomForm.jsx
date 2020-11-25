@@ -91,7 +91,8 @@ export default function NewRoomForm (props) {
       axios.put(`/api/conversations`, { 
         url: id, 
         title: title, 
-        description: description, 
+        description: description,
+        timeAvailable: timeAvailable, 
         podcastInfo: podcastInfo,
         embedTitle: selectedEpisode[0].embed_title,
         embedUrl: selectedEpisode[0].embed_url
