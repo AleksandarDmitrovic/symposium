@@ -107,26 +107,26 @@ export default function NewRoomForm (props) {
             onChange={changeDescription}
             value={description}
           />
-           <br/>
+          <br/>
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
             changeEpisodeInfo = {setEpisodeInfo}
           />
           <br/>
           <div>
-          <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
-          <br/>
-          <p id='display-episode'>{val}</p>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-          >
-            {listTitles(episodeInfo)}
-          </Menu>
-        </div> 
+            <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+            <br/>
+            <p id='display-episode'>{val}</p>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={() => setAnchorEl(null)}
+            >
+              {listTitles(episodeInfo)}
+            </Menu>
+          </div> 
           <br/>
           <input type="submit" value="Submit" />
         </form>

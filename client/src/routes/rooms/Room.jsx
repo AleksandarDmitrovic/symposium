@@ -11,27 +11,50 @@ import './room.scss';
 import axios from 'axios';
 
 export default function Room(props) {
-const [conversation, setConversation] = useState([{}]);
-const [category, setCategory] = useState("");
-const [timer, setTimer] = useState(false);
-const roomID =  props.match.params.roomID;
+
+  // STATE
+  const [conversation, setConversation] = useState([{}]);
+  const [category, setCategory] = useState("");
+  const [timer, setTimer] = useState(false);
+
+  // For ChatBox
+  const [message, setMessage] = useState("");
+  const [newMessage, setNewMessage] = useState({});
+
+  // ROOM ID
+  const roomID =  props.match.params.roomID;
+
+  // State Helper Functions
+  const changeTimer = (newValue) => {
+    setTimer(newValue)
+  };
+
+  const changeMessage = newValue => {
+    setMessage(newValue);
+  };
+
+  // After message is rendered on page update message state so that is can send duplicate messages
+  useEffect(() => {
+    setMessage("")
+  }, [message])
+
+  const changeNewMessage = newValue => {
+    setNewMessage(newValue);
+  };
 
 
-const changeTimer = (newValue) => {
-  setTimer(newValue)
-};
-
-useEffect(() => {
-  axios.get(`/api/conversations/${roomID}`).then((res) => {
-    setConversation(res.data.conversation)
-    const categoryID = res.data.conversation[0].category_id;
-    
-    axios.get(`/api/categories/${categoryID}`).then((res) => {
-      setCategory(res.data.categoryName.name)
-    })
-    
-  })
-}, [roomID]);
+  // Use Effects
+  useEffect(() => {
+    axios.get(`/api/conversations/${roomID}`).then((res) => {
+      setConversation(res.data.conversation)
+      const categoryID = res.data.conversation[0].category_id;
+      
+      axios.get(`/api/categories/${categoryID}`).then((res) => {
+        setCategory(res.data.categoryName.name)
+      });
+      
+    });
+  }, [roomID]);
 
   return (
     <article className="room">
@@ -60,12 +83,20 @@ useEffect(() => {
             embed_url = {conversation[0].podcast_episode_embed_url}
           />
         </div>
-          <Call 
-            roomID = {roomID} 
-            timer = {changeTimer}
+
+        <Call 
+          roomID = {roomID} 
+          timer = {changeTimer}
+          message = {message}
+          setNewMessage = {changeNewMessage}
           />
-        </div>
-         {/* <ChatBox /> */}
+      </div>
+
+      <ChatBox 
+        setMessage = {changeMessage}
+        newMessage = {newMessage}
+      />
+
     </article>
   );
 }
