@@ -6,9 +6,7 @@ const socket = require("socket.io");
 
 const app = express();
 // Build directory for production
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('./client/build'))
-}
+app.use(express.static('./client/build'))
 
 const server = http.createServer(app);
 const io = socket(server);
