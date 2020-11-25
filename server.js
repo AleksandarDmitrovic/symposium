@@ -86,7 +86,7 @@ const homepage = require("./routes/homepage");
 
 // For users
 const usersRoutes = require("./routes/users");
-const { default: RenderMessages } = require('./client/src/routes/rooms/RenderMessages.jsx');
+// const { default: RenderMessages } = require('./client/src/routes/rooms/RenderMessages.jsx');
 
 app.use("/api", homepage(db));
 app.use("/api/users", usersRoutes(db));
