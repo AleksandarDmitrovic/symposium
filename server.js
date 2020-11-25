@@ -5,18 +5,8 @@ const http = require("http");
 const socket = require("socket.io");
 
 const app = express();
-// // Build directory for production
-// if (process.env.NODE_ENV === 'production') {
-//   // Exprees will serve up production assets
+
 app.use(express.static('./client/build'));
-
-//   // Express serve up index.html file if it doesn't recognize route
-//   const path = require('path');
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
-
 
 const server = http.createServer(app);
 const io = socket(server);
@@ -96,8 +86,13 @@ const homepage = require("./routes/homepage");
 
 // For users
 const usersRoutes = require("./routes/users");
+const { default: RenderMessages } = require('./client/src/routes/rooms/RenderMessages.jsx');
 
 app.use("/api", homepage(db));
 app.use("/api/users", usersRoutes(db));
+
+app.get("/", (req, res) => {
+  res.sendFile('./client/build/index.html');
+});
 
 server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
