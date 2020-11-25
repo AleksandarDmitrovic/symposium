@@ -7,6 +7,7 @@ const mapConversations = function (props) {
       <IndividualConversation
         //HOW do we set unique keys properly for these elements
         // keyValue={conversation.id}
+        id={conversation.id}
         title={conversation.title}
         podcast_name={conversation.podcast_name}
         episode_title = {conversation.podcast_episode_title}
@@ -15,7 +16,7 @@ const mapConversations = function (props) {
         url={conversation.conversation_url}
         history={props.history}
         is_active = {conversation.is_active}
-        time_available_seconds = {conversation.time_available_seconds}
+        available_until = {conversation.available_until}
       />
     )
   });
