@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const socket = require("socket.io");
 
+const path = require('path');
+
 const app = express();
 
 app.use(express.static('./client/build'));
