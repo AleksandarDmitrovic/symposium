@@ -47,7 +47,6 @@ For the person awaiting to join the room:
 
 export default function Call(props) {
   const [peers, setPeers] = useState([]);
-  const [videoStream, setVideoStream] = useState(true);
 
   // const [userStream, setUserStream] = useState();
   // We keep track of the changes in the following refs without having to rerender the component
@@ -60,18 +59,7 @@ export default function Call(props) {
   const toggleVideo = () => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
-
-      if(videoStream === true) {
-
-        setVideoStream(false);
-        // stream.getVideoTracks()[0].enabled = false;
-        // stream.getVideoTracks()[0].stop();
-        // emit message
-        socketRef.current.emit("user video settings changed", socketRef.current.id);
-      } else {
-        setVideoStream(true);
-        socketRef.current.emit("user video settings changed", socketRef.current.id);
-      }
+      socketRef.current.emit("user video settings changed", socketRef.current.id);
     })
   };
 
@@ -158,10 +146,14 @@ export default function Call(props) {
         const peerObj = peersRef.current.find(p => p.peerID === userId);
         if(peerObj) {
 
+          console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
+
           if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
             peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
+            console.log('turned off video for : ', peerObj);
           } else {
             peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
+            console.log('turned on video for : ', peerObj);
           }
   
         }
