@@ -88,6 +88,7 @@ module.exports = (db) => {
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
     const { title, description, timeAvailable, url, podcastInfo, embedTitle, embedUrl } = req.body;
+    console.log('timeAvailable :', timeAvailable);
     
     podcastCategorySearch(podcastInfo.category).then(categoryFound => {
       const creatorID = 1;
@@ -103,8 +104,8 @@ module.exports = (db) => {
   
       const queryParams = [creatorID, isActive, categoryID, url, title, description, timeAvailable, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embedTitle, embedUrl];
       const queryString = `
-      INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, time_available_seconds, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
       RETURNING *;`;
   
       db.query(queryString, queryParams)
@@ -118,6 +119,31 @@ module.exports = (db) => {
             .json({ error: err.message });
         });
     });
+    
+  });
+
+  // Changes a conversation to inactive
+  router.put('/conversations/inactive', (req, res) => {
+    const { active, id } = req.body;
+
+    const queryParams = [active, id];
+    const queryString = `
+    UPDATE conversations
+    SET is_active = $1
+    WHERE id = $2
+    RETURNING *;`;
+
+    db.query(queryString, queryParams)
+      .then((data) => {
+        const conversation = data.rows;
+        res.json({ conversation });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+   
     
   });
  
