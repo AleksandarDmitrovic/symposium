@@ -32,6 +32,8 @@ io.on("connection", socket => {
       const length = users[roomID].length;
       if (length === 1) {
         socket.emit("conversation started");
+      } else if (length > 1 && length < 4) {
+        socket.emit("conversation started");
       } else if (length === 4) {
         socket.emit("room full");
         return;
@@ -65,13 +67,9 @@ io.on("connection", socket => {
     socket.broadcast.emit('user left', socket.id);
   });
 
-  socket.on('user video settings changed', userId => {
-    socket.broadcast.emit("user has disabled video", userId);
-  });
-
   // When user sends a message for the chat box
   socket.on('new message', messageInfo => {
-    socket.broadcast.emit('update chat box', messageInfo)
+    socket.broadcast.emit('update chat box', messageInfo);
   })
 
 });

@@ -1,12 +1,28 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
+import moment from 'moment'
 import PodcastSearch from './search/PodcastSearch';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import TimePicker from './TimePicker';
+
+import { Button, Menu, MenuItem, Input } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+  inputField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+}));
 
 export default function NewRoomForm (props) {
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
+  const [timePicked, setTimePicked] = useState(props.timePicked || '');
+  const [timeAvailable, setTimeAvailable] = useState(props.timeAvailable || 0);
+
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
   const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [val, setVal] = useState('');
@@ -19,6 +35,9 @@ export default function NewRoomForm (props) {
       return;
     } else if (description === "") {
       setError("Conversation description cannot be blank");
+      return;
+    } else if ((timeAvailable - moment().unix()) <= 0) {
+      setError("Please set a time in the future");
       return;
     } else if (val === "") {
       setError("Podcast & Podcast Episode must be selected");
@@ -35,6 +54,17 @@ export default function NewRoomForm (props) {
   const changeDescription = (event) => {
     setDescription(event.target.value);
   };
+  
+  const changeTimeAvailable = (value) => {
+    setTimePicked(value);
+    const hoursMins = timePicked.split(":");
+
+    const futureTime = moment().set('hour', parseInt(hoursMins[0])).set('minute', parseInt(hoursMins[1]));
+    
+    const time = futureTime.unix();
+
+    setTimeAvailable(time);
+  }
 
   const changePodcastInfo = (info) => {
     setPodcastInfo(info);
@@ -57,7 +87,8 @@ export default function NewRoomForm (props) {
       axios.put(`/api/conversations`, { 
         url: id, 
         title: title, 
-        description: description, 
+        description: description,
+        timeAvailable: timeAvailable, 
         podcastInfo: podcastInfo,
         embedTitle: selectedEpisode[0].embed_title,
         embedUrl: selectedEpisode[0].embed_url
@@ -87,25 +118,34 @@ export default function NewRoomForm (props) {
       );
     });
   }
+
+  const classes = useStyles();
  
   return (
     <main>
       <section className="new_room_form">
         <form autoComplete="off" onSubmit={create}>
-          <input
+          <Input
             title="title"
             type="text"
             placeholder="Enter Conversation Title"
             onChange={changeTitle}
             value={title}
+            className={classes.inputField}
           />
           <br/>
-          <input
+          <Input
             description="description"
             type="text"
             placeholder="Enter Conversation Description"
             onChange={changeDescription}
             value={description}
+            className={classes.inputField}
+          />
+          <br/>
+          <br/>
+          <TimePicker
+            changeTimeAvailable={changeTimeAvailable}
           />
           <br/>
           <PodcastSearch 
@@ -128,14 +168,12 @@ export default function NewRoomForm (props) {
             </Menu>
           </div> 
           <br/>
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
         </form>
         <section className="form__validation">{error}</section>
-        </section>
-        <section className="appointment__card-right">
-          <section className="appointment__actions">
-          </section>
-        </section>
+      </section>
     </main>
   );
 };

@@ -1,60 +1,152 @@
-import SocialMedia from '../rooms/SocialMedia';
+import { useState, useEffect } from 'react';
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
-import './conversation-styles/individualConversation.scss'
+import Timer from 'react-compound-timer';
+import axios from 'axios';
+import moment from 'moment'
+
 import EmbedPodcast from '../rooms/EmbedPodcast';
+import SocialMedia from '../rooms/SocialMedia';
+import './conversation-styles/individualConversation.scss'
 
 export default function IndividualConversation(props) {
+  const { id, history } = props;
+  const [active, setActive] = useState(true);
 
   const roomURL = `/room/${props.url}`
 
   const joinRoom = () => {
-    props.history.push(roomURL)
+    history.push(roomURL)
   }
 
+  const timeConversationAvailable = props.available_until
+
+  useEffect(() => {
+    const numSeconds = timeConversationAvailable - moment().unix()
+    if(numSeconds < 0) {
+      setActive(false);
+      
+      axios.put(`/api/conversations/inactive`, { 
+        active: active,
+        id: id
+      })
+      .then((res) => {
+        // console.log("Conversation has expired", res)
+      })
+      .catch(error => { console.error(error) });
+    }
+  }, [timeConversationAvailable, active, id, history]);
+  
+  const secondsForTimer = (timeConversationAvailable - moment().unix()) * 1000;
+
   return (
-    <Card className='conversation-card'>
-      <div className='card'>
-      <CardMedia
-          className='cover-photo'
-          image={props.image}
-          title="Contemplative Reptile"
-        />
-      <article>
-          <CardActionArea style={{minWidth: '925px', maxWidth: '70vw', minHeight: '250px'}}>
-            <CardContent className='body'>
-              <div className='info'>
-                <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
-                  {props.title}
-                </Typography>
-                <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
-                  {props.description}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  {props.podcast_name}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  {props.episode_title}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  Timestamps: {props.starts_at} - {props.ends_at}
-                </Typography>
-              </div>
-              <EmbedPodcast embed_url = {props.audio} />
-            </CardContent>
-            <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
-              <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
-              <div className='share'>
-                <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
-                <SocialMedia 
-                  description={props.description}
-                  url={roomURL}
-                >
-                </SocialMedia>
-              </div>
-            </CardActions>
-          </CardActionArea>   
-      </article>
-      </div>
-    </Card>
-  );
+
+//     <Card className='conversation-card'>
+//       <div className='card'>
+//       <CardMedia
+//           className='cover-photo'
+//           image={props.image}
+//           title="Contemplative Reptile"
+//         />
+//       <article>
+//           <CardActionArea style={{minWidth: '925px', maxWidth: '70vw', minHeight: '250px'}}>
+//             <CardContent className='body'>
+//               <div className='info'>
+//                 <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
+//                   {props.title}
+//                 </Typography>
+//                 <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
+//                   {props.description}
+//                 </Typography>
+//                 <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+//                   {props.podcast_name}
+//                 </Typography>
+//                 <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+//                   {props.episode_title}
+//                 </Typography>
+//                 <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+//                   Timestamps: {props.starts_at} - {props.ends_at}
+//                 </Typography>
+//               </div>
+//               <EmbedPodcast embed_url = {props.audio} />
+//             </CardContent>
+//             <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
+//               <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+//               <div className='share'>
+//                 <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
+//                 <SocialMedia 
+//                   description={props.description}
+//                   url={roomURL}
+//                 >
+//                 </SocialMedia>
+//               </div>
+//             </CardActions>
+//           </CardActionArea>   
+//       </article>
+//       </div>
+//     </Card>
+//   );
+
+    <>
+      {active && 
+        <Card className='conversation-card'>
+          <div className='card'>
+          <CardMedia
+              className='cover-photo'
+              image={props.image}
+              title="Contemplative Reptile"
+            />
+          <article>
+              <CardActionArea>
+                <CardContent className='body'>
+                <div className='info'>
+                  <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
+                    {props.title}
+                  </Typography>
+                  <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
+                    {props.description}
+                  </Typography>
+                  <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    {props.podcast_name}
+                  </Typography>
+                  <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    {props.episode_title}
+                  </Typography>
+                  <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    Timestamps: {props.starts_at} - {props.ends_at}
+                  </Typography>
+                  <label>Conversation Closes In: </label>
+                  <Timer
+                      initialTime={secondsForTimer}
+                      direction="backward"
+                  >
+                    {() => (
+                      <>
+                        <Timer.Hours /> hours
+                        <Timer.Minutes /> minutes
+                      </>
+                    )}
+                  </Timer>
+                </div>
+                <EmbedPodcast embed_url = {props.audio} />
+                </CardContent>
+                <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
+                  <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+                  <div className='share'>
+                  
+                  <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
+                  <SocialMedia 
+                    description={props.description}
+                    url={roomURL}
+                  >
+                  </SocialMedia>
+                  </div>
+                </CardActions>
+              </CardActionArea>   
+          </article>
+          </div>
+        </Card>
+      }
+    </>
+  )
+
 }
