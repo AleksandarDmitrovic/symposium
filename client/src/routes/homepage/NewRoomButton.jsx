@@ -1,9 +1,9 @@
 import { useState } from 'react';
-
 import NewRoomForm from './NewRoomForm';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import './conversation-styles/index.scss';
 
  function getModalStyle() {
    const top = 50;
@@ -28,8 +28,6 @@ import Modal from '@material-ui/core/Modal';
    },
  }));
  
-
-
 export default function NewRoomButton(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -59,7 +57,7 @@ export default function NewRoomButton(props) {
   return (
      <>
        <Button color="primary"
-          className="new_room_button"
+          className="new-room-button"
           onClick={handleOpen}
        >
           Create A Conversation Room
@@ -73,7 +71,6 @@ export default function NewRoomButton(props) {
        >
          {body}
        </Modal>
-       
-     </>
+    </>
   );
 }

@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react"
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
-import { useEffect, useState } from "react"
+import NewRoomButton from "./NewRoomButton";
+import SideNav from "./SideNav";
+import './conversation-styles/index.scss';
 import axios from 'axios';
-
-import NewRoomButton from "../rooms/NewRoomButton";
 
 export default function Conversation(props) {
 
@@ -25,21 +26,20 @@ export default function Conversation(props) {
   }, [searchParam]);
   
   return (
-    <article>
-
-      <NewRoomButton
-        history={props.history}
-      />
-    
-      <SortBy 
-        state={changeState}
-      />
-
-      <ConversationList 
-        conversations={conversations}
-        history={props.history}
-      />
-    </article>
-    
+    <main>
+      <SideNav />
+      <article class='homepage'>
+        <NewRoomButton
+          history={props.history}
+        />
+        <SortBy 
+          state={changeState}
+        />
+        <ConversationList 
+          conversations={conversations}
+          history={props.history}
+        />
+      </article>
+    </main>
   )
 };

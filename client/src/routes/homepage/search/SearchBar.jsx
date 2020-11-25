@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 
 import useDebounce from "./hooks/useDebounce";
 
-import { Input } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 export default function SearchBar(props) {
 
@@ -44,7 +44,8 @@ export default function SearchBar(props) {
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
-        <Input
+        <TextField
+          label="PODCAST"
           className="selected-podcast"
           spellCheck="false"
           placeholder="Search Podcast"

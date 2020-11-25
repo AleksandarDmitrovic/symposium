@@ -21,6 +21,7 @@
   padding-left: 1rem;
   background: #201f2f;
   overflow: hidden;
+  z-index: 2;
 }
 
 .podcast-list:hover {
@@ -37,6 +38,7 @@
   position: absolute;
   overflow-y: scroll;
   height: 300px;
+  z-index: 2;
 }
 
 ::-webkit-scrollbar {

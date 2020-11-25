@@ -1,0 +1,23 @@
+button:focus {
+  outline: none;
+}
+
+.sort-by {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+
+  li {
+    margin: 10px;
+    padding: 10px;
+  }
+}
+
+#sort-by-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.search {
+  padding-left: 1em;
+}

@@ -3,7 +3,7 @@ export default function Cover(props) {
   // Object that the will be given to the changePodcastInfo prop passed down from NewRoomForm Component
   const podcastInfo = {
     podcast_name: props.collectionName,
-    podcast_image: props.artworkUrl100,
+    podcast_image: props.artworkUrl600,
     category: props.primaryGenreName
   }
 

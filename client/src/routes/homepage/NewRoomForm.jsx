@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
-import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import PodcastSearch from './search/PodcastSearch';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 export default function NewRoomForm (props) {
@@ -53,7 +53,6 @@ export default function NewRoomForm (props) {
     event.preventDefault();
     const id = uuid();
     let selectedEpisode = episodeInfo.filter(obj => obj.embed_title === val);
-
     if (validate()) {
       axios.put(`/api/conversations`, { 
         url: id, 
@@ -67,7 +66,7 @@ export default function NewRoomForm (props) {
         props.history.push(`/room/${id}`);
         document.getElementById('episode-list').style.visibility = 'hidden';
       })
-      .catch(error => { console.error(error) }); 
+      .catch(error => { console.error('Error: ', error) }); 
     }
   }
 

@@ -1,0 +1,61 @@
+#convo-list {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+.conversation-card {
+  margin: 50px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 25vh;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  width: 75vw;
+}
+
+.info {
+  width: 55vw;
+  width: 100%;
+  height: 10em;
+  padding-left: 220px;
+}
+
+.share {
+  display: flex;
+  align-items: baseline;
+}
+
+#social-media {
+  padding-left: 1em;
+}
+
+.cover-photo {
+  height: 25vh;
+  width: 220px;
+  position: absolute;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.description {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.join-room {
+  width: 40%;
+}
+
+.embed-video {
+  padding-right: 5vw;
+}

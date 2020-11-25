@@ -13,6 +13,9 @@ const mapConversations = function (props) {
         description={conversation.description}
         image={conversation.podcast_image}
         url={conversation.conversation_url}
+        audio={conversation.podcast_episode_embed_url}
+        starts_at={conversation.podcast_starts_at}
+        ends_at={conversation.podcast_ends_at}
         history={props.history}
       />
     )
@@ -23,7 +26,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul>
+    <ul id='convo-list'>
       { mapConversations(props) }
     </ul>
   );
