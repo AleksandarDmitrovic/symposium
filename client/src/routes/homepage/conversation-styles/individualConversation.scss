@@ -1,31 +1,41 @@
+.convo-list {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
 .conversation-card {
-  display: flex;
-  margin: 2em;
+  margin: 30px;
 }
 
 .card {
   display: flex;
   flex-direction: row;
-  height: 15em;
-  width: 100%;
+  height: 25vh;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .body {
   display: flex;
   align-items: center;
+  width: 75vw;
 }
 
 .info {
-  width: 30em;
+  width: 55vw;
+  width: 100%;
   height: 10em;
-
-.footer{
-    display: flex;
-    padding: 8px;
-    align-items: baseline;
-    justify-content: space-between;
-  }
+  padding-left: 220px;
 }
+
+.footer {
+    display: flex;
+    margin: auto;
+    padding-bottom: 1em;
+    align-items: baseline;
+    justify-content: space-evenly;
+}  
+
 
 .share {
   display: flex;
@@ -37,9 +47,9 @@
 }
 
 .cover-photo {
-  height: 15em;
-  width: 15em;
-  position: relative;
+  height: 25vh;
+  width: 220px;
+  position: absolute;
 }
 
 .italic {

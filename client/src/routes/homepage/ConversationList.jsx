@@ -26,7 +26,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul>
+    <ul className='convo-list'>
       { mapConversations(props) }
     </ul>
   );

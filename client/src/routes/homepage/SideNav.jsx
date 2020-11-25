@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
-
-import './conversation-styles/sideNav.scss';
+import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -11,7 +9,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-const drawerWidth = 240;
+const drawerWidth = '20vw';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -86,27 +84,20 @@ export default function PersistentDrawerLeft() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          className={clsx(classes.menuButton, open && classes.hide)}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap>
+          Symposium
+        </Typography>
+      </Toolbar>
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -115,7 +106,8 @@ export default function PersistentDrawerLeft() {
         classes={{
           paper: classes.drawerPaper,
         }}
-      >
+      > 
+        <h3>Symposium</h3>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
