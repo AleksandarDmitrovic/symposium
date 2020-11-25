@@ -7,7 +7,7 @@ CREATE TABLE conversations (
   conversation_url TEXT NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  time_available_seconds INTEGER NOT NULL,
+  available_until INTEGER NOT NULL,
   podcast_name VARCHAR(255) NOT NULL,
   podcast_starts_at VARCHAR(255),
   podcast_ends_at VARCHAR(255),
