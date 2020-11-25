@@ -83,11 +83,17 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {
     if (open) {
-      document.getElementById('convo-list').style.paddingLeft = '20vw';
-      document.getElementById('convo-list').style.paddingRight = '0vw';
+      document.getElementById('convo-list').style.paddingLeft = '22vw';
+      document.getElementById('convo-list').style.paddingRight = '2vw';
+      document.getElementById('sort-by-container').style.paddingLeft = '22vw';
+      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '35vw';
+      document.getElementsByClassName('new-room-button')[0].style.marginRight = '35vw';
     } else {
-      document.getElementById('convo-list').style.paddingLeft = '10vw';
-      document.getElementById('convo-list').style.paddingRight = '10vw';
+      document.getElementById('convo-list').style.paddingLeft = '12vw';
+      document.getElementById('convo-list').style.paddingRight = '12vw';
+      document.getElementById('sort-by-container').style.paddingLeft = '0';
+      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '25vw';
+      document.getElementsByClassName('new-room-button')[0].style.marginRight = '15vw';
     }
   }, [open]);
 

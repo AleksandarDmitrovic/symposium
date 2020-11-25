@@ -13,9 +13,11 @@ button:focus {
   }
 }
 
-.sort-by-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: baseline;
-  flex-grow: 1;
+#sort-by-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.search {
+  padding-left: 1em;
 }

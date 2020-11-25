@@ -57,7 +57,7 @@ export default function NewRoomButton(props) {
   return (
      <>
        <Button color="primary"
-          className="new_room_button"
+          className="new-room-button"
           onClick={handleOpen}
        >
           Create A Conversation Room
@@ -71,7 +71,6 @@ export default function NewRoomButton(props) {
        >
          {body}
        </Modal>
-       
-     </>
+    </>
   );
 }

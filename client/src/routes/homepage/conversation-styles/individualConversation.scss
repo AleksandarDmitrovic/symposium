@@ -4,7 +4,7 @@
 }
 
 .conversation-card {
-  margin: 30px;
+  margin: 50px;
 }
 
 .card {
@@ -27,15 +27,6 @@
   height: 10em;
   padding-left: 220px;
 }
-
-.footer {
-    display: flex;
-    margin: auto;
-    padding-bottom: 1em;
-    align-items: baseline;
-    justify-content: space-evenly;
-}  
-
 
 .share {
   display: flex;
@@ -62,5 +53,9 @@
 }
 
 .join-room {
-  width: 60%
+  width: 40%;
+}
+
+.embed-video {
+  padding-right: 5vw;
 }

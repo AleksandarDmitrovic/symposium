@@ -1,15 +1,14 @@
-// main {
-//   display: flex;
-
-// }
 
 .homepage {
   display: flex;
   flex-direction: column;
 
-  .new_room_button {
-    padding: 3em;
+  .new-room-button {
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 3em;
     width: 50vw;
-    margin: auto;
+    margin-left: 35vw;
+    margin-right: 25vw;
   }
 }

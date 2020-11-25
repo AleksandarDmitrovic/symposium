@@ -41,18 +41,18 @@ export default function IndividualConversation(props) {
             </div>
             <EmbedPodcast embed_url = {props.audio} />
             </CardContent>
+            <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
+              <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+              <div className='share'>
+                <p>Share this Room </p>
+                <SocialMedia 
+                  description={props.description}
+                  url={roomURL}
+                >
+                </SocialMedia>
+              </div>
+            </CardActions>
           </CardActionArea>   
-        <CardActions className='footer' >
-          <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
-          <div className='share'>
-            <p>Share this Room </p>
-            <SocialMedia 
-              description={props.description}
-              url={roomURL}
-            >
-            </SocialMedia>
-          </div>
-        </CardActions>
       </article>
       </div>
     </Card>
