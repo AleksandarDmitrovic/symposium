@@ -26,19 +26,20 @@ export default function Conversation(props) {
   }, [searchParam]);
   
   return (
-    <article class='homepage'>
+    <main>
       <SideNav />
-      <NewRoomButton
-        history={props.history}
-      />
-      <SortBy 
-        state={changeState}
-      />
-      <ConversationList 
-        conversations={conversations}
-        history={props.history}
-      />
-    </article>
-    
+      <article class='homepage'>
+        <NewRoomButton
+          history={props.history}
+        />
+        <SortBy 
+          state={changeState}
+        />
+        <ConversationList 
+          conversations={conversations}
+          history={props.history}
+        />
+      </article>
+    </main>
   )
 };

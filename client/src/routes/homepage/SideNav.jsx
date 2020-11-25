@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
@@ -80,6 +80,16 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (open) {
+      document.getElementById('convo-list').style.paddingLeft = '20vw';
+      document.getElementById('convo-list').style.paddingRight = '0vw';
+    } else {
+      document.getElementById('convo-list').style.paddingLeft = '10vw';
+      document.getElementById('convo-list').style.paddingRight = '10vw';
+    }
+  }, [open]);
 
   return (
     <div className={classes.root}>
