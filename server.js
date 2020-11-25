@@ -6,7 +6,10 @@ const socket = require("socket.io");
 
 const app = express();
 // Build directory for production
-app.use(express.static('./client/build'))
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('./client/build'))
+}
+
 const server = http.createServer(app);
 const io = socket(server);
 const cors = require('cors');
