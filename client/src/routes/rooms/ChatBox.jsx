@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import RenderMessages from './RenderMessages'
 
+import { Card } from '@material-ui/core';
+
 export default function ChatBox(props) {
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
@@ -45,6 +47,7 @@ export default function ChatBox(props) {
 
   
   return (
+
     <footer className="chat-box">
       <h4>Messages</h4>
 
@@ -59,4 +62,3 @@ export default function ChatBox(props) {
     </footer>
   );
 };
-

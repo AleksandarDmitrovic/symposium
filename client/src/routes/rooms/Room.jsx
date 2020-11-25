@@ -83,6 +83,7 @@ export default function Room(props) {
             embed_url = {conversation[0].podcast_episode_embed_url}
           />
         </div>
+
         <Call 
           roomID = {roomID} 
           timer = {changeTimer}
@@ -95,6 +96,7 @@ export default function Room(props) {
         setMessage = {changeMessage}
         newMessage = {newMessage}
       />
+
     </article>
   );
 }
