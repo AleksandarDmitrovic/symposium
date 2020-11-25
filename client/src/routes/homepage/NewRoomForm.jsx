@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import moment from 'moment'
-import PodcastSearch from '../conversation_container/search/PodcastSearch';
+import PodcastSearch from './search/PodcastSearch';
 import TimePicker from './TimePicker';
 
 import { Button, Menu, MenuItem, Input } from '@material-ui/core';
