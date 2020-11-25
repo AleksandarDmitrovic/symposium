@@ -16,6 +16,8 @@ export default function Room(props) {
   const [conversation, setConversation] = useState([{}]);
   const [category, setCategory] = useState("");
   const [timer, setTimer] = useState(false);
+
+  // For ChatBox
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState({});
 

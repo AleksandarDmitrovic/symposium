@@ -22,8 +22,6 @@ export default function ChatBox(props) {
   };
 
   useEffect(() => {
-    console.log('in use effect');
-    console.log('newMessage', props.newMessage);
     if (Object.keys(props.newMessage).length !== 0) {
       setAllMessages([...allMessages, props.newMessage])
     }
