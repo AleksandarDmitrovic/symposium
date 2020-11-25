@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const socket = require("socket.io");
 
-const path = require('path');
+// const path = require('path');
 
 const app = express();
 
@@ -98,4 +98,4 @@ app.use("/api/users", usersRoutes(db));
 //   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 // });
 
-server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
+app.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
