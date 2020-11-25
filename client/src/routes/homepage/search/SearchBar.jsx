@@ -55,6 +55,7 @@ export default function SearchBar(props) {
   // const classes = useStyles();
   // <Input
   // className={classes.inputField}
+  const classes = useStyles();
 
   return (
     <section className="search">

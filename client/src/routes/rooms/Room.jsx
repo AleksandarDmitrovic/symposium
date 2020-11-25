@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import TopNav from './TopNav';
 import Call from './Call';
-import ChatBox from './ChatBox';
+// import ChatBox from './ChatBox';
 import Info from './Info';
 import EmbedPodcast from './EmbedPodcast'
 
