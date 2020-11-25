@@ -84,7 +84,7 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     if (open) {
       document.getElementById('convo-list').style.paddingLeft = '22vw';
-      document.getElementById('convo-list').style.paddingRight = '2vw';
+      document.getElementById('convo-list').style.paddingRight = '4vw';
       document.getElementById('sort-by-container').style.paddingLeft = '22vw';
       document.getElementsByClassName('new-room-button')[0].style.marginLeft = '35vw';
       document.getElementsByClassName('new-room-button')[0].style.marginRight = '35vw';
