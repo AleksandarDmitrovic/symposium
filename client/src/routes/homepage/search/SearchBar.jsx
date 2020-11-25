@@ -3,6 +3,17 @@ import { useEffect, useCallback } from "react";
 import useDebounce from "./hooks/useDebounce";
 
 import { TextField } from '@material-ui/core';
+import { Input } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) => ({
+  inputField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+}));
 
 export default function SearchBar(props) {
 
@@ -40,6 +51,11 @@ export default function SearchBar(props) {
       }
     });
   }
+
+  // const classes = useStyles();
+  // <Input
+  // className={classes.inputField}
+  const classes = useStyles();
 
   return (
     <section className="search">
