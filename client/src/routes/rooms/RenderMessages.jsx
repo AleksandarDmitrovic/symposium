@@ -1,22 +1,21 @@
 import { useState } from 'react';
 
-export default function RenderMessages(message) {
+export default function RenderMessages(props) {
 
-  const [className, setClassName] = useState();
-  const [style, setStyle] = useState();
+  let className = "";
+  let style = {};
 
-  if (message.sender === 'sender') {
-    setClassName("outgoing-messages");
-    setStyle({textAlign: "right"});
+  //This is the sender ELSE it is the receiver
+  if (props.userId === 'me') {
+    className = 'outgoing-message style-right';
+    style = {textAlign: 'right'};
   } else {
-    setClassName("incoming-messages");
+    className = 'incoming-message style-left';
   }
-
 
   return (
     <div>
-      <div className={className} style={style}>
-      </div>
+      <p className={className} style={style}>{props.message}</p>
     </div>
   )
 }

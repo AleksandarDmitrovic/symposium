@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import IncomingMessage from './IncomingMessage'
-import OutGoingMessage from './OutGoingMessage'
 import RenderMessages from './RenderMessages'
 
 export default function ChatBox(props) {
@@ -13,7 +11,7 @@ export default function ChatBox(props) {
     event.preventDefault();
     props.setMessage(chatBoxMessage);
 
-    setAllMessages([...allMessages, { message: chatBoxMessage, userId: 'me' }])
+    setAllMessages([...allMessages, { messageInfo: { message: chatBoxMessage, userId: 'me' } } ])
 
     // clear message form
     setChatBoxMessage("");
@@ -24,19 +22,36 @@ export default function ChatBox(props) {
   };
 
   useEffect(() => {
-    console.log('props', props.newMessage);
+    console.log('in use effect');
+    console.log('newMessage', props.newMessage);
     if (Object.keys(props.newMessage).length !== 0) {
       setAllMessages([...allMessages, props.newMessage])
     }
   }, [props.newMessage]);
 
 
-  console.log('all messages', allMessages);
+  const mapMessages = (allMessages) => {
+    // console.log('in map', allMessages);
+    const messages = allMessages.map(message => {
+      console.log('inside map', message);
+      return (
+        <RenderMessages
+          message={message.messageInfo.message}
+          userId={message.messageInfo.userId}
+        />
+      )
+    });
+    return messages;
+  }
 
   
   return (
     <footer className="chat-box">
       <h4>Messages</h4>
+
+      <div>
+        { mapMessages(allMessages) }
+      </div>
 
       <form onSubmit={ sendMessage }>
         <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
