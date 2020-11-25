@@ -36,7 +36,7 @@ export default function NewRoomForm (props) {
     } else if (description === "") {
       setError("Conversation description cannot be blank");
       return;
-    } else if (timeAvailable <= 0) {
+    } else if ((timeAvailable - moment().unix()) <= 0) {
       setError("Please set a time in the future");
       return;
     } else if (val === "") {
@@ -54,19 +54,16 @@ export default function NewRoomForm (props) {
   const changeDescription = (event) => {
     setDescription(event.target.value);
   };
-
+  
   const changeTimeAvailable = (value) => {
     setTimePicked(value);
     const hoursMins = timePicked.split(":");
-   
+
     const futureTime = moment().set('hour', parseInt(hoursMins[0])).set('minute', parseInt(hoursMins[1]));
-   
-    const seconds = futureTime.unix() - moment().unix()
+    
+    const time = futureTime.unix();
 
-    setTimeAvailable(seconds);
-    console.log('time :', timeAvailable);
-   
-
+    setTimeAvailable(time);
   }
 
   const changePodcastInfo = (info) => {
