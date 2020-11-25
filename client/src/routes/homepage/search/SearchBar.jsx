@@ -58,7 +58,7 @@ export default function SearchBar(props) {
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
-        <Input
+        <TextField
           label="PODCAST"
           className="selected-podcast"
           spellCheck="false"
