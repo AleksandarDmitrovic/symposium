@@ -62,7 +62,11 @@ io.on("connection", socket => {
       room = room.filter(id => id !== socket.id);
       users[roomID] = room;
     }
-    socket.broadcast.emit('user left', socket.id)
+    socket.broadcast.emit('user left', socket.id);
+  });
+
+  socket.on('user video settings changed', userId => {
+    socket.broadcast.emit("user has disabled video", userId);
   });
 
   // When user sends a message for the chat box
