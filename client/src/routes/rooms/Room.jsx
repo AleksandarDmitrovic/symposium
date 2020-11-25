@@ -17,7 +17,7 @@ export default function Room(props) {
   const [category, setCategory] = useState("");
   const [timer, setTimer] = useState(false);
   const [message, setMessage] = useState("");
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState({});
 
   // ROOM ID
   const roomID =  props.match.params.roomID;

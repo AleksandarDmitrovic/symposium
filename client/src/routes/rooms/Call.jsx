@@ -127,9 +127,9 @@ export default function Call(props) {
         setPeers(peers);
       });
 
-      socketRef.current.on("update chat box", message => {
-        if (message) {
-          props.setNewMessage(message)
+      socketRef.current.on("update chat box", messageInfo => {
+        if (messageInfo.message) {
+          props.setNewMessage({ messageInfo })
         }
       });
 
@@ -137,7 +137,7 @@ export default function Call(props) {
 
   // CHAT BOX 
   useEffect(() => {
-    socketRef.current.emit("new message", props.message)
+    socketRef.current.emit("new message", { message: props.message, userId: socketRef.current.id })
   }, [props.message]);
 
   //* Function for creating peers when a user has joined a room with existing participants

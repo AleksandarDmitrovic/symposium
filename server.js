@@ -66,8 +66,8 @@ io.on("connection", socket => {
   });
 
   // When user sends a message for the chat box
-  socket.on('new message', message => {
-    socket.broadcast.emit('update chat box', message)
+  socket.on('new message', messageInfo => {
+    socket.broadcast.emit('update chat box', messageInfo)
   })
 
 });
