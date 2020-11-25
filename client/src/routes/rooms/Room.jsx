@@ -33,6 +33,11 @@ export default function Room(props) {
     setMessage(newValue);
   };
 
+  // After message is rendered on page update message state so that is can send duplicate messages
+  useEffect(() => {
+    setMessage("")
+  }, [message])
+
   const changeNewMessage = newValue => {
     setNewMessage(newValue);
   };
