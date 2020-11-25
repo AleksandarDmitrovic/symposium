@@ -1,3 +1,4 @@
+import Animal from "react-animals";
 import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
@@ -12,7 +13,7 @@ const Video = (props) => {
   }, [props.peer]);
 
   return (
-    <video className='call-video'  playsInline autoPlay ref={ref} />
+    <video className='call-video other' playsInline autoPlay ref={ref} />
   );
 }
 
@@ -48,18 +49,23 @@ For the person awaiting to join the room:
 export default function Call(props) {
   const [peers, setPeers] = useState([]);
 
-  // const [userStream, setUserStream] = useState();
   // We keep track of the changes in the following refs without having to rerender the component
   const socketRef = useRef();
   const userVideo = useRef();
-  const peersRef = useRef([]); 
+  const peersRef = useRef([]);
+
+  // videoState to show video or avatar
+  const [videoActive, setVideoActive] = useState(true);
+
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       userVideo.current.srcObject = stream;
+      videoActive ? setVideoActive(false) : setVideoActive(true);
       socketRef.current.emit("user video settings changed", socketRef.current.id);
+      console.log('user who toggled', stream);
     })
   };
 
@@ -68,103 +74,106 @@ export default function Call(props) {
     socketRef.current = io.connect("/");
     // Get user's audio and video
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
-        // userVideo is a ref to the actual video (stream)
-        userVideo.current.srcObject = stream;
-        
-        //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
-        // Emit an event saying the user has joined the room
-        socketRef.current.emit('join room', roomID);
-        // get array of users (everyone in chat except from themselves)
-        socketRef.current.on('all users', users => {
-          // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
-          const peers = []; 
-          // iterate through each user in the room, creating a peer for each
-          users.forEach(userID => {
-            const peer = createPeer(userID, socketRef.current.id, stream);
-            peersRef.current.push({
-              peerID: userID, // the socketID for person we just created a peer for
-              peer // the peer object returned the from createPeer function
-            });
-            peers.push({
-              peerID: userID,
-              peer,
-            });
-          });
-          // Update Peers State
-          setPeers(peers);
-        });
+      // userVideo is a ref to the actual video (stream)
+      userVideo.current.srcObject = stream;
 
-        //* A PERSON ALREADY IN THE ROOM IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
-        socketRef.current.on('user joined', payload => {
-          // Create a peer for the newcomer who just joined the room
-          // Pass as paramaters signal, who is calling us, and our stream
-          const peer = addPeer(payload.signal, payload.callerID, stream);
-          
+      //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
+      // Emit an event saying the user has joined the room
+      socketRef.current.emit('join room', roomID);
+      // get array of users (everyone in chat except from themselves)
+      socketRef.current.on('all users', users => {
+        // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
+        const peers = [];
+        // iterate through each user in the room, creating a peer for each
+        users.forEach(userID => {
+          const peer = createPeer(userID, socketRef.current.id, stream);
           peersRef.current.push({
-            peerID: payload.callerID,
-            peer
+            peerID: userID, // the socketID for person we just created a peer for
+            peer // the peer object returned the from createPeer function
           });
-
-          //Object that includes peer and their id to make unique keys for the video components
-          const peerObj = {
+          peers.push({
+            peerID: userID,
             peer,
-            peerID: payload.callerID
-          }
-          // Update Peers State by adding the newly joined user to the existing array of participants
-          setPeers(users => [...users, peerObj]);
-          props.timer(true); 
+          });
         });
-
-        //* THE JOINING USER GETS THEIR RESPONSE
-        socketRef.current.on('receiving returned signal', payload => {
-          const item = peersRef.current.find(p => p.peerID === payload.id);
-          item.peer.signal(payload.signal);
-        })
-
-        socketRef.current.on('conversation started', () => {
-          props.timer(true);
-        });
-
+        // Update Peers State
+        setPeers(peers);
       });
 
-      // LEAVING USER
-      socketRef.current.on("user left", id => {
-        const peerObj = peersRef.current.find(p => p.peerID === id);
-        if(peerObj) {
-          peerObj.peer.destroy();
+      //* A PERSON ALREADY IN THE ROOM IS NOTIFIED THAT SOMEONE ELSE HAS JOINED
+      socketRef.current.on('user joined', payload => {
+        // Create a peer for the newcomer who just joined the room
+        // Pass as paramaters signal, who is calling us, and our stream
+        const peer = addPeer(payload.signal, payload.callerID, stream);
+
+        peersRef.current.push({
+          peerID: payload.callerID,
+          peer
+        });
+
+        //Object that includes peer and their id to make unique keys for the video components
+        const peerObj = {
+          peer,
+          peerID: payload.callerID
         }
-        const peers = peersRef.current.filter(p => p.peerID !== id);
-        peersRef.current = peers;
-        setPeers(peers);
+        // Update Peers State by adding the newly joined user to the existing array of participants
+        setPeers(users => [...users, peerObj]);
+        props.timer(true);
+      });
+
+      //* THE JOINING USER GETS THEIR RESPONSE
+      socketRef.current.on('receiving returned signal', payload => {
+        const item = peersRef.current.find(p => p.peerID === payload.id);
+        item.peer.signal(payload.signal);
       })
 
-      socketRef.current.on('user has disabled video', userId => {
-        console.log('user that turned off video', userId);
-        console.log('current user', socketRef.current.id);
-        console.log('peers', peersRef);
+      socketRef.current.on('conversation started', () => {
+        props.timer(true);
+      });
 
-        const peerObj = peersRef.current.find(p => p.peerID === userId);
-        if(peerObj) {
+    });
 
-          console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
+    // LEAVING USER
+    socketRef.current.on("user left", id => {
+      const peerObj = peersRef.current.find(p => p.peerID === id);
+      if (peerObj) {
+        peerObj.peer.destroy();
+      }
+      const peers = peersRef.current.filter(p => p.peerID !== id);
+      peersRef.current = peers;
+      setPeers(peers);
+    })
 
-          if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
-            peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
-            console.log('turned off video for : ', peerObj);
-          } else {
-            peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
-            console.log('turned on video for : ', peerObj);
-          }
+    // Toggle video for users
+    socketRef.current.on('user has disabled video', userId => {
+      console.log('user that turned off video', userId);
+      console.log('current user', socketRef.current.id);
+      console.log('peers', peersRef);
+
+      const peerObj = peersRef.current.find(p => p.peerID === userId);
+      if (peerObj) {
+
+        console.log('peerObj', peerObj);
+
+        console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
+
+        if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
+          peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
+          console.log('turned off video for : ', peerObj);
+        } else {
+          peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
+          console.log('turned on video for : ', peerObj);
+        }
   
-        }
-      });
+      }
+    });
 
-      // Updates newMessage state triggering useEffect in ChatBox.jsx
-      socketRef.current.on("update chat box", messageInfo => {
-        if (messageInfo.message) {
-          props.setNewMessage({ messageInfo })
-        }
-      });
+    // Updates newMessage state triggering useEffect in ChatBox.jsx
+    socketRef.current.on("update chat box", messageInfo => {
+      if (messageInfo.message) {
+        props.setNewMessage({ messageInfo })
+      }
+    });
 
   }, [roomID]);
 
@@ -212,17 +221,29 @@ export default function Call(props) {
     return peer;
   }
 
+  // used for avatar
+  const checkVideoActive = () => {
+    console.log('active?', videoActive);
+    if (videoActive) {
+      // Do something
+    } else {
+      return (
+        <Animal size="200px" className='call-video' />
+      )
+    }
+  }
+
   return (
     <>
-    <div className='call-container'>
-        <video className='call-video' muted ref={userVideo} autoPlay playsInline />
+      <div className='call-container'>
+        <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer) => {
-            return (
-                <Video key={peer.peerID} peer={peer.peer} className='call-video' />
-            );
+          return (
+            <Video key={peer.peerID} peer={peer.peer} />
+          );
         })}
-    </div>
-    <button onClick={toggleVideo}>TOGGLE VIDEO</button>
+      </div>
+      <button onClick={toggleVideo}>TOGGLE VIDEO</button>
     </>
   );
 } 
