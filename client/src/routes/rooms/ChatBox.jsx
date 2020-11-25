@@ -9,8 +9,11 @@ export default function ChatBox(props) {
 
   function sendMessage(event) {
     event.preventDefault();
+
+    // Updates message state triggering useEffect in Call.jsx
     props.setMessage(chatBoxMessage);
 
+    // Updates allMessage state causing a rerender
     setAllMessages([...allMessages, { messageInfo: { message: chatBoxMessage, userId: 'me' } } ])
 
     // clear message form
@@ -29,9 +32,7 @@ export default function ChatBox(props) {
 
 
   const mapMessages = (allMessages) => {
-    // console.log('in map', allMessages);
     const messages = allMessages.map(message => {
-      console.log('inside map', message);
       return (
         <RenderMessages
           message={message.messageInfo.message}

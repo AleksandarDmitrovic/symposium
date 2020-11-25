@@ -127,6 +127,7 @@ export default function Call(props) {
         setPeers(peers);
       });
 
+      // Updates newMessage state triggering useEffect in ChatBox.jsx
       socketRef.current.on("update chat box", messageInfo => {
         if (messageInfo.message) {
           props.setNewMessage({ messageInfo })
@@ -137,6 +138,7 @@ export default function Call(props) {
 
   // CHAT BOX 
   useEffect(() => {
+    // Message goes to server.js which broadcasts "update chat box" to all other users in the room
     socketRef.current.emit("new message", { message: props.message, userId: socketRef.current.id })
   }, [props.message]);
 

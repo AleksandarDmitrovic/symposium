@@ -35,7 +35,7 @@ export default function Room(props) {
 
   const changeNewMessage = newValue => {
     setNewMessage(newValue);
-  }
+  };
 
 
   // Use Effects
@@ -46,9 +46,9 @@ export default function Room(props) {
       
       axios.get(`/api/categories/${categoryID}`).then((res) => {
         setCategory(res.data.categoryName.name)
-      })
+      });
       
-    })
+    });
   }, [roomID]);
 
   return (
