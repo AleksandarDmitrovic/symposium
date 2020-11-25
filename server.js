@@ -8,6 +8,7 @@ const path = require('path');
 
 const app = express();
 
+// Static build for Heroku deployment
 app.use(express.static('./client/build'));
 
 const server = http.createServer(app);
@@ -93,8 +94,8 @@ const usersRoutes = require("./routes/users");
 app.use("/api", homepage(db));
 app.use("/api/users", usersRoutes(db));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
 server.listen(process.env.PORT || 8000, () => console.log('server is running on port 8000'));
