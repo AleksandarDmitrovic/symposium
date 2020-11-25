@@ -17,6 +17,8 @@ const mapConversations = function (props) {
         starts_at={conversation.podcast_starts_at}
         ends_at={conversation.podcast_ends_at}
         history={props.history}
+        is_active = {conversation.is_active}
+        time_available_seconds = {conversation.time_available_seconds}
       />
     )
   });
