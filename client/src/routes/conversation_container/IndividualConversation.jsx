@@ -28,7 +28,7 @@ export default function IndividualConversation(props) {
         id: id
       })
       .then((res) => {
-        console.log("Conversation has expired", res)
+        // console.log("Conversation has expired", res)
       })
       .catch(error => { console.error(error) });
     }
