@@ -9,6 +9,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import './conversation-styles/index.scss';
+
 const drawerWidth = '20vw';
 
 const useStyles = makeStyles((theme) => ({
@@ -124,6 +126,7 @@ export default function PersistentDrawerLeft() {
         }}
       > 
         <h3>Symposium</h3>
+        <img className='icon' src='icon_a.png' alt='icon'/>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
