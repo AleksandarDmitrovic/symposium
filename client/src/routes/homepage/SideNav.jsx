@@ -110,7 +110,7 @@ export default function PersistentDrawerLeft() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography style={{fontFamily: "'Raleway', sans-serif"}}variant="h6" noWrap>
           Symposium
         </Typography>
       </Toolbar>

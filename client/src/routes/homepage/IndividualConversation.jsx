@@ -23,19 +23,19 @@ export default function IndividualConversation(props) {
           <CardActionArea>
             <CardContent className='body'>
             <div className='info'>
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
                 {props.title}
               </Typography>
-              <Typography variant="body1"  className='description' component="p" >
+              <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
                 {props.description}
               </Typography>
-              <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
                 {props.podcast_name}
               </Typography>
-              <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
                 {props.episode_title}
               </Typography>
-              <Typography className='italic' variant="body2" color="textSecondary" component="p">
+              <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
                 Timestamps: {props.starts_at} - {props.ends_at}
               </Typography>
             </div>
@@ -44,7 +44,7 @@ export default function IndividualConversation(props) {
             <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
               <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
               <div className='share'>
-                <p>Share this Room </p>
+                <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
                 <SocialMedia 
                   description={props.description}
                   url={roomURL}
