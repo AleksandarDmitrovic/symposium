@@ -7,24 +7,25 @@ body {
   display: flex;
   flex-direction: column;
 
-  .new-room-button {
-    justify-content: center;
-    padding-top: 2em;
-    padding-bottom: 3em;
-    width: 50vw;
-    margin-left: 35vw;
-    margin-right: 25vw;
-    font-family: 'Raleway', sans-serif;
-  }
 }
 
+.new-room-button {
+  justify-content: center;
+  padding-top: 2em;
+  padding-bottom: 3em;
+  width: 50vw;
+  margin-left: 35vw;
+  margin-right: 25vw;
+  font-family: 'Raleway', sans-serif;
+}
 .fixed {
   position: fixed;
   z-index: 5;
   top: 0;
-  right: 0;
   height: 20vh;
-  width: 90%;
+  width: 60%;
+  margin-left: 100px;
+  margin-right: 100px;
   background-color: white;
 }
 
