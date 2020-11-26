@@ -4,7 +4,13 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const socket = require("socket.io");
 
+// const path = require('path');
+
 const app = express();
+
+// Static build for Heroku deployment
+app.use(express.static('./client/build'));
+
 const server = http.createServer(app);
 const io = socket(server);
 const cors = require('cors');
