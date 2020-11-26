@@ -150,24 +150,26 @@ module.exports = (db) => {
   router.get("/itunes/:podcast", (req, res) => {
     const { podcast } = req.params;
     const url = `https://itunes.apple.com/search?term=${podcast}&entity=podcast&limit=20`;
-    axios.get(url).then(response => {
-      res.json(response.data.results);
-    })
-    .catch(err => console.log('Error: ', err));
+    axios.get(url)
+      .then(response => {
+        res.json(response.data.results);
+      })
+      .catch(err => console.log('Error: ', err));
   });
 
   // Make second api call for specific podcast episodes
   router.get("/episodes/:feedUrl", (req, res) => {
     const { feedUrl } = req.params;
     const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
-    axios.get(url).then(response => {
-      const episodeData = response.data.items.map(ep => {
-        return {embed_title: ep.title, embed_url: ep.enclosure.link};
+    axios.get(url)
+      .then(response => {
+        const episodeData = response.data.items.map(ep => {
+          return {embed_title: ep.title, embed_url: ep.enclosure.link};
+        });
+        res.json(episodeData);
       })
-      res.json(episodeData);
-    })
-    .catch(err => console.log('Error:'));
-  })
+      .catch(err => console.log('Error:', err));
+  });
  
   return router;
 };
