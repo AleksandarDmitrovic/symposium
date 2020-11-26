@@ -23,8 +23,8 @@ export default function PodcastSearch(props) {
   useEffect(() => {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
     axios.get(url).then(response => {
-      response.header("Access-Control-Allow-Headers","*");
-      response.header("crossorigin",true);
+      // response.header("Access-Control-Allow-Headers","*");
+      // response.header("crossorigin",true);
       console.log('response of initial query', response)
       setResults([...response.data.results])
       // Make second api call for specific podcasts
