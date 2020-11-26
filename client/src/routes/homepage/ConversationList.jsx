@@ -8,6 +8,7 @@ const mapConversations = function (props) {
         //HOW do we set unique keys properly for these elements
         // keyValue={conversation.id}
         id={conversation.id}
+        category_id={conversation.category_id}
         title={conversation.title}
         podcast_name={conversation.podcast_name}
         episode_title = {conversation.podcast_episode_title}
