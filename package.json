@@ -7,7 +7,8 @@
     "start": "nodemon server.js",
     "build": "npm run db:reset && cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:reset": "node bin/resetdb.js"
+    "db:reset": "node bin/resetdb.js",
+    "dev:start": "nodmon server.js"
   },
   "keywords": [],
   "author": "",
