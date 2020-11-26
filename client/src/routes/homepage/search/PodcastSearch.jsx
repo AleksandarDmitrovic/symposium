@@ -40,7 +40,6 @@ export default function PodcastSearch(props) {
   }, [term]);
 
   useEffect(() => {
-    console.log('this is newFeedUrl', feedUrl)
     let url = encodeURIComponent(feedUrl);
     axios.get(`/api/episodes/${url}`).then(res => {
       changeEpisodeInfo(res.data)
