@@ -19,8 +19,8 @@ import './conversation-styles/index.scss';
  const useStyles = makeStyles((theme) => ({
    paper: {
      position: 'absolute',
-     width: 400,
-     maxHeight: '30em',
+     width: 600,
+     maxHeight: '50em',
      backgroundColor: theme.palette.background.paper,
      border: '2px solid #000',
      boxShadow: theme.shadows[5],
