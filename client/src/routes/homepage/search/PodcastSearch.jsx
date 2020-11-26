@@ -22,13 +22,15 @@ export default function PodcastSearch(props) {
 
   useEffect(() => {
     const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
-    axios.get(url).then(response => {
+    axios.get(url, {headers: {"Access-Control-Allow-Origin": "*"}}).then(response => {
+      console.log('response of initial query', response)
       setResults([...response.data.results])
       // Make second api call for specific podcasts
       const feedUrl = response.data.results[0].feedUrl;
       const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
       axios.get(url).then(response => {
         const episodeData = response.data.items.map(ep => {
+      
           return {embed_title: ep.title, embed_url: ep.enclosure.link};
         })
         if (changeEpisodeInfo) {
