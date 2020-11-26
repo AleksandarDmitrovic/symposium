@@ -9,7 +9,7 @@ const socket = require("socket.io");
 const app = express();
 
 // Static build for Heroku deployment
-// app.use(express.static('./client/build'));
+app.use(express.static('./client/build'));
 
 const server = http.createServer(app);
 const io = socket(server);
