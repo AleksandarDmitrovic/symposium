@@ -4,7 +4,7 @@ export default function Cover(props) {
   const podcastInfo = {
     podcast_name: props.collectionName,
     podcast_image: props.artworkUrl600,
-    category: props.primaryGenreName
+    category: props.primaryGenreName,
   }
 
   // Name of Podcast to display on input field and send to server for query
@@ -25,6 +25,7 @@ export default function Cover(props) {
     }
     // Fill the input field with selected podcast name using props passed down from PodcastSearch
     props.changeValue(name);
+    props.setFeedUrl(props.feedUrl)
   };
 
   return (

@@ -14,6 +14,7 @@ export default function SearchResults(props) {
         changeValue = {props.changeValue}
         changePodcastInfo = {props.changePodcastInfo}
         changeInput = {props.changeInput}
+        setFeedUrl={props.setFeedUrl}
       />
     )
   });
