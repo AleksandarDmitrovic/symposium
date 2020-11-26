@@ -21,7 +21,7 @@ export default function PodcastSearch(props) {
   }
 
   useEffect(() => {
-    const url = `https://itunes.apple.com/search?term=${term}&entity=podcast`;
+    const url = `https://itunes.apple.com/search?term=${term}&entity=podcast&limit=10`;
     axios.get(url).then(response => {
       // response.header("Access-Control-Allow-Headers","*");
       // response.header("crossorigin",true);
@@ -29,7 +29,7 @@ export default function PodcastSearch(props) {
       setResults([...response.data.results])
       // Make second api call for specific podcasts
       const feedUrl = response.data.results[0].feedUrl;
-      const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
+      const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&limit=10`
       axios.get(url).then(response => {
         const episodeData = response.data.items.map(ep => {
       
