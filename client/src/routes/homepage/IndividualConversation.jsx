@@ -56,7 +56,7 @@ export default function IndividualConversation(props) {
               title="Contemplative Reptile"
             />
           <article>
-              <CardActionArea>
+              <CardActionArea onClick={joinRoom}>
                 <CardContent className='body'>
                 <div className='info'>
                   <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
@@ -90,18 +90,17 @@ export default function IndividualConversation(props) {
                     )}
                   </Timer>
                 </div>
-                <EmbedPodcast embed_url = {props.audio} />
+                <EmbedPodcast embed_url={props.audio} />
                 </CardContent>
                 <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
                   <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
                   <div className='share'>
-                  
-                  <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
-                  <SocialMedia 
-                    description={props.description}
-                    url={roomURL}
-                  >
-                  </SocialMedia>
+                    <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
+                    <SocialMedia 
+                      description={props.description}
+                      url={roomURL}
+                    >
+                    </SocialMedia>
                   </div>
                 </CardActions>
               </CardActionArea>   
