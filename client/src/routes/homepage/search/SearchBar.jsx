@@ -2,17 +2,7 @@ import { useEffect, useCallback } from "react";
 
 import useDebounce from "./hooks/useDebounce";
 
-import { TextField, Input } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles((theme) => ({
-  inputField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300,
-  },
-}));
+import { TextField } from '@material-ui/core';
 
 export default function SearchBar(props) {
 
@@ -34,26 +24,8 @@ export default function SearchBar(props) {
         document.getElementById('display-episode').style.visibility = 'hidden';
       }
     }
-    
     onSearch(term);
   }, [term, onSearch]);
-
-  const showResults = () => {
-    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
-      if (document.getElementById('episode-list')) {
-        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
-          result.style.visibility = 'visible';
-        }
-      } else {
-        result.style.visibility = 'visible';
-      }
-    });
-  }
-
-  // const classes = useStyles();
-  // <Input
-  // className={classes.inputField}
-  const classes = useStyles();
 
   return (
     <section className="search">
@@ -69,7 +41,6 @@ export default function SearchBar(props) {
           value={value}
           onChange={event => {
             props.changeValue(event.target.value);
-            showResults();
           }}
           onClick={handleFocus}
         />
