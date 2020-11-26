@@ -160,7 +160,7 @@ module.exports = (db) => {
   // Make second api call for specific podcast episodes
   router.get("/episodes/:feedUrl", (req, res) => {
     const { feedUrl } = req.params;
-    const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`
+    const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
     axios.get(url)
       .then(response => {
         const episodeData = response.data.items.map(ep => {
