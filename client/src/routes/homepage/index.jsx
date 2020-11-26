@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
+import axios from 'axios';
+
+
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
+import NotificationBell from "./MagicBell";
 import './conversation-styles/index.scss';
-import axios from 'axios';
 
 export default function Conversation(props) {
 
@@ -26,6 +29,10 @@ export default function Conversation(props) {
   }, [searchParam]);
   
   return (
+    <>
+      <NotificationBell
+            className='bell'
+          />
     <main>
       <SideNav />
       <article class='homepage'>
@@ -43,5 +50,6 @@ export default function Conversation(props) {
         />
       </article>
     </main>
+    </>
   )
 };
