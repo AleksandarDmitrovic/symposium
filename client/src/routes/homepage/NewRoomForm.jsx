@@ -112,11 +112,14 @@ export default function NewRoomForm (props) {
   };
 
   const listTitles = titles => {
-    return titles.map(title => {
-      return (
-        <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
-      );
-    });
+    if (Array.isArray(titles)) {
+      return titles.map(title => {
+        return (
+          <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
+        );
+      });
+    }
+    return;
   }
   
   const classes = useStyles();
