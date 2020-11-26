@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 import './searchBar.scss'
@@ -15,9 +15,21 @@ export default function PodcastSearch(props) {
   // The value of the feedUrl used to get the stream of the podcast
   const [feedUrl, setFeedUrl] = useState('');
 
-  // Stores the setValue function to pass down as props
+  // Track the prev state of term to check if results need to be visible or hidden
+  const prevTermRef = useRef();
+  useEffect(() => {
+    prevTermRef.current = term;
+  }, [term]);
+  const prevTerm = prevTermRef.current;
+  
+  // Stores the setValue function to pass down as props while checking to see if prev state of the search was blank
   const changeValue = val => {
     setValue(val);
+    if (prevTerm.length <= 1) {
+      Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+        if (!document.getElementById('episode-list')) { result.style.visibility = 'visible' };
+      });
+    }
   }
 
    useEffect(() => {
