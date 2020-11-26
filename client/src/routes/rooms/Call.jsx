@@ -17,11 +17,6 @@ const Video = (props) => {
   );
 }
 
-// const videoConstraints = {
-//   height: window.innerHeight / 4,
-//   width: window.innerWidth / 4
-// };
-
 /*
 * ROOM COMPONENT - the actual chat between the peers
 Every person who joins has a unique socket object created for them by socket.io. 
@@ -54,6 +49,7 @@ export default function Call(props) {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
+
   // videoState to show video or avatar
   const [videoActive, setVideoActive] = useState(true);
 
@@ -61,11 +57,10 @@ export default function Call(props) {
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
       videoActive ? setVideoActive(false) : setVideoActive(true);
       socketRef.current.emit("user video settings changed", socketRef.current.id);
-      console.log('user who toggled', stream);
     })
   };
 
@@ -73,7 +68,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
@@ -139,16 +134,15 @@ export default function Call(props) {
       if (peerObj) {
         peerObj.peer.destroy();
       }
+
       const peers = peersRef.current.filter(p => p.peerID !== id);
+
       peersRef.current = peers;
       setPeers(peers);
     })
 
     // Toggle video for users
     socketRef.current.on('user has disabled video', userId => {
-      console.log('user that turned off video', userId);
-      console.log('current user', socketRef.current.id);
-      console.log('peers', peersRef);
 
       const peerObj = peersRef.current.find(p => p.peerID === userId);
       if (peerObj) {
@@ -237,10 +231,10 @@ export default function Call(props) {
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peers.map((peer) => {
-          return (
-            <Video key={peer.peerID} peer={peer.peer} />
-          );
+        {peersRef.current.map((peer) => {
+            return (
+              <Video key={peer.peerID} peer={peer.peer} />
+            )         
         })}
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
