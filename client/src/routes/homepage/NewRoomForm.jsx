@@ -118,18 +118,7 @@ export default function NewRoomForm (props) {
       );
     });
   }
-
-  // useEffect(() => {
-  //   let feedUrl = podcastInfo.feedUrl;
-  //   console.log('feed url inside new room form', feedUrl)
-  //   axios.get(`/api/episodes/feed=${feedUrl}`).then(res => {
-  //     console.log('episodes of that podcast', res.data)
-    
-  //   })
-  //   .catch(err => console.log('Error: ', err));
-  // // }, [term, changeEpisodeInfo]);
-  // }, [podcastInfo]);
-
+  
   const classes = useStyles();
  
   return (
