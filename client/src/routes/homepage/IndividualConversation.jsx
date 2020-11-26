@@ -9,14 +9,21 @@ import SocialMedia from '../rooms/SocialMedia';
 import './conversation-styles/individualConversation.scss'
 
 export default function IndividualConversation(props) {
-  const { id, history } = props;
+  const { id, history, category_id } = props;
   const [active, setActive] = useState(true);
+  const [category, setCategory] = useState("");
 
   const roomURL = `/room/${props.url}`
 
   const joinRoom = () => {
     history.push(roomURL)
   }
+  
+  useEffect(() => {  
+    axios.get(`/api/categories/${category_id}`).then((res) => {
+      setCategory(res.data.categoryName.name)
+    });
+  }, [category_id]);
 
   const timeConversationAvailable = props.available_until
 
@@ -66,6 +73,9 @@ export default function IndividualConversation(props) {
                   </Typography>
                   <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
                     Timestamps: {props.starts_at} - {props.ends_at}
+                  </Typography>
+                  <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    Category: {category}
                   </Typography>
                   <label>Conversation Closes In: </label>
                   <Timer
