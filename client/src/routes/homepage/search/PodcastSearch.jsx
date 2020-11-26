@@ -3,32 +3,26 @@ import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 import './searchBar.scss'
 const axios = require('axios');
-
 // PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props
 export default function PodcastSearch(props) {
   const { changeEpisodeInfo } = props
-
   // Name to insert into Itunes API 
   const [term, setTerm] = useState("");
   // The results fetched from the API
   const [results, setResults] = useState([]);
   // The value of the selected podcast
   const [value, setValue] = useState("");
-
   const [feedUrl, setFeedUrl] = useState('');
-
   // Stores the setValue function to pass down as props
   const changeValue = val => {
     setValue(val);
   }
-
    useEffect(() => {
     axios.get(`/api/itunes/${term}`).then(response => {
       setResults([...response.data])
     })
     .catch(err => console.log('Error: ', err));
   }, [term]);
-
   useEffect(() => {
     console.log('this is newFeedUrl', feedUrl)
     let url = encodeURIComponent(feedUrl);
@@ -37,7 +31,6 @@ export default function PodcastSearch(props) {
     })
     .catch(err => console.log('Error: ', err));
   }, [feedUrl]);
-
   return (
       <div>
         <SearchBar 
