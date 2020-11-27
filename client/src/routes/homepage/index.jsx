@@ -44,14 +44,19 @@ export default function Conversation(props) {
 
   // const wsENV = process.env.DB_PORT
   // console.log('wsENV :', wsENV);
-  const HOST = window.location.origin.replace(/^http/, 'ws')
-  console.log('HOST :', HOST);
+  const wsHeroku = window.location.origin.replace(/^http/, 'ws')
+  
 
 
   useEffect(() => {
+    let webSocket;
+    if(window.location.origin.includes("heroku")) {
 
+      webSocket = new WebSocket(wsHeroku);
+    } else {
+      webSocket = new WebSocket(wsURL);
+    }
     // const webSocket = new WebSocket(HOST);
-    const webSocket = new WebSocket(wsURL);
     // const webSocket = new WebSocket(process.env.WEBSOCKET_URL);
 
     webSocket.onopen = event => {
