@@ -48,6 +48,7 @@ export default function NewRoomButton(props) {
       
       <NewRoomForm 
          history = {props.history}
+         connection={props.connection}
          />
     </div>
   );

@@ -116,10 +116,10 @@ module.exports = (db, updateConversations) => {
         .then((data) => {
           const conversationID = data.rows[0].id;
 
-          setTimeout(() => {
-            res.status(204).json({});
-            updateConversations(Number(conversationID));
-          }, 1000);
+      
+          res.json({ conversationID });
+          // updateConversations(Number(conversationID));
+       
         })
         .catch((err) => {
           res
@@ -167,7 +167,7 @@ module.exports = (db, updateConversations) => {
   // Make second api call for specific podcast episodes
   router.get("/episodes/:feedUrl", (req, res) => {
     const { feedUrl } = req.params;
-    const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
+    const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&${process.env.API_KEY}`;
     axios.get(url)
       .then(response => {
         const episodeData = response.data.items.map(ep => {
