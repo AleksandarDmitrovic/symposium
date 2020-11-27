@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+
+import { useEffect, useState, useRef } from "react"
 import axios from 'axios';
 import { io } from "socket.io-client";
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
+
 
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
@@ -42,6 +44,7 @@ export default function Conversation(props) {
     setSearchParam(newState)
   };
 
+  
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation)

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
+
 const Video = (props) => {
   const ref = useRef();
 
@@ -49,19 +50,25 @@ export default function Call(props) {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
+  // Current state of users video
+  const [isActive, setIsActive] = useState(true);
 
   // videoState to show video or avatar
-  const [videoActive, setVideoActive] = useState(true);
-
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-      userVideo.current.srcObject = stream;
-      videoActive ? setVideoActive(false) : setVideoActive(true);
-      socketRef.current.emit("user video settings changed", socketRef.current.id);
-    })
+    if (isActive) {
+      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
+      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
+      // Update State
+      setIsActive(false)
+    } else {
+      // For local browser
+      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
+      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
+      setIsActive(true)
+    } 
   };
 
   // useEffect runs when someone joins the room
@@ -77,6 +84,7 @@ export default function Call(props) {
       socketRef.current.emit('join room', roomID);
       // get array of users (everyone in chat except from themselves)
       socketRef.current.on('all users', users => {
+
         // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
         const peers = [];
         // iterate through each user in the room, creating a peer for each
@@ -141,27 +149,6 @@ export default function Call(props) {
       setPeers(peers);
     })
 
-    // Toggle video for users
-    socketRef.current.on('user has disabled video', userId => {
-
-      const peerObj = peersRef.current.find(p => p.peerID === userId);
-      if (peerObj) {
-
-        console.log('peerObj', peerObj);
-
-        console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
-
-        if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
-          peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
-          console.log('turned off video for : ', peerObj);
-        } else {
-          peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
-          console.log('turned on video for : ', peerObj);
-        }
-  
-      }
-    });
-
     // Updates newMessage state triggering useEffect in ChatBox.jsx
     socketRef.current.on("update chat box", messageInfo => {
       if (messageInfo.message) {
@@ -215,26 +202,16 @@ export default function Call(props) {
     return peer;
   }
 
-  // used for avatar
-  const checkVideoActive = () => {
-    console.log('active?', videoActive);
-    if (videoActive) {
-      // Do something
-    } else {
-      return (
-        <Animal size="200px" className='call-video' />
-      )
-    }
-  }
-
   return (
     <>
       <div className='call-container'>
+
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
+
         {peersRef.current.map((peer) => {
-            return (
-              <Video key={peer.peerID} peer={peer.peer} />
-            )         
+          return (
+            <Video key={peer.peerID} peer={peer.peer} />
+          )         
         })}
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
