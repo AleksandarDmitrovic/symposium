@@ -31,7 +31,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul id='convo-list'>
+    <ul className='convo-list'>
       { mapConversations(props) }
     </ul>
   );
