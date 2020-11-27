@@ -16,6 +16,7 @@ const drawerWidth = '20vw';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    position: 'fixed'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -147,7 +148,6 @@ export default function PersistentDrawerLeft() {
           ))}
         </List>
       </Drawer>
-     
     </div>
   );
 }
