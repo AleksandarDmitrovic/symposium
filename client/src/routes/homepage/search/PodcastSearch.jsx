@@ -18,14 +18,14 @@ export default function PodcastSearch(props) {
   // The value of the feedUrl used to get the stream of the podcast
   const [feedUrl, setFeedUrl] = useState('');
 
-
-  // Track the prev state of term to check if results need to be visible or hidden
+  // Track the prev state of term. If prev term was 0 and current term is higher, results should be displayed
   const prevTermRef = useRef();
   useEffect(() => {
     prevTermRef.current = term;
   }, [term]);
   const prevTerm = prevTermRef.current;
 
+  // Find elements with given class name and hide them
   const hide = className => {
     Array.from(document.getElementsByClassName(className)).forEach(result => {
       result.style.visibility = 'hidden';
@@ -42,20 +42,20 @@ export default function PodcastSearch(props) {
         document.getElementsByClassName('result-container')[1].style.visibility = 'visible';
       }
     };
-      // If user clicks outside search results, hide results
-      document.addEventListener('click', pageClick);
-
-      function pageClick(event){
-        if (event.target.attributes.class && event.target.attributes.class.value !== 'podcast-result') {
-          hide('spinner');
-          // setValue('');
-          hide('result-container');
-          document.removeEventListener('click', pageClick);
-        }
-      };
+    // If user clicks outside search results, hide results
+    document.addEventListener('click', pageClick);
+    function pageClick(event){
+      if (event.target.attributes.class && event.target.attributes.class.value !== 'podcast-result') {
+        console.log('click event', event.target.attributes.class.value)
+        hide('result-container');
+        hide('spinner');
+        // setValue('');
+        document.removeEventListener('click', pageClick);
+      }
     };
+  };
 
-    // Spinner loader to show while waiting for API results to come back
+    // Spinner to show while waiting for API results to come back
     const useStyles = makeStyles((theme) => ({
       root: {
         visibility: 'hidden',
@@ -79,20 +79,22 @@ export default function PodcastSearch(props) {
       } else {
         document.getElementsByClassName('spinner')[0].style.visibility = 'visible';
       }
+      axios.get(`/api/itunes/${term}`).then(response => {
+        setResults([...response.data])
+        hide('spinner');
+      })
+      .catch(err => console.log('Error: ', err));
     };
-    axios.get(`/api/itunes/${term}`).then(response => {
-      hide('spinner');
-      setResults([...response.data])
-    })
-    .catch(err => console.log('Error: ', err));
   }, [term]);
 
   useEffect(() => {
-    let url = encodeURIComponent(feedUrl);
-    axios.get(`/api/episodes/${url}`).then(res => {
-      changeEpisodeInfo(res.data)
-    })
-    .catch(err => console.log('Error: ', err));
+    if (feedUrl.length > 0) {
+      let url = encodeURIComponent(feedUrl);
+      axios.get(`/api/episodes/${url}`).then(res => {
+        changeEpisodeInfo(res.data)
+      })
+      .catch(err => console.log('Error: ', err));
+    }
   }, [feedUrl, changeEpisodeInfo]);
 
   return (
