@@ -67,33 +67,16 @@ export default function Call(props) {
 
     if (isActive) {
 
-      // For other browsers
-      peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
-
-      // For local browser
-      userVideo.current.srcObject.getTracks()[0].enabled = false;
-
+      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
+      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
       // Update State
       setIsActive(false)
     } else {
-      // TURN VIDEO ON
-
       // For local browser
-      userVideo.current.srcObject.getTracks()[0].enabled = true;
-
-      // Update State
+      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
+      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
       setIsActive(true)
-    }
-      
-
-    console.log('userVideo.current.srcObject', userVideo.current.srcObject.getTracks()[0].enabled);
-    console.log('peersRef.current[0].peer', peersRef.current[0].peer);
-
-    // peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
-    // userVideo.current.srcObject.getTracks()[0].enabled = false;
-    // isActive ? setIsActive(false) : setIsActive(true);
-
-      
+    } 
   };
 
   // useEffect runs when someone joins the room
@@ -111,6 +94,9 @@ export default function Call(props) {
       socketRef.current.emit('join room', roomID);
       // get array of users (everyone in chat except from themselves)
       socketRef.current.on('all users', users => {
+
+        console.log('IN ALL USERS, PUSHING INTO PEERS REF', peersRef.current);
+
         // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
         const peers = [];
         // iterate through each user in the room, creating a peer for each
@@ -231,11 +217,13 @@ export default function Call(props) {
   return (
     <>
       <div className='call-container'>
+
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
+
         {peersRef.current.map((peer) => {
-            return (
-              <Video key={peer.peerID} peer={peer.peer} />
-            )         
+          return (
+            <Video key={peer.peerID} peer={peer.peer} />
+          )         
         })}
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
