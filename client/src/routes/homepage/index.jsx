@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
-
-
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
@@ -33,7 +31,8 @@ export default function Conversation(props) {
   }, [searchParam]);
 
   useEffect(() => {
-    const webSocket = new WebSocket('ws://localhost:8000');
+    // const webSocket = new WebSocket('ws://localhost:8000');
+    const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
     webSocket.onopen = event => {
       webSocket.send("ping")
     }
