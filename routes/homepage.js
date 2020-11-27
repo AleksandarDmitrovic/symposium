@@ -2,7 +2,7 @@ const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, updateConversations) => {
   const podcastCategorySearch = async(podcastName) => {
 
     const results = await db.query(`
@@ -94,7 +94,6 @@ module.exports = (db) => {
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
     const { title, description, timeAvailable, url, podcastInfo, embedTitle, embedUrl } = req.body;
-    console.log('timeAvailable :', timeAvailable);
     
     podcastCategorySearch(podcastInfo.category).then(categoryFound => {
       const creatorID = 1;
@@ -116,8 +115,12 @@ module.exports = (db) => {
   
       db.query(queryString, queryParams)
         .then((data) => {
-          const conversation = data.rows;
-          res.json({ conversation });
+          const conversationID = data.rows[0].id;
+
+          setTimeout(() => {
+            res.status(204).json({});
+            updateConversations(Number(conversationID));
+          }, 1000);
         })
         .catch((err) => {
           res

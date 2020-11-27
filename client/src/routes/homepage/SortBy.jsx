@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Menu, MenuItem, Tabs, Tab } from '@material-ui/core';
+import { Menu, MenuItem, Tabs, Tab } from '@material-ui/core';
 import PodcastSearch from "./search/PodcastSearch";
 import './conversation-styles/sortby.scss'
 
@@ -21,8 +21,6 @@ export default function SortBy (props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // CATEGORY BUTTON IS HARDCODED TO 1 ("OTHER")
 
   return (
 
