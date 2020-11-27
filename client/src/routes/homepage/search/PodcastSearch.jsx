@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+
 import { makeStyles, CircularProgress } from '@material-ui/core';
 import './searchBar.scss'
 import axios from 'axios';
-
+        
+// PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props
 export default function PodcastSearch(props) {
   const { changeEpisodeInfo } = props
   // Name to insert into Itunes API 
@@ -15,6 +17,7 @@ export default function PodcastSearch(props) {
   const [value, setValue] = useState("");
   // The value of the feedUrl used to get the stream of the podcast
   const [feedUrl, setFeedUrl] = useState('');
+
 
   // Track the prev state of term to check if results need to be visible or hidden
   const prevTermRef = useRef();

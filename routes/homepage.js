@@ -2,7 +2,7 @@ const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, updateConversations) => {
   const podcastCategorySearch = async(podcastName) => {
 
     const results = await db.query(`
@@ -20,7 +20,8 @@ module.exports = (db) => {
   };
 
   router.get("/conversations", (req, res) => {
-    db.query(`SELECT * FROM conversations;`)
+    db.query(`SELECT * FROM conversations
+              ORDER BY id DESC;`)
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -34,7 +35,8 @@ module.exports = (db) => {
 
   router.get("/conversations/:url", (req, res) => {
     db.query(`SELECT * FROM conversations 
-              WHERE conversations.conversation_url = $1;`, [req.params.url])
+              WHERE conversations.conversation_url = $1
+              ORDER BY id DESC;`, [req.params.url])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -49,7 +51,8 @@ module.exports = (db) => {
   router.get("/conversations/category/:id", (req, res) => {
     db.query(`SELECT * FROM conversations 
               JOIN categories ON categories.id = category_id
-              WHERE conversations.category_id = $1;`, [req.params.id])
+              WHERE conversations.category_id = $1
+              ORDER BY conversations.id DESC;`, [req.params.id])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -63,7 +66,9 @@ module.exports = (db) => {
 
   router.get("/conversations/podcast/:name", (req, res) => {
     const name = req.params.name.split('+').join(' ');
-    db.query(`SELECT * FROM conversations WHERE podcast_name = $1;`, [name])
+    db.query(`SELECT * FROM conversations 
+              WHERE podcast_name = $1
+              ORDER BY id DESC;`, [name])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
@@ -89,7 +94,6 @@ module.exports = (db) => {
   // router.put for creating a new room
   router.put('/conversations', (req, res) => {
     const { title, description, timeAvailable, url, podcastInfo, embedTitle, embedUrl } = req.body;
-    console.log('timeAvailable :', timeAvailable);
     
     podcastCategorySearch(podcastInfo.category).then(categoryFound => {
       const creatorID = 1;
@@ -111,8 +115,12 @@ module.exports = (db) => {
   
       db.query(queryString, queryParams)
         .then((data) => {
-          const conversation = data.rows;
-          res.json({ conversation });
+          const conversationID = data.rows[0].id;
+
+          setTimeout(() => {
+            res.status(204).json({});
+            updateConversations(Number(conversationID));
+          }, 1000);
         })
         .catch((err) => {
           res

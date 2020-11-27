@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
+import axios from 'axios';
+
+
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
+import { Button } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import './conversation-styles/index.scss';
-import axios from 'axios';
 
 export default function Conversation(props) {
 
@@ -13,6 +17,9 @@ export default function Conversation(props) {
 
   // String of search params from sort bar
   const [searchParam, setSearchParam] = useState('conversations')
+
+   // Keep track of if there are new conversations
+   const [newConversations, setNewConversations] = useState(false)
 
   // Pass to sortby function so that it can update searchParam state
   function changeState(newState) {
@@ -24,11 +31,39 @@ export default function Conversation(props) {
       setConversations(res.data.conversation)
     })
   }, [searchParam]);
+
+  useEffect(() => {
+    const webSocket = new WebSocket('ws://localhost:8000');
+    webSocket.onopen = event => {
+      webSocket.send("ping")
+    }
+    webSocket.onmessage = event => {
+      console.log("Message Received:", event.data); //Confirmation of connection
+    }
+    webSocket.onmessage = event => {
+      const message = JSON.parse(event.data);
+
+      if (message.type === "UPDATE_CONVERSATIONS") {
+        console.log("we did it yay")
+        setNewConversations(true);
+      }
+    }
+    //Cleanup 
+    return () => webSocket.close();
+
+  }, [])
   
-  return (
+  // Clears new conversation message and reloads the page
+  const clearNotifications = () => {
+    setNewConversations(false);
+    window.location.reload(false)
+
+  }
+  
+  return ( 
     <main>
       <SideNav />
-      <article class='homepage'>
+      <article className='homepage'>
         <div className='fixed'>
           <NewRoomButton
             history={props.history}
@@ -36,6 +71,18 @@ export default function Conversation(props) {
           <SortBy 
             state={changeState}
           />
+        {newConversations && 
+        <Alert 
+        severity="info"
+        onClick={() => {clearNotifications()}}
+        >
+          <AlertTitle>New Conversations Available</AlertTitle>
+          <Button>
+  
+          <strong>click here</strong>
+          </Button>
+        </Alert>
+        }
         </div>
         <ConversationList 
           conversations={conversations}

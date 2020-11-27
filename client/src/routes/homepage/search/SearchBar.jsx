@@ -1,7 +1,6 @@
 import { useEffect, useCallback } from "react";
-
+import { TextField } from '@material-ui/core';
 // import useDebounce from "./hooks/useDebounce";
-
 import { TextField } from '@material-ui/core';
 
 export default function SearchBar(props) {
@@ -29,6 +28,19 @@ export default function SearchBar(props) {
     }
     onSearch(value);
   }, [value, onSearch]);
+
+
+  const showResults = () => {
+    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
+      if (document.getElementById('episode-list')) {
+        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
+          result.style.visibility = 'visible';
+        }
+      } else {
+        result.style.visibility = 'visible';
+      }
+    });
+  }
 
   return (
     <section className="search">
