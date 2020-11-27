@@ -16,7 +16,6 @@ export default function SearchBar(props) {
   const onSearch = useCallback(props.onSearch, [term]);
 
   const handleFocus = (event) => {
-    console.log('handling focus of ', event.target)
     if (event.target.select) { event.target.select() };
   }
 
