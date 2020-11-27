@@ -32,7 +32,7 @@ export default function Conversation(props) {
 
   useEffect(() => {
     // const webSocket = new WebSocket('ws://localhost:8000');
-    const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
+    const webSocket = new WebSocket('ws://the-symposium.herokuapp.com/');
     webSocket.onopen = event => {
       webSocket.send("ping")
     }
