@@ -37,10 +37,10 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", socket => {
   socket.onmessage = event => {
-    console.log(`Message Received: ${event.data}`);
+    // console.log(`Message Received: ${event.data}`);
 
     if (event.data === "ping") {
-      socket.send(JSON.stringify("pong"));
+      // socket.send(JSON.stringify("pong"));
     }
   };
 });

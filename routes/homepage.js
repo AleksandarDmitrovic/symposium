@@ -116,8 +116,6 @@ module.exports = (db, updateConversations) => {
       db.query(queryString, queryParams)
         .then((data) => {
           const conversationID = data.rows[0].id;
-          // console.log('conversationID :', conversationID);
-          // res.json({ conversationID });
 
           setTimeout(() => {
             res.status(204).json({});
