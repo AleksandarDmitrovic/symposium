@@ -9,6 +9,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 8000;
 
+
+
 // Static build for Heroku deployment
 app.use(express.static('./client/build'));
 
@@ -29,12 +31,32 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cors());
 
-// Proxy allowing CORS
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "https://the-symposium.herokuapp.com/"); // update to match the domain you will make the request from
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
+//WebSocket Setup
+const WebSocket = require("ws");
+const wss = new WebSocket.Server({ server });
+
+wss.on("connection", socket => {
+  socket.onmessage = event => {
+    console.log(`Message Received: ${event.data}`);
+
+    if (event.data === "ping") {
+      socket.send(JSON.stringify("pong"));
+    }
+  };
+});
+
+const updateConversations = (id) => {
+  wss.clients.forEach(function eachClient(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(
+        JSON.stringify({
+          type: "UPDATE_CONVERSATIONS",
+          id
+        })
+      );
+    }
+  });
+};
 
 const users = {};
 
@@ -101,7 +123,7 @@ const homepage = require("./routes/homepage");
 // For users
 const usersRoutes = require("./routes/users");
 
-app.use("/api", homepage(db));
+app.use("/api", homepage(db, updateConversations));
 app.use("/api/users", usersRoutes(db));
 
 
