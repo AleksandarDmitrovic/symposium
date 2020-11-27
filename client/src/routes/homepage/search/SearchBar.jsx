@@ -1,45 +1,31 @@
 import { useEffect, useCallback } from "react";
 import { TextField } from '@material-ui/core';
-// import useDebounce from "./hooks/useDebounce";
+import useDebounce from "./hooks/useDebounce";
 
 export default function SearchBar(props) {
 
   // Value state passed down from PodcastSearch Component
   const value = props.value
 
-  //* useDebounce hook commented out. If re-implemented, change all instances of "value" to "term" in useCallback and useEffect
+  //* If useDebounce hook commented out, change all instances of "value" to "term" in useCallback and useEffect
   // Custom Hook - wait 400 ms until making the search for results
-  // const term = useDebounce(value, 0);
+  const term = useDebounce(value, 400);
 
   // onSearch is passed down from PodcastSearch and sets the term state
   // useCallback memoizes the function to run whenever debounced term changes
-  const onSearch = useCallback(props.onSearch, [value]);
+  const onSearch = useCallback(props.onSearch, [term]);
 
   const handleFocus = (event) => {
-    console.log('this is target value in handleFocus', event.target)
     if (event.target) { event.target.select() };
   }
 
   useEffect(() => {
-    if (document.getElementsByClassName('result-container')[1] && value.length === 0) {
+    if (document.getElementsByClassName('result-container')[1] && term.length === 0) {
       document.getElementById('episode-list').style.visibility = 'hidden';
       document.getElementById('display-episode').style.visibility = 'hidden';
     }
-    onSearch(value);
-  }, [value, onSearch]);
-
-
-  const showResults = () => {
-    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
-      if (document.getElementById('episode-list')) {
-        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
-          result.style.visibility = 'visible';
-        }
-      } else {
-        result.style.visibility = 'visible';
-      }
-    });
-  }
+    onSearch(term);
+  }, [term, onSearch]);
 
   return (
     <section className="search">
