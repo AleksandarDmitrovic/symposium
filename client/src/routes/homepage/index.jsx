@@ -30,27 +30,27 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
-  useEffect(() => {
-    // const webSocket = new WebSocket('ws://localhost:8000');
-    const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
-    webSocket.onopen = event => {
-      webSocket.send("ping")
-    }
-    webSocket.onmessage = event => {
-      console.log("Message Received:", event.data); //Confirmation of connection
-    }
-    webSocket.onmessage = event => {
-      const message = JSON.parse(event.data);
+  // useEffect(() => {
+  //   // const webSocket = new WebSocket('ws://localhost:8000');
+  //   const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
+  //   webSocket.onopen = event => {
+  //     webSocket.send("ping")
+  //   }
+  //   webSocket.onmessage = event => {
+  //     console.log("Message Received:", event.data); //Confirmation of connection
+  //   }
+  //   webSocket.onmessage = event => {
+  //     const message = JSON.parse(event.data);
 
-      if (message.type === "UPDATE_CONVERSATIONS") {
-        console.log("we did it yay")
-        setNewConversations(true);
-      }
-    }
-    //Cleanup 
-    return () => webSocket.close();
+  //     if (message.type === "UPDATE_CONVERSATIONS") {
+  //       console.log("we did it yay")
+  //       setNewConversations(true);
+  //     }
+  //   }
+  //   //Cleanup 
+  //   return () => webSocket.close();
 
-  }, [])
+  // }, [])
   
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
