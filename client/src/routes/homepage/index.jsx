@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
@@ -19,6 +19,7 @@ export default function Conversation(props) {
     setSearchParam(newState)
   };
 
+  
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation)

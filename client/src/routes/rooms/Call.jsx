@@ -9,7 +9,13 @@ const Video = (props) => {
 
   useEffect(() => {
     props.peer.on("stream", stream => {
+
+      
       console.log('IN useEFFECT stream', stream);
+      console.log('getTracks', stream.getTracks()[0].enabled);
+      stream.getTracks()[0].enabled = props.active;
+      console.log('getTracks after false', stream.getTracks()[0].enabled);
+
       ref.current.srcObject = stream;
     })
   }, [props.peer]);
@@ -219,9 +225,9 @@ export default function Call(props) {
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peers.map((peer) => {
+        {peersRef.current.map((peer) => {
             return (
-              <Video key={peer.peerID} peer={peer.peer} />
+              <Video key={peer.peerID} peer={peer.peer} active={false} />
             )         
         })}
       </div>
