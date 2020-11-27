@@ -6,9 +6,8 @@ import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
-import NotificationBell from "./MagicBell";
-import QuestionAnswerRoundedIcon from '@material-ui/icons/QuestionAnswerRounded';
-// import { Alert, AlertTitle } from '@material-ui/lab';
+import { Button } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import './conversation-styles/index.scss';
 
 export default function Conversation(props) {
@@ -47,9 +46,6 @@ export default function Conversation(props) {
       if (message.type === "UPDATE_CONVERSATIONS") {
         console.log("we did it yay")
         setNewConversations(true);
-        // const id = message.id
-        // const interview = message.interview
-        // dispatch({ type: SET_INTERVIEW, id, interview })
       }
     }
     //Cleanup 
@@ -57,23 +53,17 @@ export default function Conversation(props) {
 
   }, [])
   
+  // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
     window.location.reload(false)
 
   }
   
-  return (
-    <>
-      {newConversations && <NotificationBell
-            className='css-x1jtea-Bell'
-            onClick={() => {clearNotifications()}}
-          ></NotificationBell>
-      }
-      
+  return ( 
     <main>
       <SideNav />
-      <article class='homepage'>
+      <article className='homepage'>
         <div className='fixed'>
           <NewRoomButton
             history={props.history}
@@ -81,19 +71,24 @@ export default function Conversation(props) {
           <SortBy 
             state={changeState}
           />
+        {newConversations && 
+        <Alert 
+        severity="info"
+        onClick={() => {clearNotifications()}}
+        >
+          <AlertTitle>New Conversations Available</AlertTitle>
+          <Button>
+  
+          <strong>click here</strong>
+          </Button>
+        </Alert>
+        }
         </div>
-        {/* {newConversations && 
-        <Alert severity="info">
-        <AlertTitle>Info</AlertTitle>
-        This is an info alert — <strong>check it out!</strong>
-      </Alert>
-      } */}
         <ConversationList 
           conversations={conversations}
           history={props.history}
         />
       </article>
     </main>
-    </>
   )
 };
