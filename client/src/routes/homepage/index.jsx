@@ -30,9 +30,30 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
+  function url(s) {
+    var l = window.location;
+    return ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + s;
+  }
+
+  let wsURL = url(8000);
+  console.log('wsURL :', wsURL);
+  
+
+  // const HOST = window.location.origin.replace(/^http/, 'ws')
+  // console.log('HOST :', HOST);
+
+  // const wsENV = process.env.DB_PORT
+  // console.log('wsENV :', wsENV);
+  const HOST = window.location.origin.replace(/^http/, 'ws')
+  console.log('HOST :', HOST);
+
+
   useEffect(() => {
-    // const webSocket = new WebSocket('ws://localhost:8000');
-    const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
+
+    // const webSocket = new WebSocket(HOST);
+    const webSocket = new WebSocket(wsURL);
+    // const webSocket = new WebSocket(process.env.WEBSOCKET_URL);
+
     webSocket.onopen = event => {
       webSocket.send("ping")
     }
