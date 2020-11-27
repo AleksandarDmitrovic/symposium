@@ -9,17 +9,18 @@ const Video = (props) => {
   const ref = useRef();
 
   useEffect(() => {
+    console.log('in use effect');
     props.peer.on("stream", stream => {
 
       
       console.log('IN useEFFECT stream', stream);
-      console.log('getTracks', stream.getTracks()[0].enabled);
+      // console.log('getTracks', stream.getTracks()[0].enabled);
       // stream.getTracks()[0].enabled = props.active;
       // console.log('getTracks after false', stream.getTracks()[0].enabled);
 
       ref.current.srcObject = stream;
     })
-  }, [props.peer]);
+  }, [props]);
 
   console.log('IN useEFFECT ref', ref);
   return (
@@ -60,6 +61,9 @@ export default function Call(props) {
   const userVideo = useRef();
   const peersRef = useRef([]);
 
+  // Current state of users video
+  const [isActive, setIsActive] = useState(true);
+
 
   // videoState to show video or avatar
   const [mediaStream, setMediaStream] = useState(true);
@@ -68,13 +72,21 @@ export default function Call(props) {
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-      console.log('in toggleVideo userVide', userVideo.current.srcObject);  
+      
 
-      const id = userVideo.current.srcObject.id;
-      const active = userVideo.current.srcObject.active;
+      console.log('userVideo.current.srcObject', userVideo.current.srcObject.getTracks()[0].enabled);
+      console.log('peersRef.current[0].peer', peersRef.current[0].peer);
+
+      peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
+      userVideo.current.srcObject.getTracks()[0].enabled = false;
+      isActive ? setIsActive(false) : setIsActive(true);
+
+      console.log('isActive', isActive);
+      
+
 
       
-      socketRef.current.emit("user video settings changed", [id, active]);
+      // socketRef.current.emit("user video settings changed", [id, active]);
   };
 
   // useEffect runs when someone joins the room
@@ -158,12 +170,14 @@ export default function Call(props) {
 
     // Toggle video for users
     socketRef.current.on('user has disabled video', mediaStream => {
-      console.log('user has disabled video', mediaStream);
-      console.log('user has disabled video userVideo', userVideo.current.srcObject);
 
-      setMediaStream(mediaStream)
+      console.log('peersRef', peersRef);
+      // console.log('user has disabled video', mediaStream);
+      // console.log('user has disabled video userVideo', userVideo.current.srcObject);
 
-      console.log('MEDIA STREAM', mediaStream);
+      // setMediaStream(mediaStream)
+
+      // console.log('MEDIA STREAM', mediaStream);
 
       // rerender ? setRerender(false) : setRerender(true);
     });
@@ -227,7 +241,7 @@ export default function Call(props) {
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
         {peersRef.current.map((peer) => {
             return (
-              <Video key={peer.peerID} peer={peer.peer} active={mediaStream} />
+              <Video key={peer.peerID} peer={peer.peer} />
             )         
         })}
       </div>
