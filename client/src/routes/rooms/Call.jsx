@@ -74,19 +74,15 @@ export default function Call(props) {
   const toggleVideo = () => {
       
 
-      console.log('userVideo.current.srcObject', userVideo.current.srcObject.getTracks()[0].enabled);
-      console.log('peersRef.current[0].peer', peersRef.current[0].peer);
+    console.log('userVideo.current.srcObject', userVideo.current.srcObject.getTracks()[0].enabled);
+    console.log('peersRef.current[0].peer', peersRef.current[0].peer);
 
-      peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
-      userVideo.current.srcObject.getTracks()[0].enabled = false;
-      isActive ? setIsActive(false) : setIsActive(true);
+    peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
+    userVideo.current.srcObject.getTracks()[0].enabled = false;
+    isActive ? setIsActive(false) : setIsActive(true);
 
-      console.log('isActive', isActive);
+    console.log('isActive', isActive);
       
-
-
-      
-      // socketRef.current.emit("user video settings changed", [id, active]);
   };
 
   // useEffect runs when someone joins the room
@@ -168,20 +164,6 @@ export default function Call(props) {
       setPeers(peers);
     })
 
-    // Toggle video for users
-    socketRef.current.on('user has disabled video', mediaStream => {
-
-      console.log('peersRef', peersRef);
-      // console.log('user has disabled video', mediaStream);
-      // console.log('user has disabled video userVideo', userVideo.current.srcObject);
-
-      // setMediaStream(mediaStream)
-
-      // console.log('MEDIA STREAM', mediaStream);
-
-      // rerender ? setRerender(false) : setRerender(true);
-    });
-
     // Updates newMessage state triggering useEffect in ChatBox.jsx
     socketRef.current.on("update chat box", messageInfo => {
       if (messageInfo.message) {
@@ -239,7 +221,7 @@ export default function Call(props) {
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peersRef.current.map((peer) => {
+        {peers.map((peer) => {
             return (
               <Video key={peer.peerID} peer={peer.peer} />
             )         
