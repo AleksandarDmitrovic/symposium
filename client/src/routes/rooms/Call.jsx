@@ -231,7 +231,7 @@ export default function Call(props) {
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peersRef.current.map((peer) => {
+        {peers.map((peer) => {
             return (
               <Video key={peer.peerID} peer={peer.peer} />
             )         

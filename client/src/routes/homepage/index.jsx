@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
-
-
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
@@ -51,6 +49,7 @@ export default function Conversation(props) {
 
 
   useEffect(() => {
+
     // const webSocket = new WebSocket(HOST);
     const webSocket = new WebSocket(wsURL);
     // const webSocket = new WebSocket(process.env.WEBSOCKET_URL);
