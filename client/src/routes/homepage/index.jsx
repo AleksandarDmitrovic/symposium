@@ -32,8 +32,19 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
+  function url(s) {
+    var l = window.location;
+    return ((l.protocol === "https:") ? "wss://" : "ws://") + l.host + l.pathname + s;
+  }
+
+  let test = url(8000);
+  console.log('test :', test);
+
+  const HOST = window.location.origin.replace(/^http/, 'ws')
+  console.log('HOST :', HOST);
+
   useEffect(() => {
-    const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
+    const webSocket = new WebSocket(HOST);
     webSocket.onopen = event => {
       webSocket.send("ping")
     }

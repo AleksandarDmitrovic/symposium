@@ -35,12 +35,12 @@ app.use(cors());
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ server });
 
-wss.on("connection", socket => {
-  socket.onmessage = event => {
-    // console.log(`Message Received: ${event.data}`);
+wss.on("connection", ws => {
+  ws.onmessage = event => {
+    console.log(`Message Received: ${event.data}`);
 
     if (event.data === "ping") {
-      // socket.send(JSON.stringify("pong"));
+      ws.send(JSON.stringify("pong"));
     }
   };
 });
