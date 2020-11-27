@@ -7,8 +7,36 @@ import SideNav from "./SideNav";
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import './conversation-styles/index.scss';
+import { io } from "socket.io-client";
 
 export default function Conversation(props) {
+
+  const [homepage, setHomepage] = useState();
+
+  useEffect(() => {
+    console.log('creating homepage connection');
+    setHomepage(io.connect("/"));
+    // const homepage = io.connect("/");
+
+  }, [])
+  
+  // if(homepage) {
+    
+  //   homepage.on("new conversation available", () => {
+  //     console.log("made it to index !!!!")
+  //     setNewConversations(true)
+  //   })
+  // }
+  useEffect(() => {
+    if (homepage) {
+      homepage.on("new conversation available", () => {
+        console.log("made it to index !!!!")
+        setNewConversations(true)
+      })
+    }
+  }, [homepage])
+  
+  
 
   // Array of all conversations returned by axios get request
   const [conversations, setConversations] = useState([]);
@@ -30,54 +58,7 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
-  function url(s) {
-    var l = window.location;
-    return ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + s;
-  }
-
-  let wsURL = url(8000);
-  console.log('wsURL :', wsURL);
-  
-
-  // const HOST = window.location.origin.replace(/^http/, 'ws')
-  // console.log('HOST :', HOST);
-
-  // const wsENV = process.env.DB_PORT
-  // console.log('wsENV :', wsENV);
-  const wsHeroku = window.location.origin.replace(/^http/, 'ws')
-  
-
-
-  useEffect(() => {
-    let webSocket;
-    if(window.location.origin.includes("heroku")) {
-
-      webSocket = new WebSocket(wsHeroku);
-    } else {
-      webSocket = new WebSocket(wsURL);
-    }
-    // const webSocket = new WebSocket(HOST);
-    // const webSocket = new WebSocket(process.env.WEBSOCKET_URL);
-
-    webSocket.onopen = event => {
-      webSocket.send("ping")
-    }
-    webSocket.onmessage = event => {
-      console.log("Message Received:", event.data); //Confirmation of connection
-    }
-    webSocket.onmessage = event => {
-      const message = JSON.parse(event.data);
-
-      if (message.type === "UPDATE_CONVERSATIONS") {
-        console.log("we did it yay")
-        setNewConversations(true);
-      }
-    }
-    //Cleanup 
-    return () => webSocket.close();
-
-  }, [])
-  
+ 
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
@@ -92,6 +73,7 @@ export default function Conversation(props) {
         <div className='fixed'>
           <NewRoomButton
             history={props.history}
+            connection={homepage}
           />
           <SortBy 
             state={changeState}

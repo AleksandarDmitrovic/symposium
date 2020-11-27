@@ -7,6 +7,7 @@ import TimePicker from './TimePicker';
 
 import { Button, Menu, MenuItem, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+// import { io } from "socket.io-client";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewRoomForm (props) {
+
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
   const [timePicked, setTimePicked] = useState(props.timePicked || '');
@@ -93,7 +95,9 @@ export default function NewRoomForm (props) {
         embedTitle: selectedEpisode[0].embed_title,
         embedUrl: selectedEpisode[0].embed_url
       })
-      .then((res) => {
+      .then((res) => {       
+        props.connection.emit("new conversation created", res)
+        console.log("made it")
         props.history.push(`/room/${id}`);
         document.getElementById('episode-list').style.visibility = 'hidden';
       })

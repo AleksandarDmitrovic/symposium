@@ -116,10 +116,10 @@ module.exports = (db, updateConversations) => {
         .then((data) => {
           const conversationID = data.rows[0].id;
 
-          setTimeout(() => {
-            res.status(204).json({});
-            updateConversations(Number(conversationID));
-          }, 1000);
+      
+          res.json({ conversationID });
+          // updateConversations(Number(conversationID));
+       
         })
         .catch((err) => {
           res

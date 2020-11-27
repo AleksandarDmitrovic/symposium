@@ -31,38 +31,18 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cors());
 
-//WebSocket Setup
-const WebSocket = require("ws");
-const wss = new WebSocket.Server({ server });
-
-wss.on("connection", ws => {
-  ws.onmessage = event => {
-    console.log(`Message Received: ${event.data}`);
-
-    if (event.data === "ping") {
-      ws.send(JSON.stringify("pong"));
-    }
-  };
-});
-
-const updateConversations = (id) => {
-  wss.clients.forEach(function eachClient(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(
-        JSON.stringify({
-          type: "UPDATE_CONVERSATIONS",
-          id
-        })
-      );
-    }
-  });
-};
-
 const users = {};
 
 const socketToRoom = {};
 
 io.on("connection", socket => {
+
+  console.log('connection being made in server');
+
+  socket.on("new conversation created", () => {
+    socket.broadcast.emit("new conversation available");
+  });
+
   socket.on("join room", roomID => {
 
     if (users[roomID]) {
@@ -123,7 +103,7 @@ const homepage = require("./routes/homepage");
 // For users
 const usersRoutes = require("./routes/users");
 
-app.use("/api", homepage(db, updateConversations));
+app.use("/api", homepage(db));
 app.use("/api/users", usersRoutes(db));
 
 
