@@ -1,15 +1,33 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
+import { io } from "socket.io-client";
+import { Button } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
+
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
-import { Button } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import './conversation-styles/index.scss';
 
 export default function Conversation(props) {
 
+  // Set up for socket.io connection to notify users of new conversations 
+  const [homepage, setHomepage] = useState();
+
+  useEffect(() => {
+    setHomepage(io.connect("/"));
+  }, [])
+
+  useEffect(() => {
+    if (homepage) {
+      homepage.on("new conversation available", () => {
+        console.log("made it to index !!!!")
+        setNewConversations(true)
+      })
+    }
+  }, [homepage])
+  
   // Array of all conversations returned by axios get request
   const [conversations, setConversations] = useState([]);
 
@@ -30,28 +48,6 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
-  // useEffect(() => {
-  //   // const webSocket = new WebSocket('ws://localhost:8000');
-  //   const webSocket = new WebSocket('wss://the-symposium.herokuapp.com/');
-  //   webSocket.onopen = event => {
-  //     webSocket.send("ping")
-  //   }
-  //   webSocket.onmessage = event => {
-  //     console.log("Message Received:", event.data); //Confirmation of connection
-  //   }
-  //   webSocket.onmessage = event => {
-  //     const message = JSON.parse(event.data);
-
-  //     if (message.type === "UPDATE_CONVERSATIONS") {
-  //       console.log("we did it yay")
-  //       setNewConversations(true);
-  //     }
-  //   }
-  //   //Cleanup 
-  //   return () => webSocket.close();
-
-  // }, [])
-  
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
@@ -66,6 +62,7 @@ export default function Conversation(props) {
         <div className='fixed'>
           <NewRoomButton
             history={props.history}
+            connection={homepage}
           />
           <SortBy 
             state={changeState}

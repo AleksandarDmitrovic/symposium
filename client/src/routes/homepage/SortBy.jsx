@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, MenuItem, Tabs, Tab } from '@material-ui/core';
+import { Menu, MenuItem, Tabs, Tab, Typography } from '@material-ui/core';
 import PodcastSearch from "./search/PodcastSearch";
 import './conversation-styles/sortby.scss'
 
@@ -23,7 +23,8 @@ export default function SortBy (props) {
   };
 
   return (
-
+    <>
+   
     <div id='sort-by-container'>
       <Tabs
         value={value}
@@ -62,5 +63,11 @@ export default function SortBy (props) {
       <PodcastSearch state={props.state}/>
       </Tabs>
     </div>
+    <br/>
+    <Typography variant="h6" component="h5">
+      h1. Heading
+    </Typography>
+
+    </>
   )
 }
