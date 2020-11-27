@@ -5,18 +5,14 @@ import Peer from "simple-peer";
 
 
 const Video = (props) => {
-  console.log('props', props);
   const ref = useRef();
 
   useEffect(() => {
     props.peer.on("stream", stream => {
-
       ref.current.srcObject = stream;
-
     })
   }, [props.peer]);
 
-  console.log('IN useEFFECT ref', ref);
   return (
     <video className='call-video other' playsInline autoPlay ref={ref} />
   );
@@ -47,7 +43,6 @@ For the person awaiting to join the room:
 */
 
 export default function Call(props) {
-  console.log('Rerender');
   const [peers, setPeers] = useState([]);
 
   // We keep track of the changes in the following refs without having to rerender the component
@@ -58,7 +53,6 @@ export default function Call(props) {
   // Current state of users video
   const [isActive, setIsActive] = useState(true);
 
-
   // videoState to show video or avatar
   const roomID = props.roomID;
 
@@ -66,7 +60,6 @@ export default function Call(props) {
   const toggleVideo = () => {
 
     if (isActive) {
-
       userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
       // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
       // Update State
@@ -87,15 +80,11 @@ export default function Call(props) {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
-      console.log('MY STREAM IS', stream);
-
       //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
       // Emit an event saying the user has joined the room
       socketRef.current.emit('join room', roomID);
       // get array of users (everyone in chat except from themselves)
       socketRef.current.on('all users', users => {
-
-        console.log('IN ALL USERS, PUSHING INTO PEERS REF', peersRef.current);
 
         // We have no peers yet because we have just joined. Create a peers array for rendering purposes as we need to know how many videos to render
         const peers = [];
