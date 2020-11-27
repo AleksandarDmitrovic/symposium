@@ -9,18 +9,12 @@ const Video = (props) => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log('in use effect');
     props.peer.on("stream", stream => {
 
-      
-      console.log('IN useEFFECT stream', stream);
-      // console.log('getTracks', stream.getTracks()[0].enabled);
-      // stream.getTracks()[0].enabled = props.active;
-      // console.log('getTracks after false', stream.getTracks()[0].enabled);
-
       ref.current.srcObject = stream;
+
     })
-  }, [props]);
+  }, [props.peer]);
 
   console.log('IN useEFFECT ref', ref);
   return (
@@ -66,22 +60,39 @@ export default function Call(props) {
 
 
   // videoState to show video or avatar
-  const [mediaStream, setMediaStream] = useState(true);
-
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
+
+    if (isActive) {
+
+      // For other browsers
+      peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
+
+      // For local browser
+      userVideo.current.srcObject.getTracks()[0].enabled = false;
+
+      // Update State
+      setIsActive(false)
+    } else {
+      // TURN VIDEO ON
+
+      // For local browser
+      userVideo.current.srcObject.getTracks()[0].enabled = true;
+
+      // Update State
+      setIsActive(true)
+    }
       
 
     console.log('userVideo.current.srcObject', userVideo.current.srcObject.getTracks()[0].enabled);
     console.log('peersRef.current[0].peer', peersRef.current[0].peer);
 
-    peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
-    userVideo.current.srcObject.getTracks()[0].enabled = false;
-    isActive ? setIsActive(false) : setIsActive(true);
+    // peersRef.current[0].peer.removeStream(userVideo.current.srcObject)
+    // userVideo.current.srcObject.getTracks()[0].enabled = false;
+    // isActive ? setIsActive(false) : setIsActive(true);
 
-    console.log('isActive', isActive);
       
   };
 
@@ -221,7 +232,7 @@ export default function Call(props) {
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peers.map((peer) => {
+        {peersRef.current.map((peer) => {
             return (
               <Video key={peer.peerID} peer={peer.peer} />
             )         
