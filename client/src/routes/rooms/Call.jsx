@@ -60,6 +60,14 @@ export default function Call(props) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       userVideo.current.srcObject = stream;
       videoActive ? setVideoActive(false) : setVideoActive(true);
+
+      videoActive ? stream.getVideoTracks()[0].enabled = false : stream.getVideoTracks()[0].enabled = true;
+
+      console.log('stream', stream);
+      console.log('videoActive', videoActive);
+
+
+
       socketRef.current.emit("user video settings changed", socketRef.current.id);
     })
   };
@@ -143,23 +151,21 @@ export default function Call(props) {
 
     // Toggle video for users
     socketRef.current.on('user has disabled video', userId => {
+      console.log('user has disabled video');
 
-      const peerObj = peersRef.current.find(p => p.peerID === userId);
-      if (peerObj) {
+      // const peerObj = peersRef.current.find(p => p.peerID === userId);
+      // if (peerObj) {
 
-        console.log('peerObj', peerObj);
-
-        console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
-
-        if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
-          peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
-          console.log('turned off video for : ', peerObj);
-        } else {
-          peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
-          console.log('turned on video for : ', peerObj);
-        }
-  
-      }
+      //   console.log('peerObj', peerObj);
+      //   console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
+      //   if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
+      //     peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
+      //     console.log('turned off video for : ', peerObj);
+      //   } else {
+      //     peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
+      //     console.log('turned on video for : ', peerObj);
+      //   }
+      // }
     });
 
     // Updates newMessage state triggering useEffect in ChatBox.jsx
