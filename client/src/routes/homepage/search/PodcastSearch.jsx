@@ -25,6 +25,12 @@ export default function PodcastSearch(props) {
     prevTermRef.current = term;
   }, [term]);
   const prevTerm = prevTermRef.current;
+
+  const hide = className => {
+    Array.from(document.getElementsByClassName(className)).forEach(result => {
+      result.style.visibility = 'hidden';
+    });
+  };
   
   // Stores the setValue function to pass down as props while checking to see if prev state of the search was blank
   const changeValue = val => {
@@ -41,13 +47,9 @@ export default function PodcastSearch(props) {
 
       function pageClick(event){
         if (event.target.attributes.class && event.target.attributes.class.value !== 'podcast-result') {
-          Array.from(document.getElementsByClassName('spinner')).forEach(result => {
-            result.style.visibility = 'hidden';
-          });
+          hide('spinner');
           // setValue('');
-          Array.from(document.getElementsByClassName('result-container')).forEach(result => {
-            result.style.visibility = 'hidden';
-          });
+          hide('result-container');
           document.removeEventListener('click', pageClick);
         }
       };
@@ -79,7 +81,7 @@ export default function PodcastSearch(props) {
       }
     };
     axios.get(`/api/itunes/${term}`).then(response => {
-      document.getElementById('spinner').style.visibility = 'hidden';
+      hide('spinner');
       setResults([...response.data])
     })
     .catch(err => console.log('Error: ', err));
