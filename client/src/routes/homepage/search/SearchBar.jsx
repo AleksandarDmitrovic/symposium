@@ -1,7 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { TextField } from '@material-ui/core';
 // import useDebounce from "./hooks/useDebounce";
-import { TextField } from '@material-ui/core';
 
 export default function SearchBar(props) {
 
