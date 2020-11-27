@@ -85,17 +85,13 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {
     if (open) {
-      document.getElementById('convo-list').style.paddingLeft = '22vw';
+      document.getElementById('convo-list').style.paddingLeft = '24vw';
       document.getElementById('convo-list').style.paddingRight = '4vw';
-      document.getElementById('sort-by-container').style.paddingLeft = '22vw';
-      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '35vw';
-      document.getElementsByClassName('new-room-button')[0].style.marginRight = '35vw';
+      document.getElementsByClassName('fixed')[0].style.marginLeft = '30vw';
     } else {
       document.getElementById('convo-list').style.paddingLeft = '12vw';
       document.getElementById('convo-list').style.paddingRight = '12vw';
-      document.getElementById('sort-by-container').style.paddingLeft = '0';
-      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '25vw';
-      document.getElementsByClassName('new-room-button')[0].style.marginRight = '15vw';
+      document.getElementsByClassName('fixed')[0].style.marginLeft = '20vw';
     }
   }, [open]);
 
@@ -126,7 +122,7 @@ export default function PersistentDrawerLeft() {
         }}
       > 
         <h3>Symposium</h3>
-        <img className='icon' src='icon_a.png' alt='icon'/>
+        <img className='logo' src='icon_a.png' alt='logo'/>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
