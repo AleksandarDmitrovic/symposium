@@ -97,7 +97,6 @@ export default function NewRoomForm (props) {
       })
       .then((res) => {       
         props.connection.emit("new conversation created", res)
-        console.log("made it")
         props.history.push(`/room/${id}`);
         document.getElementById('episode-list').style.visibility = 'hidden';
       })

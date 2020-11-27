@@ -1,32 +1,24 @@
 import { useEffect, useState } from "react"
 import axios from 'axios';
+import { io } from "socket.io-client";
+import { Button } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
+
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
-import { Button } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import './conversation-styles/index.scss';
-import { io } from "socket.io-client";
 
 export default function Conversation(props) {
 
+  // Set up for socket.io connection to notify users of new conversations 
   const [homepage, setHomepage] = useState();
 
   useEffect(() => {
-    console.log('creating homepage connection');
     setHomepage(io.connect("/"));
-    // const homepage = io.connect("/");
-
   }, [])
-  
-  // if(homepage) {
-    
-  //   homepage.on("new conversation available", () => {
-  //     console.log("made it to index !!!!")
-  //     setNewConversations(true)
-  //   })
-  // }
+
   useEffect(() => {
     if (homepage) {
       homepage.on("new conversation available", () => {
@@ -36,8 +28,6 @@ export default function Conversation(props) {
     }
   }, [homepage])
   
-  
-
   // Array of all conversations returned by axios get request
   const [conversations, setConversations] = useState([]);
 
