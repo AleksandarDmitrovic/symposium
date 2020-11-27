@@ -4,14 +4,17 @@ import io from "socket.io-client";
 import Peer from "simple-peer";
 
 const Video = (props) => {
+  console.log('props', props);
   const ref = useRef();
 
   useEffect(() => {
     props.peer.on("stream", stream => {
+      console.log('IN useEFFECT stream', stream);
       ref.current.srcObject = stream;
     })
   }, [props.peer]);
 
+  console.log('IN useEFFECT ref', ref);
   return (
     <video className='call-video other' playsInline autoPlay ref={ref} />
   );
@@ -42,6 +45,7 @@ For the person awaiting to join the room:
 */
 
 export default function Call(props) {
+  console.log('Rerender');
   const [peers, setPeers] = useState([]);
 
   // We keep track of the changes in the following refs without having to rerender the component
@@ -52,24 +56,20 @@ export default function Call(props) {
 
   // videoState to show video or avatar
   const [videoActive, setVideoActive] = useState(true);
+  const [rerender, setRerender] = useState(true);
 
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
-      userVideo.current.srcObject = stream;
-      videoActive ? setVideoActive(false) : setVideoActive(true);
+      console.log('in toggleVideo userVide', userVideo.current.srcObject);  
+      
+      // Turn userVideo off
+      // update userVideo's ref
 
-      videoActive ? stream.getVideoTracks()[0].enabled = false : stream.getVideoTracks()[0].enabled = true;
-
-      console.log('stream', stream);
-      console.log('videoActive', videoActive);
-
-
+      // videoActive ? setVideoActive(false) : setVideoActive(true);
 
       socketRef.current.emit("user video settings changed", socketRef.current.id);
-    })
   };
 
   // useEffect runs when someone joins the room
@@ -79,6 +79,8 @@ export default function Call(props) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
+
+      console.log('MY STREAM IS', stream);
 
       //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
       // Emit an event saying the user has joined the room
@@ -151,21 +153,13 @@ export default function Call(props) {
 
     // Toggle video for users
     socketRef.current.on('user has disabled video', userId => {
-      console.log('user has disabled video');
+      console.log('user has disabled video', userId);
+      console.log('user has disabled video peersRef', peersRef); // CANNOT USE PEERSREF. THIS HAS MY VIDEO
+      console.log('user has disabled video userVideo', userVideo.current.srcObject);
 
-      // const peerObj = peersRef.current.find(p => p.peerID === userId);
-      // if (peerObj) {
+      console.log('user has disabled video peers', peers);
 
-      //   console.log('peerObj', peerObj);
-      //   console.log('state', peerObj.peer.streams[0].getVideoTracks()[0].enabled);
-      //   if (peerObj.peer.streams[0].getVideoTracks()[0].enabled === true) {
-      //     peerObj.peer.streams[0].getVideoTracks()[0].enabled = false;
-      //     console.log('turned off video for : ', peerObj);
-      //   } else {
-      //     peerObj.peer.streams[0].getVideoTracks()[0].enabled = true;
-      //     console.log('turned on video for : ', peerObj);
-      //   }
-      // }
+      rerender ? setRerender(false) : setRerender(true);
     });
 
     // Updates newMessage state triggering useEffect in ChatBox.jsx
@@ -221,23 +215,11 @@ export default function Call(props) {
     return peer;
   }
 
-  // used for avatar
-  const checkVideoActive = () => {
-    console.log('active?', videoActive);
-    if (videoActive) {
-      // Do something
-    } else {
-      return (
-        <Animal size="200px" className='call-video' />
-      )
-    }
-  }
-
   return (
     <>
       <div className='call-container'>
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-        {peersRef.current.map((peer) => {
+        {peers.map((peer) => {
             return (
               <Video key={peer.peerID} peer={peer.peer} />
             )         
