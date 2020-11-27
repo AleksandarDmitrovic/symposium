@@ -51,24 +51,22 @@ export default function Call(props) {
   const peersRef = useRef([]);
 
   // Current state of users video
-  const [isActive, setIsActive] = useState(true);
+  const [isVideoActive, setIsVideoActive] = useState(true);
+  const [isAudioActive, setIsAudioActive] = useState(true);
 
   // videoState to show video or avatar
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    if (isActive) {
-      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
-      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
-      // Update State
-      setIsActive(false)
-    } else {
-      // For local browser
-      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
-      // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
-      setIsActive(true)
-    } 
+    isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
+    setIsVideoActive(!isVideoActive);
+  };
+
+  // TURN VIDEO ON AND OFF
+  const toggleAudio = () => {
+    isAudioActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = true;
+    setIsAudioActive(!isAudioActive);
   };
 
   // useEffect runs when someone joins the room
@@ -215,6 +213,7 @@ export default function Call(props) {
         })}
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
+      <button onClick={toggleAudio}>TOGGLE AUDIO</button>
     </>
   );
 } 
