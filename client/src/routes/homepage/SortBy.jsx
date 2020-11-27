@@ -29,8 +29,6 @@ export default function SortBy (props) {
       <Tabs
         value={value}
         onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
       >
         <Tab
           aria-controls="simple-menu" 

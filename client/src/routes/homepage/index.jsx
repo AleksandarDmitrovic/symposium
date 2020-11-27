@@ -48,7 +48,6 @@ export default function Conversation(props) {
     })
   }, [searchParam]);
 
- 
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
