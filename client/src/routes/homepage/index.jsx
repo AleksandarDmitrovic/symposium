@@ -24,7 +24,6 @@ export default function Conversation(props) {
   useEffect(() => {
     if (homepage) {
       homepage.on("new conversation available", () => {
-        console.log("made it to index !!!!")
         setNewConversations(true)
       })
     }
