@@ -57,7 +57,7 @@ export default function Call(props) {
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       userVideo.current.srcObject = stream;
       videoActive ? setVideoActive(false) : setVideoActive(true);
       socketRef.current.emit("user video settings changed", socketRef.current.id);
@@ -68,7 +68,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
