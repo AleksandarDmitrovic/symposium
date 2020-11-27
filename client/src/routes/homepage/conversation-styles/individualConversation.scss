@@ -16,22 +16,52 @@
 }
 
 .body {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-end;
+  // justify-content: center;
+  height: 225px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 }
 
-.info {
+.pod {
+  display: flex;
+  justify-content: space-between;
+}
+.convo-info {
   padding-left: 300px;
+}
+.podcast-info {
+  padding-left: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .share {
-  display: flex;
-  align-items: baseline;
+  width: 65%;
+  margin-left: 30%;
+  display: inline;
 }
 
 #social-media {
+  width: 15em;
+}
+
+.share-room {
+  font-family: 'Raleway', sans-serif;
   padding-left: 1em;
+  width: 12em;
 }
 
 .cover-photo {
@@ -50,9 +80,9 @@
 }
 
 .join-room {
-  width: 40%;
+  width: 70%;
 }
 
 .embed-video {
-  padding-right: 25px;
+
 }

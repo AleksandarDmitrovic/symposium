@@ -57,52 +57,56 @@ export default function IndividualConversation(props) {
               />
             <CardActionArea onClick={joinRoom} style={{height: 'inherit'}}>
               <CardContent className='body'>
-              <div className='info'>
-                <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
-                  {props.title}
-                </Typography>
-                <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
-                  {props.description}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  {props.podcast_name}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  {props.episode_title}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  Timestamps: {props.starts_at} - {props.ends_at}
-                </Typography>
-                <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
-                  Category: {category}
-                </Typography>
-                <label>Conversation Closes In: </label>
-                <Timer
-                    initialTime={secondsForTimer}
-                    direction="backward"
-                >
-                  {() => (
-                    <>
-                      <Timer.Hours /> hours
-                      <Timer.Minutes /> minutes
-                    </>
-                  )}
-                </Timer>
-              </div>
-                <EmbedPodcast embed_url={props.audio} />
+                <div className='convo-info'>
+                  <header>
+                    <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
+                      {props.title}
+                    </Typography>
+                    <Timer
+                        initialTime={secondsForTimer}
+                        direction="backward"
+                    >
+                      {() => (
+                        <p>Conversation Closes In: <Timer.Hours /> hours <Timer.Minutes /> minutes</p>
+                      )}
+                    </Timer>
+                  </header>
+                  <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
+                    {props.description}
+                  </Typography>
+                </div>
+                <section className='pod'>
+                  <div className='podcast-info'>
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                      {props.podcast_name}
+                    </Typography>
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                      {props.episode_title}
+                    </Typography>
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                      Category: {category}
+                    </Typography>
+                  </div>
+                  <div className='player'>
+                    <EmbedPodcast embed_url={props.audio} />
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                      Timestamps: {props.starts_at} - {props.ends_at}
+                    </Typography>
+                  </div>
+                </section>
               </CardContent>
             </CardActionArea>   
-              <CardActions  style={{ display: 'flex', paddingBottom: '1em', alignItems: 'baseline', justifyContent: 'inherit'}}>
-                <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
-                <div className='share'>
-                  <p style={{fontFamily: "'Raleway', sans-serif"}}>Share this Room </p>
-                  <SocialMedia 
-                    description={props.description}
-                    url={roomURL}
-                  >
-                  </SocialMedia>
-                </div>
-              </CardActions>
+              <footer className='share'>
+                <CardActions style={{alignItems: 'baseline'}}>
+                  <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+                    <p className='share-room'>Share this Room </p>
+                    <SocialMedia 
+                      description={props.description}
+                      url={roomURL}
+                    >
+                    </SocialMedia>
+                </CardActions>
+              </footer>
           </div>
         </Card>
       }
