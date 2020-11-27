@@ -38,7 +38,9 @@ export default function PodcastSearch(props) {
 
       function pageClick(event){
         if (event.target.attributes.class && event.target.attributes.class.value !== 'podcast-result') {
-          console.log(event.target.attributes.class)
+          Array.from(document.getElementsByClassName('spinner')).forEach(result => {
+            result.style.visibility = 'hidden';
+          });
           // setValue('');
           Array.from(document.getElementsByClassName('result-container')).forEach(result => {
             result.style.visibility = 'hidden';
