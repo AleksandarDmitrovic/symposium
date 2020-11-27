@@ -65,7 +65,7 @@ export default function SortBy (props) {
     </div>
     <br/>
     <Typography variant="h6" component="h5">
-      h1. Heading
+      Sorted By: {value}
     </Typography>
 
     </>
