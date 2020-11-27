@@ -66,7 +66,7 @@ export default function Call(props) {
       setIsActive(false)
     } else {
       // For local browser
-      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false;
+      userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
       // userVideo.current.srcObject.getTracks().find((track) => track.kind === 'audio').enabled = false;
       setIsActive(true)
     } 
