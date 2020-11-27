@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
+
 const Video = (props) => {
   console.log('props', props);
   const ref = useRef();
@@ -13,8 +14,8 @@ const Video = (props) => {
       
       console.log('IN useEFFECT stream', stream);
       console.log('getTracks', stream.getTracks()[0].enabled);
-      stream.getTracks()[0].enabled = props.active;
-      console.log('getTracks after false', stream.getTracks()[0].enabled);
+      // stream.getTracks()[0].enabled = props.active;
+      // console.log('getTracks after false', stream.getTracks()[0].enabled);
 
       ref.current.srcObject = stream;
     })
@@ -61,21 +62,19 @@ export default function Call(props) {
 
 
   // videoState to show video or avatar
-  const [videoActive, setVideoActive] = useState(true);
-  const [rerender, setRerender] = useState(true);
+  const [mediaStream, setMediaStream] = useState(true);
 
   const roomID = props.roomID;
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
       console.log('in toggleVideo userVide', userVideo.current.srcObject);  
+
+      const id = userVideo.current.srcObject.id;
+      const active = userVideo.current.srcObject.active;
+
       
-      // Turn userVideo off
-      // update userVideo's ref
-
-      // videoActive ? setVideoActive(false) : setVideoActive(true);
-
-      socketRef.current.emit("user video settings changed", socketRef.current.id);
+      socketRef.current.emit("user video settings changed", [id, active]);
   };
 
   // useEffect runs when someone joins the room
@@ -158,14 +157,15 @@ export default function Call(props) {
     })
 
     // Toggle video for users
-    socketRef.current.on('user has disabled video', userId => {
-      console.log('user has disabled video', userId);
-      console.log('user has disabled video peersRef', peersRef); // CANNOT USE PEERSREF. THIS HAS MY VIDEO
+    socketRef.current.on('user has disabled video', mediaStream => {
+      console.log('user has disabled video', mediaStream);
       console.log('user has disabled video userVideo', userVideo.current.srcObject);
 
-      console.log('user has disabled video peers', peers);
+      setMediaStream(mediaStream)
 
-      rerender ? setRerender(false) : setRerender(true);
+      console.log('MEDIA STREAM', mediaStream);
+
+      // rerender ? setRerender(false) : setRerender(true);
     });
 
     // Updates newMessage state triggering useEffect in ChatBox.jsx
@@ -227,7 +227,7 @@ export default function Call(props) {
         <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
         {peersRef.current.map((peer) => {
             return (
-              <Video key={peer.peerID} peer={peer.peer} active={false} />
+              <Video key={peer.peerID} peer={peer.peer} active={mediaStream} />
             )         
         })}
       </div>
