@@ -11,6 +11,7 @@ export default function Cover(props) {
   const name = props.collectionName
 
   const selectPodcast = name => {
+  
     // Hide the remaining search results. Convert into an array to iterate through 
     Array.from(document.getElementsByClassName('result-container')).forEach(result => {
       result.style.visibility = 'hidden';
@@ -28,11 +29,13 @@ export default function Cover(props) {
     props.setFeedUrl(props.feedUrl)
   };
 
+
+
   return (
     <article onClick={() => selectPodcast(name)} className="podcast">
       <img className="podcast-thumbnail" src={props.artworkUrl60} alt="Cover" />
       <div className='podcast-list'>
-        <div className="podacast-result">{name}</div>
+        <div className="podcast-result">{name}</div>
       </div>
     </article>
   );
