@@ -9,6 +9,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 8000;
 
+
+
 // Static build for Heroku deployment
 app.use(express.static('./client/build'));
 
@@ -29,18 +31,18 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cors());
 
-// Proxy allowing CORS
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "https://the-symposium.herokuapp.com/"); // update to match the domain you will make the request from
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-
 const users = {};
 
 const socketToRoom = {};
 
 io.on("connection", socket => {
+
+  console.log('connection being made in server');
+
+  socket.on("new conversation created", () => {
+    socket.broadcast.emit("new conversation available");
+  });
+
   socket.on("join room", roomID => {
 
     if (users[roomID]) {

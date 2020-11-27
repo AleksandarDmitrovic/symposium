@@ -15,6 +15,7 @@ export default function SearchResults(props) {
         changePodcastInfo = {props.changePodcastInfo}
         changeInput = {props.changeInput}
         setFeedUrl={props.setFeedUrl}
+        setSearchDone={props.setSearchDone}
       />
     )
   });

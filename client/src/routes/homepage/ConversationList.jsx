@@ -7,6 +7,7 @@ const mapConversations = function (props) {
       <IndividualConversation
         //HOW do we set unique keys properly for these elements
         // keyValue={conversation.id}
+        key={conversation.id}
         id={conversation.id}
         category_id={conversation.category_id}
         title={conversation.title}
@@ -30,7 +31,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul id='convo-list'>
+    <ul className='convo-list'>
       { mapConversations(props) }
     </ul>
   );

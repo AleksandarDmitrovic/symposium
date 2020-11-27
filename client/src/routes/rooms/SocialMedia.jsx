@@ -2,27 +2,23 @@ import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, Lin
 
 export default function SocialMedia(props) {
 
-  // props.url = url of open room 
-  // replace url for each button with heroku url with props.url appended to the end of it
-  // ie "heroku.com/${props.url}""
-
   return (
     <div id='social-media'>
       <TwitterShareButton 
         title={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
+        url={'the-symposium.herokuapp.com' + props.url} 
       >
         <TwitterIcon size={32} round={true}></TwitterIcon>
       </TwitterShareButton>
       <FacebookShareButton 
         quote={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
+        url={'the-symposium.herokuapp.com' + props.url} 
       >
         <FacebookIcon size={32} round={true}></FacebookIcon>
       </FacebookShareButton>
       <LinkedinShareButton 
         title={props.description}
-        url={'https://github.com/AleksandarDmitrovic/symposium/tree/feature/episode-select'} 
+        url={'the-symposium.herokuapp.com' + props.url} 
       >
         <LinkedinIcon size={32} round={true}></LinkedinIcon>
       </LinkedinShareButton>

@@ -25,14 +25,15 @@ export default function Cover(props) {
     }
     // Fill the input field with selected podcast name using props passed down from PodcastSearch
     props.changeValue(name);
-    props.setFeedUrl(props.feedUrl)
+    props.setFeedUrl(props.feedUrl);
+    props.setSearchDone(true);
   };
 
   return (
     <article onClick={() => selectPodcast(name)} className="podcast">
       <img className="podcast-thumbnail" src={props.artworkUrl60} alt="Cover" />
       <div className='podcast-list'>
-        <div className="podacast-result">{name}</div>
+        <div className="podcast-result">{name}</div>
       </div>
     </article>
   );
