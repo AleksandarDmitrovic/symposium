@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
-
 import { makeStyles, CircularProgress } from '@material-ui/core';
-import './searchBar.scss'
 import axios from 'axios';
+import './searchBar.scss'
         
 // PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props
 export default function PodcastSearch(props) {
@@ -17,13 +16,8 @@ export default function PodcastSearch(props) {
   const [value, setValue] = useState("");
   // The value of the feedUrl used to get the stream of the podcast
   const [feedUrl, setFeedUrl] = useState('');
-
-  // Track the prev state of term. If prev term was 0 and current term is higher, results should be displayed
-  const prevTermRef = useRef();
-  useEffect(() => {
-    prevTermRef.current = term;
-  }, [term]);
-  const prevTerm = prevTermRef.current;
+  // Boolean tracking the search status to determine whether to show results or not
+  const [searchDone, setSearchDone] = useState(false);
 
   // Find elements with given class name and hide them
   const hide = className => {
@@ -35,7 +29,8 @@ export default function PodcastSearch(props) {
   // Stores the setValue function to pass down as props while checking to see if prev state of the search was blank
   const changeValue = val => {
     setValue(val);
-    if (prevTerm && prevTerm.length <= 2) {
+    if (searchDone) {
+      setSearchDone(false);
       if (!document.getElementById('episode-list')) { 
         document.getElementsByClassName('result-container')[0].style.visibility = 'visible';
       } else {
@@ -45,34 +40,33 @@ export default function PodcastSearch(props) {
     // If user clicks outside search results, hide results
     document.addEventListener('click', pageClick);
     function pageClick(event){
-      if (event.target.attributes.class && event.target.attributes.class.value !== 'podcast-result') {
-        console.log('click event', event.target.attributes.class.value)
+      if (!event.target.attributes.class || event.target.attributes.class.value !== 'podcast-result') {
         hide('result-container');
         hide('spinner');
-        // setValue('');
         document.removeEventListener('click', pageClick);
-      }
+        setSearchDone(true);
+      } 
     };
   };
 
-    // Spinner to show while waiting for API results to come back
-    const useStyles = makeStyles((theme) => ({
-      root: {
-        visibility: 'hidden',
-        display: 'flex',
-        '& > * + *': {
-          marginLeft: theme.spacing(3),
-        },
+  // Spinner to show while waiting for API results to come back
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      visibility: 'hidden',
+      display: 'flex',
+      '& > * + *': {
+        marginLeft: theme.spacing(3),
       },
-    }));
-    const spin = useStyles();
-    const spinner = (
-      <div className={`${spin.root} spinner`}>
-        <CircularProgress color="secondary" />
-      </div>
-    );
+    },
+  }));
+  const spin = useStyles();
+  const spinner = (
+    <div className={`${spin.root} spinner`}>
+      <CircularProgress color="secondary" />
+    </div>
+  );
 
-   useEffect(() => {
+  useEffect(() => {
     if (term.length > 0) { 
       if (document.getElementById('episode-list')) {
         document.getElementsByClassName('spinner')[1].style.visibility = 'visible';
@@ -91,7 +85,7 @@ export default function PodcastSearch(props) {
     if (feedUrl.length > 0) {
       let url = encodeURIComponent(feedUrl);
       axios.get(`/api/episodes/${url}`).then(res => {
-        changeEpisodeInfo(res.data)
+        if (changeEpisodeInfo) { changeEpisodeInfo(res.data) };
       })
       .catch(err => console.log('Error: ', err));
     }
@@ -114,6 +108,7 @@ export default function PodcastSearch(props) {
           changePodcastInfo = {props.changePodcastInfo}
           changeInput = {props.changeInput}
           setFeedUrl={setFeedUrl}
+          setSearchDone={setSearchDone}
         />
       </div>
   );

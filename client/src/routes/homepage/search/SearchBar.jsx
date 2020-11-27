@@ -16,9 +16,11 @@ export default function SearchBar(props) {
   const onSearch = useCallback(props.onSearch, [term]);
 
   const handleFocus = (event) => {
-    if (event.target) { event.target.select() };
+    console.log('handling focus of ', event.target)
+    if (event.target.select) { event.target.select() };
   }
 
+  // Hide the episodes of the chosen podcast in the NewRoomForm if the search bar is empty
   useEffect(() => {
     if (document.getElementsByClassName('result-container')[1] && term.length === 0) {
       document.getElementById('episode-list').style.visibility = 'hidden';

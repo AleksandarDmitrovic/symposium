@@ -11,7 +11,6 @@ export default function Cover(props) {
   const name = props.collectionName
 
   const selectPodcast = name => {
-  
     // Hide the remaining search results. Convert into an array to iterate through 
     Array.from(document.getElementsByClassName('result-container')).forEach(result => {
       result.style.visibility = 'hidden';
@@ -26,10 +25,9 @@ export default function Cover(props) {
     }
     // Fill the input field with selected podcast name using props passed down from PodcastSearch
     props.changeValue(name);
-    props.setFeedUrl(props.feedUrl)
+    props.setFeedUrl(props.feedUrl);
+    props.setSearchDone(true);
   };
-
-
 
   return (
     <article onClick={() => selectPodcast(name)} className="podcast">
