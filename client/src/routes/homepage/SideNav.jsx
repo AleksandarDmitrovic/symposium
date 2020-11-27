@@ -87,11 +87,11 @@ export default function PersistentDrawerLeft() {
     if (open) {
       document.getElementById('convo-list').style.paddingLeft = '24vw';
       document.getElementById('convo-list').style.paddingRight = '4vw';
-      document.getElementsByClassName('fixed')[0].style.marginLeft = '30vw';
+      document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
     } else {
       document.getElementById('convo-list').style.paddingLeft = '12vw';
       document.getElementById('convo-list').style.paddingRight = '12vw';
-      document.getElementsByClassName('fixed')[0].style.marginLeft = '20vw';
+      document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
     }
   }, [open]);
 
