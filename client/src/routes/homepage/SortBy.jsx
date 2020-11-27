@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Menu, MenuItem, Tabs, Tab } from '@material-ui/core';
+import { Menu, MenuItem, Tabs, Tab, Typography } from '@material-ui/core';
 import PodcastSearch from "./search/PodcastSearch";
 import './conversation-styles/sortby.scss'
 
@@ -22,16 +22,13 @@ export default function SortBy (props) {
     setValue(newValue);
   };
 
-  // CATEGORY BUTTON IS HARDCODED TO 1 ("OTHER")
-
   return (
-
+    <>
+   
     <div id='sort-by-container'>
       <Tabs
         value={value}
         onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
       >
         <Tab
           aria-controls="simple-menu" 
@@ -66,5 +63,11 @@ export default function SortBy (props) {
       <PodcastSearch state={props.state}/>
       </Tabs>
     </div>
+    <br/>
+    <Typography variant="h6" component="h5">
+      h1. Heading
+    </Typography>
+
+    </>
   )
 }

@@ -1,59 +1,32 @@
 import { useEffect, useCallback } from "react";
-
+import { TextField } from '@material-ui/core';
 import useDebounce from "./hooks/useDebounce";
-
-import { TextField, Input } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles((theme) => ({
-  inputField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300,
-  },
-}));
 
 export default function SearchBar(props) {
 
   // Value state passed down from PodcastSearch Component
   const value = props.value
-  // Custom Hook - wait 400 ms until making the 
+
+  //* If useDebounce hook commented out, change all instances of "value" to "term" in useCallback and useEffect
+  // Custom Hook - wait 400 ms until making the search for results
   const term = useDebounce(value, 400);
 
   // onSearch is passed down from PodcastSearch and sets the term state
   // useCallback memoizes the function to run whenever debounced term changes
   const onSearch = useCallback(props.onSearch, [term]);
 
-  const handleFocus = (event) => event.target.select();
-
-  useEffect(() => {
-    if (document.getElementsByClassName('result-container')[1]) {
-      if (document.getElementsByClassName('result-container')[1].style.visibility === 'visible' && term.length === 0) {
-        document.getElementById('episode-list').style.visibility = 'hidden';
-        document.getElementById('display-episode').style.visibility = 'hidden';
-      }
-    }
-    
-    onSearch(term);
-  }, [term, onSearch]);
-
-  const showResults = () => {
-    Array.from(document.getElementsByClassName('result-container')).forEach(result => {
-      if (document.getElementById('episode-list')) {
-        if (result.parentElement.parentElement.parentElement.className !== 'sort-by') {
-          result.style.visibility = 'visible';
-        }
-      } else {
-        result.style.visibility = 'visible';
-      }
-    });
+  const handleFocus = (event) => {
+    if (event.target.select) { event.target.select() };
   }
 
-  // const classes = useStyles();
-  // <Input
-  // className={classes.inputField}
-  const classes = useStyles();
+  // Hide the episodes of the chosen podcast in the NewRoomForm if the search bar is empty
+  useEffect(() => {
+    if (document.getElementsByClassName('result-container')[1] && term.length === 0) {
+      document.getElementById('episode-list').style.visibility = 'hidden';
+      document.getElementById('display-episode').style.visibility = 'hidden';
+    }
+    onSearch(term);
+  }, [term, onSearch]);
 
   return (
     <section className="search">
@@ -69,7 +42,6 @@ export default function SearchBar(props) {
           value={value}
           onChange={event => {
             props.changeValue(event.target.value);
-            showResults();
           }}
           onClick={handleFocus}
         />
