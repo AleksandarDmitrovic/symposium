@@ -4,45 +4,69 @@
 
 .conversation-card {
   margin: 50px;
-  min-height: 250px;
-  max-height: 280px;
+  height: 300px;
   min-width: 925px;
   max-width: 70vw;
 }
 
 .card {
-  min-height: 250px;
+  height: 300px;
   position: relative;
   box-sizing: border-box;
-  
 }
 
 .body {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  // width: 75vw;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-end;
+  // justify-content: center;
+  height: 225px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 }
 
-.info {
-  // width: 55vw;
-  // width: 100%;
-  // height: 10em;
-  padding-left: 250px;
+.pod {
+  display: flex;
+  justify-content: space-between;
+}
+.convo-info {
+  padding-left: 300px;
+}
+.podcast-info {
+  padding-left: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .share {
-  display: flex;
-  align-items: baseline;
+  width: 65%;
+  margin-left: 30%;
+  display: inline;
 }
 
 #social-media {
+  width: 15em;
+}
+
+.share-room {
+  font-family: 'Raleway', sans-serif;
   padding-left: 1em;
+  width: 12em;
 }
 
 .cover-photo {
   height: -webkit-fill-available;
-  width: 250px;
+  width: 300px;
   position: absolute;
 }
 
@@ -56,10 +80,9 @@
 }
 
 .join-room {
-  width: 40%;
+  width: 70%;
 }
 
 .embed-video {
-  padding-right: 25px;
-  // padding-left: 5vw;
+
 }

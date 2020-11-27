@@ -35,7 +35,6 @@
 }
 
 .result-container {
-  // position: absolute;
   position: fixed;
   overflow-y: scroll;
   height: 300px;
@@ -52,4 +51,9 @@
 
 #display-episode {
   visibility: hidden;
+}
+
+.search-spinner {
+  display: flex;
+  align-items: flex-end;
 }
