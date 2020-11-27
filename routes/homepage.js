@@ -35,8 +35,7 @@ module.exports = (db, updateConversations) => {
 
   router.get("/conversations/:url", (req, res) => {
     db.query(`SELECT * FROM conversations 
-              WHERE conversations.conversation_url = $1
-              ORDER BY id DESC;`, [req.params.url])
+              WHERE conversations.conversation_url = $1;`, [req.params.url])
       .then(data => {
         const conversation = data.rows;
         res.json({ conversation });
