@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+import { makeStyles, CircularProgress } from '@material-ui/core';
 import './searchBar.scss'
-const axios = require('axios');
+import axios from 'axios';
 
 export default function PodcastSearch(props) {
   const { changeEpisodeInfo } = props
@@ -44,11 +45,36 @@ export default function PodcastSearch(props) {
           });
           document.removeEventListener('click', pageClick);
         }
-      }
-    }
+      };
+    };
+
+    // Spinner loader to show while waiting for API results to come back
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        visibility: 'hidden',
+        display: 'flex',
+        '& > * + *': {
+          marginLeft: theme.spacing(3),
+        },
+      },
+    }));
+    const spin = useStyles();
+    const spinner = (
+      <div className={`${spin.root} spinner`}>
+        <CircularProgress color="secondary" />
+      </div>
+    );
 
    useEffect(() => {
+    if (term.length > 0) { 
+      if (document.getElementById('episode-list')) {
+        document.getElementsByClassName('spinner')[1].style.visibility = 'visible';
+      } else {
+        document.getElementsByClassName('spinner')[0].style.visibility = 'visible';
+      }
+    };
     axios.get(`/api/itunes/${term}`).then(response => {
+      document.getElementById('spinner').style.visibility = 'hidden';
       setResults([...response.data])
     })
     .catch(err => console.log('Error: ', err));
@@ -64,11 +90,14 @@ export default function PodcastSearch(props) {
 
   return (
       <div>
-        <SearchBar 
-          onSearch={term => setTerm(term)}
-          changeValue = {changeValue}
-          value = {value}
-        />
+        <div className='search-spinner'>
+          <SearchBar 
+            onSearch={term => setTerm(term)}
+            changeValue = {changeValue}
+            value = {value}
+          />
+          {spinner}
+        </div>
         <SearchResults 
           results={results}
           state={props.state}
