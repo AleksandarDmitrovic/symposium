@@ -80,6 +80,11 @@ export default function SideNav(props) {
     setOpen(false);
   };
 
+  const scrollToTop = () => {
+    console.log('scroll to')
+    window.scrollTo(0,100);
+  }
+
   useEffect(() => {
     if (open) {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
@@ -130,7 +135,7 @@ export default function SideNav(props) {
         </div>
         <Divider />
         <List className='nav-list'>
-          <ListItem button>
+          <ListItem button onClick={scrollToTop}>
             <ListItemIcon> <Home /> </ListItemIcon>
             <ListItemText primary='Home'/>
           </ListItem>
@@ -140,9 +145,6 @@ export default function SideNav(props) {
               connection={props.connection}
             />
           </div>
-          {/* <Button variant="contained" color="primary">
-            Create a Conversation Room
-          </Button> */}
           <ListItem button>
             <ListItemIcon> <AccountCircle /> </ListItemIcon>
             <ListItemText primary='Example User'/>

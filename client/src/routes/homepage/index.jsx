@@ -1,5 +1,4 @@
-
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios';
 import { io } from "socket.io-client";
 import { Button } from '@material-ui/core';
@@ -64,7 +63,10 @@ export default function Conversation(props) {
   
   return ( 
     <main>
-      <SideNav />
+      <SideNav 
+        history={props.history}
+        connection={homepage}
+      />
       <article className='homepage'>
         <div className='new-room-button'>
           <NewRoomButton
