@@ -177,6 +177,20 @@ module.exports = (db, updateConversations) => {
       })
       .catch(err => console.log('Error:', err));
   });
+
+  // Podcast fetched as the "Podcast of the Day"
+  router.get("/podcastOfDay", (req, res) => {
+    db.query(`
+            SELECT podcast_episode_embed_url, COUNT(*) as count
+            FROM conversations
+            GROUP BY podcast_episode_embed_url
+            ORDER BY count DESC
+            LIMIT 1;`
+    ).then(data => {
+      const embed_url = data.rows[0].podcast_episode_embed_url;
+      res.json(embed_url);
+    }).catch(err => console.log('Error:', err))
+  });
  
   return router;
 };
