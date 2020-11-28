@@ -81,7 +81,6 @@ export default function SideNav(props) {
   };
 
   const scrollToTop = () => {
-    console.log('scroll to')
     window.scrollTo(0,100);
   }
 
@@ -90,14 +89,14 @@ export default function SideNav(props) {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
-      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '23vw';
-      // document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '20vw';
+      document.getElementsByClassName('fixed')[0].style.top = '0';
+      document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button');
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
-      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '13vw';
-      // document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '0';
+      document.getElementsByClassName('fixed')[0].style.top = '10vh';
+      document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button-fixed');
     }
   }, [open]);
 
@@ -149,11 +148,11 @@ export default function SideNav(props) {
             <ListItemIcon> <AccountCircle /> </ListItemIcon>
             <ListItemText primary='Example User'/>
           </ListItem>
-          <Button variant="contained" color="primary">
-            Log Out
-          </Button>
         </List>
         <img className='logo' src='icon_c.png' alt='logo'/>
+        <Button variant="contained" color="primary">
+            Log Out
+          </Button>
       </Drawer>
     </div>
   );

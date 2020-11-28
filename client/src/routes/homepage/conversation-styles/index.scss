@@ -18,15 +18,28 @@ body {
   justify-content: center;
   width: 74vw;
   height: 10vh;
+  margin-left: 23vw;
   font-family: 'Raleway', sans-serif;
 }
 
+.new-room-button-fixed {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  width: 74vw;
+  height: 10vh;
+  margin-left: 13vw;
+  margin-right: 13vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .fixed {
-  // position: fixed;
   position: sticky;
   z-index: 5;
   top: 0;
-  // height: 10vh;
   width: 74vw;
   margin-left: 13vw;
   margin-right: 13vw;

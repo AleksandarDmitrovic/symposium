@@ -68,7 +68,7 @@ export default function Conversation(props) {
         connection={homepage}
       />
       <article className='homepage'>
-        <div className='new-room-button'>
+        <div className='top-btn new-room-button'>
           <NewRoomButton
             history={props.history}
             connection={homepage}
