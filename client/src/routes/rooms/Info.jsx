@@ -19,6 +19,8 @@ export default function Info(props) {
   // const altImage = "https://images.unsplash.com/photo-1556761175-129418cb2dfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80";
   const classes = useStyles();
 
+  console.log('props.history in info', props.url)
+
   return (
   <Card className="podcast-card">
       {/* <img src={props.podcast_image} alt={altImage} /> */}
@@ -37,7 +39,7 @@ export default function Info(props) {
       </ul>
       <SocialMedia 
         description={props.description}
-        url={props.history}
+        url={props.url}
       />
   </Card>
   )
