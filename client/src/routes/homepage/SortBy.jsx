@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { Menu, MenuItem, Tabs, Tab, Typography } from '@material-ui/core';
+import axios from 'axios';
+
 import PodcastSearch from "./search/PodcastSearch";
 import './conversation-styles/sortby.scss'
 
 export default function SortBy (props) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [sorted, setSorted] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -12,7 +16,12 @@ export default function SortBy (props) {
 
   const handleClose = (id) => {
     setAnchorEl(null);
+    setSorted(true);
     props.state(`conversations/category/${id}`)
+    
+    axios.get(`/api/categories/${id}`).then((res) => {
+      setCategory(res.data.categoryName.name)
+    });
   };
 
   // const classes = useStyles();
@@ -33,7 +42,7 @@ export default function SortBy (props) {
         <Tab
           aria-controls="simple-menu" 
           aria-haspopup="true" 
-          onClick={() => { props.state('conversations') } }
+          onClick={() => { props.state('conversations'); setCategory(null); setSorted(true); } }
           label="All" 
         />
         <Tab 
@@ -44,6 +53,7 @@ export default function SortBy (props) {
         /> 
         <Menu
           id="simple-menu"
+          className="category-sort"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={() => setAnchorEl(null)}
@@ -60,12 +70,17 @@ export default function SortBy (props) {
           <MenuItem onClick={() => { handleClose(10)}}>History</MenuItem>
           <MenuItem onClick={() => { handleClose(11)}}>Health</MenuItem>
         </Menu>
-      <PodcastSearch state={props.state}/>
+      <PodcastSearch 
+        state={props.state}
+        sortedBy={setCategory}
+        sorted={sorted}
+        setSorted={setSorted}
+      />
       </Tabs>
     </div>
     <br/>
     <Typography variant="h6" component="h5">
-      Sorted By: {value}
+      {category}
     </Typography>
 
     </>
