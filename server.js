@@ -37,8 +37,6 @@ const socketToRoom = {};
 
 io.on("connection", socket => {
 
-  console.log('connection being made in server');
-
   socket.on("new conversation created", () => {
     socket.broadcast.emit("new conversation available");
   });

@@ -1,12 +1,16 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  // font-family: 'Raleway', sans-serif;
   font-family: 'Philosopher', sans-serif;
+}
+
+.css-x1jtea-Bell{
+  left: 2000px;
 }
 
 .homepage {
   display: flex;
   flex-direction: column;
-
+  overflow: auto;
 }
 
 .new-room-button {
@@ -35,4 +39,21 @@ body {
   height: 50px;
   width: 50px;
   background-color: inherit;
+}
+
+.pod-of-day {
+  position: fixed;
+  z-index: 4;
+  background-color: purple;
+  bottom: 0;
+  height: 7vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  audio::-webkit-media-controls-play-button,
+  audio::-webkit-media-controls-panel {
+    background-color: purple;
+  }
 }

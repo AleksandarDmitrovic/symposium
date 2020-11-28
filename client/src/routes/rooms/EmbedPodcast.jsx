@@ -11,7 +11,6 @@ export default function EmbedPodcast (props) {
     myAudio.current.load()
   }, [props.embed_url]);
 
-  
   return (
     <div className="embed-video">
       <audio controls ref={myAudio}>
