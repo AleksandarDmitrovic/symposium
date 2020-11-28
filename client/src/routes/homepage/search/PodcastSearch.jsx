@@ -29,6 +29,9 @@ export default function PodcastSearch(props) {
   // Stores the setValue function to pass down as props while checking to see if prev state of the search was blank
   const changeValue = val => {
     setValue(val);
+    if(props.sortedBy){
+      props.sortedBy(false)
+    }
     if (searchDone) {
       setSearchDone(false);
       if (!document.getElementById('episode-list')) { 
@@ -48,6 +51,15 @@ export default function PodcastSearch(props) {
       } 
     };
   };
+
+  //If a user click the All or Category Sort buttons the podcast search value is set to ""
+  const {sorted, setSorted} = props;
+  useEffect(()=>{ 
+    if(sorted){
+      setValue("")
+      setSorted(false)
+    }
+  }, [sorted,setSorted])
 
   // Spinner to show while waiting for API results to come back
   const useStyles = makeStyles((theme) => ({
