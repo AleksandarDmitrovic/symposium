@@ -5,9 +5,7 @@ import Peer from "simple-peer";
 
 
 const Video = (props) => {
-
-  console.log('START OF VIDEO FUNCTION');
-  console.log('props', props);
+  const [render, setRender] = useState(false)
 
   const ref = useRef();
 
@@ -16,6 +14,10 @@ const Video = (props) => {
       ref.current.srcObject = stream;
     })
   }, [props.peer]);
+
+  useEffect(() => {
+    setRender(props.showAvatar)
+  }, [props.showAvatar])
 
 
   return (
@@ -64,7 +66,12 @@ export default function Call(props) {
 
   // const [otherUsers, setOtherUsers] = useState([]);
   const otherUsers = useRef([]);
-  const [render, setRender] = useState();
+
+  useEffect(() => {
+    console.log('OTHER USERS CHANGED');
+  }, [otherUsers])
+
+  const [render, setRender] = useState(false);
 
   // videoState to show video or avatar
   const roomID = props.roomID;
@@ -73,7 +80,6 @@ export default function Call(props) {
   const toggleVideo = () => {
     isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
     setIsVideoActive(!isVideoActive);
-    console.log('my id', socketRef.current.id);
     socketRef.current.emit("toggle video", socketRef.current.id )
   };
 
@@ -175,18 +181,17 @@ export default function Call(props) {
   }, [roomID]);
 
   function checkAvatar(userId) { 
-    console.log('checkAvatar');
-    console.log('userId', userId);
-    console.log('otherUsers', otherUsers.current);
 
     if (otherUsers.current.includes(userId)) {
-      console.log('filtering');
       otherUsers.current = otherUsers.current.filter(id => id !== userId);
-      setRender(!render);
     } else {
       otherUsers.current.push(userId);
-      setRender(!render);
     }
+
+    setRender(prevState => !prevState);
+
+
+    
   }
 
   
@@ -236,8 +241,6 @@ export default function Call(props) {
   }
 
  
-  console.log('AT BOTTOM otherUsers', otherUsers);
-  console.log('render', render);
   return (
     <>
       <div className='call-container'>
@@ -248,13 +251,7 @@ export default function Call(props) {
         </div>
         
         {peersRef.current.map((peer) => {
-          console.log('mapping');
-          console.log('otherUsers in map', otherUsers.current);
-          console.log('peer', peer.peerID);
-
           const showAvatar = otherUsers.current.includes(peer.peerID);
-          console.log('showAva', showAvatar);
-
           return (
             <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
           )         
