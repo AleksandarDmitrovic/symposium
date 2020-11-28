@@ -1,6 +1,7 @@
 .nav-title {
-  margin-right: 1vw;
-  margin-top: 0;
+  margin-right: 5vw;
+  margin-top: 1vh;
+  font-family: Raleway, sans-serif;
 }
 
 .nav-list {
@@ -12,9 +13,9 @@
 }
 
 .nav-new-room-btn {
-  background-color: blue;
+  // background-color: blue;
   color: white;
-  width: -moz-fit-content;
+  width: 18vw;
   margin: auto;
 }
 
@@ -22,4 +23,12 @@
   height: 100px;
   width: 100px;
   margin: auto;
+  margin-top: 10vh;
+}
+
+.logout {
+  margin: auto;
+  margin-bottom: 15vh;
+  display: flex;
+  justify-content: center;
 }
