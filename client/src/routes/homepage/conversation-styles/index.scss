@@ -41,11 +41,18 @@ body {
 }
 
 .pod-of-day {
-    position: fixed;
-    z-index: 5;
+  position: fixed;
+  z-index: 4;
+  background-color: purple;
+  bottom: 0;
+  height: 7vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  audio::-webkit-media-controls-play-button,
+  audio::-webkit-media-controls-panel {
     background-color: purple;
-    bottom: 0;
-    height: 5vh;
-    width: 100%;
-    display: flex;
+  }
 }
