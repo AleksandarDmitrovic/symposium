@@ -5,8 +5,6 @@ import Peer from "simple-peer";
 
 
 const Video = (props) => {
-  const [render, setRender] = useState(false)
-
   const ref = useRef();
 
   useEffect(() => {
@@ -14,11 +12,6 @@ const Video = (props) => {
       ref.current.srcObject = stream;
     })
   }, [props.peer]);
-
-  useEffect(() => {
-    setRender(props.showAvatar)
-  }, [props.showAvatar])
-
 
   return (
     <div className={'call-video other ' + props.id}>
@@ -64,13 +57,8 @@ export default function Call(props) {
   const [isVideoActive, setIsVideoActive] = useState(true);
   const [isAudioActive, setIsAudioActive] = useState(true);
 
-  // const [otherUsers, setOtherUsers] = useState([]);
-  const otherUsers = useRef([]);
-
-  useEffect(() => {
-    console.log('OTHER USERS CHANGED');
-  }, [otherUsers])
-
+  // For rendering avatar, render forces rerender
+  const otherBrowsersWithVideoToggledOff = useRef([]);  
   const [render, setRender] = useState(false);
 
   // videoState to show video or avatar
@@ -80,6 +68,7 @@ export default function Call(props) {
   const toggleVideo = () => {
     isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
     setIsVideoActive(!isVideoActive);
+    // Inform other browsers to render avatar for this user
     socketRef.current.emit("toggle video", socketRef.current.id )
   };
 
@@ -162,7 +151,6 @@ export default function Call(props) {
       }
 
       const peers = peersRef.current.filter(p => p.peerID !== id);
-
       peersRef.current = peers;
       setPeers(peers);
     })
@@ -181,17 +169,16 @@ export default function Call(props) {
   }, [roomID]);
 
   function checkAvatar(userId) { 
-
-    if (otherUsers.current.includes(userId)) {
-      otherUsers.current = otherUsers.current.filter(id => id !== userId);
+    // If otherBrowsersWithVideoToggledOff.current has the user's ID, this means that they had toggled their video off, but
+    // have since toggled their video back on, so remove the userId from other users
+    if (otherBrowsersWithVideoToggledOff.current.includes(userId)) {
+      otherBrowsersWithVideoToggledOff.current = otherBrowsersWithVideoToggledOff.current.filter(id => id !== userId);
     } else {
-      otherUsers.current.push(userId);
+      otherBrowsersWithVideoToggledOff.current.push(userId);
     }
 
+    // Forces rerender
     setRender(prevState => !prevState);
-
-
-    
   }
 
   
@@ -251,7 +238,8 @@ export default function Call(props) {
         </div>
         
         {peersRef.current.map((peer) => {
-          const showAvatar = otherUsers.current.includes(peer.peerID);
+          // Checks if other browser has toggled their video off
+          const showAvatar = otherBrowsersWithVideoToggledOff.current.includes(peer.peerID);
           return (
             <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
           )         
