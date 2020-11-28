@@ -28,7 +28,7 @@ export default function Conversation(props) {
       })
     }
   }, [homepage])
-  
+
   // Array of all conversations returned by axios get request
   const [conversations, setConversations] = useState([]);
 
@@ -42,20 +42,27 @@ export default function Conversation(props) {
   function changeState(newState) {
     setSearchParam(newState)
   };
-
   
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation)
     })
   }, [searchParam]);
-
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
     window.location.reload(false)
-
   }
+
+  useEffect(() => {
+    if (newConversations) {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '250px';
+      document.getElementsByClassName('fixed')[0].style.height = '30vh';
+    } else {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
+      document.getElementsByClassName('fixed')[0].style.height = '20vh';
+    }
+  }, [newConversations])
   
   return ( 
     <main>
