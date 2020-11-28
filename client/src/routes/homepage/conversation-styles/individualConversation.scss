@@ -1,3 +1,8 @@
+$body-color: #202020;
+$contrast-color: #383838;
+$secondary-color: #9370DB;
+$accent-color: #8A2BE2;
+
 .conversation-card {
   margin: 50px;
   height: 300px;
@@ -9,10 +14,12 @@
   height: 300px;
   position: relative;
   box-sizing: border-box;
+  background-color: $contrast-color;
 }
 
 .body {
   height: 225px;
+  margin-left: 1em;
 
   header {
     display: flex;
@@ -25,9 +32,11 @@
   display: flex;
   justify-content: space-between;
 }
+
 .convo-info {
   padding-left: 300px;
 }
+
 .podcast-info {
   padding-left: 300px;
   display: flex;
@@ -51,9 +60,9 @@
 }
 
 .share-room {
-  font-family: 'Raleway', sans-serif;
-  padding-left: 1em;
-  width: 12em;
+  font-family: "Raleway", sans-serif;
+  padding-left: 3.5em;
+  width: 18em;
 }
 
 .cover-photo {
@@ -67,14 +76,10 @@
 }
 
 .description {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .join-room {
   width: 70%;
-}
-
-.embed-video {
-
 }

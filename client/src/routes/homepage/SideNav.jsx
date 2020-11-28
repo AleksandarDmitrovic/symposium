@@ -6,13 +6,14 @@ import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material
 import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
 import './conversation-styles/sideNav.scss';
+import { BackgroundColor } from 'chalk';
 
 const drawerWidth = '20vw';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    position: 'fixed'
+    position: 'fixed',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: '#383838'
   },
   drawerHeader: {
     display: 'flex',
@@ -117,7 +119,7 @@ export default function SideNav(props) {
           Symposium
         </Typography>
       </Toolbar>
-      <Drawer
+      <Drawer 
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -126,8 +128,8 @@ export default function SideNav(props) {
           paper: classes.drawerPaper,
         }}
       > 
-        <div className={classes.drawerHeader}>
-          <h3 className='nav-title'>Symposium</h3>
+        <div className={classes.drawerHeader} style={{backgroundColor: '#383838'}}>
+          <h5 className='nav-title'>Symposium</h5>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>
@@ -135,24 +137,28 @@ export default function SideNav(props) {
         <Divider />
         <List className='nav-list'>
           <ListItem button onClick={scrollToTop}>
-            <ListItemIcon> <Home /> </ListItemIcon>
-            <ListItemText primary='Home'/>
+            <ListItemIcon style={{justifyContent: 'center'}}> <Home /> </ListItemIcon>
+            <ListItemText primary='Home' style={{paddingLeft: '1em'}}/>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon style={{justifyContent: 'center'}}> <AccountCircle /> </ListItemIcon>
+            <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
           </ListItem>
           <div className='nav-new-room-btn'>
             <NewRoomButton
               history={props.history}
               connection={props.connection}
+              class='nav-btn'
             />
           </div>
-          <ListItem button>
-            <ListItemIcon> <AccountCircle /> </ListItemIcon>
-            <ListItemText primary='Example User'/>
-          </ListItem>
         </List>
         <img className='logo' src='icon_c.png' alt='logo'/>
-        <Button variant="contained" color="primary">
-            Log Out
+        <Divider />
+        <div className='logout'>
+          <Button variant="contained" color="primary" style={{width: '18vw'}}>
+              Log Out
           </Button>
+        </div>
       </Drawer>
     </div>
   );

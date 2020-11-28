@@ -72,6 +72,7 @@ export default function Conversation(props) {
           <NewRoomButton
             history={props.history}
             connection={homepage}
+            class='convo-btn'
           />
           </div>
           <div className='fixed'>

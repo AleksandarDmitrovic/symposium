@@ -1,3 +1,8 @@
+$body-color: #202020;
+$secondary-color: #512da8 ;
+$accent-color: #9c27b0 ;
+// -webkit-linear-gradient(93deg, #512da8 0%, #9c27b0 100%);
+
 body {
   // font-family: 'Raleway', sans-serif;
   font-family: 'Philosopher', sans-serif;
@@ -10,12 +15,24 @@ body {
 .homepage {
   display: flex;
   flex-direction: column;
-  // overflow: auto;
+  background-color: $body-color;
+}
+
+.bttn-royal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.convo-btn {
+  width: 50vw;
 }
 
 .new-room-button {
   display: flex;
   justify-content: center;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   width: 74vw;
   height: 10vh;
   margin-left: 23vw;
@@ -25,15 +42,14 @@ body {
 .new-room-button-fixed {
   position: fixed;
   z-index: 5;
-  top: 0;
+  padding-top: 2vh;
   width: 74vw;
-  height: 10vh;
+  height: 8vh;
   margin-left: 13vw;
   margin-right: 13vw;
-  background-color: white;
+  background-color: $body-color;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .fixed {
@@ -43,7 +59,7 @@ body {
   width: 74vw;
   margin-left: 13vw;
   margin-right: 13vw;
-  background-color: white;
+  background-color: $body-color;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -52,7 +68,7 @@ body {
 .pod-of-day {
   position: fixed;
   z-index: 4;
-  background-color: purple;
+  background: linear-gradient(90deg, rgba(156,39,176,1) 0%, rgba(93,44,169,1) 51%, rgba(156,39,176,1) 100%);
   bottom: 0;
   height: 7vh;
   width: 100%;
@@ -62,6 +78,6 @@ body {
   
   audio::-webkit-media-controls-play-button,
   audio::-webkit-media-controls-panel {
-    background-color: purple;
+    background-color: $secondary-color;
   }
 }

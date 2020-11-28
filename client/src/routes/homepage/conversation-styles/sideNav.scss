@@ -1,3 +1,5 @@
+$contrast-color: #383838;
+
 .nav-title {
   margin-right: 5vw;
   margin-top: 1vh;
@@ -13,10 +15,12 @@
 }
 
 .nav-new-room-btn {
-  // background-color: blue;
-  color: white;
   width: 18vw;
   margin: auto;
+}
+
+.nav-btn {
+  font-size: 1.25em;
 }
 
 .logo {
