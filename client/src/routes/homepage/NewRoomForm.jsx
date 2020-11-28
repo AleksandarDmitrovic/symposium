@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import moment from 'moment'
-import PodcastSearch from './search/PodcastSearch';
-import TimePicker from './TimePicker';
-
 import { Button, Menu, MenuItem, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+
+import PodcastSearch from './search/PodcastSearch';
+import TimePicker from './TimePicker';
+import './form-styles/NewRoomForm.scss';
+
 // import { io } from "socket.io-client";
 
 
@@ -14,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   inputField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 300,
+    width: 500,
   },
 }));
 
@@ -39,7 +42,7 @@ export default function NewRoomForm (props) {
       setError("Conversation description cannot be blank");
       return;
     } else if ((timeAvailable - moment().unix()) <= 0) {
-      setError("Please set a time in the future");
+      setError("Please set a time for later today");
       return;
     } else if (val === "") {
       setError("Podcast & Podcast Episode must be selected");
@@ -129,12 +132,13 @@ export default function NewRoomForm (props) {
  
   return (
     <main>
-      <section className="new_room_form">
-        <form autoComplete="off" onSubmit={create}>
+        <form className="new_room_form" autoComplete="off" onSubmit={create}>
+          <h3 id="form-title">Create A Podcast Conversation</h3>
+          <br/>
           <Input
             title="title"
             type="text"
-            placeholder="Enter Conversation Title"
+            placeholder="Conversation Title"
             onChange={changeTitle}
             value={title}
             className={classes.inputField}
@@ -143,12 +147,11 @@ export default function NewRoomForm (props) {
           <Input
             description="description"
             type="text"
-            placeholder="Enter Conversation Description"
+            placeholder="Conversation Description"
             onChange={changeDescription}
             value={description}
             className={classes.inputField}
           />
-          <br/>
           <br/>
           <TimePicker
             changeTimeAvailable={changeTimeAvailable}
@@ -157,11 +160,11 @@ export default function NewRoomForm (props) {
           <PodcastSearch 
             changePodcastInfo = {changePodcastInfo}
             changeEpisodeInfo = {setEpisodeInfo}
+            className="search-bar"
           />
-          <br/>
           <div>
             <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
-            <br/>
+
             <p id='display-episode'>{val}</p>
             <Menu
               id="simple-menu"
@@ -173,13 +176,11 @@ export default function NewRoomForm (props) {
               {listTitles(episodeInfo)}
             </Menu>
           </div> 
-          <br/>
+          <section className="form__validation">{error}</section>
           <Button type="submit" value="Submit">
             Submit
           </Button>
         </form>
-        <section className="form__validation">{error}</section>
-      </section>
     </main>
   );
 };

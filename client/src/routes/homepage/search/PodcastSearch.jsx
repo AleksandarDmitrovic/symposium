@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
+import { makeStyles, CircularProgress } from '@material-ui/core';
+
+
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
-import { makeStyles, CircularProgress } from '@material-ui/core';
-import axios from 'axios';
 import './searchBar.scss'
         
 // PodcastSearch Component fetches podcast data from the Itunes API, passing down the results and the user input as props

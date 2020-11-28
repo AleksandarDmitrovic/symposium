@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import NewRoomForm from './NewRoomForm';
-import { Button } from '@material-ui/core';
+import { Button, Modal } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import NewRoomForm from './NewRoomForm';
 import './conversation-styles/index.scss';
 
  function getModalStyle() {
@@ -22,7 +28,7 @@ import './conversation-styles/index.scss';
      width: 600,
      maxHeight: '50em',
      backgroundColor: theme.palette.background.paper,
-     border: '2px solid #000',
+     
      boxShadow: theme.shadows[5],
      padding: theme.spacing(2, 4, 3),
    },
@@ -43,33 +49,63 @@ export default function NewRoomButton(props) {
   };
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Create Your Podcast Conversation</h2>
+    // <div style={modalStyle} className={classes.paper}>
+    //   <h2 id="simple-modal-title">Create Your Podcast Conversation</h2>
       
       <NewRoomForm 
          history = {props.history}
          connection={props.connection}
       />
-    </div>
+    // </div>
   );
-
+ 
   return (
      <>
        <Button color="primary"
+          variant="contained"
           className="new-room-button"
           onClick={handleOpen}
-       >
+          >
           Create A Conversation Room
-          {props.children}
+          <br/>
+     
+          {/* <AddCircleOutlineIcon fontSize="large"/> */}
+     
        </Button>
-       <Modal
+       {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
        >
          {body}
-       </Modal>
+       </Modal> */}
+       <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+       >
+       
+        <DialogContent
+        onClose={handleClose}
+        >
+          <DialogContentText id="alert-dialog-description">
+          <NewRoomForm 
+          history = {props.history}
+          connection={props.connection}
+          />
+          </DialogContentText>
+        </DialogContent>
+        {/* <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions> */}
+      </Dialog>
     </>
   );
 }
