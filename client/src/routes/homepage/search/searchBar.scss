@@ -36,7 +36,7 @@
 
 .result-container {
   position: fixed;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 300px;
   z-index: 2;
 }
