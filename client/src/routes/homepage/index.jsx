@@ -13,6 +13,27 @@ import './conversation-styles/index.scss';
 
 export default function Conversation(props) {
 
+  // Array of all conversations returned by axios get request
+  const [conversations, setConversations] = useState([]);
+  
+  // String of search params from sort bar
+  const [searchParam, setSearchParam] = useState('conversations')
+  
+  // Keep track of if there are new conversations
+  const [newConversations, setNewConversations] = useState(false)
+  
+  // Pass to sortby function so that it can update searchParam state
+  function changeState(newState) {
+    setSearchParam(newState)
+  };
+  
+  
+  useEffect(() => {
+    axios.get(`/api/${searchParam}`).then((res) => {
+      setConversations(res.data.conversation);
+    })
+  }, [searchParam]);
+  
   // Set up for socket.io connection to notify users of new conversations 
   const [homepage, setHomepage] = useState();
 
@@ -28,25 +49,6 @@ export default function Conversation(props) {
     }
   }, [homepage])
 
-  // Array of all conversations returned by axios get request
-  const [conversations, setConversations] = useState([]);
-
-  // String of search params from sort bar
-  const [searchParam, setSearchParam] = useState('conversations')
-
-   // Keep track of if there are new conversations
-   const [newConversations, setNewConversations] = useState(false)
-
-  // Pass to sortby function so that it can update searchParam state
-  function changeState(newState) {
-    setSearchParam(newState)
-  };
-  
-  useEffect(() => {
-    axios.get(`/api/${searchParam}`).then((res) => {
-      setConversations(res.data.conversation)
-    })
-  }, [searchParam]);
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
@@ -74,6 +76,7 @@ export default function Conversation(props) {
           />
           <SortBy 
             state={changeState}
+            search={searchParam}
           />
         {newConversations && 
         <Alert 
