@@ -7,6 +7,7 @@ import Peer from "simple-peer";
 const Video = (props) => {
 
   console.log('START OF VIDEO FUNCTION');
+  console.log('props', props);
 
   const ref = useRef();
 
@@ -17,24 +18,9 @@ const Video = (props) => {
   }, [props.peer]);
 
 
-  console.log('props.otherUsers', props.otherUsers);
-  if (props.otherUsers.includes(props.id)) {
-    console.log('AM I HERE?');
-    return (
-      <div className={'call-video other ' + props.id}>
-        <Animal size="100px" className='avatar'/>
-        <video playsInline autoPlay ref={ref} className='video' />
-      </div>
-    )
-  }
-
-
-
-  
-
-  console.log('here');
   return (
     <div className={'call-video other ' + props.id}>
+      { props.showAvatar && <Animal size="100px" className='avatar'/> }
       <video playsInline autoPlay ref={ref} className='video' />
     </div>
   );
@@ -76,7 +62,9 @@ export default function Call(props) {
   const [isVideoActive, setIsVideoActive] = useState(true);
   const [isAudioActive, setIsAudioActive] = useState(true);
 
-  const [otherUsers, setOtherUsers] = useState([]);
+  // const [otherUsers, setOtherUsers] = useState([]);
+  const otherUsers = useRef([]);
+  const [render, setRender] = useState();
 
   // videoState to show video or avatar
   const roomID = props.roomID;
@@ -181,23 +169,27 @@ export default function Call(props) {
     });
 
     socketRef.current.on("user toggled video", userId => {
-      console.log('userId', userId);
-      console.log('otherUsers', otherUsers);
-
-      if (otherUsers.includes(userId)) {
-        // console.log('filtering');
-        // let x = otherUsers;
-        // x = x.filter(id => id !== userId);
-        // setOtherUsers(x);
-      } else {
-        console.log('doesnt include');
-        const x = [...otherUsers];
-        x.push(userId);
-        setOtherUsers(x);
-      }
+      checkAvatar(userId)
     })
 
   }, [roomID]);
+
+  function checkAvatar(userId) { 
+    console.log('checkAvatar');
+    console.log('userId', userId);
+    console.log('otherUsers', otherUsers.current);
+
+    if (otherUsers.current.includes(userId)) {
+      console.log('filtering');
+      otherUsers.current = otherUsers.current.filter(id => id !== userId);
+      setRender(!render);
+    } else {
+      otherUsers.current.push(userId);
+      setRender(!render);
+    }
+  }
+
+  
 
   // CHAT BOX 
   useEffect(() => {
@@ -245,6 +237,7 @@ export default function Call(props) {
 
  
   console.log('AT BOTTOM otherUsers', otherUsers);
+  console.log('render', render);
   return (
     <>
       <div className='call-container'>
@@ -256,10 +249,14 @@ export default function Call(props) {
         
         {peersRef.current.map((peer) => {
           console.log('mapping');
-          console.log('otherUsers in map', otherUsers);
+          console.log('otherUsers in map', otherUsers.current);
           console.log('peer', peer.peerID);
+
+          const showAvatar = otherUsers.current.includes(peer.peerID);
+          console.log('showAva', showAvatar);
+
           return (
-            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} otherUsers={otherUsers} />
+            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
           )         
         })}
         
