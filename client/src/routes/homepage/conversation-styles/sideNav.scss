@@ -1,0 +1,18 @@
+.nav-title {
+  margin-right: 1vw;
+  margin-top: 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 40vh;
+  padding-top: 8px;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}

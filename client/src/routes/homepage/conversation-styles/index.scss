@@ -10,22 +10,23 @@ body {
 .homepage {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  // overflow: auto;
 }
 
 .new-room-button {
+  display: flex;
   justify-content: center;
-  padding-top: 2em;
-  padding-bottom: 3em;
-  height: 50%;
+  width: 74vw;
+  height: 10vh;
   font-family: 'Raleway', sans-serif;
 }
 
 .fixed {
-  position: fixed;
+  // position: fixed;
+  position: sticky;
   z-index: 5;
   top: 0;
-  height: 20vh;
+  // height: 10vh;
   width: 74vw;
   margin-left: 13vw;
   margin-right: 13vw;
@@ -33,12 +34,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.logo {
-  height: 50px;
-  width: 50px;
-  background-color: inherit;
 }
 
 .pod-of-day {

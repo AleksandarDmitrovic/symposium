@@ -27,7 +27,6 @@ export default function Conversation(props) {
     setSearchParam(newState)
   };
   
-  
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation);
@@ -58,10 +57,10 @@ export default function Conversation(props) {
   useEffect(() => {
     if (newConversations) {
       document.getElementsByClassName('convo-list')[0].style.marginTop = '250px';
-      document.getElementsByClassName('fixed')[0].style.height = '30vh';
+      // document.getElementsByClassName('fixed')[0].style.height = '30vh';
     } else {
       document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
-      document.getElementsByClassName('fixed')[0].style.height = '20vh';
+      // document.getElementsByClassName('fixed')[0].style.height = '20vh';
     }
   }, [newConversations])
   
@@ -69,11 +68,13 @@ export default function Conversation(props) {
     <main>
       <SideNav />
       <article className='homepage'>
-        <div className='fixed'>
+        <div className='new-room-button'>
           <NewRoomButton
             history={props.history}
             connection={homepage}
           />
+          </div>
+          <div className='fixed'>
           <SortBy 
             state={changeState}
             search={searchParam}

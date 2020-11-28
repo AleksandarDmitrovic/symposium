@@ -2,14 +2,9 @@ import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
-
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
+import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material-ui/icons';
 import './conversation-styles/index.scss';
+import './conversation-styles/sideNav.scss';
 
 const drawerWidth = '20vw';
 
@@ -71,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function SideNav(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true)
@@ -89,12 +84,14 @@ export default function PersistentDrawerLeft() {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
+      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '23vw';
       // document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '20vw';
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
-      document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '0';
+      document.getElementsByClassName('new-room-button')[0].style.marginLeft = '13vw';
+      // document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '0';
     }
   }, [open]);
 
@@ -109,7 +106,7 @@ export default function PersistentDrawerLeft() {
           edge="start"
           className={clsx(classes.menuButton, open && classes.hide)}
         >
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <Typography style={{fontFamily: "'Raleway', sans-serif"}}variant="h6" noWrap>
           Symposium
@@ -124,31 +121,26 @@ export default function PersistentDrawerLeft() {
           paper: classes.drawerPaper,
         }}
       > 
-        <h3>Symposium</h3>
-        <img className='logo' src='icon_a.png' alt='logo'/>
         <div className={classes.drawerHeader}>
+          <h3 className='nav-title'>Symposium</h3>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List className='nav-list'>
+        <ListItem button>
+            <ListItemIcon> <Home /> </ListItemIcon>
+            <ListItemText primary='Home'/>
+          </ListItem>
+          <button type='button'>Create a Conversation Room</button>
+          <ListItem button>
+            <ListItemIcon> <AccountCircle /> </ListItemIcon>
+            <ListItemText primary='Example User'/>
+          </ListItem>
+          <button type='button'>Log Out</button>
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <img className='logo' src='icon_c.png' alt='logo'/>
       </Drawer>
     </div>
   );
