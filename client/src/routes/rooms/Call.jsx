@@ -191,7 +191,7 @@ export default function Call(props) {
         // setOtherUsers(x);
       } else {
         console.log('doesnt include');
-        const x = otherUsers;
+        const x = [...otherUsers];
         x.push(userId);
         setOtherUsers(x);
       }
@@ -244,7 +244,7 @@ export default function Call(props) {
   }
 
  
-  console.log('AT BOTTOM', otherUsers);
+  console.log('AT BOTTOM otherUsers', otherUsers);
   return (
     <>
       <div className='call-container'>
@@ -255,7 +255,9 @@ export default function Call(props) {
         </div>
         
         {peersRef.current.map((peer) => {
-          console.log('peer', peer);
+          console.log('mapping');
+          console.log('otherUsers in map', otherUsers);
+          console.log('peer', peer.peerID);
           return (
             <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} otherUsers={otherUsers} />
           )         
