@@ -4,12 +4,11 @@ import axios from 'axios';
 import { io } from "socket.io-client";
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-
-
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
 import SideNav from "./SideNav";
+import Footer from "./Footer";
 import './conversation-styles/index.scss';
 
 export default function Conversation(props) {
@@ -93,6 +92,7 @@ export default function Conversation(props) {
           conversations={conversations}
           history={props.history}
         />
+        <Footer />
       </article>
     </main>
   )

@@ -89,10 +89,12 @@ export default function PersistentDrawerLeft() {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
+      document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '20vw';
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
+      document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '0';
     }
   }, [open]);
 

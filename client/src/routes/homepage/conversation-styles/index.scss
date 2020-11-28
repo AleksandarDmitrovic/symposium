@@ -39,3 +39,13 @@ body {
   width: 50px;
   background-color: inherit;
 }
+
+.pod-of-day {
+    position: fixed;
+    z-index: 5;
+    background-color: purple;
+    bottom: 0;
+    height: 5vh;
+    width: 100%;
+    display: flex;
+}
