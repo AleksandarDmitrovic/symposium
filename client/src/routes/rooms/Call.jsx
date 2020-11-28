@@ -5,6 +5,9 @@ import Peer from "simple-peer";
 
 
 const Video = (props) => {
+
+  console.log('START OF VIDEO FUNCTION');
+
   const ref = useRef();
 
   useEffect(() => {
@@ -13,8 +16,27 @@ const Video = (props) => {
     })
   }, [props.peer]);
 
+
+  console.log('props.otherUsers', props.otherUsers);
+  if (props.otherUsers.includes(props.id)) {
+    console.log('AM I HERE?');
+    return (
+      <div className={'call-video other ' + props.id}>
+        <Animal size="100px" className='avatar'/>
+        <video playsInline autoPlay ref={ref} className='video' />
+      </div>
+    )
+  }
+
+
+
+  
+
+  console.log('here');
   return (
-    <video className='call-video other' playsInline autoPlay ref={ref} />
+    <div className={'call-video other ' + props.id}>
+      <video playsInline autoPlay ref={ref} className='video' />
+    </div>
   );
 }
 
@@ -54,6 +76,8 @@ export default function Call(props) {
   const [isVideoActive, setIsVideoActive] = useState(true);
   const [isAudioActive, setIsAudioActive] = useState(true);
 
+  const [otherUsers, setOtherUsers] = useState([]);
+
   // videoState to show video or avatar
   const roomID = props.roomID;
 
@@ -61,6 +85,8 @@ export default function Call(props) {
   const toggleVideo = () => {
     isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
     setIsVideoActive(!isVideoActive);
+    console.log('my id', socketRef.current.id);
+    socketRef.current.emit("toggle video", socketRef.current.id )
   };
 
   // TURN VIDEO ON AND OFF
@@ -73,7 +99,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
@@ -154,6 +180,23 @@ export default function Call(props) {
       }
     });
 
+    socketRef.current.on("user toggled video", userId => {
+      console.log('userId', userId);
+      console.log('otherUsers', otherUsers);
+
+      if (otherUsers.includes(userId)) {
+        // console.log('filtering');
+        // let x = otherUsers;
+        // x = x.filter(id => id !== userId);
+        // setOtherUsers(x);
+      } else {
+        console.log('doesnt include');
+        const x = otherUsers;
+        x.push(userId);
+        setOtherUsers(x);
+      }
+    })
+
   }, [roomID]);
 
   // CHAT BOX 
@@ -200,17 +243,24 @@ export default function Call(props) {
     return peer;
   }
 
+ 
+  console.log('AT BOTTOM', otherUsers);
   return (
     <>
       <div className='call-container'>
 
-        <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-
+        <div className='call-video me' >
+          { !isVideoActive && <Animal size="100px" /> }
+          <video muted ref={userVideo} autoPlay playsInline />
+        </div>
+        
         {peersRef.current.map((peer) => {
+          console.log('peer', peer);
           return (
-            <Video key={peer.peerID} peer={peer.peer} />
+            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} otherUsers={otherUsers} />
           )         
         })}
+        
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
       <button onClick={toggleAudio}>TOGGLE AUDIO</button>

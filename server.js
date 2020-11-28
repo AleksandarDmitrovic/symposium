@@ -37,8 +37,6 @@ const socketToRoom = {};
 
 io.on("connection", socket => {
 
-  console.log('connection being made in server');
-
   socket.on("new conversation created", () => {
     socket.broadcast.emit("new conversation available");
   });
@@ -90,6 +88,10 @@ io.on("connection", socket => {
   socket.on('new message', messageInfo => {
     socket.broadcast.emit('update chat box', messageInfo);
   });
+
+  socket.on("toggle video", userId => {
+    socket.broadcast.emit("user toggled video", userId);
+  })
 
 });
 
