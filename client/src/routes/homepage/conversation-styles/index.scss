@@ -1,15 +1,15 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  // font-family: 'Raleway', sans-serif;
   font-family: 'Philosopher', sans-serif;
 }
 .css-x1jtea-Bell{
-  
   left: 2000px;
 }
+
 .homepage {
   display: flex;
   flex-direction: column;
-
+  overflow: auto;
 }
 
 .new-room-button {
