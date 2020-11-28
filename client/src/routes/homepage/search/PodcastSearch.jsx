@@ -29,7 +29,9 @@ export default function PodcastSearch(props) {
   // Stores the setValue function to pass down as props while checking to see if prev state of the search was blank
   const changeValue = val => {
     setValue(val);
-    props.sortedBy(false)
+    if(props.sortedBy){
+      props.sortedBy(false)
+    }
     if (searchDone) {
       setSearchDone(false);
       if (!document.getElementById('episode-list')) { 
