@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
+import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Button  } from '@material-ui/core';
 import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material-ui/icons';
+import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
 import './conversation-styles/sideNav.scss';
 
@@ -129,16 +130,26 @@ export default function SideNav(props) {
         </div>
         <Divider />
         <List className='nav-list'>
-        <ListItem button>
+          <ListItem button>
             <ListItemIcon> <Home /> </ListItemIcon>
             <ListItemText primary='Home'/>
           </ListItem>
-          <button type='button'>Create a Conversation Room</button>
+          <div className='nav-new-room-btn'>
+            <NewRoomButton
+              history={props.history}
+              connection={props.connection}
+            />
+          </div>
+          {/* <Button variant="contained" color="primary">
+            Create a Conversation Room
+          </Button> */}
           <ListItem button>
             <ListItemIcon> <AccountCircle /> </ListItemIcon>
             <ListItemText primary='Example User'/>
           </ListItem>
-          <button type='button'>Log Out</button>
+          <Button variant="contained" color="primary">
+            Log Out
+          </Button>
         </List>
         <img className='logo' src='icon_c.png' alt='logo'/>
       </Drawer>

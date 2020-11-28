@@ -56,11 +56,9 @@ export default function Conversation(props) {
 
   useEffect(() => {
     if (newConversations) {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '250px';
-      // document.getElementsByClassName('fixed')[0].style.height = '30vh';
-    } else {
       document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
-      // document.getElementsByClassName('fixed')[0].style.height = '20vh';
+    } else {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '0';
     }
   }, [newConversations])
   
