@@ -98,18 +98,17 @@ module.exports = (db, updateConversations) => {
       const creatorID = 1;
 
       const isActive = true;
+      
       const categoryID = categoryFound;
   
-  
       const podcastName = podcastInfo.podcast_name;
-      const podcastStartsAt = "TEXT";
-      const podcastEndsAt = "TEXT";
+
       const podcastImage = podcastInfo.podcast_image;
   
-      const queryParams = [creatorID, isActive, categoryID, url, title, description, timeAvailable, podcastName, podcastStartsAt, podcastEndsAt, podcastImage, embedTitle, embedUrl];
+      const queryParams = [creatorID, isActive, categoryID, url, title, description, timeAvailable, podcastName, podcastImage, embedTitle, embedUrl];
       const queryString = `
-      INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+      INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_image, podcast_episode_title, podcast_episode_embed_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING *;`;
   
       db.query(queryString, queryParams)
