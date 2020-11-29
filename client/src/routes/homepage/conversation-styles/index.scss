@@ -72,14 +72,34 @@ body {
   z-index: 8;
   background-color: $contrast-color;
   bottom: 0;
-  height: 7vh;
+  height: 12vh;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   
-  audio::-webkit-media-controls-play-button,
-  audio::-webkit-media-controls-panel {
-    background-color: $contrast-color;
-  }
+
+}
+
+.footer-player {
+  width: 100vw;
+  background-color: $contrast-color;
+}
+
+.rhap_stacked-reverse .rhap_controls-section {
+  margin-bottom: 0;
+}
+
+.rhap_header {
+  font-style: italic;
+  font-family: $primary-font;
+  margin: auto;
+  padding-bottom: 0.5em;
+}
+
+.rhap_footer {
+  font-family: $primary-font;
+  font-style: italic;
+  margin: auto;
+  padding-right: 2em;
 }
