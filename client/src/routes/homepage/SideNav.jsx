@@ -6,7 +6,6 @@ import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material
 import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
 import './conversation-styles/sideNav.scss';
-import { BackgroundColor } from 'chalk';
 
 const drawerWidth = '20vw';
 
@@ -14,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     position: 'fixed',
+    color: 'white'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: '#383838'
+    backgroundColor: '#101010',
+    color: 'white'
   },
   drawerHeader: {
     display: 'flex',
@@ -93,12 +94,14 @@ export default function SideNav(props) {
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
       document.getElementsByClassName('fixed')[0].style.top = '0';
       document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button');
+      document.getElementsByClassName('convo-btn')[0].style.height = '';
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
       document.getElementsByClassName('fixed')[0].style.top = '10vh';
       document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button-fixed');
+      document.getElementsByClassName('convo-btn')[0].style.height = '6vh';
     }
   }, [open]);
 
@@ -128,20 +131,20 @@ export default function SideNav(props) {
           paper: classes.drawerPaper,
         }}
       > 
-        <div className={classes.drawerHeader} style={{backgroundColor: '#383838'}}>
+        <div className={classes.drawerHeader} style={{backgroundColor: '#101010'}}>
           <h5 className='nav-title'>Symposium</h5>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
+            <ChevronLeft style={{color: 'white'}} />
           </IconButton>
         </div>
         <Divider />
         <List className='nav-list'>
           <ListItem button onClick={scrollToTop}>
-            <ListItemIcon style={{justifyContent: 'center'}}> <Home /> </ListItemIcon>
+            <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <Home /> </ListItemIcon>
             <ListItemText primary='Home' style={{paddingLeft: '1em'}}/>
           </ListItem>
           <ListItem button>
-            <ListItemIcon style={{justifyContent: 'center'}}> <AccountCircle /> </ListItemIcon>
+            <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <AccountCircle /> </ListItemIcon>
             <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
           </ListItem>
           <div className='nav-new-room-btn'>
@@ -152,7 +155,7 @@ export default function SideNav(props) {
             />
           </div>
         </List>
-        <img className='logo' src='icon_c.png' alt='logo'/>
+        <img className='logo' src='icon_a.png' alt='logo'/>
         <Divider />
         <div className='logout'>
           <Button variant="contained" color="primary" style={{width: '18vw'}}>

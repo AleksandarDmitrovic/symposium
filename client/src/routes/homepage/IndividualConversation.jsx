@@ -51,15 +51,15 @@ export default function IndividualConversation(props) {
         <Card className='conversation-card'>
           <div className='card'>
             <CardMedia
-                className='cover-photo'
-                image={props.image}
-                title="cover-photo"
-              />
+              className='cover-photo'
+              image={props.image}
+              title="cover-photo"
+            />
             <CardActionArea onClick={joinRoom} style={{height: 'inherit'}}>
               <CardContent className='body'>
                 <div className='convo-info'>
                   <header>
-                    <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} variant="h5" component="h2">
+                    <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} color='white' variant="h5" component="h2">
                       {props.title}
                     </Typography>
                     <Timer
@@ -71,33 +71,33 @@ export default function IndividualConversation(props) {
                       )}
                     </Timer>
                   </header>
-                  <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} className='description' component="p" >
+                  <Typography variant="body1" style={{fontFamily: "'Raleway', sans-serif"}} color='white'  className='description' component="p" >
                     {props.description}
                   </Typography>
                 </div>
                 <section className='pod'>
                   <div className='podcast-info'>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="white" component="p">
                       {props.podcast_name}
                     </Typography>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="white" component="p">
                       {props.episode_title}
                     </Typography>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="white" component="p">
                       Category: {category}
                     </Typography>
                   </div>
                   <div className='player'>
                     <EmbedPodcast embed_url={props.audio} />
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="textSecondary" component="p">
+                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body2" color="white" component="p">
                       Timestamps: {props.starts_at} - {props.ends_at}
                     </Typography>
                   </div>
                 </section>
               </CardContent>
             </CardActionArea>   
-              <footer className='share'>
-                <CardActions style={{alignItems: 'baseline'}}>
+              <CardActions>
+                <footer className='share'>
                   <p className='share-room'>Share this Room </p>
                   <SocialMedia 
                     description={props.description}
@@ -105,8 +105,8 @@ export default function IndividualConversation(props) {
                   >
                   </SocialMedia>
                   <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
-                </CardActions>
               </footer>
+              </CardActions>
           </div>
         </Card>
       }

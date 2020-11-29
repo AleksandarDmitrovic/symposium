@@ -1,7 +1,7 @@
 $body-color: #202020;
-$secondary-color: #512da8 ;
+$contrast-color: #5B5B5B;
+$secondary-color: #512da8;
 $accent-color: #9c27b0 ;
-// -webkit-linear-gradient(93deg, #512da8 0%, #9c27b0 100%);
 
 body {
   // font-family: 'Raleway', sans-serif;
@@ -44,7 +44,7 @@ body {
   z-index: 5;
   padding-top: 2vh;
   width: 74vw;
-  height: 8vh;
+  height: 10vh;
   margin-left: 13vw;
   margin-right: 13vw;
   background-color: $body-color;
@@ -68,7 +68,7 @@ body {
 .pod-of-day {
   position: fixed;
   z-index: 4;
-  background: linear-gradient(90deg, rgba(156,39,176,1) 0%, rgba(93,44,169,1) 51%, rgba(156,39,176,1) 100%);
+  background-color: $contrast-color;
   bottom: 0;
   height: 7vh;
   width: 100%;
@@ -78,6 +78,6 @@ body {
   
   audio::-webkit-media-controls-play-button,
   audio::-webkit-media-controls-panel {
-    background-color: $secondary-color;
+    background-color: $contrast-color;
   }
 }
