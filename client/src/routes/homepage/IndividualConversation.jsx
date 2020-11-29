@@ -96,21 +96,20 @@ export default function IndividualConversation(props) {
                 </section>
               </CardContent>
             </CardActionArea>   
-              <CardActions>
-                <footer className='share'>
-                  <p className='share-room'>Share this Room </p>
-                  <SocialMedia 
-                    description={props.description}
-                    url={roomURL}
-                  >
-                  </SocialMedia>
-                  <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+            <CardActions>
+              <footer className='share'>
+                <p className='share-room'>Share this Room </p>
+                <SocialMedia 
+                  description={props.description}
+                  url={roomURL}
+                >
+                </SocialMedia>
+                <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
               </footer>
-              </CardActions>
+             </CardActions>
           </div>
         </Card>
       }
     </>
   )
-
 }

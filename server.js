@@ -89,6 +89,10 @@ io.on("connection", socket => {
     socket.broadcast.emit('update chat box', messageInfo);
   });
 
+  socket.on("toggle video", userId => {
+    socket.broadcast.emit("user toggled video", userId);
+  })
+
 });
 
 // For homepage

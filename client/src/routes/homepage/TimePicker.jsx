@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 300,
+    width: 500,
   },
 }));
 
@@ -34,7 +34,7 @@ export default function TimePicker(props) {
     <form className={classes.container} noValidate>
       <TextField
         id="time"
-        label="Until when are you available?"
+        label="THIS CONVERSATION WILL EXPIRE AT:"
         type="time"
         defaultValue="00:00"
         className={classes.textField}

@@ -14,7 +14,10 @@ const Video = (props) => {
   }, [props.peer]);
 
   return (
-    <video className='call-video other' playsInline autoPlay ref={ref} />
+    <div className={'call-video other ' + props.id}>
+      { props.showAvatar && <Animal size="100px" className='avatar'/> }
+      <video playsInline autoPlay ref={ref} className='video' />
+    </div>
   );
 }
 
@@ -54,6 +57,10 @@ export default function Call(props) {
   const [isVideoActive, setIsVideoActive] = useState(true);
   const [isAudioActive, setIsAudioActive] = useState(true);
 
+  // For rendering avatar, render forces rerender
+  const otherBrowsersWithVideoToggledOff = useRef([]);  
+  const [render, setRender] = useState(false);
+
   // videoState to show video or avatar
   const roomID = props.roomID;
 
@@ -61,6 +68,8 @@ export default function Call(props) {
   const toggleVideo = () => {
     isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
     setIsVideoActive(!isVideoActive);
+    // Inform other browsers to render avatar for this user
+    socketRef.current.emit("toggle video", socketRef.current.id )
   };
 
   // TURN VIDEO ON AND OFF
@@ -73,7 +82,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
@@ -142,7 +151,6 @@ export default function Call(props) {
       }
 
       const peers = peersRef.current.filter(p => p.peerID !== id);
-
       peersRef.current = peers;
       setPeers(peers);
     })
@@ -154,7 +162,26 @@ export default function Call(props) {
       }
     });
 
+    socketRef.current.on("user toggled video", userId => {
+      checkAvatar(userId)
+    })
+
   }, [roomID]);
+
+  function checkAvatar(userId) { 
+    // If otherBrowsersWithVideoToggledOff.current has the user's ID, this means that they had toggled their video off, but
+    // have since toggled their video back on, so remove the userId from other users
+    if (otherBrowsersWithVideoToggledOff.current.includes(userId)) {
+      otherBrowsersWithVideoToggledOff.current = otherBrowsersWithVideoToggledOff.current.filter(id => id !== userId);
+    } else {
+      otherBrowsersWithVideoToggledOff.current.push(userId);
+    }
+
+    // Forces rerender
+    setRender(prevState => !prevState);
+  }
+
+  
 
   // CHAT BOX 
   useEffect(() => {
@@ -200,17 +227,24 @@ export default function Call(props) {
     return peer;
   }
 
+ 
   return (
     <>
       <div className='call-container'>
 
-        <video className='call-video me' muted ref={userVideo} autoPlay playsInline />
-
+        <div className='call-video me' >
+          { !isVideoActive && <Animal size="100px" /> }
+          <video muted ref={userVideo} autoPlay playsInline />
+        </div>
+        
         {peersRef.current.map((peer) => {
+          // Checks if other browser has toggled their video off
+          const showAvatar = otherBrowsersWithVideoToggledOff.current.includes(peer.peerID);
           return (
-            <Video key={peer.peerID} peer={peer.peer} />
+            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
           )         
         })}
+        
       </div>
       <button onClick={toggleVideo}>TOGGLE VIDEO</button>
       <button onClick={toggleAudio}>TOGGLE AUDIO</button>
