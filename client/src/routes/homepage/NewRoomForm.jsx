@@ -178,9 +178,9 @@ export default function NewRoomForm (props) {
           </div>
           <br/>
           <section className="form__validation">{error}</section>
-          <Button color="primary" variant="contained" type="submit" value="Submit">
+          <button className='bttn-jelly bttn-md bttn-primary submit-btn' type='submit' value='submit'>
             Submit
-          </Button>
+          </button>
         </form>
     </main>
   );
