@@ -161,7 +161,7 @@ export default function NewRoomForm (props) {
               changeEpisodeInfo = {setEpisodeInfo}
               label={"SELECT PODCAST"}
               form={true}
-              className="form-search-bar"
+              resultWidth='28vw'
             />
             <br/>
             <Button id='episode-list' variant="outlined" fullWidth={true} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>

@@ -1,4 +1,5 @@
 $focus-color: #8A2BE2;
+$secondary-color: #1d89ff;
 
 .search {
   display: flex;
@@ -44,7 +45,8 @@ $focus-color: #8A2BE2;
 
 .podcast-list:hover {
   cursor: pointer;
-  background: #292479;
+  // background: #292479;
+  background: $secondary-color;
 }
 
 .podcast-result {
@@ -56,6 +58,8 @@ $focus-color: #8A2BE2;
   overflow-y: auto;
   height: 300px;
   z-index: 2;
+  padding-top: 0.25em;
+  padding-left: 1em;
 }
 
 #episode-list {
