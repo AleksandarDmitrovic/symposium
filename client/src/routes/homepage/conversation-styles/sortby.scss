@@ -2,7 +2,7 @@ $body-color: #191919;
 $secondary-color: #9370DB;
 $accent-color: #8A2BE2;
 
-
+$primary-font: 'Raleway', sans-serif;
 
 button:focus {
   outline: none;
@@ -34,7 +34,10 @@ button:focus {
 #category-name {
   display: flex;
   justify-content: center;
+  margin-top: 1vh;
   margin-right: 3%;
-  background-color: $body-color;
+  font-size: 1.25em;
+  font-family: $primary-font;
+  background-color: #191919;
   color: white;
 }

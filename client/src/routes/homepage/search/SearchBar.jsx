@@ -74,8 +74,20 @@ export default function SearchBar(props) {
             props.changeValue(event.target.value);
           }}
           onClick={handleFocus}
-          InputProps={{style: {color: props.fontColor}}}
-          InputLabelProps={{style: {color: props.fontColor}}}
+          InputProps={{style: 
+            {
+              color: props.fontColor, 
+              marginTop: '30px',
+              fontFamily: "'Raleway', sans-serif"
+            }
+          }}
+          InputLabelProps={{style: 
+            {
+              color: props.fontColor, 
+              fontFamily: "'Raleway', sans-serif",
+              fontSize: '1em'
+            }
+          }}
         />
       </form>
     </section>
