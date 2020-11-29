@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import RenderMessages from './RenderMessages'
 
 // Material-ui
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import Icon from '@material-ui/core/Icon';
+import Card from '@material-ui/core/Card';
 
 // const useStyles = makeStyles((theme) => ({
 //   button: {
@@ -48,6 +47,9 @@ export default function ChatBox(props) {
 
 
   const mapMessages = (allMessages) => {
+    if (allMessages.length === 0) {
+      return "No messages to show";
+    }
     const messages = allMessages.map(message => {
       return (
         <RenderMessages
@@ -62,12 +64,14 @@ export default function ChatBox(props) {
   
   return (
 
-    <footer className="chat-box">
-      <h4>Messages</h4>
-
-      <div>
-        { mapMessages(allMessages) }
-      </div>
+    <div className="chat-box">
+      <Card className="chat-box-card" variant="outlined">
+        <div className="chat-box-messages">
+          <div>
+            { mapMessages(allMessages) }
+          </div>
+        </div>
+      </Card>
 
       <Button
         variant="contained"
@@ -76,8 +80,8 @@ export default function ChatBox(props) {
         endIcon={<SendIcon/>}
         onClick={ sendMessage }
       >
-        <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
+        <input autocomplete="off" type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
       </Button>
-    </footer>
+    </div>
   );
 };

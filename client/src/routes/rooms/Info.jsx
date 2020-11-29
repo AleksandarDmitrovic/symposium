@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 250,
-    width: 250,
+    height: 200,
+    width: 200,
     margin: 'auto'
   },
 });
@@ -47,13 +47,13 @@ export default function Info(props) {
           <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
           <li><b>Category : </b>{props.category}</li>
         </ul>
+
+        <SocialMedia 
+          description={props.description}
+          url={props.history}
+        />
       </div>
 
-      
-      <SocialMedia 
-        description={props.description}
-        url={props.history}
-      />
       
       
 

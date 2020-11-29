@@ -10,10 +10,11 @@ export default function EmbedPodcast (props) {
       <h4 className="embed-video-title">{props.title}</h4>
       <AudioPlayer
         className="embed-video-audio-player"
-        layout="stacked-reverse"
+        layout="horizontal-reverse"
         src={props.embed_url}
         showJumpControls={false}
         customAdditionalControls={[]}
+        customVolumeControls={[]}
         autoPlayAfterSrcChange={false}
       />
     </div>
