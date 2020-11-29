@@ -157,14 +157,16 @@ export default function NewRoomForm (props) {
             changeTimeAvailable={changeTimeAvailable}
           />
           <br/>
-          <PodcastSearch 
-            changePodcastInfo = {changePodcastInfo}
-            changeEpisodeInfo = {setEpisodeInfo}
-            className="search-bar"
-          />
-          <div>
-            <Button id='episode-list' aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
-
+          <div className ="podcast-selectors">
+            <PodcastSearch 
+              changePodcastInfo = {changePodcastInfo}
+              changeEpisodeInfo = {setEpisodeInfo}
+              label={"SELECT PODCAST"}
+              form={true}
+              className="form-search-bar"
+            />
+            <br/>
+            <Button id='episode-list' variant="outlined" fullWidth={true} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
             <p id='display-episode'>{val}</p>
             <Menu
               id="simple-menu"
@@ -175,9 +177,10 @@ export default function NewRoomForm (props) {
             >
               {listTitles(episodeInfo)}
             </Menu>
-          </div> 
+          </div>
+          <br/>
           <section className="form__validation">{error}</section>
-          <Button type="submit" value="Submit">
+          <Button color="primary" variant="contained" type="submit" value="Submit">
             Submit
           </Button>
         </form>

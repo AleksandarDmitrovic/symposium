@@ -112,6 +112,7 @@ export default function PodcastSearch(props) {
             onSearch={term => setTerm(term)}
             changeValue = {changeValue}
             value = {value}
+            label={props.label}
           />
           {spinner}
         </div>

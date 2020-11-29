@@ -54,7 +54,7 @@ export default function Conversation(props) {
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
-    window.location.reload(false)
+    window.location.reload()
   }
 
   useEffect(() => {

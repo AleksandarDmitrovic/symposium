@@ -1,8 +1,10 @@
 import { useEffect, useCallback } from "react";
 import { TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 import useDebounce from "./hooks/useDebounce";
+import '../form-styles/NewRoomForm.scss';
 
 export default function SearchBar(props) {
 
@@ -30,12 +32,24 @@ export default function SearchBar(props) {
     onSearch(term);
   }, [term, onSearch]);
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+      
+        width: '40ch',
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <TextField
-          label="PICK PODCAST"
-          className="selected-podcast"
+          label={props.label}
+          className={classes.root}
+          
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
