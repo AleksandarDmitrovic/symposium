@@ -25,6 +25,7 @@
     "socket.io": "^3.0.3"
   },
   "devDependencies": {
+    "cypress": "^6.0.0",
     "nodemon": "^2.0.6"
   }
 }
