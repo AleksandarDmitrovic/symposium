@@ -4,8 +4,9 @@ import RenderMessages from './RenderMessages'
 
 // Material-ui
 import Button from '@material-ui/core/Button';
-import SendIcon from '@material-ui/icons/Send';
+import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
+import { TextField } from '@material-ui/core';
 
 // const useStyles = makeStyles((theme) => ({
 //   button: {
@@ -73,15 +74,21 @@ export default function ChatBox(props) {
         </div>
       </Card>
 
-      <Button
-        variant="contained"
-        color="primary"
-        className="chat-box-send-button"
-        endIcon={<SendIcon/>}
-        onClick={ sendMessage }
-      >
-        <input autocomplete="off" type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
-      </Button>
+      <form onClick = { sendMessage } className="chat-box-form">
+        <TextField
+            className="chat-box-form-text-field"
+            label="message"
+            name="message"
+            type="text"
+            autoComplete='off'
+            value={chatBoxMessage}
+            onChange={changeHandler}
+          />
+        <Button variant="contained" color="primary" className="chat-box-form-button">
+          Send
+        </Button>
+      </form> 
+
     </div>
   );
 };

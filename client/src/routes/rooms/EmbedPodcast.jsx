@@ -1,6 +1,6 @@
 import './room.scss';
 
-import AudioPlayer from 'react-h5-audio-player';
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/src/styles.scss';
 
 
