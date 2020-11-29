@@ -3,6 +3,21 @@ import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
+// Material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
+import MicIcon from '@material-ui/icons/Mic';
+import MicOffIcon from '@material-ui/icons/MicOff';
+
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
+
 
 const Video = (props) => {
   const ref = useRef();
@@ -63,6 +78,9 @@ export default function Call(props) {
 
   // videoState to show video or avatar
   const roomID = props.roomID;
+
+  // Material-ui
+  const classes = useStyles();
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
@@ -244,10 +262,41 @@ export default function Call(props) {
             <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
           )         
         })}
+
+        <div className="toggle-buttons">
+          {isVideoActive && <Button
+            variant="contained"
+            color="secondary"
+            className={"toggle" + classes.button}
+            startIcon={<VideocamIcon />}
+            onClick={toggleVideo}
+          />}
+          {!isVideoActive && <Button
+            variant="contained"
+            color="secondary"
+            className={"toggle" + classes.button}
+            startIcon={<VideocamOffIcon />}
+            onClick={toggleVideo}
+          />}
+
+          {isAudioActive && <Button
+            variant="contained"
+            color="secondary"
+            className={"toggle" + classes.button}
+            startIcon={<MicIcon />}
+            onClick={toggleAudio}
+          />}
+          {!isAudioActive && <Button
+            variant="contained"
+            color="secondary"
+            className={"toggle" + classes.button}
+            startIcon={<MicOffIcon />}
+            onClick={toggleAudio}
+          />}
+        </div>
         
       </div>
-      <button onClick={toggleVideo}>TOGGLE VIDEO</button>
-      <button onClick={toggleAudio}>TOGGLE AUDIO</button>
+      
     </>
   );
 } 

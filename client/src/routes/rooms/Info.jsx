@@ -1,6 +1,8 @@
 import React from 'react';
 import SocialMedia from './SocialMedia';
 
+import EmbedPodcast from './EmbedPodcast'
+
 import './room.scss';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,7 +13,9 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 600,
+    height: 200,
+    width: 200,
+    margin: 'auto'
   },
 });
 
@@ -23,24 +27,35 @@ export default function Info(props) {
 
   return (
   <Card className="podcast-card">
-      {/* <img src={props.podcast_image} alt={altImage} /> */}
+      
       <CardMedia
         className={classes.media}
         image={props.podcast_image}
-        title="Contemplative Reptile"
+        title="Podcast Image"
       />
-      <ul>
-        <li><b>Title : </b>{props.title}</li>
-        <li><b>Description : </b>{props.description}</li>
-        <li><b>Podcast : </b>{props.podcast_name}</li>
-        <li><b>Episode : </b>{props.episode_title}</li>
-        <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
-        <li><b>Category : </b>{props.category}</li>
-      </ul>
-      <SocialMedia 
-        description={props.description}
-        url={props.url}
-      />
+
+      <div className="podcast">
+        <EmbedPodcast 
+          embed_title = {props.embed_title}
+          embed_url = {props.embed_url}
+          title = {props.episode_title}
+        />
+      </div>
+
+      <div class="conversation-information">
+        <ul>
+          <li><b>Title : </b>{props.title}</li>
+          <li><b>Description : </b>{props.description}</li>
+          <li><b>Timestamp : </b>{props.podcast_starts_at} - {props.podcast_ends_at}</li>
+          <li><b>Category : </b>{props.category}</li>
+        </ul>
+
+        <SocialMedia 
+          description={props.description}
+          url={props.history}
+        />
+      </div>
+      
   </Card>
   )
 }
