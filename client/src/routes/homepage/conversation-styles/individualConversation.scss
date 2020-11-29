@@ -62,15 +62,21 @@ span {
   display: contents;
 }
 
-#social-media {
-  margin: auto
-}
-
 .share-room {
   font-family: $primary-font;
   color: white;
   padding-left: 18.5vw;
   width: 30vw;
+}
+
+#social-media {
+  display: flex;
+  
+  width: 100%;
+  justify-content: space-between;  
+  // margin: 0.5em 50em 0.5em 15em;
+  padding: 0em 60em 0em 23em ;
+
 }
 
 .cover-photo {
@@ -92,7 +98,7 @@ span {
   background: #1d89ff;
   color: #fff;
   position: absolute;
-  right: 3vw;
+  right: 1vw;
   width: 30%;
 }
 

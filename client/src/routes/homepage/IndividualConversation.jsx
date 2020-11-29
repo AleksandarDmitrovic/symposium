@@ -88,10 +88,7 @@ export default function IndividualConversation(props) {
                     </Typography>
                   </div>
                   <div className='player'>
-                    <EmbedPodcast embed_url={props.audio} title={props.title} class='convo-card-player'/> 
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body" color="white" component="h3">
-                      Timestamps: {props.starts_at} - {props.ends_at}
-                    </Typography>
+                    <EmbedPodcast embed_url={props.audio} title={props.title} class='convo-card-player'/>
                   </div>
                 </section>
               </CardContent>
