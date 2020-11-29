@@ -48,6 +48,7 @@ export default function SortBy (props) {
         <Tabs
           value={value}
           onChange={handleChange}
+          TabIndicatorProps={{style: {background:'#8A2BE2'}}}
         >
           <Tab
             aria-controls="simple-menu" 
@@ -58,6 +59,7 @@ export default function SortBy (props) {
           <Tab 
             aria-controls="simple-menu" 
             aria-haspopup="true" 
+            inkBarStyle={{background: 'blue'}}
             onClick={handleClick}
             label="Category"
           /> 
@@ -86,6 +88,8 @@ export default function SortBy (props) {
           sorted={sorted}
           setSorted={setSorted}
           label={'SEARCH PODCASTS'}
+          fontColor='white'
+          resultWidth='25vw'
         />
         </Tabs>
       </div>

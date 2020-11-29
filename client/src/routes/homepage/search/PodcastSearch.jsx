@@ -113,6 +113,8 @@ export default function PodcastSearch(props) {
             changeValue = {changeValue}
             value = {value}
             label={props.label}
+            fontColor={props.fontColor}
+            resultWidth={props.resultWidth}
           />
           {spinner}
         </div>

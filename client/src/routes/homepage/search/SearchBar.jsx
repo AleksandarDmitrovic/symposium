@@ -35,7 +35,7 @@ export default function SearchBar(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        width: '40ch',
+        width: props.resultWidth,
       }
     }
   }));
