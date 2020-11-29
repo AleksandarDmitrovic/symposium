@@ -25,7 +25,6 @@ export default function SortBy (props) {
     });
   };
 
-  // const classes = useStyles();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -33,11 +32,12 @@ export default function SortBy (props) {
   };
 
   const useStyles = makeStyles((theme) => ({
-    root: {
-      ...theme.typography.button,
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1),
-    },
+    menu: {
+      "& .MuiPaper-root": {
+        backgroundColor: "#191919",
+        color: "white"
+      }
+    }
   }));
 
   const classes = useStyles();
@@ -65,7 +65,7 @@ export default function SortBy (props) {
           /> 
           <Menu
             id="simple-menu"
-            className="category-sort"
+            className={classes.menu}
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}

@@ -75,9 +75,14 @@ body {
   justify-content: space-around;
 }
 
+.convo-list {
+  padding-bottom: 120px;
+}
+
 .pod-of-day {
   position: fixed;
   z-index: 8;
+  color: white;
   background-color: $contrast-color;
   bottom: 0;
   height: 12vh;
@@ -92,6 +97,12 @@ body {
 .footer-player {
   width: 100vw;
   background-color: $contrast-color;
+  padding-right: 5%;
+  padding-left: 5%;
+
+  .rhap_time {
+    color: white !important;
+  }
   
   .rhap_stacked-reverse .rhap_controls-section {
     margin-bottom: 0;
