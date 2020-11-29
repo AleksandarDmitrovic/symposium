@@ -59,6 +59,7 @@ export default function Room(props) {
     <article className="room">
 
       <TopNav 
+      title = {conversation[0].title}
       creatorID = {conversation[0].creator_id}
       history = {props.history}
       timer = {timer}

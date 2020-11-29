@@ -273,7 +273,7 @@ export default function Call(props) {
           )         
         })}
 
-        <div className="toggle-buttons">
+        <footer className="toggle-buttons">
           {isVideoActive && <Button
             variant="contained"
             color="secondary"
@@ -303,7 +303,7 @@ export default function Call(props) {
             startIcon={<MicOffIcon />}
             onClick={toggleAudio}
           />}
-        </div>
+        </footer>
         
       </div>
       
