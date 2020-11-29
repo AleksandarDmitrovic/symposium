@@ -27,6 +27,7 @@ export default function Cover(props) {
     props.changeValue(name);
     props.setFeedUrl(props.feedUrl);
     props.setSearchDone(true);
+    document.querySelector('body').style.overflow = 'auto';
   };
 
   return (
