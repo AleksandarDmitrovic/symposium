@@ -42,6 +42,14 @@ export default function SearchBar(props) {
 
   const classes = useStyles();
 
+  document.addEventListener('input', disableScroll) 
+  
+  // If user is viewing search results, disable scroll of body
+  function disableScroll() {
+    document.querySelector('body').style.overflow = 'hidden';
+    document.removeEventListener('input', disableScroll)
+  };
+
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
