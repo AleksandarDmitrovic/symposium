@@ -8,8 +8,6 @@ export default function EmbedPodcast (props) {
   const title = props.class === 'footer-player' ? `Podcast of the Day: ${props.title}` : props.title;
   const volume = props.class === 'convo-card-player' ? [] : [RHAP_UI.VOLUME];
 
-
-export default function EmbedPodcast (props) {
   return (
     <div className="embed-video">
       {/* <h4 className="embed-video-title">{props.title}</h4> */}
