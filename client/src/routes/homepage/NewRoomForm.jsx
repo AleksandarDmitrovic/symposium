@@ -140,6 +140,7 @@ export default function NewRoomForm (props) {
             onChange={changeTitle}
             value={title}
             className={classes.inputField}
+            data-cy="title"
           />
           <br/>
           <TextField
