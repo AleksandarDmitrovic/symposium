@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import moment from 'moment'
-import { Button, Menu, MenuItem, Input } from '@material-ui/core';
+import { Button, Menu, MenuItem, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -133,19 +133,19 @@ export default function NewRoomForm (props) {
         <form className="new_room_form" autoComplete="off" onSubmit={create}>
           <h3 id="form-title">Create A Podcast Conversation</h3>
           <br/>
-          <Input
+          <TextField
             title="title"
             type="text"
-            placeholder="Conversation Title"
+            label="Conversation Title"
             onChange={changeTitle}
             value={title}
             className={classes.inputField}
           />
           <br/>
-          <Input
+          <TextField
             description="description"
             type="text"
-            placeholder="Conversation Description"
+            label="Conversation Description"
             onChange={changeDescription}
             value={description}
             className={classes.inputField}
