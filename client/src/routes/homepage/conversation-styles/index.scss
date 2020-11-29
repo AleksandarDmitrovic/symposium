@@ -3,13 +3,15 @@ $contrast-color: #5B5B5B;
 $secondary-color: #512da8;
 $accent-color: #9c27b0 ;
 
+$secondary-font: 'Philosopher', sans-serif;
+$primary-font: 'Raleway', sans-serif;
+
 html {
   background-color: $body-color;
 }
 
 body {
-  // font-family: 'Raleway', sans-serif;
-  font-family: 'Philosopher', sans-serif;
+  font-family: $primary-font;
 }
 
 .homepage {
@@ -67,7 +69,7 @@ body {
 
 .pod-of-day {
   position: fixed;
-  z-index: 4;
+  z-index: 8;
   background-color: $contrast-color;
   bottom: 0;
   height: 7vh;
