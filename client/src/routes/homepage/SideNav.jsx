@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Button  } from '@material-ui/core';
-import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material-ui/icons';
+import { Menu, AccountCircle, ChevronLeft, Home }  from '@material-ui/icons';
 import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
 import './conversation-styles/sideNav.scss';
@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SideNav(props) {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useState(true)
 
   const handleDrawerOpen = () => {
@@ -94,7 +93,7 @@ export default function SideNav(props) {
       const margin = open ? '0px' : '75px';
       document.getElementsByClassName('convo-list')[0].style.marginTop = margin;
     }
-  }, [props.newConversations])
+  }, [props.newConversations, open])
 
   useEffect(() => {
     if (open) {
