@@ -68,6 +68,7 @@ export default function Conversation(props) {
             history={props.history}
             connection={homepage}
             class='convo-btn'
+            text='Create a New Conversation Room'
           />
           </div>
           <div className='fixed'>

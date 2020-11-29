@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { Button } from '@material-ui/core';
 
 import { Add } from '@material-ui/icons'
-import { makeStyles } from '@material-ui/core/styles';
 import {  Dialog, DialogContent, DialogContentText } from '@material-ui/core';
 import './conversation-styles/index.scss';
-
 
 
 import NewRoomForm from './NewRoomForm';
@@ -23,8 +20,8 @@ export default function NewRoomButton(props) {
 
   return (
      <>
-      <button className={`bttn-gradient bttn-md bttn-royal ${props.class}`} onClick={handleOpen}>
-        Create A New Conversation Room
+      <button className={`bttn-jelly bttn-md bttn-primary ${props.class}`} onClick={handleOpen}>
+        {props.text}
         <Add style={{marginLeft: '0.5em'}}/>
         {props.children}
       </button>
