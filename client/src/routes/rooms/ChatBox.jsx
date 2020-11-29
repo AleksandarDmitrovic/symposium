@@ -2,12 +2,26 @@ import React, { useEffect, useState } from 'react';
 
 import RenderMessages from './RenderMessages'
 
-import { Card } from '@material-ui/core';
+// Material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import Icon from '@material-ui/core/Icon';
+
+// const useStyles = makeStyles((theme) => ({
+//   button: {
+//     margin: theme.spacing(1),
+//   },
+// }));
 
 export default function ChatBox(props) {
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
+
+  // Material-ui
+  // const classes = useStyles();
+
 
   function sendMessage(event) {
     event.preventDefault();
@@ -55,10 +69,14 @@ export default function ChatBox(props) {
         { mapMessages(allMessages) }
       </div>
 
-      <form onSubmit={ sendMessage }>
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<SendIcon/>}
+        onClick={ sendMessage }
+      >
         <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
-        <input type="submit" value="Submit" />
-      </form>
+      </Button>
     </footer>
   );
 };
