@@ -15,12 +15,14 @@ export default function Footer(props) {
 
   return (
     <footer className='pod-of-day'>
-      <p>Listen to what people are talking about today</p>
-      <EmbedPodcast embed_url={data.podcast_episode_embed_url} />
-      <div id='footer-pod-info'>
-        <p>{data.podcast_name}</p>
-        <p>{data.podcast_episode_title}</p>
-      </div>
+      {/* <p>Listen to what people are talking about today</p> */}
+      <EmbedPodcast 
+        embed_url={data.podcast_episode_embed_url} 
+        title={data.podcast_name} 
+        class='footer-player' 
+        name={data.podcast_name} 
+        episode={data.podcast_episode_title}
+      />
     </footer>
   );
 }

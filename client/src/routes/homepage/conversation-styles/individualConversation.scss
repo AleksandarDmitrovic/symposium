@@ -1,5 +1,13 @@
-.convo-list {
-  margin-top: 150px;
+$body-color: #191919;
+$contrast-color: #101010;
+$secondary-color: #9370DB;
+$accent-color: #8A2BE2;
+
+$primary-font: 'Raleway', sans-serif;
+$secondary-font: 'Philosopher', sans-serif;
+
+span {
+  font-family: $primary-font;
 }
 
 .conversation-card {
@@ -10,13 +18,16 @@
 }
 
 .card {
-  height: 300px;
   position: relative;
   box-sizing: border-box;
+  background-color: $contrast-color;
+  font-family: $primary-font;
 }
 
 .body {
-  height: 225px;
+  height: 240px;
+  margin-left: 1em;
+  color: white;
 
   header {
     display: flex;
@@ -29,9 +40,12 @@
   display: flex;
   justify-content: space-between;
 }
+
 .convo-info {
   padding-left: 300px;
+  font-family: $primary-font;
 }
+
 .podcast-info {
   padding-left: 300px;
   display: flex;
@@ -45,19 +59,18 @@
 }
 
 .share {
-  width: 65%;
-  margin-left: 30%;
-  display: inline;
+  display: contents;
 }
 
 #social-media {
-  width: 15em;
+  margin: auto
 }
 
 .share-room {
-  font-family: 'Raleway', sans-serif;
-  padding-left: 1em;
-  width: 12em;
+  font-family: $primary-font;
+  color: white;
+  padding-left: 18.5vw;
+  width: 30vw;
 }
 
 .cover-photo {
@@ -71,14 +84,37 @@
 }
 
 .description {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .join-room {
-  width: 70%;
+  background: #1d89ff;
+  color: #fff;
+  position: absolute;
+  right: 3vw;
+  width: 30%;
 }
 
-.embed-video {
+.convo-card-player {
+  width: 20vw;
+  background-color: $contrast-color;
 
+  .rhap_stacked-reverse .rhap_controls-section {
+    margin-bottom: 0;
+  }
+  
+  .rhap_header {
+    font-style: italic;
+    font-family: $primary-font;
+    margin: auto;
+    padding-bottom: 0.5em;
+  }
+  
+  .rhap_footer {
+    font-family: $primary-font;
+    font-style: italic;
+    margin: auto;
+    padding-right: 2em;
+  }
 }

@@ -1,38 +1,14 @@
 import { useState } from 'react';
-import NewRoomForm from './NewRoomForm';
-import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+
+import { Add } from '@material-ui/icons'
+import {  Dialog, DialogContent, DialogContentText } from '@material-ui/core';
 import './conversation-styles/index.scss';
 
- function getModalStyle() {
-   const top = 50;
-   const left = 50;
- 
-   return {
-     top: `${top}%`,
-     left: `${left}%`,
-     transform: `translate(-${top}%, -${left}%)`,
-   };
- }
- 
- const useStyles = makeStyles((theme) => ({
-   paper: {
-     position: 'absolute',
-     width: 600,
-     maxHeight: '50em',
-     backgroundColor: theme.palette.background.paper,
-     border: '2px solid #000',
-     boxShadow: theme.shadows[5],
-     padding: theme.spacing(2, 4, 3),
-   },
- }));
+
+import NewRoomForm from './NewRoomForm';
+import './conversation-styles/index.scss';
  
 export default function NewRoomButton(props) {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -42,34 +18,31 @@ export default function NewRoomButton(props) {
     setOpen(false);
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Create Your Podcast Conversation</h2>
-      
-      <NewRoomForm 
-         history = {props.history}
-         connection={props.connection}
-      />
-    </div>
-  );
-
   return (
      <>
-       <Button color="primary"
-          className="new-room-button"
-          onClick={handleOpen}
-       >
-          Create A Conversation Room
-          {props.children}
-       </Button>
-       <Modal
+      <button className={`bttn-jelly bttn-md bttn-primary ${props.class}`} onClick={handleOpen}>
+        {props.text}
+        <Add style={{marginLeft: '0.5em'}}/>
+        {props.children}
+      </button>
+ 
+      <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-       >
-         {body}
-       </Modal>
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent
+          onClose={handleClose}
+        >
+          <DialogContentText id="alert-dialog-description">
+            <NewRoomForm 
+            history = {props.history}
+            connection={props.connection}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

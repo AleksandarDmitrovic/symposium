@@ -1,5 +1,17 @@
+$body-color: #191919;
+$secondary-color: #9370DB;
+$accent-color: #8A2BE2;
+
 button:focus {
   outline: none;
+}
+
+#sort-by-container {
+  display: inline-flex;
+  justify-content: center;
+  margin-left: 10vw;
+  background-color: $body-color;
+  color: white;
 }
 
 .sort-by {
@@ -13,11 +25,6 @@ button:focus {
   }
 }
 
-#sort-by-container {
-  display: inline-flex;
-  justify-content: center;
-}
-
 .search {
   padding-left: 1em;
 }
@@ -25,5 +32,7 @@ button:focus {
 #category-name {
   display: flex;
   justify-content: center;
-  margin-right: 6%;
+  // margin-right: 6%;
+  background-color: $body-color;
+  color: white;
 }

@@ -1,9 +1,10 @@
-
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios';
 import { io } from "socket.io-client";
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
+
+
 import SortBy from "./SortBy"
 import ConversationList from "./ConversationList"
 import NewRoomButton from "./NewRoomButton";
@@ -26,7 +27,6 @@ export default function Conversation(props) {
   function changeState(newState) {
     setSearchParam(newState)
   };
-  
   
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
@@ -52,28 +52,26 @@ export default function Conversation(props) {
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
-    window.location.reload(false)
+    window.location.reload()
   }
-
-  useEffect(() => {
-    if (newConversations) {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '250px';
-      document.getElementsByClassName('fixed')[0].style.height = '30vh';
-    } else {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
-      document.getElementsByClassName('fixed')[0].style.height = '20vh';
-    }
-  }, [newConversations])
   
   return ( 
     <main>
-      <SideNav />
+      <SideNav 
+        history={props.history}
+        connection={homepage}
+        newConversations={newConversations}
+      />
       <article className='homepage'>
-        <div className='fixed'>
+        <div className='top-btn new-room-button'>
           <NewRoomButton
             history={props.history}
             connection={homepage}
+            class='convo-btn'
+            text='Create a New Conversation Room'
           />
+          </div>
+          <div className='fixed'>
           <SortBy 
             state={changeState}
             search={searchParam}
