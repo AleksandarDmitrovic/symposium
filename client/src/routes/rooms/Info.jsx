@@ -39,6 +39,7 @@ export default function Info(props) {
           embed_title = {props.embed_title}
           embed_url = {props.embed_url}
           title = {props.episode_title}
+          class = {'room-player'}
         />
       </div>
 
