@@ -98,7 +98,7 @@ export default function IndividualConversation(props) {
             </CardActionArea>   
               <footer className='share'>
                 <CardActions style={{alignItems: 'baseline'}}>
-                  <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+                  <Button className='join-room' size='large' variant="contained" color="primary" onClick={joinRoom}>Join Room</Button>
                     <p className='share-room'>Share this Room </p>
                     <SocialMedia 
                       description={props.description}

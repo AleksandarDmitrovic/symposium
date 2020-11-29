@@ -3,10 +3,6 @@ body {
   font-family: 'Philosopher', sans-serif;
 }
 
-.css-x1jtea-Bell{
-  left: 2000px;
-}
-
 .homepage {
   display: flex;
   flex-direction: column;
@@ -14,11 +10,12 @@ body {
 }
 
 .new-room-button {
-  justify-content: center;
   padding-top: 2em;
   padding-bottom: 3em;
   height: 50%;
   font-family: 'Raleway', sans-serif;
+  
+
 }
 
 .fixed {

@@ -85,6 +85,7 @@ export default function SortBy (props) {
           sortedBy={setCategory}
           sorted={sorted}
           setSorted={setSorted}
+          label={'SEARCH PODCASTS'}
         />
         </Tabs>
       </div>
