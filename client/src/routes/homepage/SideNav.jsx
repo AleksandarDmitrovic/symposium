@@ -88,9 +88,19 @@ export default function SideNav(props) {
   }
 
   useEffect(() => {
+    if (props.newConversations) {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
+    } else {
+      const margin = open ? '0px' : '75px';
+      document.getElementsByClassName('convo-list')[0].style.marginTop = margin;
+    }
+  }, [props.newConversations])
+
+  useEffect(() => {
     if (open) {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '0px';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
       document.getElementsByClassName('fixed')[0].style.top = '0';
       document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button');
@@ -98,6 +108,7 @@ export default function SideNav(props) {
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '75px';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
       document.getElementsByClassName('fixed')[0].style.top = '10vh';
       document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button-fixed');
@@ -106,7 +117,7 @@ export default function SideNav(props) {
   }, [open]);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{zIndex: 7}}>
       <CssBaseline />
       <Toolbar>
         <IconButton
@@ -118,7 +129,7 @@ export default function SideNav(props) {
         >
           <Menu />
         </IconButton>
-        <Typography style={{fontFamily: "'Raleway', sans-serif"}}variant="h6" noWrap>
+        <Typography style={{fontFamily: "'Raleway', sans-serif"}} variant="h6" noWrap>
           Symposium
         </Typography>
       </Toolbar>

@@ -3,6 +3,10 @@ $contrast-color: #5B5B5B;
 $secondary-color: #512da8;
 $accent-color: #9c27b0 ;
 
+html {
+  background-color: $body-color;
+}
+
 body {
   // font-family: 'Raleway', sans-serif;
   font-family: 'Philosopher', sans-serif;
