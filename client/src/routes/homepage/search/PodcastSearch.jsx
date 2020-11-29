@@ -50,6 +50,7 @@ export default function PodcastSearch(props) {
         hide('spinner');
         document.removeEventListener('click', pageClick);
         setSearchDone(true);
+        document.querySelector('body').style.overflow = 'auto';
       } 
     };
   };
