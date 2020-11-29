@@ -1,5 +1,4 @@
-
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios';
 import { io } from "socket.io-client";
 import { Button } from '@material-ui/core';
@@ -28,7 +27,6 @@ export default function Conversation(props) {
   function changeState(newState) {
     setSearchParam(newState)
   };
-  
   
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
@@ -59,23 +57,27 @@ export default function Conversation(props) {
 
   useEffect(() => {
     if (newConversations) {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '250px';
-      document.getElementsByClassName('fixed')[0].style.height = '30vh';
-    } else {
       document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
-      document.getElementsByClassName('fixed')[0].style.height = '20vh';
+    } else {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '0';
     }
   }, [newConversations])
   
   return ( 
     <main>
-      <SideNav />
+      <SideNav 
+        history={props.history}
+        connection={homepage}
+      />
       <article className='homepage'>
-        <div className='fixed'>
+        <div className='top-btn new-room-button'>
           <NewRoomButton
             history={props.history}
             connection={homepage}
+            class='convo-btn'
           />
+          </div>
+          <div className='fixed'>
           <SortBy 
             state={changeState}
             search={searchParam}

@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Button } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+
+import { Add } from '@material-ui/icons'
+import { makeStyles } from '@material-ui/core/styles';
+import { Modal, Dialog, DialogContent, DialogContentText } from '@material-ui/core';
+import './conversation-styles/index.scss';
+
 
 
 import NewRoomForm from './NewRoomForm';
@@ -17,17 +20,25 @@ export default function NewRoomButton(props) {
   const handleClose = () => {
     setOpen(false);
   };
- 
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Create Your Podcast Conversation</h2>
+      <NewRoomForm 
+         history = {props.history}
+         connection={props.connection}
+      />
+    </div>
+  );
+
   return (
-    <>
-      <Button 
-        color="primary"
-        variant="contained"
-        className="new-room-button"
-        onClick={handleOpen}
-      >
-        Create A Conversation Room
-      </Button>
+     <>
+      <button className={`bttn-gradient bttn-md bttn-royal ${props.class}`} onClick={handleOpen}>
+        Create A New Conversation Room
+        <Add style={{marginLeft: '0.5em'}}/>
+        {props.children}
+      </button>
+ 
       <Dialog
         open={open}
         onClose={handleClose}

@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText  } from '@material-ui/core';
-
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
+import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Button  } from '@material-ui/core';
+import { Menu, AccountCircle, ChevronLeft, ChevronRight, Home }  from '@material-ui/icons';
+import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
+import './conversation-styles/sideNav.scss';
 
 const drawerWidth = '20vw';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    position: 'fixed'
+    position: 'fixed',
+    color: 'white'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -44,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: '#101010',
+    color: 'white'
   },
   drawerHeader: {
     display: 'flex',
@@ -71,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function SideNav(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true)
@@ -84,17 +83,25 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0,100);
+  }
+
   useEffect(() => {
     if (open) {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
-      // document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '20vw';
+      document.getElementsByClassName('fixed')[0].style.top = '0';
+      document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button');
+      document.getElementsByClassName('convo-btn')[0].style.height = '';
     } else {
       document.getElementsByClassName('convo-list')[0].style.paddingLeft = '12vw';
       document.getElementsByClassName('convo-list')[0].style.paddingRight = '12vw';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '13vw';
-      document.getElementsByClassName('pod-of-day')[0].style.marginLeft = '0';
+      document.getElementsByClassName('fixed')[0].style.top = '10vh';
+      document.getElementsByClassName('top-btn')[0].className = ('top-btn new-room-button-fixed');
+      document.getElementsByClassName('convo-btn')[0].style.height = '6vh';
     }
   }, [open]);
 
@@ -109,13 +116,13 @@ export default function PersistentDrawerLeft() {
           edge="start"
           className={clsx(classes.menuButton, open && classes.hide)}
         >
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <Typography style={{fontFamily: "'Raleway', sans-serif"}}variant="h6" noWrap>
           Symposium
         </Typography>
       </Toolbar>
-      <Drawer
+      <Drawer 
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -124,31 +131,37 @@ export default function PersistentDrawerLeft() {
           paper: classes.drawerPaper,
         }}
       > 
-        <h3>Symposium</h3>
-        <img className='logo' src='icon_a.png' alt='logo'/>
-        <div className={classes.drawerHeader}>
+        <div className={classes.drawerHeader} style={{backgroundColor: '#101010'}}>
+          <h5 className='nav-title'>Symposium</h5>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <ChevronLeft style={{color: 'white'}} />
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List className='nav-list'>
+          <ListItem button onClick={scrollToTop}>
+            <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <Home /> </ListItemIcon>
+            <ListItemText primary='Home' style={{paddingLeft: '1em'}}/>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <AccountCircle /> </ListItemIcon>
+            <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
+          </ListItem>
+          <div className='nav-new-room-btn'>
+            <NewRoomButton
+              history={props.history}
+              connection={props.connection}
+              class='nav-btn'
+            />
+          </div>
         </List>
+        <img className='logo' src='icon_a.png' alt='logo'/>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <div className='logout'>
+          <Button variant="contained" color="primary" style={{width: '18vw'}}>
+              Log Out
+          </Button>
+        </div>
       </Drawer>
     </div>
   );

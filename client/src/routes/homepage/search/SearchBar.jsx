@@ -58,6 +58,8 @@ export default function SearchBar(props) {
             props.changeValue(event.target.value);
           }}
           onClick={handleFocus}
+          InputProps={{style: {color: 'white'}}}
+          InputLabelProps={{style: {color: 'white'}}}
         />
       </form>
     </section>
