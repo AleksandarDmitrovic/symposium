@@ -9,6 +9,7 @@ button:focus {
 #sort-by-container {
   display: inline-flex;
   justify-content: center;
+  margin-left: 10vw;
   background-color: $body-color;
   color: white;
 }
@@ -33,4 +34,5 @@ button:focus {
   justify-content: center;
   // margin-right: 6%;
   background-color: $body-color;
+  color: white;
 }

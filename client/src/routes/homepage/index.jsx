@@ -54,20 +54,13 @@ export default function Conversation(props) {
     setNewConversations(false);
     window.location.reload()
   }
-
-  useEffect(() => {
-    if (newConversations) {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
-    } else {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '0';
-    }
-  }, [newConversations])
   
   return ( 
     <main>
       <SideNav 
         history={props.history}
         connection={homepage}
+        newConversations={newConversations}
       />
       <article className='homepage'>
         <div className='top-btn new-room-button'>
