@@ -6,6 +6,7 @@ $accent-color: #8A2BE2;
 $primary-font: 'Raleway', sans-serif;
 $secondary-font: 'Philosopher', sans-serif;
 
+
 span {
   font-family: $primary-font;
 }
@@ -71,12 +72,16 @@ span {
 
 #social-media {
   display: flex;
-  
   width: 100%;
   justify-content: space-between;  
-  // margin: 0.5em 50em 0.5em 15em;
   padding: 0em 60em 0em 23em ;
 
+  button {
+    svg {
+      margin-left: 0;
+      margin-right: 4em;
+    }
+  }
 }
 
 .cover-photo {
@@ -98,16 +103,23 @@ span {
   background: #1d89ff;
   color: #fff;
   position: absolute;
-  right: 1vw;
-  width: 30%;
+  right: 2em;
+  width: 40%;
 }
 
 .convo-card-player {
-  width: 20vw;
+  width: 850px;
+  padding-left: 0;
+  padding-right: 2em;
+  margin: auto;
   background-color: $contrast-color;
 
   .rhap_horizontal-reverse .rhap_controls-section {
     margin-bottom: 0;
+  }
+
+  .rhap_progress-section {
+    width: 100%;
   }
   
   .rhap_header {
@@ -122,5 +134,31 @@ span {
     font-style: italic;
     margin: auto;
     padding-right: 2em;
+    padding-top: 0.5em;
   }
 }
+
+@media (max-width: 1700px) { 
+  .convo-card-player {
+    width: 700px
+  }
+}
+
+@media (max-width: 1550px) { 
+
+  .join-room {
+    width: 30%;
+  }
+
+  #social-media {
+    button {
+      svg {
+        margin-right: 3em;
+      }
+    }
+  }
+  
+  .convo-card-player {
+    width: 600px;
+  }
+} 

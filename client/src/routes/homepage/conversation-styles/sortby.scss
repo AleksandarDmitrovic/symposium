@@ -1,6 +1,4 @@
 $body-color: #191919;
-$secondary-color: #9370DB;
-$accent-color: #8A2BE2;
 
 $primary-font: 'Raleway', sans-serif;
 
@@ -38,6 +36,6 @@ button:focus {
   margin-right: 3%;
   font-size: 1.25em;
   font-family: $primary-font;
-  background-color: #191919;
+  background-color: $body-color;
   color: white;
 }

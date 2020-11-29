@@ -1,14 +1,8 @@
 $body-color: #191919;
 $contrast-color: #282828;
-$secondary-color: #1d89ff;
-$focus-color: #8A2BE2;
-
-$ivory: #FFFFF0;
-$blue-grey: #647C90;
-$yellow: #FFFF5C;
+$focus-color: #3f51b5;
 
 $primary-font: 'Raleway', sans-serif;
-$secondary-font: 'Philosopher', sans-serif;
 
 html {
   background-color: $body-color;
@@ -28,7 +22,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #284B63;
 }
 
 .convo-btn {
@@ -90,8 +83,6 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
-
 }
 
 .footer-player {

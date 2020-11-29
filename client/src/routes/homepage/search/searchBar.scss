@@ -1,8 +1,7 @@
-$focus-color: #8A2BE2;
-$secondary-color: #1d89ff;
-
 $body-color: #191919;
 $contrast-color: #282828;
+$secondary-color: #1d89ff;
+$focus-color: #3f51b5;
 
 .search {
   display: flex;
@@ -31,8 +30,7 @@ $contrast-color: #282828;
 
 .podcast-list:hover {
   cursor: pointer;
-  // background: #050e1a;
-  background:#3f51b5;
+  background: $focus-color;
 }
 
 .podcast-result {

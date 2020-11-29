@@ -59,7 +59,12 @@ export default function IndividualConversation(props) {
               <CardContent className='body'>
                 <div className='convo-info'>
                   <header>
-                    <Typography gutterBottom style={{fontFamily: "'Raleway', sans-serif"}} color='white' variant="h5" component="h1">
+                    <Typography 
+                      gutterBottom 
+                      style={{fontFamily: "'Raleway', sans-serif", fontSize: '2em'}} 
+                      color='white' variant="p" 
+                      component="p"
+                    >
                       {props.title}
                     </Typography>
                     <Timer
@@ -67,28 +72,30 @@ export default function IndividualConversation(props) {
                         direction="backward"
                     >
                       {() => (
-                        <h4>Conversation Closes In: <Timer.Hours /> hours <Timer.Minutes /> minutes</h4>
+                        <h4>Room Closes In: <Timer.Hours /> hours <Timer.Minutes /> minutes</h4>
                       )}
                     </Timer>
                   </header>
-                  <Typography variant="body" style={{fontFamily: "'Raleway', sans-serif"}} color='white'  className='description' component="h3" >
+                  <Typography 
+                    variant="p" 
+                    style={{fontFamily: "'Raleway', sans-serif", fontSize: '1.25em', paddingBottom: '2em'}} 
+                    color='white'  
+                    className='description' 
+                    component="p" 
+                  >
                     {props.description}
                   </Typography>
                 </div>
                 <section className='pod'>
-                  <div className='podcast-info'>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body" color="white" component="h3">
-                      {props.podcast_name}
-                    </Typography>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body" color="white" component="h3">
-                      {props.episode_title}
-                    </Typography>
-                    <Typography className='italic' style={{fontFamily: "'Raleway', sans-serif"}} variant="body" color="white" component="h3">
-                      Category: {category}
-                    </Typography>
-                  </div>
+                  <div className='podcast-info'></div>
                   <div className='player'>
-                    <EmbedPodcast embed_url={props.audio} title={props.title} class='convo-card-player'/>
+                    <EmbedPodcast 
+                      embed_url={props.audio} 
+                      title={props.podcast_name} 
+                      episode={props.episode_title} 
+                      category={category}
+                      class='convo-card-player'
+                    />
                   </div>
                 </section>
               </CardContent>
