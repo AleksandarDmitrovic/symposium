@@ -48,7 +48,7 @@ export default function SortBy (props) {
         <Tabs
           value={value}
           onChange={handleChange}
-          TabIndicatorProps={{style: {background:'#8A2BE2'}}}
+          TabIndicatorProps={{style: {background:'#3f51b5'}}}
         >
           <Tab
             aria-controls="simple-menu" 
@@ -89,7 +89,7 @@ export default function SortBy (props) {
           setSorted={setSorted}
           label={'SEARCH PODCASTS'}
           fontColor='white'
-          resultWidth='25vw'
+          resultWidth='330px'
         />
         </Tabs>
       </div>
