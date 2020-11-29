@@ -10,8 +10,6 @@ import PodcastSearch from './search/PodcastSearch';
 import TimePicker from './TimePicker';
 import './form-styles/NewRoomForm.scss';
 
-// import { io } from "socket.io-client";
-
 
 const useStyles = makeStyles((theme) => ({
   inputField: {

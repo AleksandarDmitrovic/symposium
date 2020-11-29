@@ -35,7 +35,6 @@ export default function SearchBar(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-      
         width: '40ch',
       },
     },
@@ -49,7 +48,6 @@ export default function SearchBar(props) {
         <TextField
           label={props.label}
           className={classes.root}
-          
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
