@@ -1,4 +1,5 @@
-$contrast-color: #101010;
+$primary-color: #101010;
+$primary-font: 'Raleway', sans-serif;
 
 .nav-title {
   margin-right: 5vw;
@@ -18,8 +19,15 @@ $contrast-color: #101010;
 }
 
 .nav-new-room-btn {
-  width: 18vw;
   margin: auto;
+
+  .bttn-jelly.bttn-md {
+    font-size: 1.25em;
+    font-family: $primary-font;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .nav-btn {
@@ -30,13 +38,17 @@ $contrast-color: #101010;
   height: 100px;
   width: 100px;
   margin: auto;
-  margin-top: 10vh;
   background: transparent;
 }
 
 .logout {
   margin: auto;
-  margin-bottom: 15vh;
+  margin-bottom: 20vh;
   display: flex;
   justify-content: center;
+
+  .bttn-unite.bttn-md {
+    background: $primary-color;
+    width: 10vw;
+  }
 }

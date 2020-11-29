@@ -48,7 +48,7 @@ export default function IndividualConversation(props) {
   return (
     <>
       {active && 
-        <Card className='conversation-card'>
+        <Card className='conversation-card' style={{background: 'black'}}>
           <div className='card'>
             <CardMedia
               className='cover-photo'

@@ -164,15 +164,14 @@ export default function SideNav(props) {
               history={props.history}
               connection={props.connection}
               class='nav-btn'
+              text='New Conversation Room'
             />
           </div>
         </List>
         <img className='logo' src='icon_a.png' alt='logo'/>
         <Divider />
         <div className='logout'>
-          <Button variant="contained" color="primary" style={{width: '18vw'}}>
-              Log Out
-          </Button>
+          <button class="bttn-unite bttn-md bttn-primary">Log Out</button>
         </div>
       </Drawer>
     </div>
