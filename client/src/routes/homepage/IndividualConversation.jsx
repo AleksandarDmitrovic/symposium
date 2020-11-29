@@ -48,14 +48,14 @@ export default function IndividualConversation(props) {
   return (
     <>
       {active && 
-        <Card className='conversation-card' style={{background: 'black'}}>
+        <Card className='conversation-card' style={{background: '#101010'}}>
           <div className='card'>
             <CardMedia
               className='cover-photo'
               image={props.image}
               title="cover-photo"
             />
-            <CardActionArea onClick={joinRoom} style={{height: 'inherit'}}>
+            <CardActionArea style={{height: 'inherit'}}>
               <CardContent className='body'>
                 <div className='convo-info'>
                   <header>
@@ -96,15 +96,14 @@ export default function IndividualConversation(props) {
                 </section>
               </CardContent>
             </CardActionArea>   
-            <CardActions>
+            <CardActions style={{display: 'flex', padding: '11px', alignItems: 'center'}}>
               <footer className='share'>
-                <p className='share-room'>Share this Room </p>
                 <SocialMedia 
                   description={props.description}
                   url={roomURL}
                 >
                 </SocialMedia>
-                <Button className='join-room' size='large' color="primary" onClick={joinRoom}>Join Room</Button>
+                <button className='bttn-jelly bttn-md bttn-primary join-room' onClick={joinRoom}>Join Room</button>
               </footer>
              </CardActions>
           </div>

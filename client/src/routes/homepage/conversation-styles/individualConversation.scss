@@ -59,20 +59,18 @@ span {
 }
 
 .share {
-  width: 65%;
-  margin-left: 30%;
   display: contents;
 }
 
 #social-media {
-  width: 15em;
+  margin: auto
 }
 
 .share-room {
   font-family: $primary-font;
   color: white;
-  padding-left: 24vw;
-  width: 40vw;
+  padding-left: 18.5vw;
+  width: 30vw;
 }
 
 .cover-photo {
@@ -91,5 +89,32 @@ span {
 }
 
 .join-room {
-  width: 70%;
+  background: #1d89ff;
+  color: #fff;
+  position: absolute;
+  right: 3vw;
+  width: 30%;
+}
+
+.convo-card-player {
+  width: 20vw;
+  background-color: $contrast-color;
+
+  .rhap_stacked-reverse .rhap_controls-section {
+    margin-bottom: 0;
+  }
+  
+  .rhap_header {
+    font-style: italic;
+    font-family: $primary-font;
+    margin: auto;
+    padding-bottom: 0.5em;
+  }
+  
+  .rhap_footer {
+    font-family: $primary-font;
+    font-style: italic;
+    margin: auto;
+    padding-right: 2em;
+  }
 }

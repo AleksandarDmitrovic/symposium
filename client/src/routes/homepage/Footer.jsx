@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import EmbedPodcast from '../rooms/EmbedPodcast';
 import axios from 'axios';
-import { PermDataSetting } from '@material-ui/icons';
 
 export default function Footer(props) {
 
