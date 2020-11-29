@@ -1,3 +1,5 @@
+$focus-color: #8A2BE2;
+
 .search {
   display: flex;
   justify-content: space-between;
@@ -5,8 +7,25 @@
 }
 
 .search-bar {
-  flex-grow: 1;
+  flex-grow: 1;  
 }
+
+// .MuiInput-underline:after {
+//   // border-bottom: $focus-color;
+//   border-bottom: red;
+// }
+
+// .MuiInput-underline:after {
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   content: "";
+//   position: absolute;
+//   transform: scaleX(0);
+//   transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+//   border-bottom: 2px solid red;
+//   pointer-events: none;
+// }
 
 .podcast {
   display: flex;
@@ -28,9 +47,8 @@
   background: #292479;
 }
 
-.props-result {
-  font-weight: 700;
-  font-size: 1.5rem;
+.podcast-result {
+  color: white;
 }
 
 .result-container {
@@ -51,4 +69,9 @@
 .search-spinner {
   display: flex;
   align-items: flex-end;
+
+  .MuiCircularProgress-colorSecondary {
+    color: $focus-color;
+  }
 }
+
