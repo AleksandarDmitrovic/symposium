@@ -36,8 +36,8 @@ export default function SearchBar(props) {
     root: {
       '& > *': {
         width: '40ch',
-      },
-    },
+      }
+    }
   }));
 
   const classes = useStyles();
@@ -46,6 +46,7 @@ export default function SearchBar(props) {
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <TextField
+          InputIndicatorProps={{style: {background:'#8A2BE2'}}}
           label={props.label}
           className={classes.root}
           spellCheck="false"
@@ -58,8 +59,8 @@ export default function SearchBar(props) {
             props.changeValue(event.target.value);
           }}
           onClick={handleFocus}
-          InputProps={{style: {color: 'white'}}}
-          InputLabelProps={{style: {color: 'white'}}}
+          InputProps={{style: {color: props.fontColor}}}
+          InputLabelProps={{style: {color: props.fontColor}}}
         />
       </form>
     </section>
