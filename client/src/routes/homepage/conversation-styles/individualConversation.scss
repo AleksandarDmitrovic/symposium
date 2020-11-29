@@ -111,6 +111,7 @@ span {
   width: 850px;
   padding-left: 0;
   padding-right: 2em;
+  padding-top: 2em;
   margin: auto;
   background-color: $contrast-color;
 
@@ -126,7 +127,6 @@ span {
     font-style: italic;
     font-family: $primary-font;
     margin: auto;
-    padding-bottom: 0.5em;
   }
   
   .rhap_footer {
@@ -134,7 +134,7 @@ span {
     font-style: italic;
     margin: auto;
     padding-right: 2em;
-    padding-top: 0.5em;
+    padding-top: 0.25em;
   }
 }
 

@@ -78,7 +78,13 @@ export default function IndividualConversation(props) {
                   </header>
                   <Typography 
                     variant="p" 
-                    style={{fontFamily: "'Raleway', sans-serif", fontSize: '1.25em', paddingBottom: '2em'}} 
+                    style={{
+                      fontFamily: "'Raleway', sans-serif", 
+                      fontSize: '1.25em', 
+                      paddingBottom: '2em',
+                      borderTop: '1px solid grey',
+                      borderBottom: '1px solid grey'
+                    }} 
                     color='white'  
                     className='description' 
                     component="p" 
