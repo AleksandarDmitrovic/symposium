@@ -52,13 +52,16 @@ body {
         border: 1px solid black;
         width: 70%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
 
         .call-video video {
-          padding: 2%;
-          width: 60%;
-          height: 60%;
+          border: 1px solid red;
+          display: flex;
+          margin: 1em;
+
+          width: 50%;
+          height: 50%;
         }
       }
 

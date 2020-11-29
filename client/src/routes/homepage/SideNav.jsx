@@ -168,7 +168,7 @@ export default function SideNav(props) {
             />
           </div>
         </List>
-        <img className='logo' src='icon_a.png' alt='logo'/>
+        <img className='logo' src='icon_c_white-svg.png' alt='logo'/>
         <Divider />
         <div className='logout'>
           <button class="bttn-unite bttn-md bttn-primary">Log Out</button>

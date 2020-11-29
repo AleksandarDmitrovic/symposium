@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
-import './call.scss'
-
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
