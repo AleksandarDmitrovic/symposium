@@ -50,27 +50,29 @@ body {
         border: 1px solid black;
         width: 70%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
+        // justify-content: center;
+        align-items: center;
+        max-height: 90vh;
 
 
 
         .call-video {
           border: 10px solid blue;
           display: flex;
+          align-items: center;
+          justify-content: center;
+
+          max-width: 50%;
+          max-height: 50%;
           
           video {
             border: 1px solid red;
-  
-  
-            margin: 1em;
-            width: 50%;
-            height: 50%;
+            width: 80%;
+            height: 80%;
           }
-
-        }
-        
-        
+        } 
       }
 
       .side-bar {
@@ -82,6 +84,7 @@ body {
         .podcast-card {
           margin: 1em;
           padding: 0.25em;
+          // background-color: #101010;
 
           .conversation-information {
             display: flex;
@@ -125,7 +128,7 @@ body {
         .chat-box {
           .chat-box-card {
             margin: 0em 1em;
-            min-height: 150px;
+            min-height: 100px;
             padding: 0em 1em;
             margin-bottom: 0px;
           }
