@@ -66,19 +66,16 @@ body {
         width: 30%;
 
         .podcast-card {
-          display: flex;
-          flex-wrap: wrap;
-          text-align: center;
+          // display: flex;
+          // flex-wrap: wrap;
           margin: 1em;
-          padding: 5px;
-          stretch: column;
 
           .conversation-information {
             display: flex;
             flex-wrap: wrap;
             ul {
               list-style-type: none;
-              text-align: left;
+              text-align: center;
               padding: 10px;
             }
           }
@@ -86,12 +83,20 @@ body {
           .podcast {
             border: 1px solid red;
 
+            .embed-video-title {
+              color: black;
+            }
+
             .embed-video {
               display: flex;
               flex-wrap: wrap;
-              height: 50px;
-              justify-content: center;          
+              justify-content: center;  
+              
+              .embed-video-audio-player {
+                border: 4px solid orange;
+              }
             }
+
           }
 
           .conversation-information {
@@ -108,9 +113,18 @@ body {
         
 
         .chat-box {
+          border: 2px solid black;
+          background-color: rgb(33, 94, 155);
           flex-shrink: 0;
           margin: 1em;
           padding: 1em;
+
+          .chat-box-send-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+          }
         }
       } // .side-bar
       

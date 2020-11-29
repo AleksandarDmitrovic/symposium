@@ -72,6 +72,7 @@ export default function ChatBox(props) {
       <Button
         variant="contained"
         color="primary"
+        className="chat-box-send-button"
         endIcon={<SendIcon/>}
         onClick={ sendMessage }
       >

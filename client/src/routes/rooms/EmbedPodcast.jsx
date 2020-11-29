@@ -7,8 +7,9 @@ import 'react-h5-audio-player/src/styles.scss';
 export default function EmbedPodcast (props) {
   return (
     <div className="embed-video">
-      <h6 className="embed-video-title">{props.title}</h6>
+      <h4 className="embed-video-title">{props.title}</h4>
       <AudioPlayer
+        className="embed-video-audio-player"
         src={props.embed_url}
         showJumpControls={false}
         customAdditionalControls={[]}
