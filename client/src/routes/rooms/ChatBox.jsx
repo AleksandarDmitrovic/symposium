@@ -2,12 +2,26 @@ import React, { useEffect, useState } from 'react';
 
 import RenderMessages from './RenderMessages'
 
-import { Card } from '@material-ui/core';
+// Material-ui
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import Card from '@material-ui/core/Card';
+import { TextField } from '@material-ui/core';
+
+// const useStyles = makeStyles((theme) => ({
+//   button: {
+//     margin: theme.spacing(1),
+//   },
+// }));
 
 export default function ChatBox(props) {
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
+
+  // Material-ui
+  // const classes = useStyles();
+
 
   function sendMessage(event) {
     event.preventDefault();
@@ -34,6 +48,9 @@ export default function ChatBox(props) {
 
 
   const mapMessages = (allMessages) => {
+    if (allMessages.length === 0) {
+      return "No messages to show";
+    }
     const messages = allMessages.map(message => {
       return (
         <RenderMessages
@@ -48,17 +65,30 @@ export default function ChatBox(props) {
   
   return (
 
-    <footer className="chat-box">
-      <h4>Messages</h4>
+    <div className="chat-box">
+      <Card className="chat-box-card" variant="outlined">
+        <div className="chat-box-messages">
+          <div>
+            { mapMessages(allMessages) }
+          </div>
+        </div>
+      </Card>
 
-      <div>
-        { mapMessages(allMessages) }
-      </div>
+      <form onClick = { sendMessage } className="chat-box-form">
+        <TextField
+            className="chat-box-form-text-field"
+            label="message"
+            name="message"
+            type="text"
+            autoComplete='off'
+            value={chatBoxMessage}
+            onChange={changeHandler}
+          />
+        <Button variant="contained" color="primary" className="chat-box-form-button">
+          Send
+        </Button>
+      </form> 
 
-      <form onSubmit={ sendMessage }>
-        <input type="text" id="message" name="message" onChange={changeHandler} value={chatBoxMessage}/>
-        <input type="submit" value="Submit" />
-      </form>
-    </footer>
+    </div>
   );
 };

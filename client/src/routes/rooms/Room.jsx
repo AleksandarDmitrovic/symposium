@@ -4,7 +4,6 @@ import TopNav from './TopNav';
 import Call from './Call';
 import ChatBox from './ChatBox';
 import Info from './Info';
-import EmbedPodcast from './EmbedPodcast'
 
 import './room.scss';
 
@@ -77,10 +76,12 @@ export default function Room(props) {
             podcast_ends_at = {conversation[0].podcast_ends_at}
             podcast_image = {conversation[0].podcast_image}
             url = {props.history.location.pathname}
-          />
-          <EmbedPodcast 
             embed_title = {conversation[0].podcast_episode_title}
             embed_url = {conversation[0].podcast_episode_embed_url}
+          />
+          <ChatBox 
+            setMessage = {changeMessage}
+            newMessage = {newMessage}
           />
         </div>
 
@@ -91,11 +92,6 @@ export default function Room(props) {
           setNewMessage = {changeNewMessage}
           />
       </div>
-
-      <ChatBox 
-        setMessage = {changeMessage}
-        newMessage = {newMessage}
-      />
 
     </article>
   );
