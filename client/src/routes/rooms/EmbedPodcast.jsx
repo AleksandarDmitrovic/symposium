@@ -5,7 +5,14 @@ import 'react-h5-audio-player/src/styles.scss';
 
 export default function EmbedPodcast (props) {
 
-  const title = props.class === 'footer-player' ? `Podcast of the Day: ${props.title}` : props.title;
+  let title = props.title;
+
+  if (props.class === 'footer-player') {
+    title = `Podcast of the Day: \xa0\xa0 ${props.title}`;
+  } else if (props.class === 'convo-card-player') {
+    title = `${props.title} \xa0\xa0\xa0 | \xa0\xa0\xa0 Category: ${props.category}`;
+  }
+
   const volume = props.class === 'convo-card-player' ? [] : [RHAP_UI.VOLUME];
 
   return (
