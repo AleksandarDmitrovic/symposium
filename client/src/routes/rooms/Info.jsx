@@ -49,12 +49,12 @@ export default function Info(props) {
         </ul>
       </div>
 
-      <div className="social-media">
+      
       <SocialMedia 
         description={props.description}
         url={props.history}
       />
-      </div>
+      
       
 
   </Card>
