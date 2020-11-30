@@ -20,7 +20,7 @@ export default function EmbedPodcast (props) {
         customVolumeControls={volume}
         customAdditionalControls={[]}
         autoPlayAfterSrcChange={false}
-        layout={layout}
+        layout={props.layout || "horizontal-reverse"}
       />
     </div>
   );
