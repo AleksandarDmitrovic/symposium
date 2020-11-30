@@ -184,7 +184,7 @@ export default function SideNav(props) {
             />
           </div>
         </List>
-        <img className='logo' src='icon_a.png' alt='logo'/>
+        <img className='logo' src='icon_c.png' alt='logo'/>
         <div className='symposium'>
           <p>{symposium}</p>
           <p>A meeting or conference for discussion of a particular subject</p>
