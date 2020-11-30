@@ -44,8 +44,9 @@ body {
 
       .call-container {
         // TO DO Change?
-        // border: 5px solid red;
+        // border: 1px solid red;
         width: 70%;
+        height: 90vh;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -64,15 +65,17 @@ body {
 
           max-width: 50%;
           min-width: 50%;
-          max-height: 50%;
-          min-height: 50%;
+          max-height: 40%;
+          min-height: 40%;
+
+          margin: 0em;
 
           z-index: 1;
           
           video {
             // border: 1px solid red;
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
           }
         } 
 
@@ -81,7 +84,7 @@ body {
           z-index: 2;
 
           position: absolute;
-          bottom: -40px;
+          bottom: -20px;
           margin: 1em;
 
           button {
