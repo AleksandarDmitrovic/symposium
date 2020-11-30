@@ -75,6 +75,7 @@ span {
   width: 100%;
   justify-content: space-between;  
   padding: 0em 60em 0em 23em ;
+  z-index: 2;
 
   button {
     svg {
@@ -109,9 +110,9 @@ span {
 
 .convo-card-player {
   width: 850px;
+  padding-top: 0;
   padding-left: 0;
   padding-right: 2em;
-  padding-top: 2em;
   margin: auto;
   background-color: $contrast-color;
   color: grey;
@@ -155,11 +156,18 @@ span {
     button {
       svg {
         margin-right: 3em;
+        z-index: 1;
       }
     }
   }
   
   .convo-card-player {
     width: 600px;
+
+    z-index: 0;
+
+    .rhap_footer {
+      
+    }
   }
 } 

@@ -45,6 +45,16 @@ export default function IndividualConversation(props) {
   
   const secondsForTimer = (timeConversationAvailable - moment().unix()) * 1000;
 
+  const numOfLines = props.description.length / 50;
+  let padding;
+  if (numOfLines > 2) {
+    padding = '1em';
+  } else if (numOfLines > 1) {
+    padding = '2em';
+  } else {
+    padding = '2.75em';
+  }
+
   return (
     <>
       {active && 
@@ -81,8 +91,7 @@ export default function IndividualConversation(props) {
                     style={{
                       fontFamily: "'Raleway', sans-serif", 
                       fontSize: '1.25em', 
-                      paddingBottom: '2em',
-                      borderTop: '1px solid grey',
+                      paddingBottom: '1em',
                       borderBottom: '1px solid grey'
                     }} 
                     color='white'  
@@ -94,13 +103,14 @@ export default function IndividualConversation(props) {
                 </div>
                 <section className='pod'>
                   <div className='podcast-info'></div>
-                  <div className='player'>
+                  <div className='player' style={{paddingTop: padding}}>
                     <EmbedPodcast 
                       embed_url={props.audio} 
                       title={props.podcast_name} 
                       episode={props.episode_title} 
                       category={category}
                       class='convo-card-player'
+                      
                     />
                   </div>
                 </section>
