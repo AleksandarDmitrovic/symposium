@@ -34,7 +34,7 @@ const Video = (props) => {
 
   return (
     <div className={'call-video other ' + props.id}>
-      { props.showAvatar && <Animal size="100px" className='avatar'/> }
+      { props.showAvatar && <Animal size="200px" className='avatar'/> }
       <video playsInline autoPlay ref={ref} className='video' style={{display: displayVideo.current}}/>
     </div>
   );
@@ -261,7 +261,7 @@ export default function Call(props) {
       <div className='call-container'>
 
         <div className='call-video me'>
-          { !isVideoActive && <Animal size="100px" /> }
+          { !isVideoActive && <Animal size="200px" /> }
           <video muted ref={userVideo} autoPlay playsInline style={{display: myVideoClass}}/>
         </div>
         
