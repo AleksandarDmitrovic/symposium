@@ -9,8 +9,22 @@ describe("Navigation", () => {
       .first()
       .click();
 
-    cy.get('form').get('[data-cy=title]')
-      .type("The Best Conversation Ever!");
+    cy.get('form')
+      .get('[data-cy=title]')
+      .type("The Best Convver{backspace}{backspace}{backspace}ersation Ever!{backspace}!") //, { delay: 120 }
+      .get('[data-cy=description]')
+      .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people.") //, { delay: 120 }
+      .get('[data-cy=time-selector]')
+      .type("23:59")
+      .get('[data-cy=search-bar]')
+      .last()
+      .type("syntax")
+      .get('[data-cy=search-results]')
+      .children()
+      .first()
+      .click();
+
+      
 
     // cy.get("[alt='Sylvia Palmer']").click();
 

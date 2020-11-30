@@ -150,6 +150,7 @@ export default function NewRoomForm (props) {
             onChange={changeDescription}
             value={description}
             className={classes.inputField}
+            data-cy="description"
           />
           <br/>
           <TimePicker
