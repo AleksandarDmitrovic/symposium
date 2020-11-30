@@ -119,7 +119,7 @@ export default function NewRoomForm (props) {
     if (Array.isArray(titles)) {
       return titles.map(title => {
         return (
-          <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}}>{title.embed_title}</MenuItem>
+          <MenuItem key={title.embed_title} onClick={() => { handleClose(title.embed_title)}} data-cy="episodes">{title.embed_title} </MenuItem>
         );
       });
     }
@@ -140,6 +140,7 @@ export default function NewRoomForm (props) {
             onChange={changeTitle}
             value={title}
             className={classes.inputField}
+            data-cy="title"
           />
           <br/>
           <TextField
@@ -149,6 +150,7 @@ export default function NewRoomForm (props) {
             onChange={changeDescription}
             value={description}
             className={classes.inputField}
+            data-cy="description"
           />
           <br/>
           <TimePicker
@@ -164,7 +166,17 @@ export default function NewRoomForm (props) {
               resultWidth='380px'
             />
             <br/>
-            <Button id='episode-list' variant="outlined" fullWidth={true} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
+            <Button 
+              id='episode-list' 
+              variant="outlined" 
+              fullWidth={true} 
+              aria-controls="simple-menu" 
+              aria-haspopup="true" 
+              onClick={handleClick}
+              data-cy="episode-select"
+            >
+                Select Episode
+            </Button>
             <p id='display-episode'>{val}</p>
             <Menu
               id="simple-menu"
@@ -172,13 +184,14 @@ export default function NewRoomForm (props) {
               keepMounted
               open={Boolean(anchorEl)}
               onClose={() => setAnchorEl(null)}
+              data-cy="episode-list"
             >
               {listTitles(episodeInfo)}
             </Menu>
           </div>
           <br/>
-          <section className="form__validation">{error}</section>
-          <button className='bttn-jelly bttn-md bttn-primary submit-btn' style={{width: '500px'}} type='submit' value='submit'>
+          <section className="form__validation" data-cy="form-validation">{error}</section>
+          <button className='bttn-jelly bttn-md bttn-primary submit-btn' style={{width: '500px'}} type='submit' value='submit' data-cy="submit">
             Submit
           </button>
         </form>

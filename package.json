@@ -8,7 +8,8 @@
     "build": "npm run db:reset && cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:reset": "node bin/resetdb.js",
-    "dev:start": "nodemon server.js"
+    "dev:start": "nodemon server.js",
+    "cypress": "cypress open -P ."
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "socket.io": "^3.0.3"
   },
   "devDependencies": {
+    "cypress": "^6.0.0",
     "nodemon": "^2.0.6"
   }
 }
