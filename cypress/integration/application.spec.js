@@ -50,7 +50,7 @@ describe("Navigation", () => {
     cy.get('[data-cy=search-bar]')
       .last()
       .type("syntax")
-      .wait(7000)
+      .wait(3000)
       .get('[data-cy=search-results]')
       .children()
       .first()
@@ -58,7 +58,7 @@ describe("Navigation", () => {
 
     cy.get('[data-cy=episode-select]')
       .click()
-      .wait(3000)
+      .wait(2000)
       .get('[data-cy=episodes]')
       .first()
       .click();

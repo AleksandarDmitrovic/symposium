@@ -190,7 +190,7 @@ export default function NewRoomForm (props) {
             </Menu>
           </div>
           <br/>
-          <section className="form__validation">{error} data-cy="form-validation"</section>
+          <section className="form__validation" data-cy="form-validation">{error}</section>
           <button className='bttn-jelly bttn-md bttn-primary submit-btn' style={{width: '500px'}} type='submit' value='submit' data-cy="submit">
             Submit
           </button>
