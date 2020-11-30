@@ -178,7 +178,7 @@ export default function NewRoomForm (props) {
           </div>
           <br/>
           <section className="form__validation">{error}</section>
-          <button className='bttn-jelly bttn-md bttn-primary submit-btn' type='submit' value='submit'>
+          <button className='bttn-jelly bttn-md bttn-primary submit-btn' style={{width: '500px'}} type='submit' value='submit'>
             Submit
           </button>
         </form>

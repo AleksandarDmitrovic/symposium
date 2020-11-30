@@ -123,7 +123,7 @@ export default function IndividualConversation(props) {
                   url={roomURL}
                 >
                 </SocialMedia>
-                <button className='bttn-jelly bttn-md bttn-primary join-room' onClick={joinRoom}>Join Room</button>
+                <button className='bttn-jelly bttn-md bttn-primary join-room' onClick={joinRoom} style={{zIndex: 2}}>Join Room</button>
               </footer>
              </CardActions>
           </div>

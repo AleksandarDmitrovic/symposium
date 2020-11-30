@@ -91,11 +91,10 @@ export default function SideNav(props) {
   }
 
   useEffect(() => {
-    if (props.newConversations) {
-      document.getElementsByClassName('convo-list')[0].style.marginTop = '150px';
+    if (props.newConversations && !open) {
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '100px';
     } else {
-      const margin = open ? '0px' : '75px';
-      document.getElementsByClassName('convo-list')[0].style.marginTop = margin;
+      document.getElementsByClassName('convo-list')[0].style.marginTop = '0';
     }
   }, [props.newConversations, open])
 
