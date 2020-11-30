@@ -1,11 +1,9 @@
 $body-color: #191919;
 $contrast-color: #101010;
-$secondary-color: #9370DB;
-$accent-color: #8A2BE2;
+$focus-color: #3f51b5;
 
 $primary-font: 'Raleway', sans-serif;
 $secondary-font: 'Philosopher', sans-serif;
-
 
 span {
   font-family: $primary-font;
@@ -101,8 +99,6 @@ span {
 }
 
 .join-room {
-  background: #1d89ff;
-  color: #fff;
   position: absolute;
   right: 2em;
   width: 40%;
@@ -119,6 +115,18 @@ span {
 
   .rhap_horizontal-reverse .rhap_controls-section {
     margin-bottom: 0;
+  }
+
+  .rhap_progress-bar-show-download {
+    background-color: $body-color;
+  }
+
+  .rhap_progress-filled {
+    background-color: $focus-color;
+  }
+
+  .rhap_download-progress {
+    background-color: $body-color;
   }
 
   .rhap_progress-section {

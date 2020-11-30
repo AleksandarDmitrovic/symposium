@@ -95,11 +95,27 @@ body {
   .rhap_time {
     color: white !important;
   }
-  
   .rhap_stacked-reverse .rhap_controls-section {
     margin-bottom: 0;
   }
-  
+  .rhap_progress-bar-show-download {
+    background-color: white;
+  }
+  .rhap_progress-filled {
+    background-color: $focus-color;
+  }
+  .rhap_download-progress {
+    background-color: white;
+  }
+  .rhap_progress-indicator {
+    background: white;
+  }
+  .rhap_volume-indicator {
+    background: white;
+  }
+  .rhap_button-clear {
+    color: white;
+  }
   .rhap_header {
     font-style: italic;
     font-family: $primary-font;
