@@ -9,29 +9,71 @@ describe("Navigation", () => {
       .first()
       .click();
 
-    cy.get('form')
-      .get('[data-cy=title]')
-      .type("The Best Convver{backspace}{backspace}{backspace}ersation Ever!{backspace}!") //, { delay: 120 }
-      .get('[data-cy=description]')
-      .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people.") //, { delay: 120 }
-      .get('[data-cy=time-selector]')
-      .type("23:59")
-      .get('[data-cy=search-bar]')
+    cy.get('form');
+
+    cy.get('[data-cy=submit]')
+      .click()
+      .get('[data-cy=form-validation]')
+      .should('be.visible').
+      contains('Conversation title cannot be blank');
+    
+    cy.get('[data-cy=title]')
+      .type("The Best Convver{backspace}{backspace}{backspace}ersation Ever!{backspace}!", { delay: 110 }); //, { delay: 110 }
+
+    cy.get('[data-cy=submit]')
+      .click()
+      .get('[data-cy=form-validation]')
+      .should('be.visible').
+      contains('Conversation description cannot be blank');
+
+    cy.get('[data-cy=description]')
+      .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people." , { delay: 110 });//, { delay: 110 }
+    
+    cy.get('[data-cy=time-selector]')
+      .type("00:01", { delay: 110 });
+
+    cy.get('[data-cy=submit]')
+      .click()
+      .get('[data-cy=form-validation]')
+      .should('be.visible').
+      contains('Please set a time for later today');
+    
+    cy.get('[data-cy=time-selector]')
+      .type("23:59", { delay: 110 });
+
+    cy.get('[data-cy=submit]')
+      .click()
+      .get('[data-cy=form-validation]')
+      .should('be.visible').
+      contains('Podcast & Podcast Episode must be selected');
+
+    cy.get('[data-cy=search-bar]')
       .last()
       .type("syntax")
+      .wait(7000)
       .get('[data-cy=search-results]')
       .children()
       .first()
       .click();
 
-      
+    cy.get('[data-cy=episode-select]')
+      .click()
+      .wait(3000)
+      .get('[data-cy=episodes]')
+      .first()
+      .click();
 
-    // cy.get("[alt='Sylvia Palmer']").click();
+    cy.get('[data-cy=submit]')
+      .click();
+     
+    // cy.contains("[data-cy=spinner]").should("exist");
+  });
 
-    // cy.contains("Save").click();
+  it("should create a conversation room", () => {
 
-    // cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-    // cy.contains(".appointment__card--show", "Sylvia Palmer");
+  
+     
+    // cy.contains("[data-cy=spinner]").should("exist");
   });
 
 
