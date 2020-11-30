@@ -150,6 +150,19 @@ body {
             background-color: #5b5e64;
           }
 
+          ::-webkit-scrollbar {
+            width: 13px;               /* width of the entire scrollbar */
+          }
+          ::-webkit-scrollbar-track {
+            background: #ffffff;        /* color of the tracking area */
+          }
+          
+          ::-webkit-scrollbar-thumb {
+            background-color: grey;    /* color of the scroll thumb */
+            border-radius: 20px;       /* roundness of the scroll thumb */
+            border: 3px solid grey;  /* creates padding around scroll thumb */
+          }
+
           .chat-box-form-card {
             margin: 0em 1em;
             background-color: #5b5e64;
