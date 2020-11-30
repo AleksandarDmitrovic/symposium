@@ -64,7 +64,7 @@ export default function ChatBox(props) {
         </div>
       </Card>
       <Card className="chat-box-form-card" variant="outlined">
-        <form onClick = { sendMessage } className="chat-box-form">
+        <form onSubmit={ sendMessage } onClick = { sendMessage } className="chat-box-form">
           <TextField
               className="chat-box-form-text-field"
               label="message"
