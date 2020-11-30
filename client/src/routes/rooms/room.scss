@@ -104,22 +104,16 @@ body {
           padding: 0.25em;
           background-color: #101010;
 
-          .conversation-information {
-            display: flex;
-            flex-wrap: wrap;
-
-            ul {
-              list-style-type: none;
-              text-align: center;
-              padding: 10px;
-            }
+          #social-media {
+            padding: 0px;
+            justify-content: space-around;
           }
 
           .podcast {
             .embed-video {
               display: flex;
               justify-content: space-around; 
-              margin: 2em 1em; 
+              margin: 1.2em 1em; 
               width: 100%;
 
               .rhap_header {
@@ -143,24 +137,17 @@ body {
           .conversation-information {
             justify-content: center;
           }
-
-          #social-media {
-            display: flex;
-            width: 100%;
-            justify-content: space-evenly;  
-          }
         } // .podcast-card
 
         .chat-box {
           .chat-box-card {
             margin: 0em 1em;
-            min-height: 130px;
-            max-height: 130px;
-            padding: 0em 1em;
+            min-height: 125px;
+            max-height: 125px;
+            padding: 0.25em 1em;
             margin-bottom: 0px;
             overflow-y: auto;
             background-color: #5b5e64;
-
           }
 
           .chat-box-form-card {
