@@ -154,7 +154,7 @@ body {
             padding: 0.25em 1em;
             margin-bottom: 0px;
             overflow-y: auto;
-            background-color: $chat-card-primary-color;
+            background-color: white;
           }
 
           ::-webkit-scrollbar {
@@ -172,7 +172,7 @@ body {
 
           .chat-box-form-card {
             margin: 0em 1em;
-            background-color: $chat-card-primary-color;
+            background-color: white;
 
             .chat-box-form {
               display: flex;
