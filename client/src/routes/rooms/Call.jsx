@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Video = (props) => {
+  console.log('props', props);
   const ref = useRef();
   
   // Hide video element from browser
@@ -34,7 +35,7 @@ const Video = (props) => {
 
   return (
     <div className={'call-video other ' + props.id}>
-      { props.showAvatar && <Animal size="200px" className='avatar'/> }
+      { props.showAvatar && props.avatar }
       <video playsInline autoPlay ref={ref} className='video' style={{display: displayVideo.current}}/>
     </div>
   );
@@ -81,6 +82,9 @@ export default function Call(props) {
   const otherBrowsersWithVideoToggledOff = useRef([]);  
   const [render, setRender] = useState(false);
 
+  // Saving avatar
+  const [myAvatar, setMyAvatar] = useState();
+
   // videoState to show video or avatar
   const roomID = props.roomID;
 
@@ -114,6 +118,10 @@ export default function Call(props) {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
+      // Create myAvatar
+      setMyAvatar(createAvatar());
+      
+
       //* A NEW USER JOINS A ROOM WITH EXISTING PARTICIPANTS
       // Emit an event saying the user has joined the room
       socketRef.current.emit('join room', roomID);
@@ -125,9 +133,11 @@ export default function Call(props) {
         // iterate through each user in the room, creating a peer for each
         users.forEach(userID => {
           const peer = createPeer(userID, socketRef.current.id, stream);
+          const avatar = createAvatar()
           peersRef.current.push({
             peerID: userID, // the socketID for person we just created a peer for
-            peer // the peer object returned the from createPeer function
+            peer, // the peer object returned the from createPeer function
+            avatar // the avatar to use for this user
           });
           peers.push({
             peerID: userID,
@@ -142,11 +152,18 @@ export default function Call(props) {
       socketRef.current.on('user joined', payload => {
         // Create a peer for the newcomer who just joined the room
         // Pass as paramaters signal, who is calling us, and our stream
+
+
+        // HERE
+        console.log('payload', payload);
+
         const peer = addPeer(payload.signal, payload.callerID, stream);
+        const avatar = createAvatar()
 
         peersRef.current.push({
           peerID: payload.callerID,
-          peer
+          peer,
+          avatar
         });
 
         //Object that includes peer and their id to make unique keys for the video components
@@ -255,13 +272,32 @@ export default function Call(props) {
     return peer;
   }
 
+  const createAvatar = (userID) => {
+    const allAvatars = 
+      ['Alligator', 'anteater', 'armadillo', 'aurochs', 'axolotl', 'badger', 'bat', 'beaver', 'buffalo', 'camel', 
+      'capybara', 'chameleon', 'cheetah', 'chinchilla', 'chipmunk', 'chupacabra', 'cormorant', 'coyote', 'crow', 
+      'dingo', 'dinosaur', 'duck', 'elephant', 'ferret', 'fox', 'frog', 'giraffe', 'gopher', 'grizzly', 'hedgehog', 'hippo',
+      'hyena', 'ibex', 'iguana', 'jackal', 'jackalope', 'kangaroo', 'koala', 'kraken', 'leopard', 'lemur', 
+      'liger', 'loris', 'manatee', 'mink', 'monkey', 'moose', 'narwhal', 'orangutan', 'otter', 'panda', 
+      'penguin', 'platypus', 'python', 'quagga', 'rabbit', 'raccoon', 'rhino', 'sheep', 'shrew', 'skunk', 
+      'squirrel', 'tiger', 'turtle', 'walrus', 'wolf', 'wolverine', 'wombat'];
+    const allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'teal']
+
+    const ranNumForName = Math.floor(Math.random() * 68); 
+    const avatarName = allAvatars[ranNumForName];
+    const ranNumForColor = Math.floor(Math.random() * 6); 
+    const avatarColor = allColors[ranNumForColor];
+
+    return <Animal name={avatarName} color={avatarColor} size="200px" />
+  }
+
  
   return (
     <>
       <div className='call-container'>
 
         <div className='call-video me'>
-          { !isVideoActive && <Animal size="200px" /> }
+          { !isVideoActive && myAvatar }
           <video muted ref={userVideo} autoPlay playsInline style={{display: myVideoClass}}/>
         </div>
         
@@ -269,7 +305,7 @@ export default function Call(props) {
           // Checks if other browser has toggled their video off
           const showAvatar = otherBrowsersWithVideoToggledOff.current.includes(peer.peerID);
           return (
-            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} />
+            <Video key={peer.peerID} peer={peer.peer} id={peer.peerID} showAvatar={showAvatar} avatar={peer.avatar} />
           )         
         })}
 
