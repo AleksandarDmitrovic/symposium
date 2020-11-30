@@ -123,3 +123,12 @@ body {
     padding-bottom: 0.5em;
   }
 }
+
+.alert {
+  .MuiAlert-icon {
+    padding: 11px;
+  }
+  .MuiTypography-body {
+    font-family: $primary-font;
+  }
+}

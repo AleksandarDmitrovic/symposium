@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Button  } from '@material-ui/core';
-import { Menu, AccountCircle, ChevronLeft, Home }  from '@material-ui/icons';
+import { Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Menu, AccountCircle, ChevronLeft, Home, Update }  from '@material-ui/icons';
 import NewRoomButton from "./NewRoomButton";
 import './conversation-styles/index.scss';
 import './conversation-styles/sideNav.scss';
@@ -78,10 +78,12 @@ export default function SideNav(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    props.setClosed(false);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
+    props.setClosed(true);
   };
 
   const scrollToTop = () => {
@@ -157,7 +159,20 @@ export default function SideNav(props) {
             <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <Home /> </ListItemIcon>
             <ListItemText primary='Home' style={{paddingLeft: '1em'}}/>
           </ListItem>
-          <ListItem button>
+          {props.newConversations && 
+            <ListItem button onClick={props.clearNotifications} 
+              style={{
+                borderBottom: '1px solid #1d89ff', 
+                borderTop: '1px solid #1d89ff',
+                paddingTop: '1em',
+                paddingBottom: '1em'
+              }}
+            >
+              <ListItemIcon style={{justifyContent: 'center', color: '#1d89ff'}}> <Update /> </ListItemIcon>
+              <ListItemText primary='New Conversations Available' style={{paddingLeft: '1em'}}/>
+            </ListItem>
+          }
+          <ListItem>
             <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <AccountCircle /> </ListItemIcon>
             <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
           </ListItem>

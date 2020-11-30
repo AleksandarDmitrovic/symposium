@@ -57,6 +57,10 @@ $primary-font: 'Raleway', sans-serif;
 .symposium {
   font-style: italic;
   font-family: $primary-font;
+  color: grey;
   text-align: center;
   padding-bottom: 5vh;
+  padding-right: 1em;
+  padding-left: 1em;
+  margin: auto;
 }
