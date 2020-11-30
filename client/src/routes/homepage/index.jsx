@@ -68,7 +68,7 @@ export default function Conversation(props) {
         clearNotifications={clearNotifications}
       />
       <article className='homepage'>
-        <div className='top-btn new-room-button' data-cy={'newRoomBtn'}>
+        <div className='top-btn new-room-button'>
           <NewRoomButton
             history={props.history}
             connection={homepage}

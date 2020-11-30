@@ -59,7 +59,7 @@ export default function SearchBar(props) {
 
   return (
     <section className="search">
-      <form className="search-bar" onSubmit={event => event.preventDefault()}>
+      <form className="search-bar" data-cy='search-bar' onSubmit={event => event.preventDefault()}>
         <TextField
           InputIndicatorProps={{style: {background:'#8A2BE2'}}}
           label={props.label}

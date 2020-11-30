@@ -44,7 +44,7 @@ export default function SortBy (props) {
 
   return (
     <>
-      <div id='sort-by-container' data-cy='sortBy'>
+      <div id='sort-by-container' data-cy='sort-by'>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -55,6 +55,7 @@ export default function SortBy (props) {
             aria-haspopup="true" 
             onClick={() => { props.state('conversations'); setCategory(null); setSorted(true); } }
             label="All" 
+            data-cy='view-all'
           />
           <Tab 
             aria-controls="simple-menu" 
@@ -62,6 +63,7 @@ export default function SortBy (props) {
             inkBarStyle={{background: 'blue'}}
             onClick={handleClick}
             label="Category"
+            data-cy='view-category'
           /> 
           <Menu
             id="simple-menu"
@@ -93,7 +95,7 @@ export default function SortBy (props) {
         />
         </Tabs>
       </div>
-      <div id="category-name"className={classes.root}>{category}</div>
+      <div id="category-name" className={classes.root} data-cy='category-name' >{category}</div>
     </>
   )
 }
