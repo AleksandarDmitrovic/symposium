@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Video = (props) => {
   const ref = useRef();
+  
+  // Hide video element from browser
+  const displayVideo = useRef('inline')
+  props.showAvatar ? displayVideo.current = 'none' : displayVideo.current = 'inline';
 
   useEffect(() => {
     props.peer.on("stream", stream => {
@@ -31,7 +35,7 @@ const Video = (props) => {
   return (
     <div className={'call-video other ' + props.id}>
       { props.showAvatar && <Animal size="100px" className='avatar'/> }
-      <video playsInline autoPlay ref={ref} className='video' />
+      <video playsInline autoPlay ref={ref} className='video' style={{display: displayVideo.current}}/>
     </div>
   );
 }
@@ -70,6 +74,7 @@ export default function Call(props) {
 
   // Current state of users video
   const [isVideoActive, setIsVideoActive] = useState(true);
+  const [myVideoClass, setMyVideoClass] = useState('inline')
   const [isAudioActive, setIsAudioActive] = useState(true);
 
   // For rendering avatar, render forces rerender
@@ -84,8 +89,13 @@ export default function Call(props) {
 
   // TURN VIDEO ON AND OFF
   const toggleVideo = () => {
+    // Toggle video to only send black pixels
     isVideoActive ? userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = false : userVideo.current.srcObject.getTracks().find((track) => track.kind === 'video').enabled = true;
     setIsVideoActive(!isVideoActive);
+
+    // Hide element from browser
+    myVideoClass === 'inline' ? setMyVideoClass('none') : setMyVideoClass('inline');
+
     // Inform other browsers to render avatar for this user
     socketRef.current.emit("toggle video", socketRef.current.id )
   };
@@ -250,9 +260,9 @@ export default function Call(props) {
     <>
       <div className='call-container'>
 
-        <div className='call-video me' >
+        <div className='call-video me'>
           { !isVideoActive && <Animal size="100px" /> }
-          <video muted ref={userVideo} autoPlay playsInline />
+          <video muted ref={userVideo} autoPlay playsInline style={{display: myVideoClass}}/>
         </div>
         
         {peersRef.current.map((peer) => {
@@ -263,7 +273,7 @@ export default function Call(props) {
           )         
         })}
 
-        <div className="toggle-buttons">
+        <footer className="toggle-buttons">
           {isVideoActive && <Button
             variant="contained"
             color="secondary"
@@ -293,7 +303,7 @@ export default function Call(props) {
             startIcon={<MicOffIcon />}
             onClick={toggleAudio}
           />}
-        </div>
+        </footer>
         
       </div>
       

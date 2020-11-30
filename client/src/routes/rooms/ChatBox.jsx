@@ -4,24 +4,14 @@ import RenderMessages from './RenderMessages'
 
 // Material-ui
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
 import { TextField } from '@material-ui/core';
 
-// const useStyles = makeStyles((theme) => ({
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-// }));
 
 export default function ChatBox(props) {
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
-
-  // Material-ui
-  // const classes = useStyles();
-
 
   function sendMessage(event) {
     event.preventDefault();
@@ -73,21 +63,22 @@ export default function ChatBox(props) {
           </div>
         </div>
       </Card>
-
-      <form onClick = { sendMessage } className="chat-box-form">
-        <TextField
-            className="chat-box-form-text-field"
-            label="message"
-            name="message"
-            type="text"
-            autoComplete='off'
-            value={chatBoxMessage}
-            onChange={changeHandler}
-          />
-        <Button variant="contained" color="primary" className="chat-box-form-button">
-          Send
-        </Button>
-      </form> 
+      <Card className="chat-box-form-card" variant="outlined">
+        <form onClick = { sendMessage } className="chat-box-form">
+          <TextField
+              className="chat-box-form-text-field"
+              label="message"
+              name="message"
+              type="text"
+              autoComplete='off'
+              value={chatBoxMessage}
+              onChange={changeHandler}
+            />
+          <Button variant="contained" color="primary" className="chat-box-form-button">
+            Send
+          </Button>
+        </form> 
+      </Card>
 
     </div>
   );
