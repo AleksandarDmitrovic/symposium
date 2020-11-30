@@ -70,8 +70,8 @@ export default function IndividualConversation(props) {
                 <div className='convo-info'>
                   <header>
                     <Typography 
+                      className='card-title'
                       gutterBottom 
-                      style={{fontFamily: "'Raleway', sans-serif", fontSize: '2em'}} 
                       color='white' variant="p" 
                       component="p"
                     >
@@ -87,15 +87,9 @@ export default function IndividualConversation(props) {
                     </Timer>
                   </header>
                   <Typography 
-                    variant="p" 
-                    style={{
-                      fontFamily: "'Raleway', sans-serif", 
-                      fontSize: '1.25em', 
-                      paddingBottom: '1em',
-                      borderBottom: '1px solid grey'
-                    }} 
+                    className='card-description'
+                    variant="p"                    
                     color='white'  
-                    className='description' 
                     component="p" 
                   >
                     {props.description}

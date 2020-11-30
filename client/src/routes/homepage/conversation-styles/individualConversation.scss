@@ -72,7 +72,7 @@ span {
   display: flex;
   width: 100%;
   justify-content: space-between;  
-  padding: 0em 60em 0em 23em ;
+  padding: 0em 60em 0em 23em;
   z-index: 2;
 
   button {
@@ -93,9 +93,19 @@ span {
   font-style: italic;
 }
 
-.description {
+.card-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em; 
+  padding-right: 0.5m;
+}
+
+.card-description {
   padding-top: 1em;
   padding-bottom: 1em;
+  font-family: 'Raleway', sans-serif; 
+  font-size: 1.25em; 
+  padding-bottom: 1em;
+  border-bottom: 1px solid grey;
 }
 
 .join-room {
@@ -152,15 +162,21 @@ span {
   .convo-card-player {
     width: 700px
   }
+  #social-media {
+    padding: 0.5em 60em 0em 23em ;
+  }
+  .card-title {
+    font-size: 1.75em; 
+  }
 }
 
 @media (max-width: 1550px) { 
-
   .join-room {
     width: 30%;
   }
-
   #social-media {
+    padding: 1em 60em 0em 23em ;
+
     button {
       svg {
         margin-right: 3em;
@@ -168,14 +184,15 @@ span {
       }
     }
   }
-  
   .convo-card-player {
     width: 600px;
-
     z-index: 0;
-
-    .rhap_footer {
-      
-    }
+  }
+  .card-title {
+    font-size: 1.75em; 
+  }
+  .card-description { 
+    font-size: 1.1em; 
+    padding-bottom: 1em;
   }
 } 
