@@ -23,7 +23,7 @@ export default function TopNav(props) {
       <ul>
         <li><a href="/"><ArrowBackIosIcon/></a></li>
         {/* <li><h5 className="creator-name"><b>{creator}'s Room</b></h5></li> */}
-        <li><h5 className="conversation-title"><b>{props.title}</b></h5></li>
+        <li><h3 className="conversation-title"><b>{props.title}</b></h3></li>
 
         {props.timer && 
         <Timer>
