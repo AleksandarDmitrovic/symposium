@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import RenderMessages from './RenderMessages'
 
@@ -9,9 +9,17 @@ import { TextField } from '@material-ui/core';
 
 
 export default function ChatBox(props) {
+  console.log('reRender');
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
+
+  // Scroll to bottom
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(scrollToBottom, [allMessages]);
 
   function sendMessage(event) {
     event.preventDefault();
@@ -58,9 +66,10 @@ export default function ChatBox(props) {
     <div className="chat-box">
       <Card className="chat-box-card" variant="outlined">
         <div className="chat-box-messages">
-          <div>
+          <div id="chat">
             { mapMessages(allMessages) }
           </div>
+          <div ref={messagesEndRef} />
         </div>
       </Card>
       <Card className="chat-box-form-card" variant="outlined">
