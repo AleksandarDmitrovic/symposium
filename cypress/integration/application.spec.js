@@ -73,7 +73,8 @@ describe("Navigation", () => {
     cy.get('[data-cy=view-category]')
       .click()
       .wait(wait)
-      .contains('Technology')
+      .children()
+      .second()
       .click();
 
     cy.get('[data-cy=category-name]')
@@ -100,10 +101,10 @@ describe("Navigation", () => {
 
   it("should be able to search for a specific podcast and view all open conversations with that tag", () => {
     cy.get('[data-cy=search-bar]')
+      .first()
       .type("lex fridman" , { delay: typingDelay })
       .wait(wait)
-    
-    cy.get('[data-cy=search-results')
+      .get('[data-cy=search-results]')
       .children()
       .first()
       .click();
