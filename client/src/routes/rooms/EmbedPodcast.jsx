@@ -15,11 +15,11 @@ export default function EmbedPodcast (props) {
     title = `${props.title} \xa0\xa0\xa0 | \xa0\xa0\xa0 Category: ${props.category}`;
   }
 
-  const volume = props.class === 'convo-card-player' ? [] : [RHAP_UI.VOLUME];
+  const volume = props.class === 'footer-player' ? [RHAP_UI.VOLUME] : [];
+  const layout = props.class === 'room-player' ? 'horizontal-reverse' : 'stacked-reverse'
 
   return (
     <div className="embed-video">
-      {/* <h4 className="embed-video-title">{props.title}</h4> */}
       <AudioPlayer
         className={`embed-video-audio-player" ${props.class}`}
         src={props.embed_url}

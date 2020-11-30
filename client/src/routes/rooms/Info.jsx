@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 200,
-    width: 200,
+    height: 300,
+    width: 300,
     margin: 'auto'
   },
 });
@@ -39,16 +39,11 @@ export default function Info(props) {
           embed_title = {props.embed_title}
           embed_url = {props.embed_url}
           title = {props.episode_title}
+          class = {'room-player'}
         />
       </div>
 
       <div class="conversation-information">
-        <ul>
-          <li><b>Title : </b>{props.title}</li>
-          <li><b>Description : </b>{props.description}</li>
-          <li><b>Category : </b>{props.category}</li>
-        </ul>
-
         <SocialMedia 
           description={props.description}
           url={props.history}
