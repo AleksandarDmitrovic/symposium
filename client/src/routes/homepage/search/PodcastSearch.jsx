@@ -75,7 +75,7 @@ export default function PodcastSearch(props) {
   }));
   const spin = useStyles();
   const spinner = (
-    <div className={`${spin.root} spinner`}>
+    <div className={`${spin.root} spinner`} data-cy="spinner">
       <CircularProgress color="secondary" />
     </div>
   );
