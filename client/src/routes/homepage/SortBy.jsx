@@ -44,7 +44,7 @@ export default function SortBy (props) {
 
   return (
     <>
-      <div id='sort-by-container'>
+      <div id='sort-by-container' data-cy='sortBy'>
         <Tabs
           value={value}
           onChange={handleChange}

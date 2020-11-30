@@ -30,7 +30,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul className='convo-list'>
+    <ul className='convo-list' data-cy='convoList'>
       { mapConversations(props) }
     </ul>
   );

@@ -121,7 +121,7 @@ export default function SideNav(props) {
   const symposium = 'sym·po·si·um \xa0\xa0\xa0 /simˈpōzēəm/';
 
   return (
-    <div className={classes.root} style={{zIndex: 7}}>
+    <div className={classes.root} data-cy={'sideNav'} style={{zIndex: 7}}>
       <CssBaseline />
       <Toolbar>
         <IconButton
