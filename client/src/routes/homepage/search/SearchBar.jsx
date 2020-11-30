@@ -60,6 +60,7 @@ export default function SearchBar(props) {
           onClick={handleFocus}
           InputProps={{style: {color: 'white'}}}
           InputLabelProps={{style: {color: 'white'}}}
+          data-cy="search-bar"
         />
       </form>
     </section>
