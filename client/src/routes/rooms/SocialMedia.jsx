@@ -5,6 +5,7 @@ export default function SocialMedia(props) {
   return (
     <div id='social-media'>
       <TwitterShareButton 
+        className="twitter-icon"
         title='Join my conversation on Symposium!'
         url={'https://the-symposium.herokuapp.com' + props.url} 
       >

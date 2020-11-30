@@ -114,7 +114,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
