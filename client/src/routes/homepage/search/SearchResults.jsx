@@ -21,7 +21,7 @@ export default function SearchResults(props) {
   });
 
   return (
-    <div className='result-container'>
+    <div className='result-container' data-cy="search-results">
       {scrollableResults}
     </div>
   );

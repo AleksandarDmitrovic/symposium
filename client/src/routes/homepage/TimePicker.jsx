@@ -46,6 +46,7 @@ export default function TimePicker(props) {
         }}
         value={time}
         onChange={changeTime}
+        data-cy="time-selector"
       />
     </form>
   );

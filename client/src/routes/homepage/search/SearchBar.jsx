@@ -64,6 +64,7 @@ export default function SearchBar(props) {
           InputIndicatorProps={{style: {background:'#8A2BE2'}}}
           label={props.label}
           className={classes.root}
+          data-cy="search-bar"
           spellCheck="false"
           placeholder="Search Podcast"
           name="search"
