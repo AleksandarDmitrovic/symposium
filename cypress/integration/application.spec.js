@@ -1,3 +1,6 @@
+const typingDelay = 110;
+const wait = 3000;
+
 describe("Navigation", () => {
   it("should visit root", () => {
     cy.visit("/");
@@ -18,7 +21,7 @@ describe("Navigation", () => {
       contains('Conversation title cannot be blank');
     
     cy.get('[data-cy=title]')
-      .type("The Best Convver{backspace}{backspace}{backspace}ersation Ever!{backspace}!", { delay: 110 }); //, { delay: 110 }
+      .type("The Best Convver{backspace}{backspace}{backspace}ersation Ever!{backspace}!", { delay: typingDelay });
 
     cy.get('[data-cy=submit]')
       .click()
@@ -27,10 +30,10 @@ describe("Navigation", () => {
       contains('Conversation description cannot be blank');
 
     cy.get('[data-cy=description]')
-      .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people." , { delay: 110 });//, { delay: 110 }
+      .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people." , { delay: typingDelay });
     
     cy.get('[data-cy=time-selector]')
-      .type("00:01", { delay: 110 });
+      .type("00:01", { delay: typingDelay });
 
     cy.get('[data-cy=submit]')
       .click()
@@ -39,7 +42,7 @@ describe("Navigation", () => {
       contains('Please set a time for later today');
     
     cy.get('[data-cy=time-selector]')
-      .type("23:59", { delay: 110 });
+      .type("23:59", { delay: typingDelay });
 
     cy.get('[data-cy=submit]')
       .click()
@@ -50,7 +53,7 @@ describe("Navigation", () => {
     cy.get('[data-cy=search-bar]')
       .last()
       .type("syntax")
-      .wait(3000)
+      .wait(wait)
       .get('[data-cy=search-results]')
       .children()
       .first()
@@ -58,7 +61,7 @@ describe("Navigation", () => {
 
     cy.get('[data-cy=episode-select]')
       .click()
-      .wait(2000)
+      .wait(wait)
       .get('[data-cy=episodes]')
       .first()
       .click();
