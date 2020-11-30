@@ -50,6 +50,7 @@ export default function PodcastSearch(props) {
         hide('spinner');
         document.removeEventListener('click', pageClick);
         setSearchDone(true);
+        document.querySelector('body').style.overflow = 'auto';
       } 
     };
   };
@@ -113,6 +114,8 @@ export default function PodcastSearch(props) {
             changeValue = {changeValue}
             value = {value}
             label={props.label}
+            fontColor={props.fontColor}
+            resultWidth={props.resultWidth}
           />
           {spinner}
         </div>

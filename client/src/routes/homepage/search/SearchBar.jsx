@@ -35,17 +35,33 @@ export default function SearchBar(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       '& > *': {
-        width: '40ch',
-      },
-    },
+        width: props.resultWidth,
+      }
+    }
   }));
 
   const classes = useStyles();
+
+  document.addEventListener('input', disableScroll) 
+  
+  // If user is viewing search results, disable scroll of body
+  function disableScroll() {
+    document.querySelector('body').style.overflow = 'hidden';
+    document.removeEventListener('input', disableScroll)
+  };
+
+  useEffect(() => {
+    const positioning = props.resultWidth === '330px' ? '135px' : '';
+    if ( document.getElementsByClassName('result-container')[0]) {
+      document.getElementsByClassName('result-container')[0].style.top = positioning;
+    }
+  }, [props.resultWidth])
 
   return (
     <section className="search">
       <form className="search-bar" onSubmit={event => event.preventDefault()}>
         <TextField
+          InputIndicatorProps={{style: {background:'#8A2BE2'}}}
           label={props.label}
           className={classes.root}
           spellCheck="false"
@@ -58,8 +74,20 @@ export default function SearchBar(props) {
             props.changeValue(event.target.value);
           }}
           onClick={handleFocus}
-          InputProps={{style: {color: 'white'}}}
-          InputLabelProps={{style: {color: 'white'}}}
+          InputProps={{style: 
+            {
+              color: props.fontColor, 
+              marginTop: '30px',
+              fontFamily: "'Raleway', sans-serif"
+            }
+          }}
+          InputLabelProps={{style: 
+            {
+              color: props.fontColor, 
+              fontFamily: "'Raleway', sans-serif",
+              fontSize: '1em'
+            }
+          }}
         />
       </form>
     </section>

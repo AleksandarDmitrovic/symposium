@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v1 as uuid } from "uuid";
 import axios from 'axios';
 import moment from 'moment'
-import { Button, Menu, MenuItem, Input } from '@material-ui/core';
+import { Button, Menu, MenuItem, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -133,19 +133,19 @@ export default function NewRoomForm (props) {
         <form className="new_room_form" autoComplete="off" onSubmit={create}>
           <h3 id="form-title">Create A Podcast Conversation</h3>
           <br/>
-          <Input
+          <TextField
             title="title"
             type="text"
-            placeholder="Conversation Title"
+            label="Conversation Title"
             onChange={changeTitle}
             value={title}
             className={classes.inputField}
           />
           <br/>
-          <Input
+          <TextField
             description="description"
             type="text"
-            placeholder="Conversation Description"
+            label="Conversation Description"
             onChange={changeDescription}
             value={description}
             className={classes.inputField}
@@ -161,7 +161,7 @@ export default function NewRoomForm (props) {
               changeEpisodeInfo = {setEpisodeInfo}
               label={"SELECT PODCAST"}
               form={true}
-              className="form-search-bar"
+              resultWidth='380px'
             />
             <br/>
             <Button id='episode-list' variant="outlined" fullWidth={true} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Episode</Button>
@@ -178,9 +178,9 @@ export default function NewRoomForm (props) {
           </div>
           <br/>
           <section className="form__validation">{error}</section>
-          <Button color="primary" variant="contained" type="submit" value="Submit">
+          <button className='bttn-jelly bttn-md bttn-primary submit-btn' style={{width: '500px'}} type='submit' value='submit'>
             Submit
-          </Button>
+          </button>
         </form>
     </main>
   );

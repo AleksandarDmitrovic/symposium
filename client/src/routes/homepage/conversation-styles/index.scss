@@ -1,9 +1,8 @@
 $body-color: #191919;
-$contrast-color: #272525;
-$secondary-color: #1d89ff;
+$contrast-color: #282828;
+$focus-color: #3f51b5;
 
 $primary-font: 'Raleway', sans-serif;
-$secondary-font: 'Philosopher', sans-serif;
 
 html {
   background-color: $body-color;
@@ -79,13 +78,11 @@ body {
   color: white;
   background-color: $contrast-color;
   bottom: 0;
-  height: 12vh;
+  height: 10vh;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
-
 }
 
 .footer-player {
@@ -93,26 +90,45 @@ body {
   background-color: $contrast-color;
   padding-right: 5%;
   padding-left: 5%;
+  padding-bottom: 1em;
 
   .rhap_time {
     color: white !important;
   }
-  
   .rhap_stacked-reverse .rhap_controls-section {
     margin-bottom: 0;
   }
-  
+  .rhap_progress-bar-show-download {
+    background-color: white;
+  }
+  .rhap_progress-filled {
+    background-color: $focus-color;
+  }
+  .rhap_download-progress {
+    background-color: white;
+  }
+  .rhap_progress-indicator {
+    background: white;
+  }
+  .rhap_volume-indicator {
+    background: white;
+  }
+  .rhap_button-clear {
+    color: white;
+  }
   .rhap_header {
     font-style: italic;
     font-family: $primary-font;
     margin: auto;
     padding-bottom: 0.5em;
   }
-  
-  .rhap_footer {
+}
+
+.alert {
+  .MuiAlert-icon {
+    padding: 11px;
+  }
+  .MuiTypography-body {
     font-family: $primary-font;
-    font-style: italic;
-    margin: auto;
-    padding-right: 2em;
   }
 }

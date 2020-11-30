@@ -1,7 +1,6 @@
 $body-color: #191919;
 $contrast-color: #101010;
-$secondary-color: #9370DB;
-$accent-color: #8A2BE2;
+$focus-color: #3f51b5;
 
 $primary-font: 'Raleway', sans-serif;
 $secondary-font: 'Philosopher', sans-serif;
@@ -71,12 +70,17 @@ span {
 
 #social-media {
   display: flex;
-  
   width: 100%;
   justify-content: space-between;  
-  // margin: 0.5em 50em 0.5em 15em;
   padding: 0em 60em 0em 23em ;
+  z-index: 2;
 
+  button {
+    svg {
+      margin-left: 0;
+      margin-right: 4em;
+    }
+  }
 }
 
 .cover-photo {
@@ -95,26 +99,44 @@ span {
 }
 
 .join-room {
-  background: #1d89ff;
-  color: #fff;
   position: absolute;
-  right: 1vw;
-  width: 30%;
+  right: 2em;
+  width: 40%;
 }
 
 .convo-card-player {
-  width: 20vw;
+  width: 850px;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 2em;
+  margin: auto;
   background-color: $contrast-color;
+  color: grey;
 
   .rhap_horizontal-reverse .rhap_controls-section {
     margin-bottom: 0;
+  }
+
+  .rhap_progress-bar-show-download {
+    background-color: $body-color;
+  }
+
+  .rhap_progress-filled {
+    background-color: $focus-color;
+  }
+
+  .rhap_download-progress {
+    background-color: $body-color;
+  }
+
+  .rhap_progress-section {
+    width: 100%;
   }
   
   .rhap_header {
     font-style: italic;
     font-family: $primary-font;
     margin: auto;
-    padding-bottom: 0.5em;
   }
   
   .rhap_footer {
@@ -122,5 +144,38 @@ span {
     font-style: italic;
     margin: auto;
     padding-right: 2em;
+    padding-top: 0.25em;
   }
 }
+
+@media (max-width: 1700px) { 
+  .convo-card-player {
+    width: 700px
+  }
+}
+
+@media (max-width: 1550px) { 
+
+  .join-room {
+    width: 30%;
+  }
+
+  #social-media {
+    button {
+      svg {
+        margin-right: 3em;
+        z-index: 1;
+      }
+    }
+  }
+  
+  .convo-card-player {
+    width: 600px;
+
+    z-index: 0;
+
+    .rhap_footer {
+      
+    }
+  }
+} 

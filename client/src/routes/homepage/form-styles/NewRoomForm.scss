@@ -1,12 +1,15 @@
+$primary-font: 'Raleway', sans-serif;
+$secondary-font: 'Philosopher', sans-serif;
 
 #form-title{
   text-align: center;
+  font-family: $primary-font;
 }
 .new_room_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  font-family: $primary-font;
 }
 
 .form__validation{
@@ -20,4 +23,9 @@
 
 #simple-menu {
   text-align: center;
+}
+
+.submit-btn {
+  margin: auto;
+  width: 35vw;
 }

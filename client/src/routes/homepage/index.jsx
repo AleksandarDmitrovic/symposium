@@ -18,14 +18,17 @@ export default function Conversation(props) {
   const [conversations, setConversations] = useState([]);
   
   // String of search params from sort bar
-  const [searchParam, setSearchParam] = useState('conversations')
+  const [searchParam, setSearchParam] = useState('conversations');
   
   // Keep track of if there are new conversations
-  const [newConversations, setNewConversations] = useState(false)
+  const [newConversations, setNewConversations] = useState(false);
+
+  // Keep track of whether side nav is closed or not. If closed, show main alert
+  const [isClosed, setIsClosed] = useState(false);
   
   // Pass to sortby function so that it can update searchParam state
   function changeState(newState) {
-    setSearchParam(newState)
+    setSearchParam(newState);
   };
   
   useEffect(() => {
@@ -44,15 +47,15 @@ export default function Conversation(props) {
   useEffect(() => {
     if (homepage) {
       homepage.on("new conversation available", () => {
-        setNewConversations(true)
+        setNewConversations(true);
       })
     }
-  }, [homepage])
+  }, [homepage]);
 
   // Clears new conversation message and reloads the page
   const clearNotifications = () => {
     setNewConversations(false);
-    window.location.reload()
+    window.location.reload();
   }
   
   return ( 
@@ -61,6 +64,8 @@ export default function Conversation(props) {
         history={props.history}
         connection={homepage}
         newConversations={newConversations}
+        setClosed={setIsClosed}
+        clearNotifications={clearNotifications}
       />
       <article className='homepage'>
         <div className='top-btn new-room-button'>
@@ -76,15 +81,21 @@ export default function Conversation(props) {
             state={changeState}
             search={searchParam}
           />
-        {newConversations && 
+        {newConversations && isClosed &&
         <Alert 
         severity="info"
         onClick={() => {clearNotifications()}}
+        className='alert'
+        style={{
+          height: '5vh',
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '1em',
+          fontFamily: "'Raleway', sans-serif"
+        }}
         >
-          <AlertTitle>New Conversations Available</AlertTitle>
           <Button>
-  
-          <strong>click here</strong>
+            <AlertTitle>Click to See New Conversations</AlertTitle>
           </Button>
         </Alert>
         }
