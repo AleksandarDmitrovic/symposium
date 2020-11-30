@@ -182,63 +182,79 @@ describe("Navigation", () => {
   });
 
   it("should create a conversation room", () => {
-
-  
      
     // cy.contains("[data-cy=spinner]").should("exist");
   });
-
-
-
 });
 
+describe("Toggle Buttons", () => {
+  it("should toggle video on and off", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('.video').click().wait(wait);
+    cy.get('.video').click().wait(wait);
+  });
 
+  it("should toggle audio on and off", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('.audio').click().wait(wait);
+    cy.get('.audio').click().wait(wait);
+  });
 
-// it("should book an interview", () => {
+  it("should play and pause the podcast", () => {
+    cy.visit("/room/3").wait(wait);
 
-//   cy.get("[alt=Add]")
-//     .first()
-//     .click();
+    cy.get('.rhap_main-controls > button').click().wait(wait);
+    cy.get('.rhap_main-controls > button').click().wait(wait);
+  });
 
-//   cy.get("[data-testid=student-name-input]")
-//     .type("Lydia Miller-Jones");
+  // Open popup windows that cypress cannot close. Consider not doing this.
+  it("should be able to load twitter button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').first().click().wait(wait);
+  });
 
-//   cy.get("[alt='Sylvia Palmer']").click();
+  it("should be able to load facebook button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').eq(1).click().wait(wait);
+  });
 
-//   cy.contains("Save").click();
+  it("should be able to load linkedIn button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').eq(2).click().wait(wait);
+  });
+});
 
-//   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-//   cy.contains(".appointment__card--show", "Sylvia Palmer");
-// });
+describe("Chat box", () => {
+  it.only("should be able to send a message", () => {
+    cy.visit("/room/3").wait(wait);
 
-// it("should edit an interview", () => {
+    cy.get('.chat-box-form > div > div > input')
+    .type("This is me typingan{backspace}{backspace} a new message into the chat box!", { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-//   cy.get("[alt=Edit]")
-//     .first()
-//     .click({ force: true });
+    cy.get('.chat-box-form > div > div > input')
+    .type("Isn't it cool?", { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-//   cy.get("[data-testid=student-name-input]").clear().type("Lydia Miller-Jones");
+    cy.get('.chat-box-form > div > div > input')
+    .type('And I will send another message!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-//   cy.get("[alt='Tori Malcolm']").click();
+    cy.get('.chat-box-form > div > div > input')
+    .type('Maybe one more so that we can start to see the chat scrolling!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-//   cy.contains("Save").click();
+    cy.get('.chat-box-form > div > div > input')
+    .type('Did you see that?', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-//   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-//   cy.contains(".appointment__card--show", "Tori Malcolm");
+    cy.get('.chat-box-form > div > div > input')
+    .type('Auto scrolling!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
 
-// });
+    cy.get('.chat-box-form > div > div > input')
+    .type('Yup', { delay: typingDelay });
+    cy.get('.chat-box-form > button').click();
 
-// it("should cancel an interview", () => {
-
-//   cy.get("[alt=Delete]")
-//     .click({ force: true });
-
-//   cy.contains("Confirm").click();
-
-//   cy.contains("Deleting").should("exist");
-//   cy.get("Deleting").should("not.exist");
-
-//   cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist");
-
-// });
-
+  });
+});
