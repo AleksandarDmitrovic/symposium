@@ -117,6 +117,8 @@ export default function SideNav(props) {
     }
   }, [open]);
 
+  const symposium = 'sym·po·si·um \xa0\xa0\xa0 /simˈpōzēəm/';
+
   return (
     <div className={classes.root} style={{zIndex: 7}}>
       <CssBaseline />
@@ -169,6 +171,10 @@ export default function SideNav(props) {
           </div>
         </List>
         <img className='logo' src='icon_a.png' alt='logo'/>
+        <div className='symposium'>
+          <p>{symposium}</p>
+          <p>A meeting or conference for discussion of a particular subject</p>
+        </div>
         <Divider />
         <div className='logout'>
           <button class="bttn-unite bttn-md bttn-primary">Log Out</button>
