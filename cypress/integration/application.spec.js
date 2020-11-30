@@ -129,3 +129,79 @@ describe("Navigation", () => {
 //   cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist");
 
 // });
+
+describe("Toggle Buttons", () => {
+  it("should toggle video on and off", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('.video').click().wait(wait);
+    cy.get('.video').click().wait(wait);
+  });
+
+  it("should toggle audio on and off", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('.audio').click().wait(wait);
+    cy.get('.audio').click().wait(wait);
+  });
+
+  it("should play and pause the podcast", () => {
+    cy.visit("/room/3").wait(wait);
+
+    cy.get('.rhap_main-controls > button').click().wait(wait);
+    cy.get('.rhap_main-controls > button').click().wait(wait);
+  });
+
+  // Open popup windows that cypress cannot close. Consider not doing this.
+  it("should be able to load twitter button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').first().click().wait(wait);
+  });
+
+  it("should be able to load facebook button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').eq(1).click().wait(wait);
+  });
+
+  it("should be able to load linkedIn button", () => {
+    cy.visit("/room/3").wait(wait);
+    cy.get('#social-media > button').eq(2).click().wait(wait);
+  });
+});
+
+describe("Chat box", () => {
+  it.only("should be able to send a message", () => {
+    cy.visit("/room/3").wait(wait);
+
+    cy.get('.chat-box-form > div > div > input')
+    .type("This is me typingan{backspace}{backspace} a new message into the chat box!", { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type("Isn't it cool?", { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type('And I will send another message!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type('Maybe one more so that we can start to see the chat scrolling!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type('Did you see that?', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type('Auto scrolling!', { delay: typingDelay })
+    cy.get('.chat-box-form > button').click();
+
+    cy.get('.chat-box-form > div > div > input')
+    .type('Yup', { delay: typingDelay });
+    cy.get('.chat-box-form > button').click();
+
+
+
+
+  });
+
+});

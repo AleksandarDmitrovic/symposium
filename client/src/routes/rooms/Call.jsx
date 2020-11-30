@@ -101,7 +101,7 @@ export default function Call(props) {
     myVideoClass === 'inline' ? setMyVideoClass('none') : setMyVideoClass('inline');
 
     // Inform other browsers to render avatar for this user
-    socketRef.current.emit("toggle video", socketRef.current.id )
+    socketRef.current.emit("toggle video", socketRef.current.id)
   };
 
   // TURN VIDEO ON AND OFF
@@ -114,7 +114,7 @@ export default function Call(props) {
   useEffect(() => {
     socketRef.current = io.connect("/");
     // Get user's audio and video
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(stream => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       // userVideo is a ref to the actual video (stream)
       userVideo.current.srcObject = stream;
 
@@ -313,14 +313,14 @@ export default function Call(props) {
           {isVideoActive && <Button
             variant="contained"
             color="secondary"
-            className={"toggle" + classes.button}
+            className={"toggle video " + classes.button}
             startIcon={<VideocamIcon />}
             onClick={toggleVideo}
           />}
           {!isVideoActive && <Button
             variant="contained"
             color="secondary"
-            className={"toggle" + classes.button}
+            className={"toggle video " + classes.button}
             startIcon={<VideocamOffIcon />}
             onClick={toggleVideo}
           />}
@@ -328,14 +328,14 @@ export default function Call(props) {
           {isAudioActive && <Button
             variant="contained"
             color="secondary"
-            className={"toggle" + classes.button}
+            className={"toggle audio " + classes.button}
             startIcon={<MicIcon />}
             onClick={toggleAudio}
           />}
           {!isAudioActive && <Button
             variant="contained"
             color="secondary"
-            className={"toggle" + classes.button}
+            className={"toggle audio " + classes.button}
             startIcon={<MicOffIcon />}
             onClick={toggleAudio}
           />}
