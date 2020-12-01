@@ -100,8 +100,8 @@ export default function SideNav(props) {
 
   useEffect(() => {
     if (open) {
-      document.getElementsByClassName('convo-list')[0].style.paddingLeft = '24vw';
-      document.getElementsByClassName('convo-list')[0].style.paddingRight = '4vw';
+      document.getElementsByClassName('convo-list')[0].style.paddingLeft = '22vw';
+      document.getElementsByClassName('convo-list')[0].style.paddingRight = '2vw';
       document.getElementsByClassName('convo-list')[0].style.marginTop = '0px';
       document.getElementsByClassName('fixed')[0].style.marginLeft = '23vw';
       document.getElementsByClassName('fixed')[0].style.top = '0';
