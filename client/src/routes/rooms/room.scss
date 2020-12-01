@@ -101,20 +101,25 @@ body {
       }
 
       .side-bar {
+        border: 1px solid red;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         width: 30%;
 
-
         .podcast-card {
-          margin: 1em;
-          padding: 0.25em;
+          border: 1px solid blue;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          margin: 0.5em 1em;
+          padding: 0.5em;
           background-color: $conversation-card-primary-color;
 
           flex-basis: 70%;
           min-height: 400px;
-
 
           .podcast-image{
             margin: 0.5em auto;
@@ -158,10 +163,12 @@ body {
         } // .podcast-card
 
         .chat-box {
+          display: flex;
+          flex-direction: column;
+
           min-height: 180px;
           margin: 0em 1em;
           flex-basis: 40%;
-
 
           .chat-box-card {
             height: 70%;
