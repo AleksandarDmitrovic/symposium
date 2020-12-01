@@ -218,4 +218,7 @@ body {
   } // .room
 } // body
 
-
+span.MuiButton-label {
+  width: 100%;
+  display: contents;
+}
