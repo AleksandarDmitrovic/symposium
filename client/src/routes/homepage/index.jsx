@@ -22,9 +22,6 @@ export default function Conversation(props) {
   
   // Keep track of if there are new conversations
   const [newConversations, setNewConversations] = useState(false);
-
-  // Keep track of whether side nav is closed or not. If closed, show main alert
-  const [isClosed, setIsClosed] = useState(false);
   
   // Pass to sortby function so that it can update searchParam state
   function changeState(newState) {
@@ -64,7 +61,6 @@ export default function Conversation(props) {
         history={props.history}
         connection={homepage}
         newConversations={newConversations}
-        setClosed={setIsClosed}
         clearNotifications={clearNotifications}
       />
       <article className='homepage'>
@@ -81,13 +77,13 @@ export default function Conversation(props) {
             state={changeState}
             search={searchParam}
           />
-        {newConversations && isClosed &&
+        {newConversations &&
         <Alert 
         severity="info"
         onClick={() => {clearNotifications()}}
         className='alert'
         style={{
-          height: '5vh',
+          height: '6vh',
           display: 'flex',
           justifyContent: 'center',
           marginTop: '1em',
