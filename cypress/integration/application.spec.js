@@ -1,12 +1,11 @@
 const typingDelay = 110;
 const wait = 3000;
+const podcast = 6000;
 
 const expectPlayingAudio = (expectation) => {
   cy.get('audio').should((elements)=>{
     let audible = false
     elements.each((i, element)=>{
-      console.log(element)
-      console.log(element.duration, element.paused, element.muted)
       if (element.duration > 0 && !element.paused && !element.muted) {
         audible = true
       }
@@ -31,28 +30,27 @@ describe("Navigation", () => {
   it("should be able to play and pause the footer podcast", () => {
     cy.get('[data-cy=pod-of-day]')
       .click()
-      .wait(wait);
+      .wait(podcast);
     expectPlayingAudio(true);
 
     cy.get('[data-cy=pod-of-day]')
       .click()
-      .wait(wait);
     expectPlayingAudio(false);
   });
 
   it("should be able to play and pause podcasts on a conversation card", () => {
-    cy.get('[data-cy=conversationCard]')
-      .first()
-      .find('[data-cy=embedded-player]')
-      .click()
-      .wait(wait);
-    expectPlayingAudio(true);
-
     cy.get('[data-cy=conversation-card]')
       .first()
       .find('[data-cy=embedded-player]')
       .click()
-      .wait(wait);
+      .wait(podcast);
+    expectPlayingAudio(true);
+
+    cy.get('[data-cy=conversation-card]')
+      .first()
+      .find('[data-cy=convo-card-player]')
+      .click()
+      .wait(podcast);
     expectPlayingAudio(false);
   });
 
@@ -73,9 +71,10 @@ describe("Navigation", () => {
     cy.get('[data-cy=view-category]')
       .click()
       .wait(wait)
-      .children()
-      .second()
-      .click();
+
+    cy.get('[data-cy=category-options')
+      .contains('Technology')
+      .click()
 
     cy.get('[data-cy=category-name]')
       .wait(wait)
@@ -93,7 +92,7 @@ describe("Navigation", () => {
       .wait(wait)
       .should('not.contain', 'Technology');
 
-    cy.get('[data-cy=conv-list]')
+    cy.get('[data-cy=convo-list]')
       .wait(wait)
       .find('[data-cy=conversation-card]')
       .should('have.length', 8);
@@ -109,7 +108,7 @@ describe("Navigation", () => {
       .first()
       .click();
 
-    cy.get('[data-cy=conv-list]')
+    cy.get('[data-cy=convo-list]')
       .wait(wait)
       .find('[data-cy=conversation-card]')
       .should('have.length', 1);
@@ -225,7 +224,7 @@ describe("Toggle Buttons", () => {
 });
 
 describe("Chat box", () => {
-  it.only("should be able to send a message", () => {
+  it ("should be able to send a message", () => {
     cy.visit("/room/3").wait(wait);
 
     cy.get('.chat-box-form > div > div > input')
