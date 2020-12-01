@@ -8,19 +8,19 @@ export default function EmbedPodcast (props) {
   let title = props.title;
   let episode = props.episode;
 
-  if (props.class === 'footer-player') {
+  if (props.className === 'footer-player') {
     title = `Podcast of the Day: \xa0\xa0 ${props.title} \xa0\xa0\xa0 | \xa0\xa0\xa0 ${props.episode}`;
     episode = null;
-  } else if (props.class === 'convo-card-player') {
+  } else if (props.className === 'convo-card-player') {
     title = `${props.title} \xa0\xa0\xa0 | \xa0\xa0\xa0 Category: ${props.category}`;
   }
 
-  const volume = props.class === 'footer-player' ? [RHAP_UI.VOLUME] : [];
+  const volume = props.className === 'footer-player' ? [RHAP_UI.VOLUME] : [];
 
   return (
     <div className="embed-video" data-cy='embedded-player'>
       <AudioPlayer
-        className={`embed-video-audio-player" ${props.class}`}
+        className={`embed-video-audio-player" ${props.className}`}
         src={props.embed_url}
         header={title}
         footer={episode}

@@ -50,13 +50,6 @@ export default function SearchBar(props) {
     document.removeEventListener('input', disableScroll)
   };
 
-  useEffect(() => {
-    const positioning = props.resultWidth === '330px' ? '135px' : '';
-    if ( document.getElementsByClassName('result-container')[0]) {
-      document.getElementsByClassName('result-container')[0].style.top = positioning;
-    }
-  }, [props.resultWidth])
-
   return (
     <section className="search">
       <form className="search-bar" data-cy='search-bar' onSubmit={event => event.preventDefault()}>

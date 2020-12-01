@@ -19,7 +19,7 @@ export default function Footer(props) {
       <EmbedPodcast 
         embed_url={data.podcast_episode_embed_url} 
         title={data.podcast_name} 
-        class='footer-player'
+        className='footer-player'
         layout={"stacked-reverse"}
         name={data.podcast_name} 
         episode={data.podcast_episode_title}

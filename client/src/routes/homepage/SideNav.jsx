@@ -189,7 +189,7 @@ export default function SideNav(props) {
         </div>
         <Divider />
         <div className='logout'>
-          <button class="bttn-unite bttn-md bttn-primary">Log Out</button>
+          <button className="bttn-unite bttn-md bttn-primary">Log Out</button>
         </div>
       </Drawer>
     </div>
