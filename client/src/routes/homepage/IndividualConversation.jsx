@@ -104,7 +104,7 @@ export default function IndividualConversation(props) {
                       episode={props.episode_title} 
                       category={category}
                       class='convo-card-player'
-                      
+                      data-cy='convo-card-player'
                     />
                   </div>
                 </section>

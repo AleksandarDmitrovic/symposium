@@ -39,3 +39,14 @@ button:focus {
   background-color: $body-color;
   color: white;
 }
+
+@media (max-width: 1700px) { 
+  #category-name {
+    margin-right: 6%;
+  }
+}
+@media (max-width: 1490px) { 
+  #category-name {
+    margin-right: 10%;
+  }
+}

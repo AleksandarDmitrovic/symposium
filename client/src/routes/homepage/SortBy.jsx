@@ -71,6 +71,7 @@ export default function SortBy (props) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}
+            data-cy='category-options'
           >
             <MenuItem onClick={() => { handleClose(1)}}>Other</MenuItem>
             <MenuItem onClick={() => { handleClose(2)}}>Technology</MenuItem>

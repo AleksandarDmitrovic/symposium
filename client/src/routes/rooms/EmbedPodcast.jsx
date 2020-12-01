@@ -19,7 +19,7 @@ export default function EmbedPodcast (props) {
   const layout = props.class === 'room-player' ? 'horizontal-reverse' : 'stacked-reverse'
 
   return (
-    <div className="embed-video" data-cy='embeddedPlayer'>
+    <div className="embed-video" data-cy='embedded-player'>
       <AudioPlayer
         className={`embed-video-audio-player" ${props.class}`}
         src={props.embed_url}
