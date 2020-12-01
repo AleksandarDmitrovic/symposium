@@ -20,7 +20,7 @@ export default function NewRoomButton(props) {
 
   return (
      <>
-      <button className={`bttn-jelly bttn-md bttn-primary ${props.class}`} onClick={handleOpen} data-cy="create">
+      <button className={`bttn-jelly bttn-md bttn-primary ${props.className}`} onClick={handleOpen} data-cy="create">
         {props.text}
         <Add style={{marginLeft: '0.5em'}}/>
         {props.children}

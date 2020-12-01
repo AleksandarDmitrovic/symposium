@@ -72,8 +72,7 @@ export default function IndividualConversation(props) {
                     <Typography 
                       className='card-title'
                       gutterBottom 
-                      color='white' variant="p" 
-                      component="p"
+                      variant="inherit" 
                     >
                       {props.title}
                     </Typography>
@@ -88,8 +87,7 @@ export default function IndividualConversation(props) {
                   </header>
                   <Typography 
                     className='card-description'
-                    variant="p"                    
-                    color='white'  
+                    variant="inherit"                    
                     component="p" 
                   >
                     {props.description}
@@ -103,7 +101,7 @@ export default function IndividualConversation(props) {
                       title={props.podcast_name} 
                       episode={props.episode_title} 
                       category={category}
-                      class='convo-card-player'                     
+                      className='convo-card-player'                     
                     />
                   </div>
                 </section>

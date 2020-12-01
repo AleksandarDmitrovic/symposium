@@ -22,10 +22,10 @@ export default function Info(props) {
           embed_title = {props.embed_title}
           embed_url = {props.embed_url}
           title = {props.episode_title}
-          class = {'room-player'}
+          className = {'room-player'}
         />
       </div>  
-      <div class="conversation-information">
+      <div className="conversation-information">
         <SocialMedia 
           description={props.description}
           url={props.url}
