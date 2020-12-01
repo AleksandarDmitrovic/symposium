@@ -9,7 +9,6 @@ import { TextField } from '@material-ui/core';
 
 
 export default function ChatBox(props) {
-  console.log('reRender');
 
   const [chatBoxMessage, setChatBoxMessage] = useState("");
   const [allMessages, setAllMessages] = useState([]);
