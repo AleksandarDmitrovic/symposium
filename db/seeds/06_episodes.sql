@@ -29,7 +29,10 @@ INSERT INTO episodes (podcast_name, podcast_image, embed_title, embed_url)
 VALUES ('HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'Becoming the Dalai Lama', 'https://sphinx.acast.com/historythisweek/becomingthedalailama/media.mp3');
 
 INSERT INTO episodes (podcast_name, podcast_image, embed_title, embed_url)
-VALUES ('HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'Becoming the Dalai Lama', 'https://sphinx.acast.com/historythisweek/becomingthedalailama/media.mp3');
+VALUES ('HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'No Representation, No Peace', 'https://sphinx.acast.com/historythisweek/norepresentationnopeace/media.mp3');
 
 INSERT INTO episodes (podcast_name, podcast_image, embed_title, embed_url)
-VALUES ('Lex Fridman Podcast', 'https://is3-ssl.mzstatic.com/image/thumb/Podcasts114/v4/62/15/8e/62158efc-a4f7-d4ec-ebab-05c9a30ed25e/mza_6076293181799511311.png/600x600bb.jpg', 'Becoming the Dalai Lama', 'https://sphinx.acast.com/historythisweek/becomingthedalailama/media.mp3');
+VALUES ('HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Diet Wars', 'https://sphinx.acast.com/historythisweek/thedietwars/media.mp3');
+
+INSERT INTO episodes (podcast_name, podcast_image, embed_title, embed_url)
+VALUES ('Lex Fridman Podcast', 'https://is3-ssl.mzstatic.com/image/thumb/Podcasts114/v4/62/15/8e/62158efc-a4f7-d4ec-ebab-05c9a30ed25e/mza_6076293181799511311.png/600x600bb.jpg', '#142 – Manolis Kellis: Meaning of Life, the Universe, and Everything', 'https://media.blubrry.com/takeituneasy/content.blubrry.com/takeituneasy/lex_ai_manolis_kellis_4.mp3');

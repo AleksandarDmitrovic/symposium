@@ -65,6 +65,12 @@ $focus-color: #3f51b5;
 #display-episode {
   visibility: hidden;
 }
+ 
+  // For Symposium 2.0 !!
+  .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+    overflow: auto;
+    height: 415px;
+  }
 
 .search-spinner {
   display: flex;
