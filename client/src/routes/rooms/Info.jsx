@@ -27,7 +27,7 @@ export default function Info(props) {
   <Card className="podcast-card">
       
       <CardMedia
-        className={classes.media}
+        className="podcast-image"
         image={props.podcast_image}
         title="Podcast Image"
       />

@@ -111,6 +111,13 @@ body {
           margin: 1em;
           padding: 0.25em;
           background-color: $conversation-card-primary-color;
+          height: 50vh;
+
+          .podcast-image{
+            margin: 0em auto;
+            height: 35vh;
+            width: 35vh;
+          }
 
           #social-media {
             padding: 0px;
