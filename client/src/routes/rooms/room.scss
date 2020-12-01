@@ -101,15 +101,13 @@ body {
       }
 
       .side-bar {
-        border: 1px solid red;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         width: 30%;
+        margin-top: 5vh;
 
         .podcast-card {
-          border: 1px solid blue;
-
           display: flex;
           flex-direction: column;
           justify-content: space-between;
