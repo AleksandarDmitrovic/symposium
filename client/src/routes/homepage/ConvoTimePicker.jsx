@@ -5,7 +5,6 @@ import moment from 'moment'
 
 export default function ConvoTimePicker(props) {
   const [selectedDate, handleDateChange] = useState(moment());
-  console.log('selectedDate :', selectedDate);
 
   const { changeTimeAvailable } = props;
 
