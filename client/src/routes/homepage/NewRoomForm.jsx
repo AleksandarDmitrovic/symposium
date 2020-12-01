@@ -87,6 +87,9 @@ export default function NewRoomForm (props) {
     const id = uuid();
     let selectedEpisode = episodeInfo.filter(obj => obj.embed_title === val);
     if (validate()) {
+      console.log(podcastInfo)
+      console.log(selectedEpisode[0].embed_title)
+      console.log(selectedEpisode[0].embed_url)
       axios.put(`/api/conversations`, { 
         url: id, 
         title: title, 
@@ -115,6 +118,7 @@ export default function NewRoomForm (props) {
     document.getElementById('display-episode').style.visibility = 'visible';
   };
 
+  //* Replaced for Sypmosium 2.0
   const listTitles = titles => {
     if (Array.isArray(titles)) {
       return titles.map(title => {

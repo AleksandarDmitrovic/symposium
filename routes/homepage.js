@@ -195,7 +195,7 @@ module.exports = (db, updateConversations) => {
   router.get("/search", (req, res) => {
     db.query(`SELECT * FROM search_results;`)
     .then(data => {
-      res.json(data.rows[0]);
+      res.json(data.rows);
     }).catch(err => console.log('Error:', err))
   });
 
@@ -203,16 +203,16 @@ module.exports = (db, updateConversations) => {
   router.get("/episodes", (req, res) => {
     db.query(`SELECT * FROM episodes;`)
     .then(data => {
-      res.json(data.rows[0]);
+      res.json(data.rows);
     }).catch(err => console.log('Error:', err))
   });
 
   // Symposium 2.0 podcast of the day
-  router.get("/episodes", (req, res) => {
+  router.get("/podcastOfDay", (req, res) => {
     db.query(`
     SELECT * FROM episodes
-    WHERE podcast_name = $1;
-    `, ['Wartime Weapon Turned Medical Miracle'])
+    LIMIT 1;
+    `)
     .then(data => {
       res.json(data.rows[0]);
     }).catch(err => console.log('Error:', err))

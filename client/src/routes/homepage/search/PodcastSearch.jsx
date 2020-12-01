@@ -88,7 +88,12 @@ export default function PodcastSearch(props) {
       } else {
         document.getElementsByClassName('spinner')[0].style.visibility = 'visible';
       }
-      axios.get(`/api/itunes/${term}`).then(response => {
+      //* Replaced with Symposium 2.0 axios call
+      // axios.get(`/api/itunes/${term}`).then(response => {
+      //   setResults([...response.data])
+      //   hide('spinner');
+      // })
+      axios.get('/api/search').then(response => {
         setResults([...response.data])
         hide('spinner');
       })
@@ -97,13 +102,17 @@ export default function PodcastSearch(props) {
   }, [term]);
 
   useEffect(() => {
-    if (feedUrl.length > 0) {
-      let url = encodeURIComponent(feedUrl);
-      axios.get(`/api/episodes/${url}`).then(res => {
+    // if (feedUrl.length > 0) {
+      // let url = encodeURIComponent(feedUrl);
+      //* Replaced with Symposium 2.0 axios call
+      // axios.get(`/api/episodes/${url}`).then(res => {
+      //   if (changeEpisodeInfo) { changeEpisodeInfo(res.data) };
+      // })
+      axios.get('/api/episodes').then(res => {
         if (changeEpisodeInfo) { changeEpisodeInfo(res.data) };
       })
       .catch(err => console.log('Error: ', err));
-    }
+    // }
   }, [feedUrl, changeEpisodeInfo]);
 
   return (

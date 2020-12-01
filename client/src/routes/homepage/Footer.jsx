@@ -14,15 +14,24 @@ export default function Footer(props) {
   }, []);
 
   return (
+    // <footer className='pod-of-day' data-cy='pod-of-day'>
+    //   <EmbedPodcast 
+    //     embed_url={data.podcast_episode_embed_url} 
+    //     title={data.podcast_name} 
+    //     className='footer-player'
+    //     layout={"stacked-reverse"}
+    //     name={data.podcast_name} 
+    //     episode={data.podcast_episode_title}
+    //   />
+    // </footer>
     <footer className='pod-of-day' data-cy='pod-of-day'>
-      {/* <p>Listen to what people are talking about today</p> */}
       <EmbedPodcast 
-        embed_url={data.podcast_episode_embed_url} 
+        embed_url={data.url} 
         title={data.podcast_name} 
         className='footer-player'
         layout={"stacked-reverse"}
         name={data.podcast_name} 
-        episode={data.podcast_episode_title}
+        episode={data.episode_name}
       />
     </footer>
   );
