@@ -85,7 +85,7 @@ export default function SideNav(props) {
   };
 
   const scrollToTop = () => {
-    window.scrollTo(0,100);
+    window.scrollTo(0, 0);
   }
 
   useEffect(() => {
