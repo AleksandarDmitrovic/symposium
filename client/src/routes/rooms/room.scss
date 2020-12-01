@@ -65,7 +65,6 @@ body {
         position: relative;
 
         .call-video {
-          // border: 1px solid blue;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -107,18 +106,20 @@ body {
         justify-content: center;
         width: 30%;
 
+
         .podcast-card {
           margin: 1em;
           padding: 0.25em;
           background-color: $conversation-card-primary-color;
-          height: 60%;
+
+          flex-basis: 70%;
           min-height: 400px;
-          // min-width: 300px;
+
 
           .podcast-image{
-            margin: 0em auto;
-            height: 60%;
-            width: 60%;
+            margin: 0.5em auto;
+            height: 58%;
+            width: 58%;
           }
 
           #social-media {
@@ -134,7 +135,7 @@ body {
             .embed-video {
               display: flex;
               justify-content: space-around; 
-              margin: 1.2em 1em; 
+              margin: 1em 1em; 
               width: 100%;
 
               .rhap_header {
@@ -157,10 +158,13 @@ body {
         } // .podcast-card
 
         .chat-box {
+          min-height: 180px;
+          margin: 0em 1em;
+          flex-basis: 40%;
+
+
           .chat-box-card {
-            margin: 0em 1em;
-            min-height: 25vh;
-            max-height: 25vh;
+            height: 70%;
             padding: 0.25em 1em;
             margin-bottom: 0px;
             overflow-y: auto;
@@ -181,7 +185,6 @@ body {
           }
 
           .chat-box-form-card {
-            margin: 0em 1em;
             background-color: white;
 
             .chat-box-form {
@@ -201,7 +204,6 @@ body {
                 border-radius: 5px;
               }
             }
-
           }
 
           
