@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS search_results CASCADE;
+
+CREATE TABLE search_results (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  image TEXT NOT NULL
+);
