@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 import PodcastSearch from './search/PodcastSearch';
-import TimePicker from './TimePicker';
+import ConvoTimePicker from './ConvoTimePicker';
 import './form-styles/NewRoomForm.scss';
 
 
@@ -20,12 +20,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewRoomForm (props) {
-
   const [title, setTitle] = useState(props.title ||'');
   const [description, setDescription] = useState(props.description || '');
-  const [timePicked, setTimePicked] = useState(props.timePicked || '');
   const [timeAvailable, setTimeAvailable] = useState(props.timeAvailable || 0);
-
   const [podcastInfo, setPodcastInfo] = useState(props.podcastInfo || '');
   const [episodeInfo, setEpisodeInfo] = useState([{}]);
   const [val, setVal] = useState('');
@@ -59,14 +56,11 @@ export default function NewRoomForm (props) {
   };
   
   const changeTimeAvailable = (value) => {
-    setTimePicked(value);
-    const hoursMins = timePicked.split(":");
 
-    const futureTime = moment().set('hour', parseInt(hoursMins[0])).set('minute', parseInt(hoursMins[1]));
-    
-    const time = futureTime.unix();
+    const userTimeAvailable = value.unix();
 
-    setTimeAvailable(time);
+    setTimeAvailable(userTimeAvailable);
+  
   }
 
   const changePodcastInfo = (info) => {
@@ -153,7 +147,7 @@ export default function NewRoomForm (props) {
             data-cy="description"
           />
           <br/>
-          <TimePicker
+          <ConvoTimePicker
             changeTimeAvailable={changeTimeAvailable}
           />
           <br/>
