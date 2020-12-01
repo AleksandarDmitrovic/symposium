@@ -111,12 +111,14 @@ body {
           margin: 1em;
           padding: 0.25em;
           background-color: $conversation-card-primary-color;
-          height: 50vh;
+          height: 60%;
+          min-height: 400px;
+          // min-width: 300px;
 
           .podcast-image{
             margin: 0em auto;
-            height: 35vh;
-            width: 35vh;
+            height: 60%;
+            width: 60%;
           }
 
           #social-media {
