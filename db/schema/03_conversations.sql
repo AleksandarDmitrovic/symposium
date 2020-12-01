@@ -8,10 +8,8 @@ CREATE TABLE conversations (
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   available_until INTEGER NOT NULL,
-  podcast_name VARCHAR(255) NOT NULL,
-  podcast_starts_at VARCHAR(255),
-  podcast_ends_at VARCHAR(255),
+  podcast_name TEXT NOT NULL,
   podcast_image TEXT NOT NULL,
-  podcast_episode_title VARCHAR(255) NOT NULL,
+  podcast_episode_title TEXT NOT NULL,
   podcast_episode_embed_url TEXT NOT NULL
 );

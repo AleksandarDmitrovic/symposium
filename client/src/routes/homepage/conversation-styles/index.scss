@@ -13,16 +13,15 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 13px;               /* width of the entire scrollbar */
+  width: 13px;               
 }
 body::-webkit-scrollbar-track {
-  background: #adacac;        /* color of the tracking area */
+  background: #adacac;   
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: grey;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid grey;  /* creates padding around scroll thumb */
+  background-color: grey;  
+  border-radius: 20px;       
 }
 
 .homepage {

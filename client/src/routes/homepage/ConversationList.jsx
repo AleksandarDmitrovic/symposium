@@ -6,9 +6,7 @@ const mapConversations = function (props) {
 
     return (
       <IndividualConversation
-        //HOW do we set unique keys properly for these elements
-        // keyValue={conversation.id}
-        key={conversation.id}
+        key={conversation.url}
         id={conversation.id}
         category_id={conversation.category_id}
         title={conversation.title}
@@ -18,8 +16,6 @@ const mapConversations = function (props) {
         image={conversation.podcast_image}
         url={conversation.conversation_url}
         audio={conversation.podcast_episode_embed_url}
-        starts_at={conversation.podcast_starts_at}
-        ends_at={conversation.podcast_ends_at}
         history={props.history}
         is_active = {conversation.is_active}
         available_until = {conversation.available_until}
@@ -32,7 +28,7 @@ const mapConversations = function (props) {
 export default function ConversationList(props) {
 
   return (
-    <ul className='convo-list'>
+    <ul className='convo-list' data-cy='convo-list'>
       { mapConversations(props) }
     </ul>
   );

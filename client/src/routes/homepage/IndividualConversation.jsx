@@ -58,7 +58,7 @@ export default function IndividualConversation(props) {
   return (
     <>
       {active && 
-        <Card className='conversation-card' style={{background: '#101010'}}>
+        <Card className='conversation-card' data-cy='conversation-card' style={{background: '#101010'}}>
           <div className='card'>
             <CardMedia
               className='cover-photo'
@@ -70,8 +70,8 @@ export default function IndividualConversation(props) {
                 <div className='convo-info'>
                   <header>
                     <Typography 
+                      className='card-title'
                       gutterBottom 
-                      style={{fontFamily: "'Raleway', sans-serif", fontSize: '2em'}} 
                       color='white' variant="p" 
                       component="p"
                     >
@@ -87,15 +87,9 @@ export default function IndividualConversation(props) {
                     </Timer>
                   </header>
                   <Typography 
-                    variant="p" 
-                    style={{
-                      fontFamily: "'Raleway', sans-serif", 
-                      fontSize: '1.25em', 
-                      paddingBottom: '1em',
-                      borderBottom: '1px solid grey'
-                    }} 
+                    className='card-description'
+                    variant="p"                    
                     color='white'  
-                    className='description' 
                     component="p" 
                   >
                     {props.description}
@@ -103,14 +97,13 @@ export default function IndividualConversation(props) {
                 </div>
                 <section className='pod'>
                   <div className='podcast-info'></div>
-                  <div className='player' style={{paddingTop: padding}}>
+                  <div className='player' data-cy='convo-card-player' style={{paddingTop: padding}}>
                     <EmbedPodcast 
                       embed_url={props.audio} 
                       title={props.podcast_name} 
                       episode={props.episode_title} 
                       category={category}
-                      class='convo-card-player'
-                      
+                      class='convo-card-player'                     
                     />
                   </div>
                 </section>
