@@ -16,7 +16,6 @@ export default function EmbedPodcast (props) {
   }
 
   const volume = props.class === 'footer-player' ? [RHAP_UI.VOLUME] : [];
-  const layout = props.class === 'room-player' ? 'horizontal-reverse' : 'stacked-reverse'
 
   return (
     <div className="embed-video" data-cy='embedded-player'>

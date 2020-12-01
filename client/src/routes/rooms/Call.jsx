@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Video = (props) => {
-  console.log('props', props);
   const ref = useRef();
   
   // Hide video element from browser
@@ -152,10 +151,6 @@ export default function Call(props) {
       socketRef.current.on('user joined', payload => {
         // Create a peer for the newcomer who just joined the room
         // Pass as paramaters signal, who is calling us, and our stream
-
-
-        // HERE
-        console.log('payload', payload);
 
         const peer = addPeer(payload.signal, payload.callerID, stream);
         const avatar = createAvatar()
