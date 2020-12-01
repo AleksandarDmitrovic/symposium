@@ -78,16 +78,14 @@ export default function SideNav(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    props.setClosed(false);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
-    props.setClosed(true);
   };
 
   const scrollToTop = () => {
-    window.scrollTo(0,100);
+    window.scrollTo(0, 0);
   }
 
   useEffect(() => {
@@ -173,7 +171,7 @@ export default function SideNav(props) {
           }
           <ListItem>
             <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <AccountCircle /> </ListItemIcon>
-            <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
+            <ListItemText primary='Plato' style={{paddingLeft: '1em'}}/>
           </ListItem>
           <div className='nav-new-room-btn'>
             <NewRoomButton
