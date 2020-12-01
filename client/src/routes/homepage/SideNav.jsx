@@ -78,12 +78,10 @@ export default function SideNav(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    props.setClosed(false);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
-    props.setClosed(true);
   };
 
   const scrollToTop = () => {
