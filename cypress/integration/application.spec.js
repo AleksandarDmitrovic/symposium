@@ -39,18 +39,17 @@ describe("Navigation", () => {
   });
 
   it("should be able to play and pause podcasts on a conversation card", () => {
-    cy.get('[data-cy=conversation-card]')
+    cy.get('[data-cy=convo-card-player]')
       .first()
-      .find('[data-cy=embedded-player]')
+      .find('button')
       .click()
       .wait(podcast);
     expectPlayingAudio(true);
 
-    cy.get('[data-cy=conversation-card]')
+   cy.get('[data-cy=convo-card-player]')
       .first()
-      .find('[data-cy=convo-card-player]')
+      .find('button')
       .click()
-      .wait(podcast);
     expectPlayingAudio(false);
   });
 
@@ -58,6 +57,7 @@ describe("Navigation", () => {
     cy.scrollTo('bottom')
       .window()
       .its('scrollY')
+      .wait(wait)
       .should('not.equal', 0);
 
     cy.get('[data-cy=home]').click();

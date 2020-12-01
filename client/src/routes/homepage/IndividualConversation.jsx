@@ -97,14 +97,13 @@ export default function IndividualConversation(props) {
                 </div>
                 <section className='pod'>
                   <div className='podcast-info'></div>
-                  <div className='player' style={{paddingTop: padding}}>
+                  <div className='player' data-cy='convo-card-player' style={{paddingTop: padding}}>
                     <EmbedPodcast 
                       embed_url={props.audio} 
                       title={props.podcast_name} 
                       episode={props.episode_title} 
                       category={category}
-                      class='convo-card-player'
-                      data-cy='convo-card-player'
+                      class='convo-card-player'                     
                     />
                   </div>
                 </section>
