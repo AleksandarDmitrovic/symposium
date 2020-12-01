@@ -152,40 +152,68 @@ module.exports = (db, updateConversations) => {
       });
   });
 
-  // Fetches podcast info from Itunes API
-  router.get("/itunes/:podcast", (req, res) => {
-    const { podcast } = req.params;
-    const url = `https://itunes.apple.com/search?term=${podcast}&entity=podcast&limit=20`;
-    axios.get(url)
-      .then(response => {
-        res.json(response.data.results);
-      })
-      .catch(err => console.log('Error: ', err));
+  //* Commented out to use Symposium 2.0 queries
+  // // Fetches podcast info from Itunes API
+  // router.get("/itunes/:podcast", (req, res) => {
+  //   const { podcast } = req.params;
+  //   const url = `https://itunes.apple.com/search?term=${podcast}&entity=podcast&limit=20`;
+  //   axios.get(url)
+  //     .then(response => {
+  //       res.json(response.data.results);
+  //     })
+  //     .catch(err => console.log('Error: ', err));
+  // });
+
+  // // Make second api call for specific podcast episodes
+  // router.get("/episodes/:feedUrl", (req, res) => {
+  //   const { feedUrl } = req.params;
+  //   const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&${process.env.API_KEY}`;
+  //   axios.get(url)
+  //     .then(response => {
+  //       const episodeData = response.data.items.map(ep => {
+  //         return {embed_title: ep.title, embed_url: ep.enclosure.link};
+  //       });
+  //       res.json(episodeData);
+  //     })
+  //     .catch(err => console.log('Error:', err));
+  // });
+
+  // // Podcast fetched as the "Podcast of the Day"
+  // router.get("/podcastOfDay", (req, res) => {
+  //   db.query(`
+  //           SELECT podcast_episode_embed_url, podcast_episode_title, podcast_name, COUNT(*) as count
+  //           FROM conversations
+  //           GROUP BY podcast_episode_embed_url, podcast_episode_title, podcast_name
+  //           ORDER BY count DESC
+  //           LIMIT 1;`
+  //   ).then(data => {
+  //     res.json(data.rows[0]);
+  //   }).catch(err => console.log('Error:', err))
+  // });
+
+  // Symposium 2.0 search result call
+  router.get("/search", (req, res) => {
+    db.query(`SELECT * FROM search_results;`)
+    .then(data => {
+      res.json(data.rows[0]);
+    }).catch(err => console.log('Error:', err))
   });
 
-  // Make second api call for specific podcast episodes
-  router.get("/episodes/:feedUrl", (req, res) => {
-    const { feedUrl } = req.params;
-    const url =  `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&${process.env.API_KEY}`;
-    axios.get(url)
-      .then(response => {
-        const episodeData = response.data.items.map(ep => {
-          return {embed_title: ep.title, embed_url: ep.enclosure.link};
-        });
-        res.json(episodeData);
-      })
-      .catch(err => console.log('Error:', err));
+  // Symposium 2.0 episode call
+  router.get("/episodes", (req, res) => {
+    db.query(`SELECT * FROM episodes;`)
+    .then(data => {
+      res.json(data.rows[0]);
+    }).catch(err => console.log('Error:', err))
   });
 
-  // Podcast fetched as the "Podcast of the Day"
-  router.get("/podcastOfDay", (req, res) => {
+  // Symposium 2.0 podcast of the day
+  router.get("/episodes", (req, res) => {
     db.query(`
-            SELECT podcast_episode_embed_url, podcast_episode_title, podcast_name, COUNT(*) as count
-            FROM conversations
-            GROUP BY podcast_episode_embed_url, podcast_episode_title, podcast_name
-            ORDER BY count DESC
-            LIMIT 1;`
-    ).then(data => {
+    SELECT * FROM episodes
+    WHERE podcast_name = $1;
+    `, ['Wartime Weapon Turned Medical Miracle'])
+    .then(data => {
       res.json(data.rows[0]);
     }).catch(err => console.log('Error:', err))
   });
