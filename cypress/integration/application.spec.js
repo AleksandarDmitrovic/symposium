@@ -1,9 +1,117 @@
 const typingDelay = 110;
 const wait = 3000;
+const podcast = 6000;
+
+const expectPlayingAudio = (expectation) => {
+  cy.get('audio').should((elements)=>{
+    let audible = false
+    elements.each((i, element)=>{
+      if (element.duration > 0 && !element.paused && !element.muted) {
+        audible = true
+      }
+    })
+    expect(audible).to.eq(expectation)
+  })
+}
 
 describe("Navigation", () => {
   it("should visit root", () => {
     cy.visit("/");
+  });
+
+  it ("should see the homepage in it's entirety", () => {
+    cy.get('[data-cy=side-nav]').should('be.visible');
+    cy.get('[data-cy=create]').should('be.visible');
+    cy.get('[data-cy=sort-by]').should('be.visible');
+    cy.get('[data-cy=convo-list]').should('be.visible');
+    cy.get('[data-cy=pod-of-day]').should('be.visible');
+  });
+
+  it("should be able to play and pause the footer podcast", () => {
+    cy.get('[data-cy=pod-of-day]')
+      .click()
+      .wait(podcast);
+    expectPlayingAudio(true);
+
+    cy.get('[data-cy=pod-of-day]')
+      .click()
+    expectPlayingAudio(false);
+  });
+
+  it("should be able to play and pause podcasts on a conversation card", () => {
+    cy.get('[data-cy=convo-card-player]')
+      .first()
+      .find('button')
+      .click()
+      .wait(podcast);
+    expectPlayingAudio(true);
+
+   cy.get('[data-cy=convo-card-player]')
+      .first()
+      .find('button')
+      .click()
+    expectPlayingAudio(false);
+  });
+
+  it("should press the home icon and be take to the top of the conversation list viewport", () => {
+    cy.scrollTo('bottom')
+      .window()
+      .its('scrollY')
+      .wait(wait)
+      .should('not.equal', 0);
+
+    cy.get('[data-cy=home]').click();
+
+    cy.window()
+      .its('scrollY')
+      .should('equal', 100);
+  });
+
+  it("should be able to view conversations based on a specific category or view all", () => {
+    cy.get('[data-cy=view-category]')
+      .click()
+      .wait(wait)
+
+    cy.get('[data-cy=category-options')
+      .contains('Technology')
+      .click()
+
+    cy.get('[data-cy=category-name]')
+      .wait(wait)
+      .contains('Technology');
+
+    cy.get('[data-cy=convo-list]')
+      .wait(wait)
+      .find('[data-cy=conversation-card]')
+      .should('have.length', 2);
+
+    cy.get('[data-cy=view-all]')
+      .click()
+
+    cy.get('[data-cy=category-name]')
+      .wait(wait)
+      .should('not.contain', 'Technology');
+
+    cy.get('[data-cy=convo-list]')
+      .wait(wait)
+      .find('[data-cy=conversation-card]')
+      .should('have.length', 8);
+  });
+
+  it("should be able to search for a specific podcast and view all open conversations with that tag", () => {
+    cy.get('[data-cy=search-bar]')
+      .first()
+      .type("lex fridman" , { delay: typingDelay })
+      .wait(wait)
+      .get('[data-cy=search-results]')
+      .children()
+      .first()
+      .click();
+
+    cy.get('[data-cy=convo-list]')
+      .wait(wait)
+      .find('[data-cy=conversation-card]')
+      .should('have.length', 1);
   });
 
   it("should create a conversation room", () => {
@@ -73,62 +181,10 @@ describe("Navigation", () => {
   });
 
   it("should create a conversation room", () => {
-
-  
      
     // cy.contains("[data-cy=spinner]").should("exist");
   });
-
-
 });
-
-// it("should book an interview", () => {
-
-//   cy.get("[alt=Add]")
-//     .first()
-//     .click();
-
-//   cy.get("[data-testid=student-name-input]")
-//     .type("Lydia Miller-Jones");
-
-//   cy.get("[alt='Sylvia Palmer']").click();
-
-//   cy.contains("Save").click();
-
-//   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-//   cy.contains(".appointment__card--show", "Sylvia Palmer");
-// });
-
-// it("should edit an interview", () => {
-
-//   cy.get("[alt=Edit]")
-//     .first()
-//     .click({ force: true });
-
-//   cy.get("[data-testid=student-name-input]").clear().type("Lydia Miller-Jones");
-
-//   cy.get("[alt='Tori Malcolm']").click();
-
-//   cy.contains("Save").click();
-
-//   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-//   cy.contains(".appointment__card--show", "Tori Malcolm");
-
-// });
-
-// it("should cancel an interview", () => {
-
-//   cy.get("[alt=Delete]")
-//     .click({ force: true });
-
-//   cy.contains("Confirm").click();
-
-//   cy.contains("Deleting").should("exist");
-//   cy.get("Deleting").should("not.exist");
-
-//   cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist");
-
-// });
 
 describe("Toggle Buttons", () => {
   it("should toggle video on and off", () => {
@@ -168,7 +224,7 @@ describe("Toggle Buttons", () => {
 });
 
 describe("Chat box", () => {
-  it.only("should be able to send a message", () => {
+  it ("should be able to send a message", () => {
     cy.visit("/room/3").wait(wait);
 
     cy.get('.chat-box-form > div > div > input')
@@ -199,9 +255,5 @@ describe("Chat box", () => {
     .type('Yup', { delay: typingDelay });
     cy.get('.chat-box-form > button').click();
 
-
-
-
   });
-
 });

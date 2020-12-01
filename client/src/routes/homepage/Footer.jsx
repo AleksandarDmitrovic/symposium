@@ -14,7 +14,7 @@ export default function Footer(props) {
   }, []);
 
   return (
-    <footer className='pod-of-day'>
+    <footer className='pod-of-day' data-cy='pod-of-day'>
       {/* <p>Listen to what people are talking about today</p> */}
       <EmbedPodcast 
         embed_url={data.podcast_episode_embed_url} 

@@ -1,7 +1,7 @@
 INSERT INTO categories (name) VALUES ('Other');
 INSERT INTO categories (name) VALUES ('Technology');
 INSERT INTO categories (name) VALUES ('Arts');
-INSERT INTO categories (name) VALUES ('Business');
+INSERT INTO categories (name) VALUES ('TV & Film');
 INSERT INTO categories (name) VALUES ('Comedy');
 INSERT INTO categories (name) VALUES ('Education');
 INSERT INTO categories (name) VALUES ('Science');

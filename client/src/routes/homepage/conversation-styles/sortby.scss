@@ -33,9 +33,20 @@ button:focus {
   display: flex;
   justify-content: center;
   margin-top: 1vh;
-  margin-right: 3%;
+  margin-right: 3.5%;
   font-size: 1.25em;
   font-family: $primary-font;
   background-color: $body-color;
   color: white;
+}
+
+@media (max-width: 1700px) { 
+  #category-name {
+    margin-right: 6%;
+  }
+}
+@media (max-width: 1490px) { 
+  #category-name {
+    margin-right: 10%;
+  }
 }

@@ -121,7 +121,7 @@ export default function SideNav(props) {
   const symposium = 'sym·po·si·um \xa0\xa0\xa0 /simˈpōzēəm/';
 
   return (
-    <div className={classes.root} style={{zIndex: 7}}>
+    <div className={classes.root} data-cy='side-nav' style={{zIndex: 7}}>
       <CssBaseline />
       <Toolbar>
         <IconButton
@@ -154,7 +154,7 @@ export default function SideNav(props) {
         </div>
         <Divider />
         <List className='nav-list'>
-          <ListItem button onClick={scrollToTop}>
+          <ListItem button onClick={scrollToTop} data-cy='home'>
             <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <Home /> </ListItemIcon>
             <ListItemText primary='Home' style={{paddingLeft: '1em'}}/>
           </ListItem>
