@@ -173,7 +173,7 @@ export default function SideNav(props) {
           }
           <ListItem>
             <ListItemIcon style={{justifyContent: 'center', color: 'white'}}> <AccountCircle /> </ListItemIcon>
-            <ListItemText primary='JMcCay' style={{paddingLeft: '1em'}}/>
+            <ListItemText primary='LH-Labber' style={{paddingLeft: '1em'}}/>
           </ListItem>
           <div className='nav-new-room-btn'>
             <NewRoomButton
