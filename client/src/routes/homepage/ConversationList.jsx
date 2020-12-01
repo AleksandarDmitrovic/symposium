@@ -6,9 +6,7 @@ const mapConversations = function (props) {
 
     return (
       <IndividualConversation
-        //HOW do we set unique keys properly for these elements
-        // keyValue={conversation.id}
-        key={conversation.id}
+        key={conversation.url}
         id={conversation.id}
         category_id={conversation.category_id}
         title={conversation.title}

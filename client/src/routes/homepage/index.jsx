@@ -34,6 +34,7 @@ export default function Conversation(props) {
   useEffect(() => {
     axios.get(`/api/${searchParam}`).then((res) => {
       setConversations(res.data.conversation);
+      console.log('res.data.conversation', res.data.conversation)
     })
   }, [searchParam]);
   
