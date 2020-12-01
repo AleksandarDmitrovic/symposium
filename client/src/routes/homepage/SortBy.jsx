@@ -27,7 +27,8 @@ export default function SortBy (props) {
 
   const [value, setValue] = useState(0);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
+    console.log(newValue)
     setValue(newValue);
   };
 
@@ -59,8 +60,7 @@ export default function SortBy (props) {
           />
           <Tab 
             aria-controls="simple-menu" 
-            aria-haspopup="true" 
-            inkBarStyle={{background: 'blue'}}
+            aria-haspopup="false" 
             onClick={handleClick}
             label="Category"
             data-cy='view-category'
