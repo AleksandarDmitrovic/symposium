@@ -1,12 +1,11 @@
-INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
-VALUES (5, true, 10, '5', 'Inca warriors', 'The war against the Europeans', 1606281895, 'HISTORY This Week', '5:36', '18:34', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Incas Last Stand', 'https://sphinx.acast.com/historythisweek/theincaslaststand/media.mp3');
+--Past conversations--
+INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_image, podcast_episode_title, podcast_episode_embed_url)
+VALUES (1, true, 10, '1', 'Inca warriors', 'The war against the Europeans', 1606281895, 'HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Incas Last Stand', 'https://sphinx.acast.com/historythisweek/theincaslaststand/media.mp3');
 
-INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
-VALUES (5, true, 10, '5', 'Inca warriors', 'The war against the Europeans', 1606281895, 'HISTORY This Week', '5:36', '18:34', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Incas Last Stand', 'https://sphinx.acast.com/historythisweek/theincaslaststand/media.mp3');
+INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_image, podcast_episode_title, podcast_episode_embed_url)
+VALUES (1, true, 10, '1', 'Inca warriors', 'The war against the Europeans', 1606281895, 'HISTORY This Week', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Incas Last Stand', 'https://sphinx.acast.com/historythisweek/theincaslaststand/media.mp3');
 
-INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_starts_at, podcast_ends_at, podcast_image, podcast_episode_title, podcast_episode_embed_url)
-VALUES (5, true, 10, '5', 'Inca warriors', 'The war against the Europeans', 1606281895, 'HISTORY This Week', '5:36', '18:34', 'https://is4-ssl.mzstatic.com/image/thumb/Podcasts124/v4/62/ef/05/62ef0542-e871-4ec7-b3f6-c2bd5582f273/mza_7664804343855747667.jpg/600x600bb.jpg', 'The Incas Last Stand', 'https://sphinx.acast.com/historythisweek/theincaslaststand/media.mp3');
-
+--Demo conversations--
 INSERT INTO conversations (creator_id, is_active, category_id, conversation_url, title, description, available_until, podcast_name, podcast_image, podcast_episode_title, podcast_episode_embed_url)
 VALUES (2, true, 2, '2','Apple Silicon and AR', 'I''m curious to get other people''s opinions on how Apple Silicon may change the AR world. Thoughts?', 1608870024, 'This Week in Tech', 'https://is2-ssl.mzstatic.com/image/thumb/Podcasts123/v4/25/c8/15/25c815e4-7341-ab2e-04c0-ab6b92a3f983/mza_1648795446521719082.jpg/600x600bb.jpg', 'TWiT 797: Theres Blubber All Over the Highway - Apple Silicon, Exploding Whale, TikTok', 'https://chtbl.com/track/E91833/cdn.twit.tv/audio/twit/twit0797/twit0797.mp3');
 
