@@ -1,19 +1,19 @@
 const typingDelay = 110;
 const wait = 3000;
 const podcast = 6000;
-let feed = 8;
+
 
 const expectPlayingAudio = (expectation) => {
   cy.get('audio').should((elements)=>{
     let audible = false
     elements.each((i, element)=>{
       if (element.duration > 0 && !element.paused && !element.muted) {
-        audible = true
+        audible = true;
       }
-    })
-    expect(audible).to.eq(expectation)
-  })
-}
+    });
+    expect(audible).to.eq(expectation);
+  });
+};
 
 describe("Navigation", () => {
   it("should visit root", () => {
@@ -41,16 +41,16 @@ describe("Navigation", () => {
 
   it("should be able to play and pause podcasts on a conversation card", () => {
     cy.get('[data-cy=convo-card-player]')
-      .first()
+      .last()
       .find('button')
       .click()
       .wait(podcast);
     expectPlayingAudio(true);
 
-   cy.get('[data-cy=convo-card-player]')
-      .first()
+    cy.get('[data-cy=convo-card-player]')
+      .last()
       .find('button')
-      .click()
+      .click();
     expectPlayingAudio(false);
   });
 
@@ -81,11 +81,6 @@ describe("Navigation", () => {
       .wait(wait)
       .contains('Technology');
 
-    cy.get('[data-cy=convo-list]')
-      .wait(wait)
-      .find('[data-cy=conversation-card]')
-      .should('have.length', 2);
-
     cy.get('[data-cy=view-all]')
       .click()
 
@@ -93,10 +88,6 @@ describe("Navigation", () => {
       .wait(wait)
       .should('not.contain', 'Technology');
 
-    cy.get('[data-cy=convo-list]')
-      .wait(wait)
-      .find('[data-cy=conversation-card]')
-      .should('have.length', feed);
   });
 
   it("should be able to search for a specific podcast and view all open conversations with that tag", () => {
@@ -116,6 +107,7 @@ describe("Navigation", () => {
   });
 
   it("should create a conversation room", () => {
+    cy.visit("/");
 
     cy.get('[data-cy=create]')
       .first()
@@ -140,18 +132,23 @@ describe("Navigation", () => {
 
     cy.get('[data-cy=description]')
       .type("I want to have a awesome conversation with awesome{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}great people." , { delay: typingDelay });
-    
-    cy.get('[data-cy=time-selector]')
-      .type("00:01", { delay: typingDelay });
 
+    cy.get('[data-cy=time-selector]').click()
+      .get('.MuiDialogActions-root').contains('OK').click()
+      .wait(wait);
+    
     cy.get('[data-cy=submit]')
       .click()
       .get('[data-cy=form-validation]')
       .should('be.visible').
       contains('Please set a time for later today');
     
-    cy.get('[data-cy=time-selector]')
-      .type("23:59", { delay: typingDelay });
+    cy.get('[data-cy=time-selector]').click()
+      .get('.MuiPickersClock-squareMask').click('topLeft') // set to 11 hours
+      .wait(wait)
+      .get('.MuiPickersClock-squareMask').click('topLeft') // set to 53 minutes
+      .wait(wait)
+      .get('.MuiDialogActions-root').contains('OK').click();
 
     cy.get('[data-cy=submit]')
       .click()
@@ -161,7 +158,7 @@ describe("Navigation", () => {
 
     cy.get('[data-cy=search-bar]')
       .last()
-      .type("syntax")
+      .type("syntax", { delay: typingDelay })
       .wait(wait)
       .get('[data-cy=search-results]')
       .children()
@@ -178,15 +175,9 @@ describe("Navigation", () => {
     cy.get('[data-cy=submit]')
       .click();
 
-    feed++;
-     
-    // cy.contains("[data-cy=spinner]").should("exist");
   });
 
-  it("should create a conversation room", () => {
-     
-    // cy.contains("[data-cy=spinner]").should("exist");
-  });
+
 });
 
 describe("Toggle Buttons", () => {
@@ -231,31 +222,31 @@ describe("Chat box", () => {
     cy.visit("/room/3").wait(wait);
 
     cy.get('.chat-box-form > div > div > input')
-    .type("This is me typingan{backspace}{backspace} a new message into the chat box!", { delay: typingDelay })
+      .type("This is me typingan{backspace}{backspace} a new message into the chat box!", { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type("Isn't it cool?", { delay: typingDelay })
+      .type("Isn't it cool?", { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type('And I will send another message!', { delay: typingDelay })
+      .type('And I will send another message!', { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type('Maybe one more so that we can start to see the chat scrolling!', { delay: typingDelay })
+      .type('Maybe one more so that we can start to see the chat scrolling!', { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type('Did you see that?', { delay: typingDelay })
+      .type('Did you see that?', { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type('Auto scrolling!', { delay: typingDelay })
+      .type('Auto scrolling!', { delay: typingDelay })
     cy.get('.chat-box-form > button').click();
 
     cy.get('.chat-box-form > div > div > input')
-    .type('Yup', { delay: typingDelay });
+      .type('Yup', { delay: typingDelay });
     cy.get('.chat-box-form > button').click();
 
   });
