@@ -21,15 +21,15 @@ Here is the app live: https://the-symposium.herokuapp.com/
 
 #### Send a message in the chat
 
-!["Send Chat"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.21.14.gif)
+!["Send Chat"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.23.40.gif)
 
 #### Search for conversations about a specific podcast
 
-!["Search for Podcast"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.29.32.gif)
+!["Search for Podcast"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.29.32.gif)
 
 #### Create your own conversation room
 
-!["Create a Conversation"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.30.05.gif)
+!["Create a Conversation"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.30.05.gif)
 
 #### Select a time you are available until, a podcast, and an episode to talk about
 
