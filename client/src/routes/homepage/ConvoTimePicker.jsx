@@ -23,6 +23,7 @@ export default function ConvoTimePicker(props) {
         label="THIS CONVERSATION WILL EXPIRE AT:"
         value={selectedDate}
         onChange={handleDateChange}
+        data-cy="time-selector"
       />
 
     </MuiPickersUtilsProvider>
