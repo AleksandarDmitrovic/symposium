@@ -29,8 +29,18 @@ export default function SearchBar(props) {
       document.getElementById('episode-list').style.visibility = 'hidden';
       document.getElementById('display-episode').style.visibility = 'hidden';
     }
+    if (document.getElementsByClassName('result-container')[0]) {
+      if (window.pageYOffset > 90) {
+        document.getElementsByClassName('result-container')[0].style.top = '65px';
+      } else {
+        const positioning = props.resultWidth === '330px' ? '155px' : '135px';
+        if ( document.getElementsByClassName('result-container')[0]) {
+          document.getElementsByClassName('result-container')[0].style.top = positioning;
+        }
+      }
+    }
     onSearch(term);
-  }, [term, onSearch]);
+  }, [term, onSearch, props.resultWidth]);
 
   const useStyles = makeStyles((theme) => ({
     root: {
