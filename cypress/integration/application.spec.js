@@ -1,6 +1,7 @@
 const typingDelay = 110;
 const wait = 3000;
 const podcast = 6000;
+let feed = 8;
 
 const expectPlayingAudio = (expectation) => {
   cy.get('audio').should((elements)=>{
@@ -64,7 +65,7 @@ describe("Navigation", () => {
 
     cy.window()
       .its('scrollY')
-      .should('equal', 100);
+      .should('equal', 0);
   });
 
   it("should be able to view conversations based on a specific category or view all", () => {
@@ -95,7 +96,7 @@ describe("Navigation", () => {
     cy.get('[data-cy=convo-list]')
       .wait(wait)
       .find('[data-cy=conversation-card]')
-      .should('have.length', 8);
+      .should('have.length', feed);
   });
 
   it("should be able to search for a specific podcast and view all open conversations with that tag", () => {
@@ -176,6 +177,8 @@ describe("Navigation", () => {
 
     cy.get('[data-cy=submit]')
       .click();
+
+    feed++;
      
     // cy.contains("[data-cy=spinner]").should("exist");
   });
