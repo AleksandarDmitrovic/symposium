@@ -30,7 +30,7 @@ export default function SearchBar(props) {
       document.getElementById('display-episode').style.visibility = 'hidden';
     }
     if (document.getElementsByClassName('result-container')[0]) {
-      if (window.pageYOffset > 90) {
+      if (window.pageYOffset > 80) {
         document.getElementsByClassName('result-container')[0].style.top = '65px';
       } else {
         const positioning = props.resultWidth === '330px' ? '155px' : '135px';
