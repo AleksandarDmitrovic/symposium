@@ -13,15 +13,31 @@ Here is the app live: https://the-symposium.herokuapp.com/
 
 #### Symposium Homepage
 
-!["Homepage"]()
+!["Homepage"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.20.21.gif)
 
-#### Conversation Chat Room
+#### Join a conversation room
 
-!["Conversation Room"]()
+!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.21.14.gif)
 
-#### Share Your Conversation 
+#### Send a message in the chat
 
-!["Social Media Links"]()
+!["Send Chat"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.21.14.gif)
+
+#### Search for conversations about a specific podcast
+
+!["Search for Podcast"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.29.32.gif)
+
+#### Create your own conversation room
+
+!["Create a Conversation"](!["Conversation Room"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.30.05.gif)
+
+#### Select a time you are available until, a podcast, and an episode to talk about
+
+!["Select Conversation Info"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.32.52.gif)
+
+#### Share your conversation 
+
+!["Social Media Links"](https://github.com/AleksandarDmitrovic/symposium/blob/main/client/public/gifs/2020-12-01%2019.34.54.gif)
 
 ## Stack
 
