@@ -1,5 +1,5 @@
 const typingDelay = 110;
-const wait = 3000;
+const wait = 5000;
 const podcast = 6000;
 
 
